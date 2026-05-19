@@ -135,6 +135,7 @@ h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 
   <button class="tab-btn tab-summary active" onclick="show('summary',this)">📋 Summary</button>
   <button class="tab-btn tab-kindroid" onclick="show('kindroid',this)">Kindroid</button>
   <button class="tab-btn tab-ggpt" onclick="show('girlfriendgpt',this)">GirlfriendGPT</button>
+  <button class="tab-btn tab-od" onclick="show('ourdream',this)">OurDream</button>
   <span class="private-badge">DRT.FM · Private</span>
 </nav>
 
@@ -177,7 +178,7 @@ h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 
   <div class="status-card"><div class="status-card-name">SweetDream</div><div class="status-card-state">Pending</div></div>
   <div class="status-card"><div class="status-card-name">Nomi</div><div class="status-card-state">Pending</div></div>
   <div class="status-card"><div class="status-card-name">Candy.AI</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">OurDream</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card status-done"><div class="status-card-name">OurDream</div><div class="status-card-state">Done · 2026-05-18</div></div>
   <div class="status-card"><div class="status-card-name">SecretDesires</div><div class="status-card-state">Pending</div></div>
   <div class="status-card status-done"><div class="status-card-name">GirlfriendGPT</div><div class="status-card-state">Done · 2026-05-17</div></div>
   <div class="status-card"><div class="status-card-name">Promptchan</div><div class="status-card-state">Pending</div></div>
@@ -214,9 +215,13 @@ h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 
     <div class="top3-name">Candy.AI</div>
     <div class="top3-pending-label">Session pending</div>
   </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">OurDream</div>
-    <div class="top3-pending-label">Session pending</div>
+  <div class="top3-card">
+    <div class="top3-name">OurDream &#10003;</div>
+    <ol class="top3-list">
+      <li><strong>Creator economy + content unlock.</strong> Community builds 21K-image character libraries; users pay coins to unlock them. OurDream earns on every unlock at zero content cost. The Dreamer Program (50K → 300K interactions, coins → cash) keeps creators building.</li>
+      <li><strong>Generation studio is best-in-class.</strong> Vivid 2.0 for explicit images, Spicy 1.0/2.0 video, 5-mode video studio, community pose library, background async generation, personal gallery — the entire media pipeline is polished and addicting.</li>
+      <li><strong>UX + retention mechanics.</strong> Cancellation flow with coin bonus goodwill, in-app helpdesk hub (Bugs/Features/Changelog), Lust Level slider, TikTok-style Feed → chat in one tap. Best UX in the category by a significant margin.</li>
+    </ol>
   </div>
   <div class="top3-card top3-pending">
     <div class="top3-name">SecretDesires</div>
@@ -1294,6 +1299,772 @@ h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 
       <br><br>
       <img src="assets/checks/girlfriendgpt/54-cancellation-survey.png" class="check-shot">
       <img src="assets/checks/girlfriendgpt/55-uncancel-option.png" class="check-shot">
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<!-- ==================== OURDREAM ==================== -->
+<div id="ourdream" class="section">
+
+<div class="check-header">
+  <h1>OurDream.AI</h1>
+  <div class="meta">ourdream.ai &nbsp;·&nbsp; tier picked: ___ &nbsp;·&nbsp; session date: ___</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-18</span></h2>
+<div class="actions">
+  <div class="verdict">
+    <p><strong>OurDream is the best all-round AI companion platform in the category — and it's not a companion product, it's a creative media studio with companion elements bolted on.</strong> Users come for the characters, stay for the generation tools, and get hooked on building and discovering community content. The companion feel is real but secondary: the chat quality is "okay but not wow" and the voice call is functional but passive. What's exceptional is everything around the conversation — the image gen, the video studio, the creator economy, the UX polish, and the business model. Dainis verdict: "a mix of Kindroid and GPT — better balance, more depth than GPT, but calls are the weakest part." The community flywheel (creators → content → discovery → unlock purchases → more creators) is the core differentiator and is already spinning fast. 10M users, 50M pieces of media, 300M messages in under a year.</p>
+  </div>
+
+  <h3>Steal immediately for DRT.FM</h3>
+  <ul class="steal">
+    <li><strong>In-app helpdesk hub (Bugs / Features / Changelog).</strong> Premium-gated, all in one in-app panel, clean tabbed UI. Dainis: "my favourite feature — better than GGPT's Beamer, want to steal it." Gives users a voice, gives the team intelligence, signals transparency. Build this.</li>
+    <li><strong>Cancellation flow.</strong> Step 1: reason dropdown (Chat Quality / Image Quality / Expensive / Avoid Recurring Billing / Video Quality / Just Trialling / Other). Step 2: "We understand" — coin bonus offer (3,000 coins, awarded the day before the billing period ends). Step 3: even if they cancel, they keep the goodwill coins. Non-hostile, no guilt, no dark patterns. Best cancel UX in the category.</li>
+    <li><strong>Lust Level slider + per-chat writing style panel.</strong> 5-level arousal control (😒 → 💀, from "playful and suggestive" to "sexually forward, fast escalation, anatomically detailed"). AI model picker (Standard / Thinking / Experimental), response length, chat mode (Roleplay vs Texting) — all per-character, not global. Gives users granular control without overwhelming them.</li>
+    <li><strong>Background generation + notification bell.</strong> Every generation (image, video, audio) runs async. Text always arrives first. Gallery accumulates passively. Notification bell tracks job status. Users never wait at a loading screen. This is the correct architecture for a generation-heavy product.</li>
+    <li><strong>Content unlock model.</strong> Every public character has a community-built library. Pay once in coins (scales with library size: 250–1,000 coins), get all current + future content. OurDream pays $0 for the content — community generates it. Three-tap funnel: Feed scroll → character card → Unlock All Content. Kylie Bennett: 21K images + 665 videos for 1,000 coins.</li>
+    <li><strong>Dreamer Program creator ladder.</strong> Rising Dreamer (~50K interactions) → Lucid Dreamer (300K interactions, earn 100 coins per community pack purchase) → Dream Architect (coming soon: cash payouts). Fast-track for creators from other platforms. The program does the content recruitment so the platform doesn't have to.</li>
+  </ul>
+
+  <h3>DRT.FM already does better</h3>
+  <ul class="win">
+    <li><strong>Nothing confirmed yet — OurDream is ahead across the board.</strong> Honest assessment from Dainis. The one exploitable gap right now: OurDream's memory cap crisis (15K Pinned Memories cap introduced silently in April, causing power user churn). If DRT.FM has reliable, visible, unlimited memory — say so loudly and target OurDream's churning power users directly.</li>
+  </ul>
+
+  <h3>Avoid / counter-position</h3>
+  <ul class="avoid">
+    <li><strong>Context header in every response.</strong> Date / time / location / weather prefixed on every AI message. Works in immersive text roleplay; becomes noise in voice calls and clutters the chat list preview. Don't do this as a default.</li>
+    <li><strong>Passive voice call.</strong> No video, no initiation — she waits for the user to speak. Makes the call feel like a phone tree, not an intimate conversation. Kindroid's talking-head video call is the correct benchmark. Don't ship voice without initiation logic.</li>
+    <li><strong>Silent limit reductions.</strong> The April 20 changelog entry that capped Pinned Memories to 15K was mislabelled as "Fixed" and caused a verified power user churn wave. Never silently reduce limits. If you must cap something, announce it, explain it, and give users time to adapt.</li>
+    <li><strong>Advanced Settings tab confusion.</strong> The Generate button inside the Advanced Settings panel doesn't actually trigger generation from the main UI — same bug appeared in both image gen and video gen. Small but recurring friction. Don't put action buttons inside settings panels.</li>
+    <li><strong>Coin burn opacity.</strong> Voice call at 1 coin/second, Spicy 2.0 video at 2,250 coins (≈$22 at top-up rates), Ultra voice at 5 coins/paragraph — the costs add up fast and aren't always visible before you commit. The design intentionally makes it easy to spend; this can tip into resentment for some users. Show estimated costs before generation, not just a coin counter after.</li>
+  </ul>
+
+  <h3>Scores</h3>
+  <div class="scores">
+    <span>Memory <strong>6/10</strong></span>
+    <span>Voice <strong>6/10</strong></span>
+    <span>Image consistency <strong>8/10</strong></span>
+    <span>NSFW consistency <strong>9/10</strong></span>
+    <span>Companion feel <strong>7/10</strong></span>
+  </div>
+</div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; 2026-05-18</span></h2>
+<div class="findings">
+  <div class="finding" data-tags="billing,standout">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>"Share the Dream, Earn Coins" — referral system tied directly to the in-app currency.</strong> Referrals pay out in DreamCoins, meaning the reward is immediately spendable on the features users actually want (voice calls, image gen, video). Coin-denominated referral rewards are smarter than cash-back or subscription discounts — they pull the user back into the product to spend the reward rather than just reducing their invoice. Worth noting vs. Kindroid's slot-based upsell and GGPT's discount chip.
+      <br><br>
+      <img src="assets/checks/ourdream/01-referral-share-the-dream.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta"><span class="time">Settings</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Multi-language interface — marked "experimental."</strong> Language picker: English, 中文, 繁體中文, 日本語, Español (scroll for more). The "experimental" badge matches their Mar 2026 auto-detection changelog entry. Strong Asian market signal — Simplified + Traditional Chinese both listed separately, plus Japanese.
+      <br><br>
+      <img src="assets/checks/ourdream/02-language-selector.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Helpdesk</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>In-app Helpdesk — Support, Bugs, Features, Changelog all in one place.</strong> Support tab: Discord link ("40,000+ dreamers") + FAQ + "Contact Support" CTA. Community scale (40K) beats Kindroid's 29,694. Having feedback, bugs, and changelog inside the app — not on a separate URL — is the right pattern. Worth exploring deeper.
+      <br><br>
+      <img src="assets/checks/ourdream/03-helpdesk-support-feedback.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Explore</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Homepage Explore — strong filter system + heavy UGC presence.</strong> Four filter dimensions: Sort (For You / Popular / Newest / Following), Gender (Any / Female / Male / Trans), Style (Realistic / Anime), Age (Any Age / Teen / Young Adult / Adult / Mature). Personality tag bar across the top: MILF, Teen, Asian, Latina, Blonde, Busty, Submissive, Dominant, BDSM, Romantic, Slow Burn, Athletic, Caring, Virgin, College Student, Vampire, Cosplay + more. Creator handles on every card (@notmist, @brainfuckfantasies, @jokersspleasures, @rookie) — UGC is the product surface, not buried.
+      <br><br>
+      <img src="assets/checks/ourdream/04-homepage-explore.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/05-explore-sort-filter.png" class="check-shot">
+      <img src="assets/checks/ourdream/06-explore-gender-filter.png" class="check-shot">
+      <img src="assets/checks/ourdream/07-explore-style-filter.png" class="check-shot">
+      <img src="assets/checks/ourdream/08-explore-age-filter.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Explore</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Group Chats are a first-class Explore tab — and the content is scenario-driven serialised fiction.</strong> Group Chats gets its own filter tab at the same level as personality tags. Content inside: "Orcs and Warriors," "In The Shadows Of Croft Manor," "FWB - ROAD TRIP across the EXPANSE," "Quiet Teeth - A Monster War series," "Four Goth Roommates Looking for One Older Man." Users are building multi-character fiction universes, not just multi-person chats. High engagement counts. This is a distinct use case from one-on-one companion and OurDream is leaning into it hard.
+      <br><br>
+      <img src="assets/checks/ourdream/09-explore-group-chats.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ick">
+    <div class="finding-meta"><span class="time">Helpdesk</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Bugs, Features, Changelog all gated behind Premium — "Upgrade to read and vote on bug reports."</strong> Free users can't see bug reports, vote on features, or read the changelog. Transparency as a conversion lever — clever but punishing. Free users can't self-serve on issues they're experiencing. DRT.FM: keep changelog and bug visibility free; gate voting/submitting if needed.
+      <br><br>
+      <img src="assets/checks/ourdream/10-helpdesk-bugs-premium-gate.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,billing">
+    <div class="finding-meta"><span class="time">Help Center</span><span class="tag">ux</span><span class="tag">billing</span></div>
+    <div class="finding-body">
+      <strong>Public help center at help.ourdream.ai — Zendesk-powered, separate from the in-app Helpdesk.</strong> Standard FAQ layout with category sections. Payments &amp; Refunds section visible: "What are Dreamcoins?" confirms the currency scope — "generate images and videos, make voice calls, list..." Monthly pricing exposed in FAQ: <strong>$19.99 USD/month, billed monthly — 1,000 DreamCoins immediately then 1,000 every month.</strong> Two-layer support: in-app Helpdesk (FrontApp) + external Zendesk portal.
+      <br><br>
+      <img src="assets/checks/ourdream/11-help-center-public.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,tech">
+    <div class="finding-meta"><span class="time">Help Center</span><span class="tag">ux</span><span class="tag">tech</span></div>
+    <div class="finding-body">
+      <strong>Support stack confirmed: FrontApp for email + Zendesk for help center.</strong> Submitting a feature request from inside the app triggered an email verification from <strong>Front Notifications &lt;hello@frontapp.com&gt;</strong> — "Dream Studio: Verify email address. Powered by Front." Two things buried here: (1) <strong>FrontApp</strong> is their shared inbox / support routing tool for all inbound contact; (2) the product is called <strong>"Dream Studio"</strong> in transactional emails, not OurDream. The Requests page (help portal) was empty — no submitted tickets from this account, meaning feature requests via email aren't a meaningful channel for their users. Discord absorbs all that volume instead.
+      <br><br>
+      <img src="assets/checks/ourdream/12-frontapp-email-verify.png" class="check-shot">
+      <img src="assets/checks/ourdream/13-feature-requests-empty.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Discord</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Discord: 58,329 members · 4,622 online · Est. Nov 2024 — largest community of any competitor checked.</strong> Kindroid is 29,694 members, est. Jun 2023 — OurDream has nearly double the members in half the time. Self-described: "The Ultimate Adult AI Playground. Create Characters, Images, Videos, Stories, Roleplay. And More!" Role shown to new joiners: DREAMER. Get Started onboarding tasks built in: "Tell us your favorite feature," "Read our FAQ," "Introduce yourself," "check out community-made guides," "Read the rules."
+      <br><br>
+      Legal entities confirmed in Feed footer: <strong>Dream Studio USA, Inc.</strong> (US entity) + <strong>TEKTOPIA LTD HE 473775</strong> (Cyprus) — standard adult-content platform structure, Cyprus entity likely for payment processing and regulatory flexibility.
+      <br><br>
+      <img src="assets/checks/ourdream/14-discord-server-home.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Discord</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Discord channel structure — creator-tool focused, not just community hangout.</strong> Full channel inventory:<br><br>
+      <strong>share:</strong> share-clothes · share-vids · share-chatlogs · share-prompts<br>
+      <strong>contest corner:</strong> community-contests · moondoggystyle-animation · dreamy-image-presets-archive · remix-lab-edit-contest<br>
+      <strong>fun:</strong> art · memes · tifu<br>
+      <strong>help/request:</strong> prompt-bounties · moondoggys-video-workshop · video-prompt-help · prompt-help · suggestions<br>
+      <strong>support:</strong> bugs · help<br><br>
+      Key signals: <em>prompt-bounties</em> (paid community prompt challenges), <em>moondoggys-video-workshop</em> (named creator running video tutorials), <em>dreamy-image-presets-archive</em> (community-built preset library). This is a creator-economy Discord, not just a fan server. The named creator channels suggest OurDream is cultivating power users as unofficial community leads.
+      <br><br>
+      <img src="assets/checks/ourdream/15-discord-channels-1.png" class="check-shot">
+      <img src="assets/checks/ourdream/16-discord-channels-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Feed</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Feed = TikTok-style full-screen vertical scroll with direct click-through to character chat.</strong> Full-bleed image of the character fills the screen. Heart / comment / share icons on the right. Character name + description teaser overlaid at the bottom. Swipe up for the next character. Clicking the card goes directly to that character's chat page — no intermediate profile page. This is a discovery-to-conversion funnel in one gesture: you see a character you like, tap, you're already in the chat. The Feed is in the main left nav alongside Create, Explore, Chat, Generate — it's a primary surface, not a buried feature.
+      <br><br>
+      <img src="assets/checks/ourdream/17-feed-tiktok-style.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,billing,standout">
+    <div class="finding-meta"><span class="time">Feed → Character Chat</span><span class="tag">ux</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Character chat page from Feed click-through — layout is strong, upgrade nudge is coin-triggered.</strong> Right panel: character name + age ("Janice Wood · 47"), image gallery strip (1/5), "View Media" + "New Chat" + "Call Me" buttons. Expandable sections: Members · Writing Style · Voice · Memory · Persona. Left panel: live chat with suggested reply pre-filled ("Janceeee... *standing near bathroom door with a girl* I think you're in the wrong room haha"). Top bar: <strong>"35 dreamcoins left → UPGRADE"</strong> — the upsell is triggered by low coin balance, not a generic paywall. That's smart: shows the user exactly why they need to upgrade (running out of currency to do what they're doing) rather than an abstract "go premium" pitch. Comment count visible (49) — characters have social engagement scores.
+      <br><br>
+      <img src="assets/checks/ourdream/18-feed-click-through-character-chat.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ick">
+    <div class="finding-meta"><span class="time">Upgrade page</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Full pricing breakdown — "Unlimited Audio &amp; Video" is a feature unlock, not actual unlimited use. The real product is the coin bucket.</strong><br><br>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;line-height:2;margin:8px 0">
+        <tr style="color:#7070a0;font-size:11px;text-transform:uppercase;letter-spacing:0.8px"><td style="width:200px"></td><td style="color:#c08aff">Premium · $19.99/mo</td><td style="color:#f59e0b">Deluxe · $59.99/mo</td></tr>
+        <tr><td style="color:#a0a0c0">DreamCoins/month</td><td>1,000</td><td><strong>5,000</strong></td></tr>
+        <tr><td style="color:#a0a0c0">Images</td><td>200</td><td><strong>1,000</strong></td></tr>
+        <tr><td style="color:#a0a0c0">Voice call minutes</td><td>20 min</td><td><strong>100 min</strong></td></tr>
+        <tr><td style="color:#a0a0c0">Videos</td><td>10</td><td><strong>50</strong></td></tr>
+        <tr><td style="color:#a0a0c0">Chat memory</td><td>Standard</td><td><strong>3× Chat Memory</strong></td></tr>
+        <tr><td style="color:#a0a0c0">AI chat models</td><td>Standard</td><td><strong>Free Premium Chat Models</strong></td></tr>
+      </table>
+      Both tiers unlock the same features (Image &amp; Video Generation, Voice Calls, Unlimited Text Messages, Unlimited Audio Messages, Publish Characters). The upgrade from Premium → Deluxe is purely <strong>5× more coin budget + better memory + better models</strong> at 3× the price.<br><br>
+      <strong>Why the confusion:</strong> "Unlimited Audio Messages" and "Unlimited Video" in the feature list refer to short voice clips / generated images in chat — not Voice Call minutes or video generation. Voice calls are still coin-metered (50 coins/min = 20 min on Premium, 100 min on Deluxe). This is intentionally blurry copy — "unlimited" is technically true for one thing while the thing users actually want (call time, video gen) is strictly metered.<br><br>
+      <strong>Resentment math:</strong> Premium at $19.99 → 20 min of voice calls per month. That's less than one decent call. Users who discover this mid-month run dry and see the upgrade prompt. Classic foot-in-the-door → upsell loop — but the resentment from "I'm paying $20 and I can't call for more than 20 minutes" is exactly what the research flagged ("constantly calculating actual expenses").<br><br>
+      <strong>Annual: Save 75% + free coins</strong> — that's the primary retention mechanism for price-sensitive users.<br><br>
+      <img src="assets/checks/ourdream/19-pricing-premium.png" class="check-shot">
+      <img src="assets/checks/ourdream/20-pricing-deluxe.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,ux,ick">
+    <div class="finding-meta"><span class="time">Character creator</span><span class="tag">character-creator</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Two creation modes: "Design with AI" (free-text, 5 coins) + "Guided" (step-by-step visual, free).</strong> The AI mode lets you type anything — Dainis typed "beautiful like jessica alba" — and generates a character. Costs 5 DreamCoins per generation attempt.<br><br>
+      <strong>Real person name filter — hard block with clear error message.</strong> Prompt "beautiful like jessica alba" was blocked: <em>"Failed to generate character. Blocked: 'jessica alba' matches 'Jessica Alba'. We don't allow content based on real people."</em> Name matching against a celebrity blocklist. Smart legal protection — same reason most platforms have it. Error message is honest and clear rather than silently failing.
+      <br><br>
+      <img src="assets/checks/ourdream/21-character-creator-design-with-ai.png" class="check-shot">
+      <img src="assets/checks/ourdream/22-character-creator-real-person-block.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,ux,standout">
+    <div class="finding-meta"><span class="time">Character creator — steps</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Personality step: Name, Age (number scroll), Voice, Personality, Occupation, Relationship, Hobby, Fetish — all in one screen.</strong> Auto-generated name "Aurora Moonstruck" shown. Age set via a scroll wheel (21–25+ visible). Each attribute is a tappable card — Voice has a play button to preview. "Next (5 🪙)" — generation costs 5 coins. Advanced Details panel (optional, collapsed): Autocomplete With AI, Realistic Model picker (Dreamy), Custom Physical Details, Custom Face Details, Greeting, Scenario, Additional Personality Details, Extra Details, Tags.
+      <br><br>
+      <strong>Voice selector: 20+ named voices with preview buttons.</strong> Names: Honey, Aurora, ASMR, Hottie, JOI 💕, Sorority 💕, Posh, Smooth, Adventurer, Conspiracist, Casual 💕, Coach, Formal, Quirky, Nerdy, Adorable, Villain, Hypnosis... (💕 = Premium-only voices gated behind subscription). Named voices with playable previews — far more intentional than Kindroid's "Default Voice 1–5."
+      <br><br>
+      <img src="assets/checks/ourdream/24-creator-personality-step.png" class="check-shot">
+      <img src="assets/checks/ourdream/25-creator-advanced-details.png" class="check-shot">
+      <img src="assets/checks/ourdream/27-creator-voice-selector.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,ux,standout">
+    <div class="finding-meta"><span class="time">Character creator — result</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Generation loading screen shows full attribute summary while you wait — then delivers a cinematic reveal.</strong> Progress bar with "Creating your dream companion" (26% shown). Right panel shows the full spec: Voice=ASMR, Hair=Long, Body=Athletic, Ethnicity=White, Breast=Large, Butt=Medium, Eye=Blue, Hair=Blonde, Skin=Tan, Model=Dreamy — no ambiguity about what was selected. Tags auto-applied: Young Adult, Busty, +4 more.<br><br>
+      Result screen: full-bleed character portrait (Aurora Moonstruck — blonde, guitar, stage lighting — occupation "Musician" mapped visually). Two CTAs: <strong>"Generate" (more images)</strong> and <strong>"Chat" (pink, primary)</strong>. Third option: "Explore public characters." Clean, confident end-state.
+      <br><br>
+      <img src="assets/checks/ourdream/26-creator-generating.png" class="check-shot">
+      <img src="assets/checks/ourdream/28-creator-result-aurora.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing">
+    <div class="finding-meta"><span class="time">Pricing — Annual</span><span class="tag">billing</span></div>
+    <div class="finding-body">
+      <strong>Annual pricing: Premium $9.99/mo · Deluxe $29.99/mo — 50% off monthly rate + bonus coins.</strong> Annual Premium = $119.88/yr + 1,000 bonus coins first month. Annual Deluxe = ~$360/yr + 5,000 bonus coins. "Save $120/yr + 1,000 bonus coins first month" is the headline offer. Same coin buckets as monthly (1,000/month Premium, 5,000/month Deluxe). The annual lock-in is the primary retention mechanism — 50% discount is aggressive.
+      <br><br>
+      <img src="assets/checks/ourdream/29-pricing-annual.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ux,standout">
+    <div class="finding-meta"><span class="time">Affiliate program</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Affiliate program — up to 40% revshare or $60 CPA, tracked via Everflow, paying net-15.</strong> Self-reported scale: <strong>1bn+ messages sent · 200m+ videos and images generated · 20m+ active users · #1 EPC adult AI offering on CrakRevenue.</strong> Co-founder Scott: "we are outperforming everyone else in the adult ai space because our philosophy at ourdream is build the best platform and the rest will follow." CPA tiers: $26 (Tier 3, monthly, White/Level 1) → $60 (Pro/Level 3, yearly subscription). Attribution: last-touch at account creation, no fixed cookie window — any click that converts is yours forever. Payout: net-15, PayPal at every level, BTC/USDT from Pink VIP tier, bank transfer from Pro. Minimum: $100 PayPal/bank, $1,000 crypto.<br><br>
+      <strong>What they pitch to affiliates as their conversion advantages (= their self-declared selling points):</strong>
+      <ul style="margin:8px 0 8px 16px;line-height:1.8;font-size:13px">
+        <li><strong>Rapid product velocity</strong> — new features and content ship weekly</li>
+        <li><strong>Premium visual quality</strong> — industry-leading AI models</li>
+        <li><strong>Up to 10-minute video</strong> — long-form AI video "competitors cannot match"</li>
+        <li><strong>Expanding catalogue</strong> — growing library of models and styles</li>
+        <li><strong>Conversion-focused UX</strong> — signup flow and pricing tiers optimized for trial-to-paid</li>
+        <li><strong>Mobile-first design</strong></li>
+      </ul>
+      <img src="assets/checks/ourdream/30-affiliate-in-app.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/33-affiliate-commission-models.png" class="check-shot">
+      <img src="assets/checks/ourdream/34-affiliate-why-converts.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="signup,billing,ux,standout">
+    <div class="finding-meta"><span class="time">Post-purchase</span><span class="tag">signup</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Checkout success screen — "Deluxe Activated" with two CTA cards + immediate referral nudge.</strong> URL: ourdream.ai/checkout/success. Confirmation: "✅ Deluxe Activated · This charge will appear as <strong>Dream Studio</strong> on your card statement." Two large path cards: <strong>"Jump into a new chat → Explore"</strong> (pink) | <strong>"Make some dreamy pics → Generate"</strong> (dark). Below: referral banner — "Refer a Friend — and you both get +1000 coins! +1,000 🪙." Note: neither CTA routes to the character just created — the post-purchase flow ignores the creation funnel and resets to discovery. Minor UX gap vs. Kindroid's welcome-and-guide approach.
+      <br><br>
+      <img src="assets/checks/ourdream/36-checkout-success.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Generate page</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Standalone Generate page — image generation decoupled from chat, with full parameter control.</strong> Four optional selectors: Character · Pose · Background · Outfit. Custom Prompt text field. Advanced Settings (collapsed). Gallery below with Images / Videos / Liked tabs + Filter + Manage. 5,000 coins shown top-right (Deluxe active). This is a standalone generation studio separate from the chat — users can create images outside of a conversation context. Kindroid and GGPT don't have this as a clean standalone tool.
+      <br><br>
+      <img src="assets/checks/ourdream/37-generate-page.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,ick,standout">
+    <div class="finding-meta"><span class="time">Bugs tab — now visible as Deluxe</span><span class="tag">ux</span><span class="tag tag-ick">ick</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Bug board unlocked — and it is a crisis log. OurDream is in active product meltdown as of late April 2026.</strong> The top voted bugs tell a clear story: a series of changes around April 28th broke the core product. Most upvoted issues ranked:<br><br>
+      <strong style="color:#ff6b6b">🔴 Memory crisis — #1 pain, causing mass cancellations</strong>
+      <ul style="margin:6px 0 10px 16px;line-height:1.8;font-size:13px">
+        <li>Pinned Memories capped at <strong>15,000 characters</strong> — previously unlimited. Users had built up 200,000–536,000+ word memory logs. Now truncated. Multiple users threatening to cancel or already cancelled.</li>
+        <li>Auto Memory Log also degraded — unreliable saves, drops important context, occasionally hallucinates facts that never happened.</li>
+        <li>Custom Instructions / Pinned Memory stopped working entirely for some users. Characters ignoring CI rules, forgetting things 2–3 messages prior.</li>
+        <li><em>"The pinned memories used to be unlimited, I don't understand why you guys changed it"</em> — 13 upvotes. <em>"Pinned memories are suddenly capped at 15,000 when I've never experienced a limit before... my story was getting so good"</em> — user had 536,234 words.</li>
+      </ul>
+      <strong style="color:#ff6b6b">🔴 Chat quality nosedive since April 28th — characters broken</strong>
+      <ul style="margin:6px 0 10px 16px;line-height:1.8;font-size:13px">
+        <li>All character personalities flattened — distinct characters now behave identically regardless of settings.</li>
+        <li>Characters writing the user's actions (breaking the "{{user}}" separation) — immersion-destroying.</li>
+        <li>Formatting broken: dialogue vs. action demarcation (yellow vs. white text) disappeared.</li>
+        <li>Lively, Balanced, Nova, Genius models all reported degraded. Only "Creative" mode working for some.</li>
+        <li>Gibberish responses appearing — random code/multilingual garbage in chat output.</li>
+        <li>DeepSeek model implicated by name in several reports.</li>
+        <li><em>"Chat has become an exercise in pure frustration... I have already unsubbed"</em> — 15 upvotes.</li>
+      </ul>
+      <strong style="color:#fbbf24">🟡 Image generation degraded</strong>
+      <ul style="margin:6px 0 10px 16px;line-height:1.8;font-size:13px">
+        <li>Characters facing away from POV consistently (presets and prompts ignored).</li>
+        <li>Characters not matching prompts — wrong poses, wrong body parts, anatomical errors.</li>
+        <li>Vivid-2 images cannot be set as character avatars — only Dreamy images work for profile pics.</li>
+        <li>Automod over-flagging: a garden, a fully-clothed woman, anime closeups all flagged incorrectly.</li>
+      </ul>
+      <strong style="color:#fbbf24">🟡 Dev communication failure — biggest sentiment driver</strong>
+      <ul style="margin:6px 0 10px 16px;line-height:1.8;font-size:13px">
+        <li>Weeks of unanswered bug reports. Admins respond to phone/download issues but ignore the core chat and memory posts.</li>
+        <li><em>"Why does it feel like the more this site grows and the more money you bring in the worse it gets?"</em></li>
+        <li><em>"Can we just get some feedback? Someone to at least acknowledge that there is an issue?"</em></li>
+        <li>Feature requests section: out of hundreds of posts in 3 months, only 2 had status changed from Open.</li>
+      </ul>
+      <strong>DRT.FM opportunity:</strong> OurDream's paying users are angry, churning, and looking for alternatives <em>right now</em>. Memory reliability and transparent dev communication are the two exact gaps DRT.FM can position against immediately.
+      <br><br>
+      <img src="assets/checks/ourdream/38-helpdesk-bugs-now-visible.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Helpdesk — Features tab</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Feature request board — searchable, sortable by Top/New, filterable by status (All / Open / Planned / In Progress). "+ Request a Feature" CTA.</strong> Top voted features expose exactly what users want most right now:<br><br>
+      <ol style="margin:8px 0 8px 16px;line-height:2;font-size:13px">
+        <li><strong>More than one character in group chat images</strong> — 72 votes. "Bring back the option to have more than one character in images generated by group chats."</li>
+        <li><strong>Set lust level in character creation</strong> — default NSFW intensity dial per character, adjustable at creation time.</li>
+        <li><strong>Groupchats: interactions counted on profile</strong> — 63 votes. Group chat activity doesn't currently count toward a character's interaction total or show on the profile.</li>
+        <li><strong>Increase Pinned Memory character limit</strong> — 57 votes. Directly tied to the memory crisis; users explicitly requesting the 15K cap be raised.</li>
+      </ol>
+      Status system: Open → Planned → In Progress. Only one item marked "Planned" visible (Favorite Sections for chats). The majority are Open with no response — same communication gap as Bugs. Dainis verdict: <strong>cleaner than GGPT's Beamer, best helpdesk in the category.</strong>
+      <br><br>
+      <img src="assets/checks/ourdream/39-features-top-voted.png" class="check-shot">
+      <img src="assets/checks/ourdream/40-features-status-filter.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Helpdesk — Changelog tab</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>In-app changelog — dated, labelled New / Improved / Fixed, clean timeline. Launched Mar 15 2026 — only 2 months old.</strong> Recent entries (most recent first):<br><br>
+      <table style="width:100%;font-size:12px;line-height:2;border-collapse:collapse">
+        <tr><td style="color:#5060a0;width:70px">May 7</td><td><span style="background:#1a3a5e;color:#60a5fa;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">Improved</span>Upgraded voice calls with live transcripts</td></tr>
+        <tr><td style="color:#5060a0">Apr 30</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Vivid 1.0 in character create</td></tr>
+        <tr><td style="color:#5060a0">Apr 20</td><td><span style="background:#2a1a14;color:#ff9f43;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">Fixed</span><strong style="color:#ff6b6b">Individual messages limited to max 11k characters (~2.5k words) for performance</strong> ← <em>This is the April 28th change that caused the memory crisis</em></td></tr>
+        <tr><td style="color:#5060a0">Apr 17</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Sign in with Microsoft</td></tr>
+        <tr><td style="color:#5060a0">Mar 24</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Community presets</td></tr>
+        <tr><td style="color:#5060a0">Mar 21</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Vivid 2.0 re-enabled with improvements</td></tr>
+        <tr><td style="color:#5060a0">Mar 15</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Mute characters in group chats · Default chat settings · Reorganized chat settings</td></tr>
+        <tr><td style="color:#5060a0">Mar 15</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span><strong>Released changelog</strong> — the changelog itself only launched here</td></tr>
+        <tr><td style="color:#5060a0">Mar 10</td><td><span style="background:#1a3a2e;color:#4ade80;padding:1px 6px;border-radius:3px;font-size:10px;margin-right:6px">New</span>Renaming chats · Select a character as a persona</td></tr>
+      </table>
+      <br>The Apr 20 entry confirms the root cause of the memory crisis: framed as a "Fixed" (performance patch), it was actually a breaking change that silently capped memory. Labelling a feature reduction as a bug fix is the kind of communication that destroys trust.
+      <br><br>
+      <img src="assets/checks/ourdream/41-changelog-recent.png" class="check-shot">
+      <img src="assets/checks/ourdream/42-changelog-march.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Community</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Community section = three-dimensional creator economy: Dreamers (creators) · Characters · Collections — all with ranked leaderboards.</strong><br><br>
+      <strong>Dreamers tab</strong> — "JOIN THE OURDREAM.AI DREAMER PROGRAM" hero banner. Creator leaderboard ranked by interactions in the last 30 days. "Lucid" badge = top creator tier. Top creators: serenaod (3.9m interactions / 4.3k followers), vermillion (3.7m), sometcool (2.4m), anonarona (1.8m). Featured creators shown above the leaderboard.<br><br>
+      <strong>Characters tab</strong> — individual AI characters ranked by interactions. Top 30 days: "Reincarnated in Versper..." 2.9m interactions by vermillion · "Kylie Bennett" 1.2m · "Bella Davis" 1.1m. Characters are creator-owned properties with their own follower + like + interaction metrics.<br><br>
+      <strong>Collections tab</strong> — character media libraries ranked by total media count. Top: "Serra de Santa Anna" 33.1k media items · "Lay Mi" 25.5k · "Chloe Jensen" 23.0k · "Kylie Bennett" 21.4k. A "Collection" is effectively a creator's entire image/video output for one character — 33K pieces is a content library, not a profile.<br><br>
+      <strong>Dainis's read is right — OurDream runs on creator economics.</strong> The platform supplies the tools and the distribution; creators supply the characters, the content, and the audience. The Dreamer Program (referral bonuses, $5K contests, lucid tier badges) is the incentive layer that keeps creators producing. OurDream's content quality compounds for free as the creator base grows. The interaction numbers (3.9m/month for one creator) show this flywheel is already spinning hard.
+      <br><br>
+      <img src="assets/checks/ourdream/43-community-dreamers-leaderboard.png" class="check-shot">
+      <img src="assets/checks/ourdream/44-community-characters-leaderboard.png" class="check-shot">
+      <img src="assets/checks/ourdream/45-community-collections-leaderboard.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,video,ux,standout">
+    <div class="finding-meta"><span class="time">Generate — Video modes</span><span class="tag">video</span><span class="tag">image</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Video is a full 5-mode studio, not just a "generate" button.</strong>
+      <ul style="margin:8px 0 8px 16px;line-height:1.9;font-size:13px">
+        <li><strong>Presets</strong> — design from scratch using pose/action presets + prompts</li>
+        <li><strong>Image To Video</strong> — animate any generated image</li>
+        <li><strong>Extend Video</strong> — continue an existing video for longer</li>
+        <li><strong>Talking</strong> — generate a video with speech and dialogue (standalone TTS video, separate from voice calls)</li>
+        <li><strong>Edit Video</strong> <em>[new]</em> — modify an existing video with a text prompt</li>
+      </ul>
+      Video mode parameter grid: Select Character (required) · Action (required) · Background (optional) · Outfit (optional) · Custom Prompt (optional) · Advanced Settings [new model toggle]. The "Talking" mode is the most interesting — a character speaks lines you write, rendered as video. Different from the voice call; this is asynchronous scripted video output.
+      <br><br>
+      <img src="assets/checks/ourdream/46-video-modes.png" class="check-shot">
+      <img src="assets/checks/ourdream/47-generate-video-presets.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ux,standout">
+    <div class="finding-meta"><span class="time">Generate — Character + Pose selection</span><span class="tag">image</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Generate works across ALL public characters — anyone's character, your own, or "Freeplay" (no character).</strong> Character picker filters: Public / Female / Realistic / Young Adult / Popular·Month. Community's top characters (Kylie Bennett, Bella Davis, Anna Whitfield, Julia Tanaka, Emma) appear directly in the picker — you can generate images using a character you don't own. This is the content flywheel: popular characters get used by everyone, racking up interaction counts on the leaderboard, which makes them more visible, which gets them used more.<br><br>
+      <strong>Pose library is community-powered with visual previews.</strong> Tabs: All · My Presets · Community · Aftermath · BDSM · Body Focus · Group · Intercourse. Community poses visible: Standing Doggy, Ahegao Breeding, Walking Towards, Jack O' Pose Front, Jack O' Pose Rear, Jogging, Squeeze N Moan, Torso For Scale — each shown as a rendered image so you see exactly what you're selecting. "Create a Preset" option lets users add to the community library. This is the Community Presets system from the Mar 24 changelog. The community is building the content library for free.
+      <br><br>
+      <img src="assets/checks/ourdream/48-generate-image-freeplay.png" class="check-shot">
+      <img src="assets/checks/ourdream/49-generate-select-character.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/50-generate-pose-community-1.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/51-generate-pose-community-2.jpeg" class="check-shot">
+    </div>
+  </div>
+  <div class="finding" data-tags="character-creator,standout">
+    <div class="finding-meta"><span class="time">Character creator — Guided</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Guided creator — visual image-picker UI, clearly ahead of DRT.FM's current creator.</strong> 6-step progress bar (identity → appearance → vibe → body → personality → photo). This step shows Eye Color (colour swatches), Hair Color (colour swatches), Hair Style (image grid). Each hair style option shows an actual rendered character portrait — Braided, Long, Bangs, Ponytail, Short, Bun, Buns, Wavy, Pixie, + "Custom" (PREMIUM-gated). You see exactly what you're picking before you select it. No dropdowns, no text labels alone — fully visual.<br><br>
+      <strong>Why this matters for DRT.FM:</strong> If the character creator is a primary user action, this is the UX benchmark. Users feel like they're designing something, not filling out a form. The "Custom" option gated behind Premium is a clean upsell — users who want fine-grained control have a clear reason to upgrade.
+      <br><br>
+      <img src="assets/checks/ourdream/23-character-creator-guided-hair.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ux,standout">
+    <div class="finding-meta"><span class="time">Generate — Create Preset (UGC pipeline)</span><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Preset creation is a full UGC publishing pipeline baked into the generate flow.</strong> From the pose library "Create a Preset" — three tabs (Pose / Outfit / Background), style toggle (Realistic / Anime), prompt field, batch size (2/4/8/16 images), then Generate at 80 coins for 16 images (5 coins each). Generation runs in background — "Finalizing your masterpiece" at ~80% — then you pick a cover image from your generated batch.<br><br>
+      <strong>Submission form:</strong> Name, Description, Tags (manual entry, no autosuggest — Dainis flagged this as UX friction), SFW/NSFW toggle. Submission Guidelines enforced: no duplicates, prompt must work across different characters (not tied to one character's look), cover must accurately match the preset, no watermarks or UI artifacts. Then "Submit for Review" — moderated before going live.<br><br>
+      <strong>The model:</strong> OurDream doesn't build the pose library — the community does, and moderation is their QA. Smart content flywheel with almost zero platform cost. The missing tag autosuggest is the only rough edge — trivial to fix, worth noting.
+      <br><br>
+      <img src="assets/checks/ourdream/52-create-preset-empty.png" class="check-shot">
+      <img src="assets/checks/ourdream/53-create-preset-generating.png" class="check-shot">
+      <img src="assets/checks/ourdream/54-create-preset-results-form.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/55-preset-submission-form-filled.png" class="check-shot">
+      <img src="assets/checks/ourdream/56-preset-submission-guidelines.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ux,speed,standout">
+    <div class="finding-meta"><span class="time">Generate — Image gen polish, speed, coin-burn design</span><span class="tag">image</span><span class="tag">ux</span><span class="tag">speed</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Three model choices shown as visual thumbnail cards, not dropdowns:</strong> Dreamy [default] "consistent high quality results for good prompts" · Vivid 1.0 "ultra realistic but does not do NSFW poses well" · Vivid 2.0 [experimental] "ultra realistic and now works with explicit poses." The model tradeoff is explained in plain English in the UI — users know what they're picking and why.<br><br>
+      <strong>Orientation options:</strong> Portrait 4:5, Landscape 5:4, 9:16, 1:1, 16:9. Batch size up to 256 images. "Magic enhance" button on the custom prompt — AI improves your prompt automatically. Advanced settings collapsed by default (gear icon), doesn't clutter the main flow.<br><br>
+      <strong>Speed:</strong> 15+ images generate simultaneously. "Adding magical effects" at ~70% — all appear together when done. Dainis: "super super polished! nice to use it." No approve/select button — you just X out, which keeps you in the generation loop (intentional friction removal). One minor oddity: Generate button inside the Advanced Settings tab doesn't generate from the main screen — same confusion as video. Small bug.<br><br>
+      <strong>Overall impression:</strong> "Easy to create tons of images, super fast. So experience is super fun, and can spend fast! Feels powerful, premium experience." — The speed and batch volume make it addicting. You can burn through your coin balance fast without noticing. That's smart product design.
+      <br><br>
+      <img src="assets/checks/ourdream/57-generate-presets-active.png" class="check-shot">
+      <img src="assets/checks/ourdream/58-image-advanced-settings-style.png" class="check-shot">
+      <img src="assets/checks/ourdream/59-image-generating-15-simultaneous.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,ux,standout">
+    <div class="finding-meta"><span class="time">Generate — Video: Image-to-Video, cost structure, audio emotion</span><span class="tag">video</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Image-to-Video is the most impressive video mode.</strong> Pick a base image from your gallery + select a pose preset → Generate Video. Dainis: "A LOT better than GPTGirlfriend — they have realistic models."<br><br>
+      <strong>Two video models:</strong> Spicy 1.0 [default] "best for explicit acts" · Spicy 2.0 [audio, 2.5× cost] "sharper detail, smoother long clips, with native audio." Coin cost: Spicy 1.0 ≈ 120 coins for a basic 5s clip; 350 coins for more complex / POV Missionary (2 images). Spicy 2.0 = 2,250 coins for 1 video — a hard coin sink.<br><br>
+      <strong>Advanced settings:</strong> Quality (Balanced 720p / Ultra 1080p / Max 4K, +1,000 coins for 4K) · Duration 5s–60s slider · Audio text input ("Type what you want them to say") · Emotion picker: Happy / Neutral / Sad / Angry / Fearful / Disgusted · Voice picker with Balanced tier (ASMR, Aurora, Honey, Hottie) and Ultra tier (Sorority [character default + emotion support], Adorable, Adventurer, Casual, Coach, Conspiracist, Formal, Hypnosis, JOI, Nerdy, Posh, Quirky, Smooth, Villain).<br><br>
+      <strong>Post-generation action bar:</strong> Remix / Edit / Extend / Speech / Enhance / More. Context menu: Download, Share, Details, Add to Profile, Report, Delete. The Extend option alone is valuable — extend an existing video without regenerating from scratch.<br><br>
+      Dainis: "You can spend credits on videos fast but you can create/customise a lot — it's a fun premium playground, I understand how you can run out of coins fast and it's addicting."
+      <br><br>
+      <img src="assets/checks/ourdream/60-image-to-video-lying-missionary.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/61-video-advanced-talking-mode.png" class="check-shot">
+      <img src="assets/checks/ourdream/62-video-select-voice-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/63-video-advanced-spicy2-cost.png" class="check-shot">
+      <img src="assets/checks/ourdream/64-video-advanced-audio-emotion.png" class="check-shot">
+      <img src="assets/checks/ourdream/65-image-to-video-pov-missionary-350coins.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/68-video-completed-gallery.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Generate — Background jobs gallery + notification system</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>All generation runs in the background — you never wait at a loading screen.</strong> The Generate gallery (Images / Videos / Liked tabs) accumulates everything you've made. While one video finishes at 96%, your completed images are already there. Dainis: "I love that all my generations can be done in the background and then all appear in Generate feed — so I can have my own cosy gallery."<br><br>
+      <strong>Notification bell (top right nav):</strong> Shows async job status in-app — "Freeplay - Female Realistic's video is generating 1m." When video completes, a popup toast appears at the top of the screen. Zero friction: start a generation, go explore or chat, come back to a full gallery. The coin balance is also visible in the nav bar at all times — 4,520 coins shown (started at 5,000, ~480 spent this session).<br><br>
+      <strong>Why this matters for DRT.FM:</strong> Most competitors block the UI during generation. OurDream treats generation as a background service — the gallery becomes a personal content library you build over time. This is the right mental model for a media platform, not a prompt tool.
+      <br><br>
+      <img src="assets/checks/ourdream/66-generate-gallery-feed.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/67-notifications-bell.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,standout">
+    <div class="finding-meta"><span class="time">Billing — Buy Dreamcoins coin store</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Coin top-up available separately from the subscription.</strong> Three tiers: 1,000 coins = $11.99 ($11.99/1k) · 5,000 coins = $49.99 ($10/1k, 20% off, highlighted as recommended) · 20,000 coins = $159.99 ($8/1k, 33% off).<br><br>
+      <strong>Payment methods: Card, Crypto (BTC/ETH/USDT), MyBank.</strong> Crypto payment is notable — most AI girlfriend competitors don't offer it. Appeals to privacy-conscious users and markets where card payments are sensitive.<br><br>
+      <strong>Coin math insight:</strong> Topping up 5K coins at $49.99 ($10/1k) is almost the same unit price as the Deluxe sub ($59.99 for 5K coins = $11.99/1k). This subtly anchors the subscription as "better value per coin" — you get the same 5K coins plus all the subscription features for just $10 more. Smart pricing architecture.
+      <br><br>
+      <img src="assets/checks/ourdream/70-buy-dreamcoins-page.png" class="check-shot">
+      <img src="assets/checks/ourdream/69-buy-dreamcoins-crypto.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,nsfw">
+    <div class="finding-meta"><span class="time">Premium/Elite characters — could not locate</span><span class="tag">ux</span><span class="tag">nsfw</span></div>
+    <div class="finding-body">
+      Subscription copy references "Premium models" for Deluxe tier and earlier competitor research flagged an "Elite" character tier. Dainis could not find these characters anywhere in the character picker during this session. Possible explanations: (a) Elite branding was renamed or removed, (b) they appear in a section not yet visited (e.g. Explore with a specific filter), or (c) they are only visible after creating a chat, not in the character browser. Needs follow-up in the next session if accessible.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Community — Creator profiles + coin donations</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Clicking a character in Explore opens a preview card:</strong> name, age, bio (first few lines + "show more"), tags (Young Adult / Busty / Slim / Caucasian Latina Asian mix / nurse / yoga / slow burn / mind reading / romance / BDSM / worship / tease / flirty / lingerie…), video carousel of generated media, creator attribution (feel0the0release — 1.6m interactions / 495 followers), Follow button, Generate / Chat CTAs at the bottom.<br><br>
+      <strong>Creator profile page</strong> (tap creator name): avatar, username, interaction count, follower/following count, bio ("Gentlemen of culture, here we are again. Thanks for all the donations! You guys are the best!"), Follow + <strong>Donate</strong> buttons, then all their characters in a grid (Highlighted / Characters tabs). feel0the0release has: Marisa Voss 30, Ashley Besgrove 22, Penelope (Pen) Ondrus 22, Sofia Lindkvist 28, plus more.<br><br>
+      <strong>Donate Coins modal:</strong> "Send coins to feel0the0release. Minimum donation is 100 coins." Amount field (default 100), current balance shown (4,420 coins), optional message field, "Donate anonymously" checkbox ("You'll appear as a 'Mystery Donor' to the recipient and this donation won't show in your activity"). Big pink "Donate 100 Coins" button.<br><br>
+      <strong>Dainis verdict:</strong> "You can donate coins and I guess creators somehow can use them or get out in cash — not sure. Smart — you donate with their own system." The creator bio explicitly thanks donors, so it's actively used. The mechanism is clever: users tip with coins they've already bought, the platform skims the exchange. No Stripe, no external payment — pure in-platform currency. Whether creators can cash out is unknown but likely yes (otherwise no creator incentive). This is a Patreon-lite layer built into the coin economy.
+      <br><br>
+      <img src="assets/checks/ourdream/76-character-preview-card.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/82-creator-card-ctas.png" class="check-shot">
+      <img src="assets/checks/ourdream/79-creator-profile.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/80-donate-coins-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/77-character-description.png" class="check-shot">
+      <img src="assets/checks/ourdream/78-character-tags.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ux,standout">
+    <div class="finding-meta"><span class="time">Generate from public character card — remix any character's look</span><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>From any character preview card, "Generate" pre-loads that character's image as the base.</strong> You land on the Generate page with Marisa Voss (or whichever character) already locked in as the source image, ready for Pose / Background / Outfit / Custom Prompt / Advanced Settings. Dainis: "I can click on a girl and generate and create my own version of it — good system. I can personalise each one." Image only — not available for chat character creation.<br><br>
+      This collapses the discovery → generation funnel to one tap. You don't need to own or create a character; anyone's public character becomes a generation seed. Combined with the community pose library, this means the entire public character catalogue is a content playground.
+      <br><br>
+      <img src="assets/checks/ourdream/83-generate-from-character-card.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,standout">
+    <div class="finding-meta"><span class="time">Voice call — UI spotted (call screen)</span><span class="tag">voice</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Voice call screen appeared during browsing — this is the entry point.</strong> Full-screen character image (Marisa Voss, beach/sunset backdrop), character name centred at top, "Voice Call" label beneath, large green phone button to initiate, and cost displayed: <strong>1 coin per second</strong> (= 60 coins/minute). The chat text is still visible behind the overlay — voice call launches over an active chat, not from a separate tab.<br><br>
+      <strong>Cost note:</strong> 1 coin/sec = 60 coins/min. At Deluxe (5,000 coins) that's ~83 minutes of call time. The pricing page stated 50 coins/min for voice — discrepancy may mean 1 coin/sec only counts during active AI speech, not silence. Needs confirmation during the actual call.
+      <br><br>
+      <img src="assets/checks/ourdream/81-voice-call-marisa-screen.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,image,video,nsfw,standout">
+    <div class="finding-meta"><span class="time">Chat — in-chat Edit Image + Generate Video (10/100 coins)</span><span class="tag">chat</span><span class="tag">image</span><span class="tag">video</span><span class="tag">nsfw</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Images generated in chat are immediately editable and animatable — no leaving the chat.</strong> Two actions surface directly on any in-chat image:<br><br>
+      <strong>Edit Image — 10 coins.</strong> Pink tooltip: "Describe how you want to edit this image. Costs 10 coins." Text input appears at the bottom: "Describe your edit…" Dainis typed "naked" — it worked. The character's outfit was removed and the new naked image replaced the original in the chat thread. 10 coins = essentially free escalation. No separate page, no setup — one text prompt from inside the conversation.<br><br>
+      <strong>Generate Video — in-chat version (100 coins).</strong> Simpler than the standalone Generate page: Action picker (dropdown — "All Fours" selected), Quality Level (Balanced / Ultra 1080p / Max 4K), Duration slider (5s–60s). No Spicy model choice, no audio/emotion. Just the essentials. 100 coins for a basic clip. The pre-selected action picker is the NSFW pose grid — <strong>Search actions…</strong> bar + category tabs: All · Anal · BDSM · Boobs · Couple · Cumshot · Dance · Expression · Fetish + more. Poses shown with rendered image previews: All Fours, Custom, POV Missionary, Cowgirl, Cumshot, Doggy Style.<br><br>
+      <strong>Video button in chat</strong> triggers this same paid generation flow — Dainis: "I see video button and it kicks paid video gen." Chat is the coin-burn surface for users who don't visit the standalone Generate tab.<br><br>
+      <strong>Voice call blocks multitasking; chat does not.</strong> Dainis: "When I was on call I couldn't do both things but if I chat it's okay." Voice call is a dedicated foreground experience — the rest of the app is locked while active. Chat runs in parallel with other actions.
+      <br><br>
+      <img src="assets/checks/ourdream/86-chat-edit-image-tooltip.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/84-chat-action-picker-nsfw-grid.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/85-chat-generate-video-modal.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,billing,standout">
+    <div class="finding-meta"><span class="time">Voice — two-tier pricing: Balanced free / Ultra 5 coins per paragraph</span><span class="tag">voice</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>This is the mechanism behind "unlimited audio messages."</strong> Voice has two tiers with completely different pricing:<br><br>
+      <strong>BALANCED — 0 coins per message.</strong> Four English-only voices: ASMR, Aurora, Honey, Hottie. Genuinely free. Every response can be narrated at zero cost. This is what makes the "unlimited" marketing claim true — it's not a lie, it's a tier gate.<br><br>
+      <strong>ULTRA — 5 coins per paragraph.</strong> Smooth [creator's choice, currently selected], Adorable, Adventurer, + more (Casual, Coach, Conspiracist, Formal, Hypnosis, JOI, Nerdy, Posh, Quirky, Villain). Ultra voices support emotion. At 5 coins/paragraph, a typical 3-paragraph response costs 15 coins. Deluxe's 5,000 coins = ~333 full Ultra responses, or about 10-11 days of daily use.<br><br>
+      <strong>Playback settings:</strong> Auto-play voice messages (off by default) · Narrate actions in audio (on — so scene descriptions get read aloud, not just dialogue).<br><br>
+      <strong>What this means for DRT.FM:</strong> The "unlimited audio" claim is a tier split, not a genuine unlimited. The free tier keeps the marketing honest; the paid tier is where quality lives. If DRT.FM offers voice, this is the right framing — don't position it as "unlimited" and then surprise users with a coin gate.
+      <br><br>
+      <img src="assets/checks/ourdream/88-voice-tiering-balanced-ultra.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,standout">
+    <div class="finding-meta"><span class="time">Memory panel — three-part architecture + 15K cap confirmed</span><span class="tag">memory</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Memory is a three-layer system, all in one panel (Current Chat / Default toggle):</strong><br><br>
+      <strong>1. Auto Memory Log</strong> — AI-generated summary of the chat. "Start chatting to generate memories." Controls: Edit / Force regenerate / Pause. "Auto-updates on" indicator. The AI watches the conversation and maintains a running summary automatically.<br><br>
+      <strong>2. Pinned Memories</strong> — manual, persistent. "Add persistent memories here." Counter: <strong>0 / 15,000 characters.</strong> This is the field that caused the April crisis. It was previously unlimited; the Apr 20 changelog entry capped it to 15K (≈ 2,500 words) for "performance." Power users who had built 200K–536K word memory logs lost almost everything. The cap is now visible and hard — the counter is right there in the UI.<br><br>
+      <strong>3. Custom Instructions</strong> — behavioural overrides. "Add additional instructions here. e.g. write only in lower case." Counter: <strong>0 / 15,000 characters.</strong> Separate cap from Pinned Memories — so total manual context = 30K chars max.<br><br>
+      <strong>What DRT.FM should do:</strong> If DRT.FM's memory is more generous or unlimited, say so directly and loudly. OurDream's power users are actively churning over 15K. "No memory cap" is a steal-able differentiator right now.
+      <br><br>
+      <img src="assets/checks/ourdream/89-memory-panel.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Chat settings — AI models, Lust Level, Response Length, Chat Mode, share</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Writing Style panel (per-chat or global Default):</strong><br><br>
+      <strong>Chat Mode:</strong> Roleplay [new] (immersive storytelling, narrated actions and scenes) · Texting [experimental] (conversational).<br><br>
+      <strong>AI Model tiers:</strong>
+      <ul>
+        <li>STANDARD — Balanced [default]: "Fast, smart and spicy" · Lively: "Less predictable, more variety and less looping"</li>
+        <li>THINKING — Genius [1-8 coins, <strong>free</strong>]: "Fantastic for understanding complex scenes, deep immersion, and improved memory" · Lively Genius [free]: "The variety of Lively but with the intelligence and memory of Genius." The coin cost is shown struck-through with a green "free" badge — Deluxe gets thinking models at no extra coin cost.</li>
+        <li>EXPERIMENTAL (sunsetting) — Nova: "Quick and detailed, but prone to more content flags" · Creative: "Enhanced details for captivating narratives." Both tagged [sunsetting] — being phased out. OurDream is consolidating their model lineup.</li>
+      </ul>
+      <strong>Lust Level slider — 5 positions:</strong> 😒 · 😐 · 😊 ("playful and suggestive, follows the scenario pace") · 🔥 ("sexually forward, fast escalation, anatomically detailed") · 💀 (max). Set per character. This is the arousal control the bug board users were requesting.<br><br>
+      <strong>Response Length slider:</strong> "balanced response length" at midpoint. Per-character tuning.<br><br>
+      <strong>Chat sharing:</strong> Any chat can be made public with one tap — "Chat Shared! Public link created." URL: `ourdream.ai/share/chat/[uuid]`. Copy button + Done. Instant shareable chat transcript.
+      <br><br>
+      <img src="assets/checks/ourdream/90-writing-style-ai-models.png" class="check-shot">
+      <img src="assets/checks/ourdream/94-lust-level-high-experimental-models.png" class="check-shot">
+      <img src="assets/checks/ourdream/95-experimental-models-sunsetting.png" class="check-shot">
+      <img src="assets/checks/ourdream/91-lust-level-response-length.png" class="check-shot">
+      <img src="assets/checks/ourdream/93-chat-shared-public-link.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux">
+    <div class="finding-meta"><span class="time">Chat — Group chat: Add Character (new feature)</span><span class="tag">chat</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      Members modal inside an active chat shows the current character (Marisa Voss · 30) and an <strong>"Add Character [new]"</strong> button. Group chats — multiple AI characters in one conversation — are rolling out as a new feature. The Members panel is the management surface. Chat date stamp visible: Thursday | 07-May.
+      <br><br>
+      <img src="assets/checks/ourdream/92-group-chat-add-character.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Chat — micro-UX details: video toolbar, voice player, star rating, feedback, delete</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>In-chat video has the same post-generation toolbar as the standalone gallery.</strong> After a video generates inside a chat, the action bar appears directly below: Edit / Extend / Speech / Enhance / More. No need to go to the Generate tab to iterate. The video and all its editing tools live right in the conversation thread.<br><br>
+      <strong>Voice messages render as inline waveform players.</strong> Pink play button, waveform visualisation, timestamp (0:00). Star rating icons (☆☆☆☆☆) and refresh/forward controls sit above the player — so voice messages are also ratable.<br><br>
+      <strong>Voice Generation onboarding modal</strong> (first-time activation): "Bring your conversations to life with audio! Cost: 5 coins per paragraph. Change your voice anytime in the chat sidebar under Voice settings." → Got it. Clean transparent pricing at the point of first use — no hidden cost surprise.<br><br>
+      <strong>Per-response star rating + "Tell us why" feedback loop.</strong> Every AI response has a 1–5 star rating bar below it (refresh · ★☆☆☆☆ · Tell us why · >>). Rate below 5 stars → "Tell us why" button appears → Feedback modal: free-text field "Tell us what you think…" + Submit Feedback. Dainis: "I can star each chat and tell why I didn't like it." This is per-response quality signal collection baked into the chat flow — granular training feedback that most competitors don't have.<br><br>
+      <strong>Chat sidebar delete button:</strong> small red trash icon on each chat entry, alongside a share icon and heart/like count. "+ New Chat" button at the top. Dainis: "tiny delete chat button too — great UX." Clean, unobtrusive — doesn't clutter the sidebar but it's there when needed.
+      <br><br>
+      <img src="assets/checks/ourdream/96-chat-video-post-gen-toolbar.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/97-chat-voice-message-player.png" class="check-shot">
+      <img src="assets/checks/ourdream/98-voice-generation-onboarding-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/100-chat-response-star-rating.png" class="check-shot">
+      <img src="assets/checks/ourdream/101-chat-feedback-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/99-chat-sidebar-delete-share.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,ux">
+    <div class="finding-meta"><span class="time">Voice call — verdict: functional but not polished (Kindroid is the benchmark)</span><span class="tag">voice</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Voice call UI:</strong> Full-screen character image (Aurora Moonstruck, guitarist/stage setting), name centred, "Voice Call" label, large green call button, "1 coin per second." Star rating (☆☆☆) visible at top left — you can rate the call. When active, minimises to a background pill at the bottom: character avatar + name + timer (00:04 · Listening...) + three controls: generate scene image / mute / hang up.<br><br>
+      <strong>Dainis verdict: "Okay, but not wow."</strong> Specific issues:
+      <ul>
+        <li>She doesn't initiate — waits for the user to speak first, no greeting. Makes it feel passive, not intimate.</li>
+        <li>Always shows the date/time in every response — the roleplay context header (📅 Thursday | 07-May · 🕐 10:35 am · 🌍 Pacific Wave Wellness Studio · ☁️ 68°F | Sunny) appears at the start of every AI message. Immersive in text roleplay; annoying in voice context.</li>
+        <li>Voice settings changes (model, emotion) didn't seem to take effect — voice sounded the same.</li>
+        <li>Character slows down in chat during a call — performance degradation under concurrent load.</li>
+        <li>No video — audio only. Kindroid's video call is the UX benchmark to aim for, not this.</li>
+      </ul>
+      <strong>Call controls:</strong> The scene generation button on the call pill is interesting — you can generate an image of the current scene mid-call without hanging up.
+      <br><br>
+      <img src="assets/checks/ourdream/105-voice-call-aurora-screen.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/104-voice-call-background-pill.png" class="check-shot">
+      <img src="assets/checks/ourdream/106-chat-context-header.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Group chats — mechanics, character selection, async loading, scene gen limit</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Group chat working with multiple characters simultaneously.</strong> Aurora Moonstruck · 23 + Bella Davis · 22 in one thread; a second group chat with Sierra + others also tested. Members modal: Add Character [new] + Edit + full right sidebar (Members / Writing Style / Voice / Memory / Persona / Preferences / History).<br><br>
+      <strong>No voice call in group chats — audio messages instead.</strong> The voice call button is disabled in group context. Characters generate audio messages per-response. Audio lags (counter shows "99" loading, waveform at 0:00) but text arrives fast — you keep chatting while audio catches up. Same pattern as voice messages in solo chat.<br><br>
+      <strong>Character selection:</strong> Character avatars visible at the bottom of the chat — you can tap to select which character responds next, or leave it on random. Dainis: "I can see how the convo is more interesting" — the back-and-forth between two characters with different personalities creates natural tension and dynamics.<br><br>
+      <strong>20K character description warning:</strong> Red toast — "This character's description exceeds 20k characters and may cause issues in group chats." Separate cap from Pinned Memories (15K). Long character descriptions can destabilise group context.<br><br>
+      <strong>Scene Generation in group chats — known limitation.</strong> Modal note: "In group chats, you'll only see the most recent character (we'll improve this!)" — the 5-coin scene image only renders the last character who spoke, not all characters in the scene. Self-acknowledged gap; they're already flagging the fix. Dainis: "it only shows recent character — I like that text comes first."<br><br>
+      <strong>Async loading keeps chat unblocked:</strong> Image generates in the background ("Finalizing your masterpiece 95%"), audio loads (counter "99"), but you can keep sending messages. Text is fast; media catches up. Dainis: "yes audio loads and video loads but you can keep chatting." This is the right architecture — never block the conversation.
+      <br><br>
+      <img src="assets/checks/ourdream/102-group-chat-aurora-bella.png" class="check-shot">
+      <img src="assets/checks/ourdream/114-group-chat-two-responding.png" class="check-shot">
+      <img src="assets/checks/ourdream/112-group-chat-async-loading.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/113-scene-gen-group-chat-limit.png" class="check-shot">
+      <img src="assets/checks/ourdream/103-scene-generation-modal.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,standout">
+    <div class="finding-meta"><span class="time">Billing — Subscription management + cancellation flow (standout)</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Subscription page:</strong> Active · Deluxe Monthly · Next payment Jun 19, 2026 · Next coins Jun 18, 2026 at 9:00 PM. Coins drop the day before billing — you never feel like you're "paying and then waiting." Actions: Update Payment Method · Switch to Yearly [Save 50%] · Coin History · Sync Subscription · Cancel Subscription.<br><br>
+      <strong>Cancellation flow — best in class.</strong> Three-step sequence:<br>
+      <ol>
+        <li><strong>Reason dropdown</strong> (product intelligence collection): Chat Quality · Image Quality · Expensive · Avoid Recurring Billing · Video Quality · Just Trialling · Other. No guilt, no wall of text — just one clean dropdown.</li>
+        <li><strong>"We understand" retention modal:</strong> "Running the best AI in the market isn't cheap, and we don't want to cut any corners on quality or experience. To show our appreciation for your continued support, we'd like to offer you a special bonus." Offer: <strong>3,000 DreamCoins awarded on June 18, 2026.</strong> Two buttons: Claim Bonus (stay) | Continue Cancellation (red).</li>
+        <li>Even if you hit Continue Cancellation, your regular 5,000 coin top-up still lands on Jun 18 — a day before access ends on Jun 19. You leave with coins in hand.</li>
+      </ol>
+      <strong>Dainis: "I love their cancellation process — they asked, and then when I wanted to cancel they offered 3,000 coins. Next coins is day before cancellation — so smart. You can still cancel but you will get coins either way — so good will."</strong><br><br>
+      The mechanics are elegant: the 3,000 bonus coins are dated Jun 18 — the same day as the regular top-up. It feels like a gift layered on top of what was already coming. The coin-based retention offer costs OurDream almost nothing (coins are virtual) but frames the stay decision around value gained, not loss avoided. No dark patterns, no countdown timers, no guilt. The cancellation button is right there throughout.
+      <br><br>
+      <img src="assets/checks/ourdream/111-subscription-management.png" class="check-shot">
+      <img src="assets/checks/ourdream/116-cancel-reason-dropdown.png" class="check-shot">
+      <img src="assets/checks/ourdream/117-cancel-retention-3000-coins.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Make Character Public — creator progression system</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Publishing a character is a gated, moderated process with a progression ladder.</strong> Two-tab modal:<br><br>
+      <strong>Content Rules:</strong> Adults only in age, appearance, and behavior · Agency required (no non-consent, coercive, or exploitative scenarios) · No sexual content involving family members or relatives · Dark themes handled with care · No copyrighted IP · Manual review for borderline content.<br><br>
+      <strong>Minimum Requirements:</strong> Greeting ≥ 50 chars · Public Description ≥ 200 chars · Scenario ≥ 1000 chars · Personality & Extra Details ≥ 1200 chars (combined). High quality bar — lazy submissions won't pass.<br><br>
+      <strong>Creator progression:</strong> "Approvals remaining today: 2 of 2. In manual review (incl. group chats): 0 of 2. Your limits will increase to 4/4 when you have at least 5 public characters." Daily submission quota starts at 2 and doubles at 5 published characters. Discord linked for creator tips. The limit increase is a small but smart mechanic — it makes publishing your first characters feel meaningful, and gives established creators more throughput.<br><br>
+      Dainis: "I had a choice to make character public and that has some rules — I think it's also part of the excitement to become a creator in the community." The Dreamer Program is the incentive layer; this submission flow is the onramp.
+      <br><br>
+      <img src="assets/checks/ourdream/109-make-character-public-requirements.png" class="check-shot">
+      <img src="assets/checks/ourdream/110-make-character-public-content-rules.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Chat list + personal media gallery — everything in one place</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Chat list</strong> shows all active conversations with timestamps and last message preview: Aurora Moonstruck (7:44 PM) · Marisa Voss (7:40 PM) · In The Shadows Of Croft Manor (7:18 PM). The last message preview for Marisa leads with the context header (Thursday | 07-May · 10:35 am · Pacific Wave Wellness Studio…), which is slightly noisy as a list preview.<br><br>
+      <strong>Personal media gallery</strong> (Generate tab) accumulates everything Dainis generated this session: images of Marisa in yoga poses (clothed and naked), the "phone photo" generated image, videos. Images/Videos/Liked tabs. Dainis: "Nice — in chats I have all chat memory, and in Generate all generated media memory." Each context has its own persistence — chat history in Chat, media library in Generate. Clean separation of concerns.
+      <br><br>
+      <img src="assets/checks/ourdream/108-chat-list-view.png" class="check-shot">
+      <img src="assets/checks/ourdream/107-generate-gallery-personal.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ux,standout">
+    <div class="finding-meta"><span class="time">Feed — Content unlock: pay-per-character community library (standout revenue model)</span><span class="tag">billing</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Every public character has a community-built content library you can unlock for coins.</strong> Discovered from the TikTok-style Feed — tap a video, land on the character card, see a preview, then get offered the full library.<br><br>
+      <strong>Pricing scales with library size:</strong>
+      <ul>
+        <li><strong>Liesl Hofmann-Chen</strong> — 148 images + 42 videos → <strong>250 coins</strong> to unlock all</li>
+        <li><strong>Kylie Bennett</strong> — 21,261 images + 665 videos → <strong>1,000 coins</strong> to unlock all</li>
+      </ul>
+      <strong>"+ All Future Content"</strong> — pay once and every new image/video the community generates for that character is yours too. Perpetual access for a one-time coin cost.<br><br>
+      <strong>Character pages have their own URLs</strong> (e.g. ourdream.ai/liesl-hofmann-zeXCDf2STz) — shareable externally. The character page shows: likes · image count · video count · creator · bio · Images/Videos/Liked tabs · Unlock All Content CTA · Chat + Generate CTAs.<br><br>
+      <strong>The business model:</strong> OurDream pays nothing for the content — the community generates it. OurDream charges users to access it (coin fee), keeps the margin. Zero content production cost, pure access fee. Dainis: "Love how they reuse public content and make money. I could unlock a lot so it's fun — I don't generate, pay little and can see all."<br><br>
+      <strong>The math on Kylie Bennett:</strong> 21,261 images for 1,000 coins = ~$10 at top-up prices. 0.047 cents per image. Astronomically cheap vs generating yourself (5 coins each = $0.05/image at top-up rates). It's a different product — browsing vs creating — and the price difference makes both feel right for their use case.<br><br>
+      <strong>Feed → card → unlock funnel:</strong> Discovery (TikTok scroll) → preview (character card with 4 sample images) → purchase (Unlock All Content). Three taps from cold discovery to paid conversion. Coin balance shown throughout (3,424 coins visible) — removes friction of card checkout.
+      <br><br>
+      <img src="assets/checks/ourdream/118-feed-kylie-bennett-card.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/121-liesl-unlock-250coins.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/119-kylie-bennett-unlock-21k-1000coins.jpeg" class="check-shot">
+      <img src="assets/checks/ourdream/120-kylie-bennett-character-page.png" class="check-shot">
+      <img src="assets/checks/ourdream/122-liesl-character-page.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Dreamer Program — full creator economy structure (ourdreamfaq.notion.site/dreamers)</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Three-level creator program — each level unlocks more tools, visibility, and money.</strong><br><br>
+      <strong>Level 1 — Rising Dreamer</strong> (~50K interactions): Badge + profile frame · Discord inner circle (direct team access) · Early feature access · Creator spotlights + featured character eligibility.<br><br>
+      <strong>Level 2 — Lucid Dreamer</strong> (top 50 community leaderboard, 300K+ interactions): All Rising perks + priority approval queue + <strong>earn 100 DreamCoins every time someone purchases your character's community pack.</strong> This is where the coin economy closes the loop — creators earn coins from unlocks, coins have purchase value, so top creators are genuinely incentivised to keep building.<br><br>
+      <strong>Level 3 — Dream Architect</strong> (coming soon): All Lucid perks + 1:1 direct team contact + <strong>earn cash based on character usage.</strong> This is the endgame — top creators get a revenue share in real money.<br><br>
+      <strong>Fast-track for creators from other platforms</strong> — OurDream actively recruits established bot creators from competitors (Kindroid, etc.). Special incentives for "best creators in the world": growth@ourdream.ai. This is a competitor acquisition strategy dressed as a creator program.<br><br>
+      <strong>Eligibility rules:</strong> Manual review only (no auto-accepts). Quality over quantity — "make what you want, not what you think the community wants." Regular audits at Lucid+. Copying other creators' bots = permanent ban.<br><br>
+      <strong>Platform stats (Sep 30, 2025 — within ~6 months of launch):</strong> Top 50 a16z AI consumer apps · 10M+ users · 50M+ images and videos generated · 300M+ messages sent · 4+ star Trustpilot.<br><br>
+      <strong>CoreProtect™</strong> — proprietary moderation system pending academic peer review. Positioned as industry-leading.<br><br>
+      <strong>Why this matters for DRT.FM:</strong> The Dreamer Program is the content strategy. OurDream doesn't build characters — creators do. The three-level progression (visibility → coins → cash) is the incentive ladder. Each level costs OurDream almost nothing but gives creators real reasons to invest more time. The fast-track recruitment is aggressive — they're pulling top creators from Kindroid and others right now.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,nsfw,ux">
+    <div class="finding-meta"><span class="time">Generate — Video quality + audio weakness</span><span class="tag">video</span><span class="tag">nsfw</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Video quality: moans present, but generation is inconsistent.</strong> Dainis: "The video had moans, but video not perfect — it is kinda realistic but not perfect. Which is good — so it depends a lot on prompting and not our fault so they have it too. That's part of image gen to have weird wasted generations, when it's kinda there and kinda not." Same inconsistency issue as all AI video. NSFW audio (moans) present in the generated video — that's the baseline.<br><br>
+      <strong>Audio/speech is the weakest point.</strong> Dainis expected audio in the video but it wasn't included by default — he added it separately using the Speech action on the generated video. Result: "Audio is the weakest so far — it doesn't sound emotional." Flat, unemotional TTS on top of the video. The emotion picker (Happy/Neutral/Sad etc.) doesn't seem to translate into convincing voice performance.<br><br>
+      <strong>Edit loop = coin sink by design.</strong> After receiving a video, the action bar (Remix / Edit / Extend / Speech / Enhance) invites continued spending. Each action costs more coins. Dainis: "I see that I can keep editing the video and spend more credits." This is intentional — the generation is the entry point, not the end point. The upsell is baked into the output.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,nsfw,ux,standout">
+    <div class="finding-meta"><span class="time">Generate Audio — preset NSFW sounds + custom speech + Enhance Video</span><span class="tag">video</span><span class="tag">nsfw</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Generate Audio is a separate post-generation action (Speech button) — 20 coins/second of audio.</strong> "Video will be trimmed to match audio length." Two modes:<br><br>
+      <strong>Presets tab</strong> — 18 pre-built NSFW audio clips, playable before selecting: Orgasm · Heavy breathing · Quivering orgasm · Horny moan · Pure ecstasy · Deepthroat blowjob · Soft moaning · Oh fuck yeah · Japanese moans · After sex · Rhythmic fucking · "I love that dick dad..." · Make me take it · Horny breathing · It's in deep · Orgasmic moan · Please please · Just like that. These are sound design assets, not speech — they sidestep the flat-TTS problem entirely for sexual content.<br><br>
+      <strong>Custom tab</strong> — Voice picker (Sorority = character default), Emotion selector (8 options: Happy / Sad / Angry / Fearful / Disgusted / Surprised / Neutral / <strong>Seductive</strong>), Script field (0/300 chars). "Seductive" is the key emotion — not present in the video Advanced Settings picker, only here in the Speech action.<br><br>
+      <strong>Enhance Video</strong> (separate action): upscale a generated video post-hoc. Enhance to 1080p = 100 coins · Enhance to 4K = 200 coins. "Enhancing upscales your video for sharper detail and higher resolution." This means you can generate fast at Balanced quality to check the result, then pay to upscale only the ones you like.<br><br>
+      <strong>Dainis verdict:</strong> "They are stronger on audio noises — you can choose preset ones or create custom. So far audio voices the weakest — but UI/UX again incredible." The preset NSFW sounds are the right call: they don't need an emotional voice actor, they're sound effects. The custom scripted speech is where it falls flat emotionally. The overall audio architecture — generate → optionally add audio → optionally enhance — is well thought out, even if the voice model underdelivers.
+      <br><br>
+      <img src="assets/checks/ourdream/73-generate-audio-custom.png" class="check-shot">
+      <img src="assets/checks/ourdream/72-generate-audio-presets.png" class="check-shot">
+      <img src="assets/checks/ourdream/71-audio-select-emotion-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/75-enhance-video-modal.png" class="check-shot">
+      <img src="assets/checks/ourdream/74-video-context-menu.png" class="check-shot">
     </div>
   </div>
 
