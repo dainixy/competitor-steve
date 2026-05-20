@@ -1,11 +1,22 @@
 ---
 name: competitor-checks
-description: Capture Dainis's hands-on review of an AI girlfriend competitor (paid account browsing) into a structured per-competitor tab inside competitor-checks.html. Use when user types /competitor-checks <site>, says "starting <site>" (for an AI girlfriend competitor), or shares notes/screenshots from a competitor review session.
+description: Capture Dainis's hands-on review of an AI girlfriend competitor (paid account browsing) into a per-competitor HTML page. Use when user types /competitor-checks <site>, says "starting <site>" (for an AI girlfriend competitor), or shares notes/screenshots from a competitor review session.
 ---
 
 # Competitor Checks — Workflow
 
-This skill is for capturing Dainis's hands-on review notes while he browses paid accounts of AI girlfriend competitors (Kindroid, LoveScape, Swipey, Candy.AI, OurDream, SecretDesires, GirlfriendGPT, Promptchan, Joi.AI, SweetDream, Nomi, etc.). One tab per competitor inside `competitor-checks.html`, designed so each competitor can be reviewed in a fresh Claude tab without context bloat.
+This skill is for capturing Dainis's hands-on review notes while he browses paid accounts of AI girlfriend competitors (Kindroid, LoveScape, Swipey, Candy.AI, OurDream, SecretDesires, GirlfriendGPT, Promptchan, Joi.AI, SweetDream, Nomi, etc.). **Each competitor gets its own HTML file** (e.g. `candy.html`, `secretdesires.html`). `index.html` is the summary page. `competitor-checks.html` is a legacy single-file version — do not use it for new sessions.
+
+## STEP 0 — Orient before doing anything
+
+**Always run this before starting a new competitor session:**
+
+```bash
+git log --oneline -5          # see recent refactors that affect file structure
+ls *.html                     # see which competitor pages already exist
+```
+
+Then read the nav in `index.html` to understand the current page list and naming conventions. This prevents creating files in the wrong format or missing nav links. The file structure may have changed since this skill was written.
 
 ## Trigger phrases
 
@@ -18,10 +29,11 @@ This skill is for capturing Dainis's hands-on review notes while he browses paid
 
 When user signals start of a new competitor (e.g. "starting Kindroid"):
 
-1. Check if a tab for that competitor already exists in `competitor-checks.html`. If yes, resume. If no, add a new tab.
-2. Create `assets/checks/<slug>/` folder (slug = lowercased competitor name, no spaces — e.g. `kindroid`, `lovescape`, `secretdesires`).
-3. Display the **Quick Reference Checklist** for that competitor in chat — see "Checklist composition" below.
-4. Tell user: "Browse freely. Share screenshots (save to ~/Downloads as macOS default `SCR-*.png/jpeg`) and notes in chat. I'll catalogue."
+1. Run Step 0 — check git log and ls to confirm current file structure.
+2. Check if `<slug>.html` already exists. If yes, resume it. If no, create it following the "Adding a new competitor page" section below.
+3. Create `assets/checks/<slug>/` folder (slug = lowercased competitor name, no spaces — e.g. `kindroid`, `lovescape`, `secretdesires`).
+4. Display the **Quick Reference Checklist** for that competitor in chat — see "Checklist composition" below.
+5. Tell user: "Browse freely. Share screenshots (save to ~/Downloads as macOS default `SCR-*.png/jpeg`) and notes in chat. I'll catalogue."
 
 ### 2. Receiving notes
 
@@ -62,17 +74,72 @@ When user signals end of a competitor session ("done with X", "wrapping up Kindr
 - Bullet list: "Avoid / counter-position" (dark patterns, bad UX, billing traps)
 - Final 1-10 scores for: memory, voice, image consistency, NSFW consistency, companion feel
 
-**B. Restructure the completed tab** — sessions are working tools; completed tabs are reference docs. When a session ends, restructure the tab HTML so:
+**B. Restructure the completed page** — sessions are working tools; completed pages are reference docs. When a session ends, restructure `<slug>.html` so:
 1. **Remove** the Quick Reference Checklist (was only useful during active browsing)
-2. **Move Standout & Actions for Steve to the TOP** of the tab — immediately after `div.check-header`
+2. **Move Standout & Actions for Steve to the TOP** — immediately after `div.check-header`
 3. **Relabel Findings** as "Session Findings" with an "Archive · YYYY-MM-DD" badge and move it below Actions
 4. **Update the zone-badge** on the h2 to "Session complete · YYYY-MM-DD"
 
-The correct completed-tab order is: `check-header` → `h2 + div.actions` → `h2 + div.findings`
+The correct completed-page order is: `check-header` → `h2 + div.actions` → `h2 + div.findings`
 
-Use Python (not sed/awk) to do the block reordering — see the Kindroid session in git history for the exact reassembly pattern.
+Use Python (not sed/awk) to do the block reordering — see `candy.html` or the Kindroid session in git history for the exact reassembly pattern.
 
-**C. Fill in the Top-3 in the Summary tab** — find the `div.top3-card top3-pending` card for this competitor in the `#summary` section and replace it with a populated card:
+**B2. Reorganize findings into toggle groups** — after restructuring, group the Session Findings into collapsible sections by feature area (all closed by default). This makes large finding sets navigable.
+
+Add to the second `<style>` block:
+```css
+ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
+.finding-group{margin-bottom:6px}
+.group-toggle{display:flex;align-items:center;width:100%;background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;text-align:left;gap:10px;transition:background .15s}
+.group-toggle:hover{background:#13131e}
+.group-toggle.open{border-radius:10px 10px 0 0;border-bottom-color:#13131e}
+.group-title{font-size:13px;font-weight:700;color:#e0e0e8;flex:1}
+.group-count{font-size:11px;color:#5060a0;flex-shrink:0}
+.toggle-arrow{font-size:9px;color:#5060a0;transition:transform .2s;flex-shrink:0}
+.group-toggle.open .toggle-arrow{transform:rotate(90deg)}
+.group-body{display:none;background:#07070f;border:1px solid #2a2a3e;border-top:none;border-radius:0 0 10px 10px;padding:12px;flex-direction:column;gap:12px}
+.group-body.open{display:flex}
+```
+
+Replace `<div class="findings" id="<slug>-findings">` with `<div id="<slug>-findings" style="display:flex;flex-direction:column;gap:6px">`.
+
+Wrap findings in groups:
+```html
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Group Name</span>
+    <span class="group-count">N findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <!-- .finding divs here -->
+  </div>
+</div>
+```
+
+Add before `</body>`:
+```html
+<script>
+function toggleGroup(btn) {
+  var body = btn.nextElementSibling;
+  var open = !btn.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
+</script>
+```
+
+Group by product feature area (mirror the competitor's own nav/features). Typical groups: Homepage & Discovery · Onboarding & Signup · Character Creator · Chat & Progression · Voice & Calls · Video & Content · Image Generation · Group Chats · NSFW & Private Content · Billing & Monetization · Community · Distribution & Company. Adjust to what that competitor actually has.
+
+Also add inline color styles to the h3 action headings inside `.actions`:
+- "Steal immediately for DRT.FM" → `style="color:#4ade80;margin-top:4px"`
+- "DRT.FM already does better" → `style="color:#60a5fa"`
+- "Avoid / counter-position" → `style="color:#ff6b6b"`
+- "Scores" → `style="color:#a0a0c0"`
+
+Add `.actions h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px}` to the main style block.
+
+**C. Fill in the Top-3 in the Summary page** — find the `div.top3-card top3-pending` card for this competitor in `index.html` and replace it with a populated card:
 
 ```html
 <div class="top3-card">
@@ -87,11 +154,13 @@ Use Python (not sed/awk) to do the block reordering — see the Kindroid session
 
 Top 3 = the three highest-impact / most novel things from that session — what Steve most needs to know about this competitor at a glance.
 
+**Card ordering in index.html**: completed competitors go newest-first (most recently finished at top), pending competitors follow at the bottom. Apply this ordering to both the Progress status-grid and the Top 3 grid. Also mark the completed card with `status-done` class and "Done · YYYY-MM-DD" label.
+
 ### 6. Recommending the next competitor
 
 After end-of-session synthesis, recommend the next competitor based on:
 
-1. **Not yet reviewed** in `competitor-checks.html`
+1. **Not yet reviewed** — check `index.html` status grid for pending competitors
 2. **Highest expected learning** — prioritize competitors with most "Net-new features" claims in `ai_girlfriend_competitor_discovery_v2.md`, then competitors flagged as incumbents but not yet hand-verified.
 
 State the recommendation as one sentence with reasoning, then ask Dainis to confirm or override.
@@ -165,10 +234,6 @@ for f in *.png;  do sips -Z 1200 "$f" -o "$f" > /dev/null 2>&1; done
 ```
 
 Target: max 1200px on longest dimension, JPEG quality 75. Reduces ~55MB → ~29MB per session.
-
-### 4. Update competitor-checks.html too
-
-The legacy single-file version still needs the new section and nav button added so it stays in sync as a fallback.
 
 ## Tab HTML structure (per competitor)
 
