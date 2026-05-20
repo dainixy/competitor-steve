@@ -782,6 +782,43 @@ h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 
     </div>
   </div>
 
+  <div class="finding" data-tags="billing,ux,standout">
+    <div class="finding-meta">Post-session · billing · memory · standout</div>
+    <div class="finding-body">
+      <strong>Kindroid has three subscription tiers — Standard + two engagement-gated add-ons (Ultra, MAX). Memory and context scale dramatically across tiers.</strong><br><br>
+      <strong>Tier structure:</strong> Add-ons are optional monthly subscriptions stacked on top of Standard. Ultra requires Standard; MAX requires Ultra + Standard — each tier cumulative.
+      <ul style="margin:8px 0 6px 16px;line-height:1.9">
+        <li><strong>Standard</strong> — base subscription. Active on Dainis's account.</li>
+        <li><strong>Ultra</strong> — <em>engagement-gated</em>: "Keep chatting and engaging with your Kindroids to qualify." Not purchaseable immediately — you have to earn it through use. Unlocks advanced features.</li>
+        <li><strong>MAX</strong> — requires Ultra first. The top tier.</li>
+      </ul>
+      <strong>Add-on Feature Matrix — full numbers:</strong>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;line-height:1.9">
+        <tr style="color:#6b7280;font-size:11px"><td style="padding:4px 8px 4px 0;width:55%">Feature</td><td style="padding:4px 8px;text-align:center">Standard</td><td style="padding:4px 8px;text-align:center;color:#a78bfa">Ultra</td><td style="padding:4px 8px;text-align:center;color:#fbbf24">MAX</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Total conversation context</td><td style="text-align:center">500K</td><td style="text-align:center;color:#a78bfa">1.3M</td><td style="text-align:center;color:#fbbf24">2.8M</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Short term context</td><td style="text-align:center">18K</td><td style="text-align:center;color:#a78bfa">50K</td><td style="text-align:center;color:#fbbf24">125K</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Cascaded memory context</td><td style="text-align:center">480K</td><td style="text-align:center;color:#a78bfa">1.2M</td><td style="text-align:center;color:#fbbf24">2.7M</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Additional AI backstory expansion</td><td style="text-align:center">N/A</td><td style="text-align:center;color:#a78bfa">2,500</td><td style="text-align:center;color:#fbbf24">5,000</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">User backstory limit</td><td style="text-align:center">500</td><td style="text-align:center;color:#a78bfa">1,000</td><td style="text-align:center;color:#fbbf24">2,000</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Group context limit</td><td style="text-align:center">1,000</td><td style="text-align:center;color:#a78bfa">1,500</td><td style="text-align:center;color:#fbbf24">3,000</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Recalled LTM &amp; journals limit</td><td style="text-align:center">3</td><td style="text-align:center;color:#a78bfa">5</td><td style="text-align:center;color:#fbbf24">9</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Complimentary monthly audio credits</td><td style="text-align:center">1M</td><td style="text-align:center;color:#a78bfa">2.5M</td><td style="text-align:center;color:#fbbf24">6M</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Selfie regen per 30 minutes</td><td style="text-align:center">1</td><td style="text-align:center;color:#a78bfa">2</td><td style="text-align:center;color:#fbbf24">2</td></tr>
+        <tr><td style="padding:3px 8px 3px 0;color:#d1d5db">Priority selfies (dedicated compute)</td><td style="text-align:center">–</td><td style="text-align:center;color:#a78bfa">–</td><td style="text-align:center;color:#fbbf24">Yes*</td></tr>
+      </table>
+      <em style="font-size:12px;color:#6b7280">* MAX priority selfies: dedicated compute with no/low queue — up to 10 selfies in a short window, then standard queue applies. LTM consolidation is infinite for all tiers; recalled &amp; considered LTM may differ. Context/selfie improvements only guaranteed on latest subscriber LLM and selfie versions.</em><br><br>
+      <strong>Key observations:</strong>
+      <ul style="margin:8px 0 6px 16px;line-height:1.9">
+        <li><strong>Ultra is engagement-gated, not just purchaseable</strong> — Kindroid is literally incentivising chat engagement to unlock higher tiers. Brilliant retention mechanic: your most engaged users (who want more memory) are also the ones who have to keep engaging to unlock it.</li>
+        <li><strong>Memory scales 5×+ between tiers</strong> — Standard's 480K cascaded memory context vs MAX's 2.7M is a nearly 6× gap. Power users who care about memory have a very concrete reason to climb tiers.</li>
+        <li><strong>Recalled LTM items go from 3 → 9</strong> — even with infinite consolidation, only 3–9 memories are injected per response. The quality of recall is gated behind tier.</li>
+        <li><strong>OurDream comparison:</strong> OurDream had a memory crisis over a 15K cap. Kindroid's Standard tier starts at 480K cascaded memory. Different league entirely — and users who care about memory will notice.</li>
+      </ul>
+      <img src="assets/checks/kindroid/52-subscription-tiers-standard-ultra-max.png" class="check-shot">
+      <img src="assets/checks/kindroid/53-add-on-feature-matrix.png" class="check-shot">
+    </div>
+  </div>
+
 </div>
 
 </div>
