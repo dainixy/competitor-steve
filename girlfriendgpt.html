@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM Competitor Checks — Hands-On Review</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{background:#1e1e2e}
+.tab-btn.active{color:#fff}
+.tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
+.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
+.tab-lovescape{color:#f0abfc}.tab-lovescape.active{background:#260a30}
+.tab-swipey{color:#fb7185}.tab-swipey.active{background:#2a0a14}
+.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
+.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
+.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
+.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
+.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
+.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
+.tab-pc{color:#ff9f43}.tab-pc.active{background:#1e1200}
+.tab-joi{color:#f9ca24}.tab-joi.active{background:#1e1800}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* SECTIONS */
+.section{display:none;max-width:1100px;margin:0 auto;padding:32px 32px 80px}
+.section.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#061a0a,#0a2a10);border:1px solid #1a4a1a;border-radius:14px;padding:26px 32px;margin-bottom:32px}
+.hero h1{font-size:22px;font-weight:800;color:#34d399;margin-bottom:8px}
+.hero p{font-size:14px;color:#7ed4b8;max-width:760px;line-height:1.6}
+.hero .meta{margin-top:14px;font-size:12px;color:#4a8a4a}
+
+/* COMPETITOR HEADER */
+.check-header{background:linear-gradient(135deg,#0e0e16,#13131c);border:1px solid #2a2a3e;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.check-header h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px}
+.check-header .meta{font-size:13px;color:#7070a0;font-family:'SF Mono','Monaco',monospace}
+.check-header .priority{margin-top:12px;font-size:13px;color:#a8d4b8;background:#0a1a14;border:1px solid #1a3a28;border-radius:8px;padding:10px 14px;line-height:1.5}
+
+/* SECTION HEADERS (within a tab) */
+h2.zone{font-size:13px;font-weight:700;color:#5eead4;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
+h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* QUICK REFERENCE */
+.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
+.quick-ref-group{margin-bottom:18px}
+.quick-ref-group:last-child{margin-bottom:0}
+.quick-ref-group-title{font-size:11px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.quick-ref ul{list-style:none}
+.quick-ref li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px;color:#c0c0d8;line-height:1.6}
+.quick-ref li input[type="checkbox"]{margin-top:5px;flex-shrink:0;accent-color:#5eead4}
+.quick-ref li strong{color:#fff;font-weight:600}
+.quick-ref li em{color:#7070a0;font-style:italic;font-size:12px;display:block;margin-top:2px}
+.ambient{margin-top:18px;padding:12px 14px;background:#0a1828;border:1px solid #1a3a5e;border-radius:8px;font-size:12px;color:#a8c8e8;line-height:1.5}
+.ambient strong{color:#60a5fa}
+
+/* FINDINGS */
+.findings{display:flex;flex-direction:column;gap:12px}
+.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
+.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.finding-meta .time{color:#5060a0}
+.tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.tag-standout{background:#2a1a4e;color:#c08aff}
+.tag-ick{background:#2a0a14;color:#ff8aaa}
+.tag-speed{background:#1e1200;color:#ff9f43}
+.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
+.finding-body strong{color:#fff}
+.findings-empty{padding:40px 20px;text-align:center;color:#5060a0;font-size:13px;font-style:italic;background:#0a0a12;border:1px dashed #2a2a3e;border-radius:10px}
+.check-shot{display:block;max-width:100%;width:auto;border-radius:8px;border:1px solid #2a2a3e;margin:10px 0}
+
+/* ACTIONS / STANDOUT */
+.actions{background:linear-gradient(135deg,#16103a,#0e0a20);border:1px solid #3a2a6e;border-radius:14px;padding:24px 28px}
+.actions-empty{color:#7070a0;font-style:italic;font-size:13px}
+.verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #2a2050}
+.action-group{margin-bottom:18px}
+.action-group:last-child{margin-bottom:0}
+.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.steal .action-group-title{color:#4ade80}
+.win .action-group-title{color:#60a5fa}
+.avoid .action-group-title{color:#ff6b6b}
+.action-group ul{list-style:none}
+.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0;padding-left:18px;position:relative;line-height:1.6}
+.action-group li::before{position:absolute;left:0;top:5px;font-weight:700}
+.steal li::before{content:'+';color:#4ade80}
+.win li::before{content:'✓';color:#60a5fa}
+.avoid li::before{content:'!';color:#ff6b6b}
+.scores{margin-top:16px;padding-top:16px;border-top:1px solid #2a2050;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.score{background:#0a0814;border:1px solid #2a2050;border-radius:8px;padding:10px 12px;text-align:center}
+.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.score-value{font-size:22px;font-weight:800;color:#c08aff;line-height:1.2;margin-top:2px}
+
+/* SUMMARY TAB */
+.always-on{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:22px 26px;margin-bottom:24px}
+.always-on h3{font-size:14px;color:#5eead4;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+.always-on ol{padding-left:22px;color:#c0c0d8;font-size:13px;line-height:1.8}
+.always-on ol li{margin-bottom:6px}
+.always-on ol li strong{color:#fff}
+
+.workflow-card{background:#0a1a14;border:1px solid #1a4838;border-radius:12px;padding:18px 22px;margin-bottom:16px;font-size:13px;color:#a8d4b8;line-height:1.7}
+.workflow-card code{background:#0a2820;color:#5eead4;padding:2px 6px;border-radius:4px;font-family:'SF Mono','Monaco',monospace;font-size:12px}
+.workflow-card strong{color:#34d399}
+
+.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
+.status-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:8px;padding:12px 14px}
+.status-card-name{font-size:13px;font-weight:700;color:#e0e0e8;margin-bottom:4px}
+.status-card-state{font-size:11px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.status-done{border-color:#1a4a1a;background:#0a1a0a}
+.status-done .status-card-state{color:#4ade80}
+.status-progress{border-color:#1e3a5e;background:#0a1828}
+.status-progress .status-card-state{color:#60a5fa}
+
+/* TOP-3 SUMMARY */
+.top3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:4px}
+.top3-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:18px 22px}
+.top3-name{font-size:14px;font-weight:800;color:#5eead4;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.top3-list{padding-left:20px;color:#c0c0d8;font-size:13px;line-height:1.7}
+.top3-list li{margin-bottom:10px}
+.top3-list li strong{color:#fff}
+.top3-pending{border-color:#1e1e2e;opacity:0.5}
+.top3-pending-label{font-size:12px;color:#5060a0;font-style:italic;margin-top:8px}
+</style>
+<style>
+.section { display: block !important; }
+nav a.tab-btn { text-decoration: none; display: inline-block; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-label">Competitor Checks</span>
+  <a class="tab-btn tab-summary" href="index.html">📋 Summary</a>
+  <a class="tab-btn tab-kindroid" href="kindroid.html">Kindroid</a>
+  <a class="tab-btn tab-ggpt active" href="girlfriendgpt.html">GirlfriendGPT</a>
+  <a class="tab-btn tab-od" href="ourdream.html">OurDream</a>
+  <a class="tab-btn tab-candy" href="candy.html">Candy.AI</a>
+  <span class="private-badge">DRT.FM · Private</span>
+</nav>
+
+<div id="girlfriendgpt" class="section active">
+<div class="check-header">
+  <h1>GirlfriendGPT</h1>
+  <div class="meta">gptgirlfriend.online · tier picked: ___ · session date: ___</div>
+  <div class="priority"><strong>Priority:</strong> Memory Manager (category benchmark — the #1 most-praised feature in all research), Videos with Audio (character speaks during animated clip), Proactive Roleplay (AI initiates scenarios on login), Elite chat engine (~3x stronger, Apr 2026), Chat Model Settings (user-controlled POV/format/NSFW speed). Get <strong>Elite</strong> if budget allows — 16K context doubles the memory window vs Deluxe.</div>
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-17</span></h2>
+<div class="actions">
+
+  <div class="verdict">
+    Sex chatbot, not a companion platform. Top creators make sex bots — shallow but fun. Dainis: "I always thought it was super advanced." Looks great from first impressions — sexy, shiny, polished UI — but falls apart the moment you actually use it. The chat field (the main product) breaks when you stack video, image, and text at the same time. Everything looks premium, nothing feels reliable. <strong>Study the UX surface and the UGC/creator system. Build video. Counter-position on stability and character consistency.</strong>
+  </div>
+
+  <div class="action-group steal">
+    <div class="action-group-title">Steal immediately for DRT.FM</div>
+    <ul>
+      <li><strong>UX/UI surface — the look sells.</strong> Modern, sexy, shiny. Best first impression of any competitor tested. Dark gradients, clean card layouts, polished typography. Dainis: "everything was bad, except how it looks from front." DRT.FM should have this level of visual polish before anything else. First impression is the product for most users who churn in the first session.</li>
+      <li><strong>Top Creators leaderboard + UGC ecosystem.</strong> Public character library with creator rankings (Most Engaging / Trending / Most Followers), follower counts, character counts, total engagement scores. @sarah-the-creator: 359 characters, 57.2M total score. Dainis: "I loved the public characters — leaderboard, lots of UGC — that's well done." The creator economy keeps content fresh without GGPT paying for it. If DRT.FM ever opens character creation, build this infrastructure first.</li>
+      <li><strong>Video functionality — build it, even if basic.</strong> Dainis: "nobody has this functionality" (except Promptchan who specialises). GGPT's video is badly executed — generic anime renderer, no character awareness, anatomical artifacts — but it still sells subscriptions because video is a category nobody else offers. DRT.FM should build toward video. Study Promptchan for the actual execution. Don't copy GGPT's implementation; copy the decision to ship it.</li>
+      <li><strong>Notification system (Beamer, ~$50/mo).</strong> 4-channel re-engagement: in-app "What's new" panel, email digest opt-in, browser push, action-triggered drip modals. Every product update becomes a reactivation push. DRT.FM ships constantly and tells nobody. One afternoon for Steve to install.</li>
+      <li><strong>Cancellation survey + one-click un-cancel.</strong> Exit survey captures churn reason; reactivation stays one click away. Both are rare in AI companion apps. DRT.FM billing should have both.</li>
+    </ul>
+  </div>
+
+  <div class="action-group avoid">
+    <div class="action-group-title">Avoid / counter-position</div>
+    <ul>
+      <li><strong>Broken core when features stack.</strong> The chat field — the main product — stops working or hits errors when video, image generation, and text are running simultaneously. Dainis: "if you click around video, img, text, it stops working or hits errors." Never ship features that break the primary interaction. Ship each feature stable before adding the next.</li>
+      <li><strong>Looks polished, feels broken.</strong> The gap between first impression and actual use is GGPT's deepest problem. Beautiful UI that fails under normal use destroys trust faster than an ugly UI that works. DRT.FM should never be in this position — stability is the moat.</li>
+      <li><strong>Image gen standalone and slow.</strong> Dainis: "I wouldn't highlight their image generator." Disconnected from characters, queued even on Elite, slow. Don't highlight image generation in DRT.FM marketing unless it's fast and character-aware.</li>
+      <li><strong>Video decoupled from character.</strong> Generic anime renderer for all characters regardless of style — users pay to see their character and get a random anime girl. Don't ship video until the output looks like Alexis.</li>
+      <li><strong>"Undress" button that violates terms.</strong> Prominently placed quick-action that fires a terms violation error on a paid NSFW-enabled Elite account. Dainis: "super stupid — why have it." Never ship a button you can't back up.</li>
+      <li><strong>Statement name obfuscation.</strong> "NDAI.CHAT" on the credit card statement. Users dispute charges they don't recognise. Make DRT.FM's billing name obvious.</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; 2026-05-17</span></h2>
+<div class="findings">
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Homepage loads with "What's new on GirlfriendGPT" Beamer panel open in the right sidebar.</strong> Returning users immediately see what's changed since their last visit — latest changelog entry front-and-centre. Re-engagement mechanic: instead of logging in to a blank chat, you log in to news. Makes the product feel alive and actively maintained. Dainis: <em>"knowing what's updated is cool and handy — easier, more exciting to get back."</em>
+      <br><br>
+      Also: browser push notification prompt on load — "We'd like to show you notifications for the latest news and updates." ALLOW / NO, THANKS. Gentle, one-time ask.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/01-homepage-beamer-news-panel.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,nsfw">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag">nsfw</span></div>
+    <div class="finding-body">
+      <strong>NSFW toggle + Dark theme toggle live directly in the user account dropdown</strong> — one click from any page, not buried in a settings subpage. Dark theme is ON by default. NSFW is OFF by default (free tier). Also visible in the menu: <strong>"Enjoy 20% off"</strong> upsell chip and a language selector (EN flag). Clean, opinionated defaults — dark mode on, explicit off, user chooses to unlock. Dainis: <em>"I like it would love it too."</em>
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/02-settings-menu-nsfw-dark-theme.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Beamer changelog at app.getbeamer.com/gptgirlfrinden — full public feed.</strong> Categories: Alert!, Announcement, Improvement, New. Monthly archive back to Aug 2025. <strong>Email subscribe CTA</strong> embedded in the feed — gentle opt-in, sends a confirmation email. Not forced. Dainis wants to explore the full notification stack:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Beamer</strong> — public changelog / what's new feed (in-app panel + standalone URL)</li>
+        <li><strong>In-app news panel</strong> — shown on login, right sidebar</li>
+        <li><strong>Email notifications</strong> — opt-in via Beamer feed, confirmation sent, not forced</li>
+        <li><strong>Browser push notifications</strong> — ALLOW prompt on homepage load</li>
+      </ul>
+      <em>This is a 4-channel re-engagement system. DRT.FM has none of these explicitly surfaced.</em>
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/03-beamer-changelog-full.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">DevTools deep-dive</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Beamer is a JS widget — integration is trivially simple for Steve to replicate.</strong> Network captured two Beamer calls on interaction:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">sendFeedback</code> — POST with <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">featureId: 229156138</code>, <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">feedbackText: "i love it"</code>, <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">humanScore: 78</code></li>
+        <li><code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">sendReaction</code> — POST with <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">reaction: positive</code>, <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">humanScore: 79</code></li>
+      </ul>
+      Both calls share: <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">app_id: FUfkrliH62286</code> (GGPT's Beamer account key) + <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">custom_user_id</code> (their own platform user ID passed to Beamer so reactions are tied to real users).<br><br>
+      <strong>What this means:</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Beamer is just an embedded JS widget + one API key.</strong> Steve adds a <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">&lt;script&gt;</code> tag and passes DRT.FM's user ID as <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">custom_user_id</code>. That's the entire integration. Beamer handles the panel UI, email digests, browser push, and per-user read/unread state.</li>
+        <li><strong>humanScore</strong> is Beamer's per-user engagement score — they use it to segment who is reacting positively vs. going cold. High-value users can be targeted differently.</li>
+        <li><strong>Clerk auth</strong> confirmed — <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">touch?__clerk_api_version=</code> calls in Network are Clerk session keepalives. GGPT uses Clerk for auth.</li>
+        <li><strong>Microsoft Clarity</strong> (<code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:11px">s.clarity.ms/collect</code>) — session recording + heatmaps. They are watching exactly how users scroll and interact with the changelog panel.</li>
+      </ul>
+      <strong>Cost estimate:</strong> Beamer starts ~$49/mo for the "Grow" plan (custom user IDs, email, push). One afternoon of Steve's time to wire in. The entire 4-channel re-engagement system is basically a $50/mo SaaS drop-in.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Notifications</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Beamer notification text (Apr 27 2026) — new Elite chat engine announcement used as a direct conversion tool.</strong> The full announcement ends with: <em>"💜 If you're already on Elite, it's live for you now. ✨ If not, this is a great time to experience the most advanced GGPT has to offer."</em> Every product update is also an upsell. The notification channel doubles as a conversion channel — users who haven't upgraded see a concrete, specific reason to upgrade, embedded in a feature they're already reading about. No separate marketing email needed. DRT.FM ships improvements constantly but has no channel to tell existing users about them.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,signup,ux">
+    <div class="finding-meta"><span class="time">Subscription</span><span class="tag">billing</span><span class="tag">signup</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Pricing tiers — desktop app — monthly billing.</strong> Three tiers:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Premium — €12/mo:</strong> 400 coins, 5k messages, Premium models, video up to 5s, NSFW, Custom Characters, In-Chat Pictures. Premium Creator Badge.</li>
+        <li><strong>Deluxe — €30/mo (Best Seller):</strong> 1000 coins, 20k messages, 10 videos/mo with lite model (+20% faster), videos up to 10s, Voice, 8K context. Deluxe Creator Badge.</li>
+        <li><strong>Elite — €42/mo (Best Value):</strong> 2000 coins, Unlimited messages, Next-Gen AI Model, 10 videos/mo with lite or pro models (+20% faster), 16K context, Advanced long-term memory. Elite Creator Badge.</li>
+      </ul>
+      "Enjoy 20% off" chip visible top-right throughout the app — persistent upsell. Desktop app shows "App update available" — they ship a desktop app (macOS/Windows wrapper). Creator badges are tier-based status signals visible in the community.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/04-pricing-tiers-desktop.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing">
+    <div class="finding-meta"><span class="time">Subscription</span><span class="tag">billing</span></div>
+    <div class="finding-body">
+      <strong>Coins store — separate from subscription, additive spending layer.</strong> Available coins: 429 (already had some). Packs:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li>+300 coins — €9</li>
+        <li>+840 coins — €23 (+12% bonus)</li>
+        <li>+2000 coins — €45 (+33% bonus, <strong>"LIFETIME validity"</strong>)</li>
+      </ul>
+      "Earn" tab also exists — coins earnable through actions (not just purchaseable). "Subscribe 34% off" shown in left sidebar while on the coins page — cross-sell always visible. Lifetime coin validity on the big pack is a strong value anchor.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/05-coins-store.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ick">
+    <div class="finding-meta"><span class="time">Checkout</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Checkout — Elite €42/mo + €8.82 tax = €50.82 total. Payment methods: Credit Card, Pay by Bank, Alipay, Cryptocurrencies.</strong> Tax shown transparently at checkout — not hidden until the last step.
+      <br><br>
+      <strong class="tag-ick" style="color:#ff8aaa">ICK — Statement name is "NDAI.CHAT", not GirlfriendGPT.</strong> Fine print: <em>"Your purchase will appear as NDAI.CHAT on your statement."</em> Users who forget they subscribed may not recognise "NDAI.CHAT" and dispute the charge. Classic billing obfuscation. Also: coupon field present at checkout — implies discount codes circulate.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/06-checkout-elite.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,signup,ux">
+    <div class="finding-meta"><span class="time">Post-purchase</span><span class="tag">billing</span><span class="tag">signup</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Post-purchase flow: Payment Successful screen → "Start Chatting" CTA. Clean single action.</strong> Then on account page: green "Subscription successfully purchased" banner + amber warning: "Subscriptions often take 1 hour to fully process by our payment provider." Honest, but creates post-payment anxiety — the user just paid €50.82 and is told features may not appear for an hour. Tabs on account page: Subscription · Account Information · Preferences · Chat Profiles. Elite plan clearly listed with all features and renewal date (06/17/2026). Usage counter shows 0/∞.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/07-payment-successful.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/08-account-post-purchase.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ux">
+    <div class="finding-meta"><span class="time">Account · post-Elite</span><span class="tag">billing</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Plan page post-purchase reveals the full coin + bonus message economy.</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Coins: 2429</strong> — jumped from 429 (free balance) to 2429 the moment Elite activated. Elite's 2000 coins/mo credited instantly.</li>
+        <li><strong>Bonus Messages: 50</strong> — separate from the unlimited message quota. Don't expire. Used only after the monthly subscription quota is exhausted. A buffer layer.</li>
+        <li><strong>Image generation: 6–10 coins</strong> (depends on workflow)</li>
+        <li><strong>Voice: 2 coins per 100 characters</strong> — very cheap, basically free at Elite volume</li>
+        <li><strong>NSFW toggle is now ON</strong> — flipped automatically once Elite activated. On free tier it was locked off.</li>
+      </ul>
+      The coin cost structure makes image/voice feel negligible at Elite level (2000 coins goes a long way), which reduces perceived friction and encourages heavy usage.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/10-account-plan-coins-bonus.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta"><span class="time">Account · UI</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>12-language UI: English, Deutsch, Español, Français, Italiano, Nederlands, Português, Türkçe, Русский, 中文, 日本語, 한국어.</strong> Selector is one click from the top nav. Broad Asian + European coverage. Consistent with the Elite engine's "improved multilingual performance" claim — they built the UI localisation to match. DRT.FM is English-only.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/09-language-selector.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Homepage · Explore</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Homepage is a clean character discovery grid — Dainis: "very clean UX UI."</strong> Three top-level tabs: <strong>For you</strong> · <strong>Explore</strong> · <strong>NSFW</strong>. NSFW is a first-class tab, not hidden behind a settings toggle. Filter bar: All Styles · All Genders · Recent Hits. Category tabs (20+): Scenario · Dominant · Submissive · Fictional · Multiple · Original Character (OC) · Petite · Breeding · Femdom · Milf · Straight · Cheating · Bisexual · RPG · Monster Girl · Bully · Non-human · Switch · Femboy · Magical · Show all.
+      <br><br>
+      Each card: cover image, character name, short description, NSFW badge, heart count, view count. Left sidebar Explore section mirrors the same categories — dual navigation path (top bar or sidebar). <strong>Generate Image</strong> and <strong>Top Creators</strong> are top-level nav items — image gen and the creator economy are both promoted at navigation level, not buried.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/11-homepage-explore-grid.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta"><span class="time">Homepage · Your Space</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>"Your Space" sidebar section: Characters · Favorites · Gallery · Following.</strong> Four personal library views in one expandable nav group. Gallery = your generated images. Following = creators you follow. Clean separation of "discover" (Explore) vs "own" (Your Space). No chat history in the nav at this level — Chats is a separate top-level item. Social graph is built in: you follow creators, not just characters.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/12-your-space-sidebar.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,character-creator">
+    <div class="finding-meta"><span class="time">Homepage · Filters</span><span class="tag">ux</span><span class="tag">character-creator</span></div>
+    <div class="finding-body">
+      <strong>Three filter dropdowns cover the full discovery matrix: Style · Gender · Sort.</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Style:</strong> All Styles / Realistic / Anime — just two art styles, kept simple</li>
+        <li><strong>Gender:</strong> All Genders / Female / Male / LGBTQIA+ / Futa — explicit inclusivity, Futa as a named category signals they lean into niche interests rather than sanitising</li>
+        <li><strong>Sort:</strong> Recent Hits / Trending Now / Newest / Most Liked — four social signals; "Trending Now" and "Most Liked" drive discovery toward high-performing UGC</li>
+      </ul>
+      Combined with 20+ category tabs (Dominant, Submissive, Breeding, Femdom, Cheating, Monster Girl, Femboy, etc.), this is a comprehensive kink/interest taxonomy. Every filter combo is a different audience segment they're explicitly serving.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/13-filter-gender.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/14-filter-sort.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/15-filter-style.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,standout">
+    <div class="finding-meta"><span class="time">Homepage · UGC</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>UGC-first platform — "Top Creators" is a top-level nav item alongside Home and Chats.</strong> The sort options (Trending Now, Most Liked) and the Following system suggest the discovery engine actively amplifies creator content. Characters have public view counts and like counts — social proof baked into every card. Dainis unsure whether creators are incentivised financially; to check: visit a Top Creator's profile and look for any earnings/payout UI, or check the "Earn" tab on the Coins page (seen earlier — that tab existed alongside "Buy"). The "Earn" tab likely explains the creator incentive loop. Worth clicking.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,character-creator,standout">
+    <div class="finding-meta"><span class="time">Character profile</span><span class="tag">ux</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Character profile page (/character/...) — social metadata, dual CTA, 5-tab structure.</strong> URL: <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:12px">gptgirlfriend.online/character/dce9dd61-b2a5-42ce-a7e0-9d4f38d194da</code>. "Unsatisfied Stepdaughter": 777K views · 31.2K likes · 440 favorites. Creator: @eroticauthor with Follow button. Published Apr 27 2026, last updated 20 days ago — freshness signal visible. Tags: Female · Scenario · Submissive · OC · NSFW · Petite · Straight · Erotic Roleplay · Bondage · Realistic.
+      <br><br>
+      Two equal-weight CTAs: <strong>Start New Chat 💬</strong> and <strong>Generate Pictures ✨</strong>. Chat and image gen are co-equal entry points. Five tabs: Media Gallery · Recent Chats · Reviews · AI Image Generator · Memories. <strong>Dainis likes the heart (favorite) button</strong> — one click to save, easy to find later. Red heart on the character image thumbnail = the favorite toggle.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/16-character-profile-page.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/16b-character-profile-closeup.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta"><span class="time">Character profile · moderation</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Report modal — 5 structured UGC moderation categories.</strong> Underage · Incest · Images of real person · Ads or spam · Copyright infringement · Other. Optional comment field. Noteworthy: "Incest" is a reportable category even though incest-themed characters are allowed (e.g. "Unsatisfied Stepdaughter"). The line is drawn at real-person imagery and underage content — fictional scenarios within those themes are permitted. Compliance-aware but permissive on fantasy.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/18-report-button.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/17-report-modal.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,character-creator">
+    <div class="finding-meta"><span class="time">Character profile · reviews</span><span class="tag">ux</span><span class="tag">character-creator</span></div>
+    <div class="finding-body">
+      <strong>Public reviews with up/down — 16 reviews, 439 ❤️ 10 💔. Negative reviews shown unfiltered.</strong> "Leave a review" open to all users. Reviews range from harsh ("Absolutely does not function as advertised — 100% opposite of what this one advertises") to enthusiastic ("One of the best"). Honest social proof. Creates quality pressure on creators to maintain character consistency. Each reviewer has a real profile avatar — not anonymous.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/19-reviews-tab.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,billing">
+    <div class="finding-meta"><span class="time">Character profile · canvas</span><span class="tag">image</span><span class="tag">billing</span></div>
+    <div class="finding-body">
+      <strong>Canvas / AI Image Generator — character-locked tab, accessible from profile. Costs 12 coins per image.</strong> URL: <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:12px">/create/advanced?characterId=dce9dd61...</code> — deep-linked per character. Controls: Prompt · Negative Prompt · Auto-Enhance (on by default) · Safe Mode (on by default). Four style options: Anime · Realistic Lite · Realistic Pro · Character Pro (marked "New"). "Inspire Me 🎲" button for prompt suggestions. At 2000 Elite coins/mo, 12 coins = ~166 images before buying more.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/20-canvas-image-generator.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,ux,standout">
+    <div class="finding-meta"><span class="time">Post-subscribe notification</span><span class="tag">video</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Two-touch video onboarding after Elite activation: excitement modal + contextual tooltip.</strong> First: full-screen modal — "Your video experience has been upgraded. Choose between different models without the wait time!" Then: settings gear with a red notification dot → tooltip "Introducing Video Generation Models: Lite for faster, Pro for more polished. From Chat Settings." Excitement hook first, how-to second — on the exact button that controls it.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/21-video-upgrade-notification.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/22-video-models-tooltip.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Chat interface</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Chat interface — Dainis clicked "Start New Chat" and the layout switched entirely. This is the core product.</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Consent banner:</strong> yellow bar — "fictional roleplay, explicit consent, safe chat rules." Legal positioning before any input.</li>
+        <li><strong>AI scene opener:</strong> full narrative paragraph, not "hi!" — the character starts in-story immediately (train station scene).</li>
+        <li><strong>▶ Play button on AI messages</strong> — inline TTS playback per message.</li>
+        <li><strong>Suggested Reply:</strong> "6 Weeks Later..." pre-written, with Reset + Suggest Reply buttons. Reduces blank-page friction.</li>
+        <li><strong>Generate Video ^ button</strong> in the action bar next to Suggest Reply — one click to generate video from current scene.</li>
+        <li><strong>NSFW toggle in the input bar</strong> — hot-switch mid-conversation, always visible.</li>
+        <li><strong>+ Elite Model badge</strong> in input bar — tier is labelled so you know which model you're on.</li>
+      </ul>
+      <img src="assets/checks/girlfriendgpt/23-chat-interface.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,billing,ux">
+    <div class="finding-meta"><span class="time">Chat · voice</span><span class="tag">voice</span><span class="tag">billing</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Voice cost warning shown proactively before enabling — transparent about variable pricing.</strong> "Voice messages cost 2 coins for every 100 characters. Lengthy responses from your bot will cost more than short responses." One-time "Got it" dismiss. Honest about the variable cost up front rather than surprising users. At Elite (2000 coins/mo), a 500-char voice reply = 10 coins — heavy voice users will hit the wall fast.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/24-voice-cost-warning.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Chat · Recent Chats tab</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Recent Chats tab on the character profile — resume any old thread or start fresh. Dainis likes this.</strong> Card shows: character avatar, last message preview snippet, message count (3), date (May 17, 2026), "Open Chat →" button. The two CTAs (Start New Chat + Generate Pictures) stay visible above the tabs at all times — you can always fork a new thread. Clean pattern: the character profile is the hub for all your history with that character, not buried in a global chat list.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/25-recent-chats-tab.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta"><span class="time">Chat · suggested replies</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Suggested Reply is in-character and scene-specific — not generic filler. Dainis: "good to have lots of auto suggested replies."</strong> After the "6 Weeks Later" scene, the suggestion is: <em>"+I pick up Jia's heavy suitcase 'Of course honey, let's go home.'"</em> — fully in the scenario, with action + dialogue. Pencil/edit icon to modify before sending. "Suggest Reply" button regenerates a new option; "Generate Video ∨" sits right alongside as the alternative action. The suggested reply reduces blank-page friction and keeps the story moving without the user having to write anything.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/26-chat-suggested-reply.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,billing,ux">
+    <div class="finding-meta"><span class="time">Chat · video generation</span><span class="tag">video</span><span class="tag">billing</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Video with Audio costs 80 coins — shown in a pre-generation warning with "Do not show this again" opt-out.</strong> Transparent cost disclosure before spending, same pattern as voice. "Do not show this again" checkbox = experienced users can skip it. At 2000 Elite coins/mo: 25 videos with audio per month before hitting the wall. Compare: 12 coins for an image (~166/mo), 2 coins per 100 chars of voice.
+      <br><br>
+      Video generation renders <strong>inline in the chat thread</strong> as a message from the character — purple flame icon, "Generating Video," progress bar, "Visualizing your request......" copy, yellow notice: "Video generation may take a few minutes to complete. Thank you for your patience." Non-jarring: the generation is part of the conversation, not a separate modal or page.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/27-video-cost-warning.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/28-video-generating-inline.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,chat,ux">
+    <div class="finding-meta"><span class="time">Chat · video presets</span><span class="tag">video</span><span class="tag">chat</span><span class="tag">ux</span></div>
+    <div class="finding-body">
+      <strong>Video generation has named preset actions — "Bouncing Boobs" visible as a selected preset in the generate flow.</strong> When Dainis clicked Generate Video the options included named NSFW scene presets (not open-ended prompts). The selected preset label appears as a tag on the user's message bubble in the chat thread. AI is generating while the suggested reply is already pre-populated with the same narrative context — the two systems (video gen + text reply) run in parallel. Voice input ("Listening...") was also active simultaneously — all three modes (text, voice, video) accessible at once.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/29-chat-generating-voice-active.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,ux,standout">
+    <div class="finding-meta"><span class="time">Chat · memory manager</span><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Manage Memories modal — accessible from top-right of chat. Clear, minimal, user-controlled.</strong> Description: "The AI automatically creates them to remember key details, but you can also add, edit, or delete your own." Two controls: <strong>Disable Chat Memories</strong> toggle (on by default) + <strong>Saved Memories</strong> list with refresh + <strong>Add New</strong> button. "No memories yet" — empty at session start, builds as you chat. The user has full read/write access to memory from day one. No black box.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/30-manage-memories-modal.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,ux,standout">
+    <div class="finding-meta"><span class="time">In-app notification · drip</span><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>"Smarter memory is here!" — richly illustrated drip notification triggered by action, not by login. Dainis: "I think it's drip-fed over time — its good!"</strong> Full illustrated modal: brain with chat bubbles, colourful background, headline, value prop copy: "make your chats feel more seamless, personal, and connected — with full control to view, edit, or delete what's remembered anytime." "Try now" CTA deep-links to the feature.
+      <br><br>
+      This is the second distinct notification system: not Beamer (changelog) and not browser push — this is an <strong>action-triggered in-app drip sequence</strong>. Each major feature gets its own rich reveal, timed to when the user is most likely to care about it (e.g. after they've been chatting for a few messages, memory becomes relevant). Three notification layers now confirmed: Beamer changelog · browser push · in-app action-triggered drip.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/31-smarter-memory-notification.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,ick">
+    <div class="finding-meta"><span class="time">Chat · video result</span><span class="tag">video</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Video result — anime style, wrong character, underwhelming. Dainis: "underwhelming so far."</strong> The "Bouncing Boobs" preset generated a generic anime character (white/grey hair, blue eyes, anime face) — completely different from the character's established realistic photographic appearance. <strong>Face consistency: ~1/10.</strong> The preset ignored the character's look entirely and rendered a generic anime girl. This is a fundamental failure of the core promise — you're chatting with one character and the video delivers a stranger.
+      <br><br>
+      The video plays inline in chat with a thumbs up/down reaction under it. "1.00" counter visible — likely 1 second into the clip. Duration appears short.
+      <br><br>
+      <strong>Second video tested — "Mom's Hot Friend" character, "Seduce Me" preset (Video with Audio).</strong> Same result: anime render, different character from profile photo, and visible <strong>double/triple arm artifact</strong> in at least one frame — a hand appears at the waist while both arms are already accounted for. Classic AI video generation artifact from inconsistent limb tracking across frames. The Canvas image-to-video flow uses the same pipeline (screenshot: "Bring this image to life" input, Pro model selected). Not polished. Dainis: "not polished."
+      <br><br>
+      <strong>Confirmed separately: ALL video generation on GGPT is animated/anime style regardless of whether the character is set to Realistic.</strong> This is architectural — their video pipeline is a single animated renderer, not matched to the character's style. A "Realistic" character gets the same anime video as an anime character. Face consistency is structurally impossible, not just a quality issue.
+      <br><br>
+      <strong>DRT.FM win:</strong> 3D Alexis maintains exact character appearance across all outputs. GGPT's video presets are decoupled from character identity — a generic render engine plugged in, not a character-specific one.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/32-video-result-anime.jpeg" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/44-canvas-image-to-video.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/45-video-moms-hot-friend-frame1.jpeg" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/46-video-moms-hot-friend-double-arm.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,nsfw">
+    <div class="finding-meta"><span class="time">Chat · video presets</span><span class="tag">video</span><span class="tag">nsfw</span></div>
+    <div class="finding-body">
+      <strong>Video preset menu — 2 scrollable pages of named NSFW actions, two modes (Video / Video with Audio).</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Page 1:</strong> Bouncing Boobs · Masturbating · Missionary · Spreading Legs · Titjob · Naked on Floor · Blow a Kiss · Seduce Me · Reach Out</li>
+        <li><strong>Page 2:</strong> Titty Bounce · Deepthroat · Spreading Pussy · Fuck Me in Missionary · Play with Myself · Titjob · Lotus Pose · Cowgirl</li>
+      </ul>
+      Two mode tabs: <strong>Video</strong> (standard, lower cost) · <strong>Video with Audio</strong> (New, 80 coins). Additional quick-action buttons in the same bar: <strong>Undress 🔥</strong> and <strong>Selfie 📸</strong> — one-click aside from video presets. The preset taxonomy is explicit and extensive but quality doesn't match the selection breadth.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/33-video-presets-page1.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/34-video-presets-page2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ick,speed">
+    <div class="finding-meta"><span class="time">Chat · image gen</span><span class="tag">image</span><span class="tag tag-ick">ick</span><span class="tag tag-speed">speed</span></div>
+    <div class="finding-body">
+      <strong class="tag-ick" style="color:#ff8aaa">ICK — Image generation timed out when Dainis clicked away. System gets overwhelmed running multiple features simultaneously.</strong> Triggering video + text generation + image + voice call concurrently caused the image gen to fail silently (timeout, no error recovery visible). No graceful fallback — generation just disappeared. Running one feature at a time appears to be the intended usage model; the UI doesn't prevent you from stacking them but the backend can't handle it. This is a reliability issue at exactly the moment users are most excited — trying everything at once after subscribing.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Account · Chat Profiles</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Chat Profiles — you can create multiple user personas (your side of the conversation), not just AI characters.</strong> "Create profile" modal: Name + Personality (free-text paragraph) + Gender. Multiple saved profiles visible in the background. This means users can switch between "being" different characters in different chats — a submissive persona for one character, a dominant one for another. Adds depth to the roleplay without changing the AI character. Underexplored feature; no DRT.FM equivalent visible.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/35-chat-profiles-create.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,ux,standout">
+    <div class="finding-meta"><span class="time">Chat · shareable memory</span><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Memories are publicly shareable via URL — viral/social mechanic built into the memory system.</strong> "Congratulations! Your Chat Memory is now ready to share with the world." Auto-titled from the chat content: <em>"you seem to be enjoying the view"</em> (the character's exact line from the video). Share URL: <code style="background:#0a2820;color:#5eead4;padding:1px 5px;border-radius:3px;font-size:12px">gptgirlfriend.online/chat/90932b...</code>. "You can copy this to share with your friends, community or on social media." Memory title is editable before sharing.
+      <br><br>
+      Worth flagging: this appeared somewhat unexpectedly while Dainis was clicking around — unclear if it requires explicit intent or if clicking around the memory panel can trigger a public share unintentionally. Potential <strong>privacy concern</strong> if public sharing is too easy to trigger accidentally.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/36-memory-shared-public.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="nsfw,ick">
+    <div class="finding-meta"><span class="time">Chat · Undress button</span><span class="tag">nsfw</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong class="tag-ick" style="color:#ff8aaa">ICK — "Undress" button in the chat UI triggered "This prompt violates our terms. Coins refunded, please refresh the page."</strong> Dainis: "super weird." The platform shows an <strong>Undress 🔥</strong> quick-action button prominently in the chat bar, but clicking it on an Elite NSFW-enabled account produced a terms violation. The system did refund the coins automatically — so the content moderation catches and blocks before generation, then refunds — but the UX is directly contradictory: a button labelled "Undress" that tells you "undress violates our terms."
+      <br><br>
+      Could be triggered by age verification not completed (GGPT requires it for certain regions), or the specific scene context, or a stricter filter on the Undress pipeline specifically. Recovery instruction is crude: "please refresh the page." On Elite at €50.82/mo this is a jarring experience. Inconsistent NSFW = users don't trust what will and won't work.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/37-undress-terms-violation.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,speed,ick">
+    <div class="finding-meta"><span class="time">Chat · image gen queue</span><span class="tag">image</span><span class="tag tag-speed">speed</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Image generation has a public queue — "Your position in the queue: 1" — even on Elite at €42/mo.</strong> Two-stage pipeline visible: "Validating..." (content moderation check) → "Generating image..." + queue position. Elite does not skip the queue — it's shared infrastructure. Dainis: "I don't care [what image gen they use], it's slow." The queue indicator is honest (better than a silent spinner) but the fact of queuing on the top tier is a broken promise. Chat is blocked during the entire wait.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/39-image-gen-validating.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/40-image-gen-queue.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,standout">
+    <div class="finding-meta"><span class="time">Top Creators leaderboard</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>AI Character Creator Leaderboard — three sort modes, full stats per creator. UGC economy confirmed.</strong> Tabs: Most Engaging · Trending Creators · Most Followers. Columns: Followers · Characters · Total Scores (cumulative likes/views). Top 3 on Trending: @eroticauthor (8.2K followers, 141 characters, 35M score) · @clanky3147 (425 followers, 104 characters, 4.6M) · @sarah-the-creator (8.7K followers, 359 characters, 57.2M). @sarah-the-creator has the highest raw total score (57.2M) and most characters (359) but ranks #3 on Trending — recency weighting. Creator of "Unsatisfied Stepdaughter" (the character Dainis used) is @eroticauthor, currently #1 Trending. No monetisation UI visible here — still need to check the Earn tab.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/41-top-creators-leaderboard.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ick,speed">
+    <div class="finding-meta"><span class="time">Canvas · standalone image gen</span><span class="tag">image</span><span class="tag tag-ick">ick</span><span class="tag tag-speed">speed</span></div>
+    <div class="finding-body">
+      <strong>Canvas image generator is more powerful than in-chat — batch up to 8 images, Safe Mode toggle, more styles, Creativity slider. Costs 11 coins/image in batch vs 12 solo.</strong> Styles visible: AnimeXL · Character Pro · Anime · Realism · Cameo · Realistic Lite · Patriotic · Patching. "Not impressed by the results? Don't worry, we've got more for you." — regenerate CTA baked in. Safe Mode OFF enables NSFW in standalone canvas.
+      <br><br>
+      <strong class="tag-ick" style="color:#ff8aaa">ICK — Second "violates terms" error, all 8 queued images cancelled on refresh.</strong> Dainis prompted with "jessica alba" — a named celebrity — which almost certainly triggered the "Images of real person" violation. Defensible from a legal standpoint, but the system gives zero upfront warning that celebrity names are blocked. You queue, wait, then get the red banner. On refresh, all in-progress generations were wiped — confirmed: GGPT has no generation persistence across page loads. Coins refunded but time and momentum lost.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/42-canvas-batch-generation.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/43-terms-violation-banner.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="standout">
+    <div class="finding-meta"><span class="time">Session close · final assessment</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Dainis final read: "GirlfriendGPT feels like a fun sex chatbot — for NSFW creations, not real relationship and intimacy. Kindroid is relationship-focused. GirlfriendGPT is sex-focused, shallow."</strong>
+      <br><br>
+      Two structural clarifications at session close:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Video is just a handful of preselected prompts + LoRAs</strong> — not a character-aware video system. The presets (Bouncing Boobs, Missionary, etc.) are LoRA-based style triggers mapped to a generic animated renderer. No connection to the character you're chatting with.</li>
+        <li><strong>Image gen is fully standalone — your chat character cannot be used in it.</strong> The workflow is: Canvas → generate a generic image → turn that image into a video with a text prompt. The "character" selector in Canvas is a style filter, not your companion. The entire image/video pipeline is disconnected from the relationship layer. You have a chat product and a separate image/video tool that happen to share a login.</li>
+      </ul>
+      This explains the hollow feel. Kindroid puts memory, voice calls, and screen sharing in service of one companion. GGPT gives you a chatbot in one tab and a generic NSFW image generator in another tab. The former builds attachment; the latter is a content tool.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,speed,ick">
+    <div class="finding-meta"><span class="time">Session wrap · overall impression</span><span class="tag">ux</span><span class="tag tag-speed">speed</span><span class="tag tag-ick">ick</span></div>
+    <div class="finding-body">
+      <strong>Final impression — feature-rich, buggy, slow. Dainis: "lots of cool functionality but the experience is not good. Kindroid was simple UI but it worked and experience was smooth."</strong>
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Red mic button</strong> = STT (speech-to-text) voice input directly into the chat text field — separate from TTS playback on AI messages. Good feature, easy to miss.</li>
+        <li><strong>Text generation feels slow</strong> — unexpected for a text-first product. Text should be the fastest thing they do. Suggests either the Elite model (3× more powerful) trades speed for quality, or infra is under load.</li>
+        <li><strong>Kindroid comparison:</strong> simpler UI, fewer features, smoother execution. Feature count ≠ experience quality. GGPT is a lesson in how to build UX patterns; Kindroid is a lesson in how to ship reliably.</li>
+        <li><strong>Good to learn UX from GGPT</strong> — notification system, memory UI, suggested reply, Chat Profiles, video presets taxonomy — all worth studying. Just don't copy the execution quality.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="finding" data-tags="video">
+    <div class="finding-meta"><span class="time">Canvas · video gen loading</span><span class="tag">video</span></div>
+    <div class="finding-body">
+      <strong>Video generation loading state — "Mom's Hot Friend · Seduce Me" in progress.</strong> Loading screen visible while Video with Audio (80 coins) generates. No elapsed time indicator; just a spinner. On a paid Elite account, the wait creates anxiety with no progress signal.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/47-video-gen-loading-screen.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,standout,image">
+    <div class="finding-meta"><span class="time">Canvas · Media Actions panel</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span><span class="tag">image</span></div>
+    <div class="finding-body">
+      <strong>Canvas generates an image, then exposes a full Media Actions panel — including a direct "Create Character" pipeline.</strong> After generation, the image panel shows four actions: <strong>Upscale · Edit Image · Remix · Turn Into Video</strong> (purple CTA). Below those: a <strong>"Create Character"</strong> button that takes the generated image and opens the character creator pre-loaded with it. This is the image → character pipeline: design a look in Canvas, then promote it to a companion. The workflow is: Canvas generates → you like it → one click → character creator with your generated image. Architecturally clever but still structurally disconnected from your existing chat companions.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/48-canvas-media-actions-panel.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator">
+    <div class="finding-meta"><span class="time">Character creator · top fields</span><span class="tag">character-creator</span></div>
+    <div class="finding-body">
+      <strong>Character creator form — top section: Name, Character Image (Choose File / Generate Image), Age, Language.</strong> The "Generate Image" button inside the character creator uses the same Canvas pipeline — so you can generate a look on-the-fly without leaving the creator. Age field defaults to 18. Language selector visible. Clean layout, nothing unexpected.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/49-character-creator-top-fields.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator">
+    <div class="finding-meta"><span class="time">Character creator · token counters</span><span class="tag">character-creator</span></div>
+    <div class="finding-body">
+      <strong>Character Tags (max 10) + Description / Personality / Scenario — all with live token counters showing 0 tokens.</strong> Three separate text fields for the character's description, personality, and scenario, each with an individual token counter. Tags are a separate UI element with a 10-tag max. The token system makes the quality of character content legible to the creator before publishing — and feeds into the 100-token quality gate for public characters.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/50-character-creator-token-counters.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator">
+    <div class="finding-meta"><span class="time">Character creator · first message + voice</span><span class="tag">character-creator</span></div>
+    <div class="finding-body">
+      <strong>First Message field + Legacy toggle + Visibility (Private/Public) + full voice library.</strong> The "First Message" sets the opening line your character sends — key to the initial impression. Legacy toggle visible (unclear what it enables — likely an older behaviour mode). Visibility defaults to Private. Voice section splits into Male Voice 1–10 and Female Voice 1–16 — 26 voices total. New voices marked with "New" badge on several entries (Male: 5,6,7; Female: 8,13,14). Token counter at bottom: 0 / 2500 total. Reset and Create buttons.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/51-character-creator-first-message-voice.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/52-character-creator-voice-list-full.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,standout">
+    <div class="finding-meta"><span class="time">Character creator · 100-token quality gate</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong class="tag-standout" style="color:#5eead4">STANDOUT — Public characters require at least 100 tokens to submit. Orange warning prevents thin UGC from shipping.</strong> When Visibility is set to Public, an orange warning appears: <em>"Please consider adding more context to your character. Public characters require at least 100 tokens to be submitted."</em> The Create button is blocked until the threshold is met across the combined Description + Personality + Scenario + First Message fields. 100 tokens ≈ 60–80 words — enough to force a minimum viable character brief. This is how they prevent the explore grid from filling with empty "Sarah, 18" placeholders. Dainis flagged this explicitly: "nice if you want to create public character you need to fill at least 100 tokens (to remove low quality selections)." <strong>DRT.FM should adopt a token/word minimum if UGC characters are ever added.</strong>
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/53-character-creator-100-token-gate.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,standout">
+    <div class="finding-meta"><span class="time">Billing · cancellation flow</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Cancellation survey + un-cancel option — retention mechanics worth copying.</strong> When cancelling the subscription, GGPT shows a proper exit survey (asking why you're leaving — pricing? bugs? features?). Dainis: "I like the cancellation survey, we need it too." After cancelling, there is an explicit <strong>un-cancel / reactivate option</strong> that stays visible. Dainis: "oh nice I can uncancel it later too." The combination — capture the exit reason for product intel, then make reactivation frictionless — is standard SaaS retention best practice but rare in AI companion apps. DRT.FM billing should have both: an exit survey and a one-click reactivation path.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/54-cancellation-survey.png" class="check-shot">
+      <img src="assets/checks/girlfriendgpt/55-uncancel-option.png" class="check-shot">
+    </div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
