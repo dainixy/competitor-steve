@@ -12,124 +12,72 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
 nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
 .nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
-.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
 .tab-btn:hover{background:#1e1e2e}
 .tab-btn.active{color:#fff}
 .tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
-.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
-.tab-lovescape{color:#f0abfc}.tab-lovescape.active{background:#260a30}
-.tab-swipey{color:#fb7185}.tab-swipey.active{background:#2a0a14}
-.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
-.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
-.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
-.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
-.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
-.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
-.tab-pc{color:#ff9f43}.tab-pc.active{background:#1e1200}
-.tab-joi{color:#f9ca24}.tab-joi.active{background:#1e1800}
+.tab-kindroid{color:#5eead4}
+.tab-candy{color:#ff4da6}
+.tab-od{color:#4da6ff}
+.tab-sd{color:#9b4dca}
+.tab-ggpt{color:#ff6b9d}
 .private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
 
-/* SECTIONS */
-.section{display:none;max-width:1100px;margin:0 auto;padding:32px 32px 80px}
-.section.active{display:block}
+/* LAYOUT */
+.section{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,#061a0a,#0a2a10);border:1px solid #1a4a1a;border-radius:14px;padding:26px 32px;margin-bottom:32px}
+.hero{background:linear-gradient(135deg,#061a0a,#0a2a10);border:1px solid #1a4a1a;border-radius:14px;padding:26px 32px;margin-bottom:28px}
 .hero h1{font-size:22px;font-weight:800;color:#34d399;margin-bottom:8px}
 .hero p{font-size:14px;color:#7ed4b8;max-width:760px;line-height:1.6}
+.hero p code{background:#0a2820;color:#5eead4;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:12px}
 .hero .meta{margin-top:14px;font-size:12px;color:#4a8a4a}
 
-/* COMPETITOR HEADER */
-.check-header{background:linear-gradient(135deg,#0e0e16,#13131c);border:1px solid #2a2a3e;border-radius:14px;padding:24px 28px;margin-bottom:24px}
-.check-header h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px}
-.check-header .meta{font-size:13px;color:#7070a0;font-family:'SF Mono','Monaco',monospace}
-.check-header .priority{margin-top:12px;font-size:13px;color:#a8d4b8;background:#0a1a14;border:1px solid #1a3a28;border-radius:8px;padding:10px 14px;line-height:1.5}
-
-/* SECTION HEADERS (within a tab) */
+/* ZONE HEADERS — one style everywhere */
 h2.zone{font-size:13px;font-weight:700;color:#5eead4;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
 h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+h2.zone:first-of-type{margin-top:0}
 
-/* QUICK REFERENCE */
-.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
-.quick-ref-group{margin-bottom:18px}
-.quick-ref-group:last-child{margin-bottom:0}
-.quick-ref-group-title{font-size:11px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.quick-ref ul{list-style:none}
-.quick-ref li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px;color:#c0c0d8;line-height:1.6}
-.quick-ref li input[type="checkbox"]{margin-top:5px;flex-shrink:0;accent-color:#5eead4}
-.quick-ref li strong{color:#fff;font-weight:600}
-.quick-ref li em{color:#7070a0;font-style:italic;font-size:12px;display:block;margin-top:2px}
-.ambient{margin-top:18px;padding:12px 14px;background:#0a1828;border:1px solid #1a3a5e;border-radius:8px;font-size:12px;color:#a8c8e8;line-height:1.5}
-.ambient strong{color:#60a5fa}
+/* UNIFIED CARD BASE */
+.card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
 
-/* FINDINGS */
-.findings{display:flex;flex-direction:column;gap:12px}
-.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
-.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.finding-meta .time{color:#5060a0}
-.tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
-.tag-standout{background:#2a1a4e;color:#c08aff}
-.tag-ick{background:#2a0a14;color:#ff8aaa}
-.tag-speed{background:#1e1200;color:#ff9f43}
-.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
-.finding-body strong{color:#fff}
-.findings-empty{padding:40px 20px;text-align:center;color:#5060a0;font-size:13px;font-style:italic;background:#0a0a12;border:1px dashed #2a2a3e;border-radius:10px}
-.check-shot{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid #2a2a3e;margin:8px 0}
-
-/* ACTIONS / STANDOUT */
-.actions{background:linear-gradient(135deg,#16103a,#0e0a20);border:1px solid #3a2a6e;border-radius:14px;padding:24px 28px}
-.actions-empty{color:#7070a0;font-style:italic;font-size:13px}
-.verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #2a2050}
-.action-group{margin-bottom:18px}
-.action-group:last-child{margin-bottom:0}
-.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.steal .action-group-title{color:#4ade80}
-.win .action-group-title{color:#60a5fa}
-.avoid .action-group-title{color:#ff6b6b}
-.action-group ul{list-style:none}
-.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0;padding-left:18px;position:relative;line-height:1.6}
-.action-group li::before{position:absolute;left:0;top:5px;font-weight:700}
-.steal li::before{content:'+';color:#4ade80}
-.win li::before{content:'✓';color:#60a5fa}
-.avoid li::before{content:'!';color:#ff6b6b}
-.scores{margin-top:16px;padding-top:16px;border-top:1px solid #2a2050;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-.score{background:#0a0814;border:1px solid #2a2050;border-radius:8px;padding:10px 12px;text-align:center}
-.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
-.score-value{font-size:22px;font-weight:800;color:#c08aff;line-height:1.2;margin-top:2px}
-
-/* SUMMARY TAB */
-.always-on{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:22px 26px;margin-bottom:24px}
-.always-on h3{font-size:14px;color:#5eead4;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
-.always-on ol{padding-left:22px;color:#c0c0d8;font-size:13px;line-height:1.8}
-.always-on ol li{margin-bottom:6px}
-.always-on ol li strong{color:#fff}
-
-.workflow-card{background:#0a1a14;border:1px solid #1a4838;border-radius:12px;padding:18px 22px;margin-bottom:16px;font-size:13px;color:#a8d4b8;line-height:1.7}
-.workflow-card code{background:#0a2820;color:#5eead4;padding:2px 6px;border-radius:4px;font-family:'SF Mono','Monaco',monospace;font-size:12px}
-.workflow-card strong{color:#34d399}
-
-.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
-.status-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:8px;padding:12px 14px}
-.status-card-name{font-size:13px;font-weight:700;color:#e0e0e8;margin-bottom:4px}
-.status-card-state{font-size:11px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+/* PROGRESS STRIP */
+.progress-summary{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;font-size:12px;color:#7070a0}
+.progress-summary strong{color:#fff;font-size:14px;font-weight:800}
+.progress-summary .done strong{color:#4ade80}
+.progress-summary .pending strong{color:#60a5fa}
+.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.status-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:8px;padding:10px 14px;text-decoration:none;display:block;transition:border-color .15s,background .15s}
+.status-card:hover{border-color:#3a3a5e;background:#13131e}
+.status-card-name{font-size:13px;font-weight:700;color:#e0e0e8;margin-bottom:3px}
+.status-card-state{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
 .status-done{border-color:#1a4a1a;background:#0a1a0a}
 .status-done .status-card-state{color:#4ade80}
-.status-progress{border-color:#1e3a5e;background:#0a1828}
-.status-progress .status-card-state{color:#60a5fa}
+.status-done:hover{border-color:#2a6a2a;background:#0e240e}
 
 /* TOP-3 SUMMARY */
-.top3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:4px}
-.top3-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:18px 22px}
-.top3-name{font-size:14px;font-weight:800;color:#5eead4;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.top3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.top3-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 22px;transition:border-color .15s}
+.top3-card:hover{border-color:#3a3a5e}
+.top3-card a.top3-name{display:block;font-size:14px;font-weight:800;color:#5eead4;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none}
+.top3-card a.top3-name:hover{color:#7ef5e0}
 .top3-list{padding-left:20px;color:#c0c0d8;font-size:13px;line-height:1.7}
 .top3-list li{margin-bottom:10px}
+.top3-list li:last-child{margin-bottom:0}
 .top3-list li strong{color:#fff}
-.top3-pending{border-color:#1e1e2e;opacity:0.5}
-.top3-pending-label{font-size:12px;color:#5060a0;font-style:italic;margin-top:8px}
-</style>
-<style>
-.section { display: block !important; }
-nav a.tab-btn { text-decoration: none; display: inline-block; }
+
+/* HOW IT WORKS */
+.howto{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px;font-size:13px;color:#c0c0d8;line-height:1.8}
+.howto code{background:#0a2820;color:#5eead4;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:12px}
+.howto strong{color:#fff}
+.howto ol{padding-left:22px}
+.howto ol li{margin-bottom:4px}
+
+/* ALWAYS-ON CHECKLIST */
+.checklist{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
+.checklist ol{padding-left:22px;color:#c0c0d8;font-size:13px;line-height:1.8}
+.checklist ol li{margin-bottom:6px}
+.checklist ol li strong{color:#fff}
 </style>
 </head>
 <body>
@@ -146,25 +94,90 @@ nav a.tab-btn { text-decoration: none; display: inline-block; }
   <span class="private-badge">DRT.FM · Private</span>
 </nav>
 
-<div id="summary" class="section active">
+<div class="section">
+
 <div class="hero">
   <h1>Hands-On Competitor Review</h1>
-  <p>One tab per competitor. Quick Reference Checklist at top of each tab, Findings (chronological, tagged, with screenshots) in the middle, Standout &amp; Actions for Steve at the bottom. Each competitor can be reviewed in a fresh Claude tab — just type <code style="background:#0a2820;color:#5eead4;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:12px">/competitor-checks &lt;site&gt;</code> to load the workflow.</p>
+  <p>One page per competitor: Quick Reference Checklist, chronological tagged Findings with screenshots, and Standout &amp; Actions for Steve. Review a new one in a fresh Claude tab by typing <code>/competitor-checks &lt;site&gt;</code>.</p>
   <div class="meta">First session: Kindroid · Started 2026-05-17</div>
 </div>
 
-<div class="workflow-card">
-  <strong>How this works:</strong><br>
-  1. Dainis opens a paid account on a competitor site.<br>
-  2. Browses freely. Shares notes + screenshots in chat (screenshots auto-save to <code>~/Downloads/SCR-*.png|jpeg</code>).<br>
-  3. Claude catalogues notes into the right tab, moves screenshots into <code>assets/checks/&lt;slug&gt;/</code>, and prompts for Chrome DevTools deep-dives when a feature looks standout.<br>
-  4. At session end, Claude generates the <strong>Standout &amp; Actions for Steve</strong> zone — verdict, steal-list, win-list, avoid-list, 1-10 scores.<br>
-  5. Then recommends the next competitor.
+<h2 class="zone">Progress <span class="zone-badge">5 of 11 done</span></h2>
+<div class="progress-summary">
+  <span class="done"><strong>5</strong> completed</span>
+  <span class="pending"><strong>6</strong> remaining</span>
+</div>
+<div class="status-grid">
+  <a class="status-card status-done" href="secretdesires.html"><div class="status-card-name">SecretDesires</div><div class="status-card-state">Done · 2026-05-20</div></a>
+  <a class="status-card status-done" href="candy.html"><div class="status-card-name">Candy.AI</div><div class="status-card-state">Done · 2026-05-20</div></a>
+  <a class="status-card status-done" href="ourdream.html"><div class="status-card-name">OurDream</div><div class="status-card-state">Done · 2026-05-18</div></a>
+  <a class="status-card status-done" href="girlfriendgpt.html"><div class="status-card-name">GirlfriendGPT</div><div class="status-card-state">Done · 2026-05-17</div></a>
+  <a class="status-card status-done" href="kindroid.html"><div class="status-card-name">Kindroid</div><div class="status-card-state">Done · 2026-05-17</div></a>
+  <div class="status-card"><div class="status-card-name">LoveScape</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Swipey</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">SweetDream</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Nomi</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Promptchan</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Joi.AI</div><div class="status-card-state">Pending</div></div>
+</div>
+
+<h2 class="zone">Top 3 Standout Features <span class="zone-badge">Completed sessions</span></h2>
+<div class="top3-grid">
+  <div class="top3-card">
+    <a class="top3-name" href="secretdesires.html">SecretDesires &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>Voice quality &amp; pacing.</strong> Fastest, most natural speech cadence of any competitor — sounded genuinely human. Others speak too slowly and kill immersion. Sets the bar DRT.FM must match.</li>
+      <li><strong>Image generation speed &amp; optimisation.</strong> DaVinci engine at 10–15 seconds, output at 35KB/832×1248 — fast and lean. Visual outfit picker with thumbnail examples makes generation intuitive.</li>
+      <li><strong>Partner settings depth + cancel flow.</strong> Lots of per-chat customisation options. Cancel flow has 2–3 escalating heart bribes (2× → 2.5×) plus a downgrade offer — the most thorough retention flow seen across all competitors.</li>
+    </ol>
+  </div>
+  <div class="top3-card">
+    <a class="top3-name" href="candy.html">Candy.AI &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>Proactive engagement everywhere.</strong> AI initiates on login, breaks call silence with emotional variation (seductive → worried/guilty), messages you first. A deliberate design philosophy running across every surface.</li>
+      <li><strong>Loop Videos + gamified Romance Mode.</strong> Looped realistic video clips give "she's there" presence while you chat. XP progression + Romance Mode levels unlock new content formats — the best gamification stack seen so far.</li>
+      <li><strong>Group Chat + per-message TTS audio.</strong> 2-3 characters interacting with each other and user, "Keep Talking" auto-continue, realistic voice on every message. Highest-engagement feature across the AI GF category.</li>
+    </ol>
+  </div>
+  <div class="top3-card">
+    <a class="top3-name" href="ourdream.html">OurDream &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>Creator economy + content unlock.</strong> Community builds 21K-image character libraries; users pay coins to unlock them. OurDream earns on every unlock at zero content cost. The Dreamer Program (50K → 300K interactions, coins → cash) keeps creators building.</li>
+      <li><strong>Generation studio is best-in-class.</strong> Vivid 2.0 for explicit images, Spicy 1.0/2.0 video, 5-mode video studio, community pose library, background async generation, personal gallery — the entire media pipeline is polished and addicting.</li>
+      <li><strong>UX + retention mechanics.</strong> Cancellation flow with coin bonus goodwill, in-app helpdesk hub (Bugs/Features/Changelog), Lust Level slider, TikTok-style Feed → chat in one tap. Best UX in the category by a significant margin.</li>
+    </ol>
+  </div>
+  <div class="top3-card">
+    <a class="top3-name" href="girlfriendgpt.html">GirlfriendGPT &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>UX/UI surface + Top Creators leaderboard.</strong> Best first visual impression of any competitor — sexy, shiny, modern. UGC creator economy (359 characters, 57M+ engagement scores) keeps content fresh. The look sells even when the product doesn't deliver.</li>
+      <li><strong>Video functionality — nobody else has it.</strong> Badly executed (generic anime renderer, no character awareness), but it sells subscriptions. First-mover signal: study Promptchan for the right implementation, but copy GGPT's decision to ship video at all.</li>
+      <li><strong>Notification system (Beamer) + cancellation/reactivation flow.</strong> 4-channel re-engagement loop for ~$50/mo. Exit survey captures churn reason; one-click reactivation keeps lapsed users recoverable. Both are rare in the category.</li>
+    </ol>
+  </div>
+  <div class="top3-card">
+    <a class="top3-name" href="kindroid.html">Kindroid &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>Talking-head live calls for all characters + camera vision.</strong> Self-hosted face-animation pipeline (V3) drives lips + face from any 2:3 photo — scales to the entire character library instantly. Mid-call the AI captures webcam frames and comments on what you're wearing. Highest-impact intimacy signal tested.</li>
+      <li><strong>Deceptively deep customization under a simple surface.</strong> 5 memory layers (backstory, response directive, key memories, example message, journal recall), LLM picker, voice model picker, dynamism slider, proactivity controls. Hidden in settings — most users never find them. Same depth with better discoverability = big opportunity.</li>
+      <li><strong>Community ecosystem with identity culture.</strong> Users call their characters "Kins" — possessive, attached. Social profiles, remix marketplace, 34K Reddit, 30K Discord with daily prompts and events, YouTube affiliate livestreams. Third-party community behaves like a fan community, not a product community.</li>
+    </ol>
+  </div>
+</div>
+
+<h2 class="zone">How this works <span class="zone-badge">Process</span></h2>
+<div class="howto">
+  <ol>
+    <li>Dainis opens a paid account on a competitor site.</li>
+    <li>Browses freely. Shares notes + screenshots in chat (screenshots auto-save to <code>~/Downloads/SCR-*.png|jpeg</code>).</li>
+    <li>Claude catalogues notes into the right page, moves screenshots into <code>assets/checks/&lt;slug&gt;/</code>, and prompts for Chrome DevTools deep-dives when a feature looks standout.</li>
+    <li>At session end, Claude generates the <strong>Standout &amp; Actions for Steve</strong> zone — verdict, steal-list, win-list, avoid-list, 1-10 scores.</li>
+    <li>Then recommends the next competitor.</li>
+  </ol>
 </div>
 
 <h2 class="zone">Always-On Checklist <span class="zone-badge">Every competitor</span></h2>
-<div class="always-on">
-  <h3>The 6 items applied to every site</h3>
+<div class="checklist">
   <ol>
     <li><strong>Time it (seconds):</strong> first chat response · first image · first video · first voice word · clicks from homepage → first message.</li>
     <li><strong>Screenshots to always grab:</strong> chat input area · subscription/upgrade page · homepage (logged in) · mobile view.</li>
@@ -175,88 +188,6 @@ nav a.tab-btn { text-decoration: none; display: inline-block; }
   </ol>
 </div>
 
-<h2 class="zone">Progress <span class="zone-badge">11 sites in scope</span></h2>
-<div class="status-grid">
-  <div class="status-card status-done"><div class="status-card-name">SecretDesires</div><div class="status-card-state">Done · 2026-05-20</div></div>
-  <div class="status-card status-done"><div class="status-card-name">Candy.AI</div><div class="status-card-state">Done · 2026-05-20</div></div>
-  <div class="status-card status-done"><div class="status-card-name">OurDream</div><div class="status-card-state">Done · 2026-05-18</div></div>
-  <div class="status-card status-done"><div class="status-card-name">GirlfriendGPT</div><div class="status-card-state">Done · 2026-05-17</div></div>
-  <div class="status-card status-done"><div class="status-card-name">Kindroid</div><div class="status-card-state">Done · 2026-05-17</div></div>
-  <div class="status-card"><div class="status-card-name">LoveScape</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">Swipey</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">SweetDream</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">Nomi</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">Promptchan</div><div class="status-card-state">Pending</div></div>
-  <div class="status-card"><div class="status-card-name">Joi.AI</div><div class="status-card-state">Pending</div></div>
-</div>
-
-<h2 class="zone">Top 3 Standout Features <span class="zone-badge">Per competitor</span></h2>
-<div class="top3-grid">
-  <div class="top3-card">
-    <div class="top3-name">SecretDesires &#10003;</div>
-    <ol class="top3-list">
-      <li><strong>Voice quality &amp; pacing.</strong> Fastest, most natural speech cadence of any competitor — sounded genuinely human. Others speak too slowly and kill immersion. Sets the bar DRT.FM must match.</li>
-      <li><strong>Image generation speed &amp; optimisation.</strong> DaVinci engine at 10–15 seconds, output at 35KB/832×1248 — fast and lean. Visual outfit picker with thumbnail examples makes generation intuitive.</li>
-      <li><strong>Partner settings depth + cancel flow.</strong> Lots of per-chat customisation options. Cancel flow has 2–3 escalating heart bribes (2× → 2.5×) plus a downgrade offer — the most thorough retention flow seen across all competitors.</li>
-    </ol>
-  </div>
-  <div class="top3-card">
-    <div class="top3-name">Candy.AI &#10003;</div>
-    <ol class="top3-list">
-      <li><strong>Proactive engagement everywhere.</strong> AI initiates on login, breaks call silence with emotional variation (seductive → worried/guilty), messages you first. A deliberate design philosophy running across every surface.</li>
-      <li><strong>Loop Videos + gamified Romance Mode.</strong> Looped realistic video clips give "she's there" presence while you chat. XP progression + Romance Mode levels unlock new content formats — the best gamification stack seen so far.</li>
-      <li><strong>Group Chat + per-message TTS audio.</strong> 2-3 characters interacting with each other and user, "Keep Talking" auto-continue, realistic voice on every message. Highest-engagement feature across the AI GF category.</li>
-    </ol>
-  </div>
-  <div class="top3-card">
-    <div class="top3-name">OurDream &#10003;</div>
-    <ol class="top3-list">
-      <li><strong>Creator economy + content unlock.</strong> Community builds 21K-image character libraries; users pay coins to unlock them. OurDream earns on every unlock at zero content cost. The Dreamer Program (50K → 300K interactions, coins → cash) keeps creators building.</li>
-      <li><strong>Generation studio is best-in-class.</strong> Vivid 2.0 for explicit images, Spicy 1.0/2.0 video, 5-mode video studio, community pose library, background async generation, personal gallery — the entire media pipeline is polished and addicting.</li>
-      <li><strong>UX + retention mechanics.</strong> Cancellation flow with coin bonus goodwill, in-app helpdesk hub (Bugs/Features/Changelog), Lust Level slider, TikTok-style Feed → chat in one tap. Best UX in the category by a significant margin.</li>
-    </ol>
-  </div>
-  <div class="top3-card">
-    <div class="top3-name">GirlfriendGPT &#10003;</div>
-    <ol class="top3-list">
-      <li><strong>UX/UI surface + Top Creators leaderboard.</strong> Best first visual impression of any competitor — sexy, shiny, modern. UGC creator economy (359 characters, 57M+ engagement scores) keeps content fresh. The look sells even when the product doesn't deliver.</li>
-      <li><strong>Video functionality — nobody else has it.</strong> Badly executed (generic anime renderer, no character awareness), but it sells subscriptions. First-mover signal: study Promptchan for the right implementation, but copy GGPT's decision to ship video at all.</li>
-      <li><strong>Notification system (Beamer) + cancellation/reactivation flow.</strong> 4-channel re-engagement loop for ~$50/mo. Exit survey captures churn reason; one-click reactivation keeps lapsed users recoverable. Both are rare in the category.</li>
-    </ol>
-  </div>
-  <div class="top3-card">
-    <div class="top3-name">Kindroid &#10003;</div>
-    <ol class="top3-list">
-      <li><strong>Talking-head live calls for all characters + camera vision.</strong> Self-hosted face-animation pipeline (V3) drives lips + face from any 2:3 photo — scales to the entire character library instantly. Mid-call the AI captures webcam frames and comments on what you're wearing. Highest-impact intimacy signal tested.</li>
-      <li><strong>Deceptively deep customization under a simple surface.</strong> 5 memory layers (backstory, response directive, key memories, example message, journal recall), LLM picker, voice model picker, dynamism slider, proactivity controls. Hidden in settings — most users never find them. Same depth with better discoverability = big opportunity.</li>
-      <li><strong>Community ecosystem with identity culture.</strong> Users call their characters "Kins" — possessive, attached. Social profiles, remix marketplace, 34K Reddit, 30K Discord with daily prompts and events, YouTube affiliate livestreams. Third-party community behaves like a fan community, not a product community.</li>
-    </ol>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">LoveScape</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">Swipey</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">SweetDream</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">Nomi</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">Promptchan</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-  <div class="top3-card top3-pending">
-    <div class="top3-name">Joi.AI</div>
-    <div class="top3-pending-label">Session pending</div>
-  </div>
-</div>
 </div>
 
 </body>
