@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zane Analytics — Phase 0 Prototype</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1c2230;
+    --ink: #e8ecf3;
+    --ink-dim: #9aa3b2;
+    --line: #2a3142;
+    --accent: #7aa2ff;
+    --good: #5ecf8a;
+    --warn: #ffce5e;
+    --bad: #ff7a7a;
+    --pill: #2a3142;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    padding: 40px 24px 80px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .sub { color: var(--ink-dim); margin-bottom: 8px; }
+  .meta { color: var(--ink-dim); font-size: 13px; margin-bottom: 28px; }
+  h2 {
+    font-size: 20px;
+    margin: 32px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 18px 0 8px;
+    letter-spacing: -0.005em;
+    color: var(--accent);
+  }
+  p, li { color: var(--ink); }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 12px 0;
+  }
+  .panel.head {
+    border-color: #3a5fbd;
+    background: linear-gradient(180deg, #1a2238 0%, #161a22 100%);
+  }
+  .panel.warn { border-color: rgba(255, 206, 94, 0.4); }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--pill);
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin-right: 6px;
+  }
+  .pill.good { background: rgba(94, 207, 138, 0.15); color: var(--good); }
+  .pill.warn { background: rgba(255, 206, 94, 0.15); color: var(--warn); }
+  .pill.cost { background: rgba(122, 162, 255, 0.15); color: var(--accent); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { color: var(--ink-dim); font-weight: 500; }
+  tbody tr:last-child td { border-bottom: none; }
+  code, pre {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; }
+  pre {
+    background: var(--panel-2);
+    padding: 12px 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  ul, ol { padding-left: 22px; }
+  li { margin: 4px 0; }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 32px 0;
+  }
+  .checklist li { list-style: none; position: relative; padding-left: 4px; }
+  .checklist li::before { content: "☐  "; color: var(--ink-dim); }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 4px 14px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+  .stat-row .k { color: var(--ink-dim); }
+  .gate {
+    border-left: 3px solid var(--accent);
+    padding: 6px 14px;
+    margin: 12px 0;
+    background: rgba(122, 162, 255, 0.06);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Zane Analytics — Phase 0 Prototype</h1>
+<div class="sub">The cheapest, fastest data pull that tells us 80% of what's killing the dead channels.</div>
+<div class="meta">2026-05-12 · Built in Claude Code · Synthesis of Claude / Grok / Kimi research</div>
+
+<div class="panel head">
+<h2 style="margin-top:0">The 80/20 thesis</h2>
+<p>Three independent agents agreed on the same maximalist hybrid stack (Blotato + YouTube Analytics + Apify or Metricool + Bluesky). <strong>All three over-engineered the first move.</strong></p>
+<p>The cheapest decision-quality data we can get this week is:</p>
+<p style="margin: 14px 0 6px"><span class="pill cost">$0 marginal</span> <span class="pill good">~1 Claude Code session</span> <span class="pill good">covers all 7 channels at baseline + retention on YouTube</span></p>
+<ul>
+  <li><strong>Blotato API</strong> (already paid for) → views, likes, comments, reach, impressions, shares, saves per post per platform — all 7 channels.</li>
+  <li><strong>YouTube Analytics API</strong> (free) → retention curve + traffic source + demographics on YouTube — your highest-cadence channel.</li>
+</ul>
+<p>That's it. No Apify, no Metricool, no Meta or TikTok app review. We add those <em>only if</em> Phase 0 fails to answer the question.</p>
+</div>
+
+<h2>Why this beats the full-stack recommendations</h2>
+<p>The question you need answered is: <strong>"why did some channels lose views?"</strong> The decision tree:</p>
+<table>
+<thead><tr><th>What Phase 0 might reveal</th><th>What you do next</th></tr></thead>
+<tbody>
+<tr><td>Channels are <strong>obviously dead</strong> (e.g. IG average views &lt;50, never had a hit)</td><td>Skip deeper analytics entirely. Fix posting strategy: add hashtags to IG, audit account standing, change posting time.</td></tr>
+<tr><td><strong>YT retention curve</strong> shows drop-off at second 1–3</td><td>Hook problem. Fixable in script generation, no more data needed.</td></tr>
+<tr><td><strong>YT traffic source</strong> shows recommendation share collapsed</td><td>Algorithm hit. Diagnose recent posting/content changes around that date. No more data needed.</td></tr>
+<tr><td>YT looks healthy, but IG/TT mysteriously low</td><td><em>Now</em> we add Apify (~$10/mo) to peek at IG/TT specifically. Bounded investment.</td></tr>
+<tr><td>Need follower-vs-non-follower reach split to diagnose IG/TT</td><td><em>Now</em> we add Metricool ($25–30/mo). You connect accounts in the UI (~30 min); no engineering.</td></tr>
+</tbody>
+</table>
+<p>Three of those five paths require zero further infrastructure. Phase 0 is the option-preserving move.</p>
+
+<hr>
+
+<h2>What Phase 0 covers (and what it doesn't)</h2>
+
+<h3>Coverage by signal</h3>
+<table>
+<thead><tr><th>Signal</th><th>YouTube</th><th>Other 6 channels</th></tr></thead>
+<tbody>
+<tr><td>Views / impressions / reach</td><td><span class="pill good">✅ full</span></td><td><span class="pill good">✅ full (Blotato)</span></td></tr>
+<tr><td>Engagement</td><td><span class="pill good">✅ full</span></td><td><span class="pill good">✅ full (Blotato)</span></td></tr>
+<tr><td>Retention curve</td><td><span class="pill good">✅ full (YT Analytics)</span></td><td><span class="pill warn">❌ not in Phase 0</span></td></tr>
+<tr><td>Traffic source</td><td><span class="pill good">✅ full</span></td><td><span class="pill warn">❌ not in Phase 0</span></td></tr>
+<tr><td>Follower growth</td><td><span class="pill good">✅ full</span></td><td><span class="pill warn">🟡 snapshots only via Blotato</span></td></tr>
+<tr><td>Demographics</td><td><span class="pill good">✅ full</span></td><td><span class="pill warn">❌ not in Phase 0</span></td></tr>
+</tbody>
+</table>
+
+<h3>The diagnostic dead zone Phase 0 leaves</h3>
+<p>If the dead channels turn out to be IG or TikTok and Blotato's views-only data doesn't make the cause obvious, we'll be guessing. That's the explicit trade. Acceptable because (a) we'll know within 2 days whether Phase 0 is enough, (b) escalation paths are pre-mapped.</p>
+
+<hr>
+
+<h2>What we build (in Claude Code)</h2>
+
+<h3>Script 1 — Blotato puller</h3>
+<p>Path: <code>pipeline/17-pull-blotato-analytics.py</code></p>
+<ol>
+  <li><code>GET https://backend.blotato.com/v2/posts?status=published&amp;since=&lt;launch&gt;&amp;limit=250</code> — paginate via cursor, collect all post IDs across all 7 platforms.</li>
+  <li>For each post: <code>GET /v2/posts/{id}/analytics</code> — write to <code>analytics/&lt;scene_id&gt;/blotato-&lt;platform&gt;.json</code>.</li>
+  <li>Skip posts younger than 48h (metrics not settled).</li>
+  <li>Re-fetch posts at age 7d and 30d to capture long tail.</li>
+  <li>Use existing <code>blotato-api-key</code> from <code>.mcp.json</code>.</li>
+</ol>
+
+<h3>Script 2 — YouTube Analytics puller</h3>
+<p>Path: <code>pipeline/17-pull-youtube-analytics.py</code></p>
+<ol>
+  <li>Google Cloud project → enable YouTube Data API v3 + YouTube Analytics API.</li>
+  <li>OAuth 2.0 desktop credentials. You click once to grant. Token cached locally.</li>
+  <li>Call <code>youtubeAnalytics.reports.query</code> with:
+    <ul>
+      <li>Metrics: <code>views, estimatedMinutesWatched, averageViewPercentage, audienceRetentionRatio, subscribersGained, subscribersLost</code></li>
+      <li>Dimensions: <code>video, day, trafficSourceType, ageGroup, gender</code></li>
+      <li>Date range: channel launch → today</li>
+    </ul>
+  </li>
+  <li>Match each YT post to its scene_id via the post URL (already in Blotato manifest).</li>
+  <li>Write to <code>analytics/&lt;scene_id&gt;/youtube-deep.json</code>.</li>
+</ol>
+
+<h3>Script 3 — Rollup + analyse</h3>
+<p>Path: <code>pipeline/18-analyse-analytics.py</code></p>
+<ol>
+  <li>Read all <code>analytics/*/</code> JSONs.</li>
+  <li>Join with <code>scenes/NNNN/meta.json</code> (script, pillar, hook style — already on disk).</li>
+  <li>Build flat CSV at <code>analytics/rollup.csv</code> for eyeball QA.</li>
+  <li>Call Claude Sonnet 4.6 with: the joined dataset + <code>channel-brief.md</code> + the diagnostic prompt below.</li>
+  <li>Output: <code>analytics/report-YYYY-MM-DD.html</code> — auto-open.</li>
+</ol>
+
+<h3>Diagnostic prompt (Sonnet input)</h3>
+<pre>You are diagnosing the performance of the Scarred Truth channel — short
+vertical videos featuring "Zane," a tattooed wisdom-from-scars character.
+Content brief is attached (channel-brief.md).
+
+Posting cadence: YouTube gets ~3 posts/day, the other 6 platforms (Instagram,
+TikTok, Bluesky, Facebook, Threads, Twitter) get 1 post/day — same video,
+same caption. Account for this asymmetry when comparing.
+
+Data attached:
+- Blotato per-post metrics (views, engagement, reach) for all 7 channels
+- YouTube Analytics: retention curves, traffic source, demographics
+- Scene metadata: script text, pillar, hook style
+
+Diagnose:
+1. Which channels are dead (rank by views/post normalised across cadence).
+2. For each dead channel — is it (a) sudden cliff, (b) slow decay, or
+   (c) never-took-off? Cite evidence from the data.
+3. Where in YouTube videos do viewers drop off most? Map to hook style
+   and pillar. Which combos retain past the 10-second mark?
+4. Which traffic source dominates on YouTube? If recommendation share is
+   declining, flag the date.
+5. Top 5 and bottom 5 posts overall — return scene IDs + the actual hook
+   text so we can pattern-match.
+6. Three testable adjustments to make this week, ordered by expected impact.
+7. Honest limitations: what you cannot diagnose from this data, and
+   what extra data would resolve it.
+
+Output: an HTML report. Be specific. No motivational filler.</pre>
+
+<hr>
+
+<h2>Phase 0 → Phase 1 decision gate</h2>
+
+<div class="gate">
+<strong>Run Phase 0 once. Read the report. Then decide:</strong>
+<ul>
+  <li><strong>Stop here</strong> if the diagnosis is actionable. Fix the content/posting issues identified.</li>
+  <li><strong>Add Metricool (~$25–30/mo)</strong> if the report flags "need follower/non-follower reach split on IG/TT to confirm hypothesis." Connect accounts in the UI; no engineering needed.</li>
+  <li><strong>Add Apify (~$5–15/mo)</strong> if you need cheaper depth on specific platforms or want to scrape competitors for benchmarks. Built in Claude Code.</li>
+  <li><strong>Escalate to native Meta/TikTok APIs</strong> only if Phase 0 + Metricool both fall short on a specific question. Multi-week app review, no upside until then.</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>This week's checklist</h2>
+<div class="checklist">
+<h3>Build (Claude Code session, ~1 sitting)</h3>
+<ul>
+<li>Google Cloud project — enable YouTube Data API v3 + YouTube Analytics API. Generate OAuth desktop credentials.</li>
+<li><code>17-pull-blotato-analytics.py</code> — paginate posts, fetch per-post analytics.</li>
+<li><code>17-pull-youtube-analytics.py</code> — single OAuth flow, one batch reports query.</li>
+<li><code>18-analyse-analytics.py</code> — join + Sonnet call + HTML output.</li>
+<li>Run end-to-end once. Sanity-check the CSV. Open the report.</li>
+</ul>
+
+<h3>Your only manual step (~2 min)</h3>
+<ul>
+<li>Click through the YouTube OAuth consent screen once when prompted.</li>
+<li>Read the HTML report when it lands.</li>
+<li>Decide at the Phase 1 gate.</li>
+</ul>
+</div>
+
+<h2>Cost summary</h2>
+<div class="stat-row"><div class="k">Phase 0 setup cost</div><div>$0</div></div>
+<div class="stat-row"><div class="k">Phase 0 recurring</div><div>$0 (existing Blotato + free YouTube API + Sonnet weekly ≈ $0.50–2/run)</div></div>
+<div class="stat-row"><div class="k">Time to first insight</div><div>~1 Claude Code session, ~2 min of your time (OAuth click)</div></div>
+<div class="stat-row"><div class="k">Worst-case Phase 1 add</div><div>Metricool $25–30/mo if needed — still under your $100/mo threshold</div></div>
+
+<div style="color: var(--ink-dim); font-size: 13px; margin-top: 32px;">
+Generated 2026-05-12 · Synthesis of three independent research outputs (Claude, Grok, Kimi). 80/20 path identified by stripping the maximalist hybrid down to the highest-signal-per-dollar core, with explicit decision gates for escalation.
+</div>
+
+</div>
+</body>
+</html>

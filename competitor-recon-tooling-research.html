@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Competitor Recon — AI Reverse Engineering Stack (May 2026)</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+         background:#0a0a12; color:#e6e6f0; max-width:960px; margin:0 auto; padding:48px 32px 120px; line-height:1.6; }
+  h1 { font-size:32px; margin:0 0 8px; color:#fff; }
+  .sub { color:#8b8ba0; margin-bottom:32px; }
+  h2 { font-size:22px; margin-top:48px; border-bottom:1px solid #1e1e2e; padding-bottom:8px; color:#fff;}
+  h3 { font-size:17px; margin-top:28px; color:#dadafa; }
+  .tldr { background:linear-gradient(135deg,#1a0e2a,#10081a); border:1px solid #4a1e7a; border-radius:14px;
+          padding:22px 26px; margin-bottom:20px; }
+  .tldr h2 { margin-top:0; border:0; padding:0; color:#c89eff; font-size:13px; letter-spacing:1.5px; }
+  .layer { background:linear-gradient(135deg,#0a1e10,#06170a); border:1px solid #1a4a2a; border-radius:14px;
+           padding:22px 26px; margin:20px 0; }
+  .layer-head { color:#5edb95; font-weight:700; font-size:13px; letter-spacing:1.5px; margin-bottom:6px; }
+  .layer h3 { margin-top:0; color:#fff; font-size:20px; }
+  .baseline { background:#0d0d18; border:1px dashed #4a4a6a; border-radius:10px; padding:14px 18px; margin:14px 0;
+              color:#a0a0b8; font-size:14px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:14px; }
+  th, td { padding:10px 12px; border-bottom:1px solid #1e1e2e; text-align:left; vertical-align:top; }
+  th { color:#8b8ba0; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
+  .pill-new { background:#2a1a4a; color:#c89eff; }
+  .pill-cost { background:#1a2a4a; color:#8fb8e6; }
+  .pill-free { background:#1a4a2a; color:#5edb95; }
+  code { background:#15151f; padding:2px 6px; border-radius:4px; font-size:13px; color:#ffd9a3; }
+  pre { background:#0d0d18; border:1px solid #1e1e2e; border-radius:10px; padding:18px; overflow-x:auto;
+        font-size:13px; line-height:1.5; }
+  .step { background:#0d0d18; border:1px solid #1e1e2e; border-radius:10px; padding:18px 22px; margin:14px 0; }
+  .step-n { color:#c89eff; font-weight:700; font-size:13px; letter-spacing:1px; }
+  ul li { margin-bottom:6px; }
+  a { color:#8fb8e6; }
+  .quote { border-left:3px solid #4a3a1a; padding:8px 16px; color:#ffd060; font-style:italic; margin:12px 0; background:#1a1408; }
+</style>
+</head>
+<body>
+
+<h1>Competitor Recon — AI Reverse Engineering Stack</h1>
+<div class="sub">Research v2 — May 12, 2026. Question: what AI-native tools beat the "Loom + Gemini" baseline for copying and reverse-engineering competitors?</div>
+
+<div class="tldr">
+<h2>MENTAL MODEL SHIFT</h2>
+<p><strong>Stop documenting. Start cloning.</strong></p>
+<p>Loom + Gemini gives you a <em>description</em> of what you saw — words about a button, a screenshot of a UI, an opinion about voice quality. That's still manual work translated through a model.</p>
+<p>The new 2026 stack pulls <em>the actual artifacts</em>: their React code, their API endpoints with full request/response schemas, sometimes their literal system prompts. Steve doesn't need your notes about how their chat works — he needs their <code>/api/chat/stream</code> request body. We can get him exactly that.</p>
+<p><strong>Three layers, three new tools:</strong></p>
+<ul>
+<li><strong>Frontend code →</strong> Magic Patterns Chrome extension / v0 / source-map extraction (no more screenshots — get the actual JSX)</li>
+<li><strong>Backend API →</strong> mitmproxy + mitmproxy2swagger + mitmproxy MCP server (auto-generates OpenAPI spec from observed traffic)</li>
+<li><strong>AI behavior →</strong> mitmproxy intercepts their LLM calls in flight, exposing system prompts, model choice, params (this is how Zed's coding assistant got reverse-engineered last year)</li>
+</ul>
+<p>Loom + Gemini stays in the stack but drops to <strong>tier 3</strong> — only for qualitative judgment ("does the voice feel emotional?"). The actual engineering deliverable comes from the other two.</p>
+</div>
+
+<div class="baseline">
+<strong>Your baseline:</strong> Loom screen-record + Gemini 3 Pro video analysis = hands-off UX capture. <em>Good for qualitative impressions, bad for engineering specs.</em> Everything below is what to add ON TOP.
+</div>
+
+<div class="layer">
+<div class="layer-head">LAYER 1 — THE KILLER UNLOCK</div>
+<h3>mitmproxy + mitmproxy2swagger + mitmproxy MCP</h3>
+<p>You put mitmproxy between your browser and the competitor's backend. As you use the site, it captures every single API call — full request bodies, response bodies, headers, auth flow, timing. Then:</p>
+<ul>
+<li><strong>mitmproxy2swagger</strong> auto-converts the traffic to an OpenAPI 3.0 spec. Steve opens that spec and sees their entire backend surface area without writing a line of code. <a href="https://github.com/alufers/mitmproxy2swagger">Open source, free.</a></li>
+<li><strong>mitmproxy MCP server</strong> (new, late 2025) connects mitmproxy directly to Claude Code or any MCP client. You ask Claude in natural language: "find all the endpoints that handle image generation, group them by feature, and summarise the request schemas." It reads the captured traffic and answers.</li>
+<li><strong>System prompt extraction:</strong> when the competitor's frontend calls an LLM (OpenAI, Anthropic, etc.), mitmproxy intercepts the call <em>before</em> it reaches the provider. You see the exact system prompt, model name, temperature, tools. <a href="https://dzlab.github.io/genai/2025/06/07/mitmproxy-zed/">Someone reverse-engineered Zed's coding assistant this way</a> — extracted the full prompt strategy.</li>
+</ul>
+<p><strong>What this gives Steve:</strong> an OpenAPI spec he can implement against, plus the competitor's literal LLM prompts. That's a 90%-built feature spec without screenshots.</p>
+<p><strong>Cost:</strong> <span class="pill pill-free">$0</span> (all open source, runs locally). <strong>Setup:</strong> ~30 min one-time. Steve can wire it up.</p>
+<p><strong>Gotcha:</strong> sites with cert pinning (some mobile apps, rare on web) block mitmproxy. For web targets, install mitmproxy's CA cert in your browser profile and it's transparent.</p>
+</div>
+
+<div class="layer">
+<div class="layer-head">LAYER 2 — INSTANT UI CLONE</div>
+<h3>Magic Patterns Chrome extension + v0 + UXMagic Clone-a-Website</h3>
+<p>Three competing tools, same idea: point at any UI on the web, get production-ready React/Tailwind code out the other end. As of 2026 this actually works for non-trivial layouts.</p>
+<ul>
+<li><strong>Magic Patterns Chrome extension</strong> — capture any UI from any website, get editable components with clean code. This is closest to "AI is paying attention while you browse." <a href="https://www.magicpatterns.com/">magicpatterns.com</a></li>
+<li><strong>v0 by Vercel</strong> — upload screenshot or paste URL, get pixel-perfect responsive code. Best for full-page generation. <a href="https://v0.dev/">v0.dev</a></li>
+<li><strong>UXMagic.ai</strong> — has a literal "Clone a Website to UI" feature: paste URL, get Figma-ready design + React code. <a href="https://uxmagic.ai/">uxmagic.ai</a></li>
+<li><strong>Builder.io Visual Copilot</strong> — better if you want output to match an existing design system (yours).</li>
+</ul>
+<p><strong>What this gives Steve:</strong> instead of him implementing "a chat layout that looks like Candy's", he gets Candy's actual layout as a starting component. Tweak, brand, ship.</p>
+<p><strong>Cost:</strong> v0 free tier covers maybe 5-10 captures/day, Pro ~$20/mo. Magic Patterns has a free tier. <strong>Pick one</strong> — they overlap heavily.</p>
+<p><strong>Bonus — source map extraction:</strong> if the competitor ships source maps (most do, even by accident), <code>unwebpack-sourcemap</code> recovers their actual React tree. Pair with <strong>Humanify</strong> (LLM-driven unminifier) for clean code. This gives you not just the visible UI but every component they ship, including ones behind feature flags. <a href="https://github.com/rarecoil/unwebpack-sourcemap">rarecoil/unwebpack-sourcemap</a> · <a href="https://thejunkland.com/blog/using-llms-to-reverse-javascript-minification.html">LLM unminification writeup</a></p>
+</div>
+
+<div class="layer">
+<div class="layer-head">LAYER 3 — DELEGATE THE BROWSING ITSELF</div>
+<h3>Stagehand + Browserbase Director (or Claude Computer Use)</h3>
+<p>This is the "AI takes over my browser" idea, done properly in 2026. Two viable options:</p>
+
+<h4 style="margin-top:18px; color:#dadafa;">Option A: Browserbase Director (no-code, recommended for you)</h4>
+<ul>
+<li>You demonstrate the recon flow once by browsing naturally. Director watches and converts your session into a <strong>Stagehand script</strong> — natural-language instructions like "click submit", "extract the pricing table".</li>
+<li>You can then re-run that script anytime against the same competitor (catch updates), or fork it to run against the other 4 competitors with small tweaks.</li>
+<li>The script outputs structured data: every screen, every API call, every text snippet. Pipe directly to a markdown doc or your <a href="competitor-analysis-v2.html">analysis HTML</a>.</li>
+<li><a href="https://www.browserbase.com/blog/introducing-director">Browserbase Director</a> · <a href="https://www.browserbase.com/stagehand">Stagehand SDK</a></li>
+</ul>
+
+<h4 style="margin-top:18px; color:#dadafa;">Option B: Claude Computer Use (code, more control)</h4>
+<ul>
+<li>Anthropic's Computer Use loop: Claude takes a screenshot, decides what to click, clicks it, screenshots again. As of 2026 it has a <strong>Zoom Action</strong> for inspecting small UI elements.</li>
+<li>You write a prompt like "open candy.ai, sign in with these cookies, go through every feature, output a JSON file with screenshots and notes for each." It runs unattended.</li>
+<li>Best when you want repeatability + full programmatic control.</li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool">Computer Use docs</a></li>
+</ul>
+
+<p><strong>What this gives you:</strong> a recon "robot" you can re-run any time a competitor ships a feature. Combined with Layer 1 (mitmproxy), you get a complete delta report: "OurDream added 3 new API endpoints since last week, and here's a screenshot of every new screen."</p>
+<p><strong>Cost:</strong> Browserbase Director ~$39-99/mo. Claude Computer Use ~$0.10-0.50 per session run. <span class="pill pill-cost">~$30-100/mo</span></p>
+</div>
+
+<h2>The new stack, end-to-end</h2>
+
+<div class="step">
+<div class="step-n">PASS 1 — PASSIVE CAPTURE (one session per competitor)</div>
+<ul>
+<li>Start mitmproxy. Configure your browser to route through it. (One-time setup; Steve can script this.)</li>
+<li>Browse the competitor naturally — you're not collecting anything by hand. Just use the product.</li>
+<li>In parallel: Loom recording running for qualitative voiceover ("voice latency feels like 2 seconds, the image quality is gorgeous").</li>
+<li><strong>Output:</strong> one <code>.har</code>-style mitmproxy capture + one Loom recording per site.</li>
+</ul>
+</div>
+
+<div class="step">
+<div class="step-n">PASS 2 — AI EXTRACTION (fully automated)</div>
+<ul>
+<li><strong>API spec:</strong> run <code>mitmproxy2swagger</code> on the capture → OpenAPI spec file. Done.</li>
+<li><strong>LLM behavior:</strong> grep the capture for OpenAI/Anthropic/etc. endpoints. Pipe to Claude with "summarize the system prompts and model choices used." Done.</li>
+<li><strong>UX clone:</strong> for each screen you want to copy, paste URL into v0 or Magic Patterns → React code. Done.</li>
+<li><strong>Qualitative notes:</strong> upload Loom to Gemini 3 Pro → structured table of impressions. Done.</li>
+<li><strong>Bundle dive (optional):</strong> if their source maps are exposed, run unwebpack-sourcemap → get their full codebase tree. This is the cheat code.</li>
+</ul>
+</div>
+
+<div class="step">
+<div class="step-n">PASS 3 — DELTA AUTOMATION (set and forget)</div>
+<ul>
+<li>Build a Stagehand script with Director that re-runs Pass 1 on a schedule (weekly?). It generates a diff: new endpoints, new screens, new prompts.</li>
+<li>Now you're not just doing one-off recon — you have a competitor radar that runs itself.</li>
+</ul>
+</div>
+
+<h2>Comparison: old plan vs new plan</h2>
+<table>
+<tr><th>Thing you want</th><th>Old way (Loom + Gemini)</th><th>New way</th></tr>
+<tr><td>UX flow</td><td>Watch 45-min video, AI summarises</td><td>Magic Patterns → actual React code <span class="pill pill-new">UPGRADE</span></td></tr>
+<tr><td>API endpoints</td><td>"AI, tell me what calls happened" (from video — unreliable)</td><td>mitmproxy2swagger → OpenAPI spec <span class="pill pill-new">UPGRADE</span></td></tr>
+<tr><td>Their LLM prompts</td><td>Impossible</td><td>mitmproxy intercept → literal prompts <span class="pill pill-new">UNLOCK</span></td></tr>
+<tr><td>Voice/video quality judgment</td><td>You + Gemini</td><td>Same (this needs human ears)</td></tr>
+<tr><td>Tracking competitor updates</td><td>Manual re-run</td><td>Stagehand script on schedule <span class="pill pill-new">UPGRADE</span></td></tr>
+<tr><td>Hidden features behind flags</td><td>Invisible</td><td>Source-map extraction reveals them <span class="pill pill-new">UNLOCK</span></td></tr>
+</table>
+
+<h2>What I'd actually do this week</h2>
+<ol>
+<li><strong>Day 1:</strong> Set up mitmproxy + mitmproxy2swagger locally with Steve (~1 hour). Test on one competitor. Verify you get a usable OpenAPI spec.</li>
+<li><strong>Day 2:</strong> Test Magic Patterns Chrome extension on 3-5 competitor screens. Decide if v0 or Magic Patterns is the better fit. ($0 first.)</li>
+<li><strong>Day 3-4:</strong> Run Pass 1 + Pass 2 across all 5 competitors. End of week you have: 5 OpenAPI specs, ~30 cloned React components, 5 sets of intercepted LLM prompts.</li>
+<li><strong>Week 2:</strong> Decide whether Stagehand/Director is worth the $39/mo subscription based on how fast competitors ship.</li>
+</ol>
+
+<div class="quote">
+The key insight: mitmproxy + AI changes competitive recon from "describing what you saw" to "exporting their backend". It's the difference between a journalist and a forensic accountant.
+</div>
+
+<h2>What I'd skip</h2>
+<ul>
+<li><strong>Scribe / Tango / Guidde</strong> — these document what <em>you</em> click. The new stack documents what their <em>system</em> does, which is more valuable.</li>
+<li><strong>rrweb / OpenReplay</strong> — built for recording your own users' sessions, not for competitor recon. Wrong tool.</li>
+<li><strong>Generic screenshot tools</strong> — every screenshot you take by hand is a failure of automation. The only manual capture should be qualitative voice notes on Loom.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul style="font-size:13px; color:#8b8ba0;">
+<li><a href="https://github.com/alufers/mitmproxy2swagger">mitmproxy2swagger — auto-generate OpenAPI from captured traffic</a></li>
+<li><a href="https://dzlab.github.io/genai/2025/06/07/mitmproxy-zed/">Reverse-Engineering Zed's AI Coding Assistant with mitmproxy</a></li>
+<li><a href="https://skywork.ai/skypage/en/mitmproxy-mcp-server-ai-engineer/1980464062349824000">Mitmproxy MCP Server deep dive</a></li>
+<li><a href="https://www.browserbase.com/blog/introducing-director">Browserbase Director — natural-language browser automation</a></li>
+<li><a href="https://www.browserbase.com/stagehand">Stagehand SDK</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool">Claude Computer Use docs</a></li>
+<li><a href="https://www.magicpatterns.com/">Magic Patterns — screenshot/URL to UI code</a></li>
+<li><a href="https://v0.dev/">v0 by Vercel</a></li>
+<li><a href="https://github.com/rarecoil/unwebpack-sourcemap">unwebpack-sourcemap — extract SPA from source maps</a></li>
+<li><a href="https://thejunkland.com/blog/using-llms-to-reverse-javascript-minification.html">LLMs for reversing JS minification (Humanify)</a></li>
+<li><a href="https://ai.google.dev/gemini-api/docs/video-understanding">Gemini 3 video understanding (still useful for Layer 3 qualitative)</a></li>
+</ul>
+
+</body>
+</html>

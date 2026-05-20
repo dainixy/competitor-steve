@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zane Analytics — Three Solutions</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1c2230;
+    --ink: #e8ecf3;
+    --ink-dim: #9aa3b2;
+    --line: #2a3142;
+    --accent: #7aa2ff;
+    --good: #5ecf8a;
+    --warn: #ffce5e;
+    --bad: #ff7a7a;
+    --pill: #2a3142;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    padding: 40px 24px 80px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .sub { color: var(--ink-dim); margin-bottom: 32px; }
+  h2 {
+    font-size: 20px;
+    margin: 36px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 16px;
+    margin: 22px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  p, li { color: var(--ink); }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 14px 0;
+  }
+  .panel.rec {
+    border-color: #3a5fbd;
+    background: linear-gradient(180deg, #1a2238 0%, #161a22 100%);
+  }
+  .tldr {
+    color: var(--ink-dim);
+    font-size: 14px;
+    margin: 4px 0 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { color: var(--ink-dim); font-weight: 500; }
+  tbody tr:last-child td { border-bottom: none; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--pill);
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin-right: 6px;
+  }
+  .pill.good { background: rgba(94, 207, 138, 0.15); color: var(--good); }
+  .pill.warn { background: rgba(255, 206, 94, 0.15); color: var(--warn); }
+  .pill.bad  { background: rgba(255, 122, 122, 0.15); color: var(--bad); }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+    margin: 10px 0;
+  }
+  .grid .k { color: var(--ink-dim); }
+  code, pre {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; }
+  ul { padding-left: 22px; }
+  li { margin: 4px 0; }
+  .footer-note {
+    color: var(--ink-dim);
+    font-size: 13px;
+    margin-top: 24px;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 36px 0;
+  }
+  .six-signal {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    font-size: 13.5px;
+    margin: 8px 0 4px;
+  }
+  .six-signal .k { color: var(--ink-dim); }
+  .six-signal .v { font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Zane Analytics — Three Solutions</h1>
+<div class="sub">Cross-platform analytics for 7 Blotato-scheduled channels, designed for AI diagnosis with minimum human involvement.</div>
+
+<div class="panel">
+<h2 style="margin-top:0">Mental model</h2>
+<p>You want to answer one question: <strong>why did some channels lose views?</strong> That question splits three ways:</p>
+<ul>
+  <li><strong>Sudden cliff</strong> → account flag / algorithm hit. Needs <em>traffic-source</em> data to detect.</li>
+  <li><strong>Slow decay</strong> → content fit drift. Needs <em>engagement trend</em> + <em>retention curves</em>.</li>
+  <li><strong>Never took off</strong> → cold-start failure. Needs <em>follower-vs-non-follower reach split</em>.</li>
+</ul>
+<p>Blotato gives you views + engagement only. That's enough to tell you <em>that</em> a channel is dying. It's <strong>not enough to tell you why</strong> — for that you need retention curves (YouTube) and traffic source (Meta/TikTok). The three solutions below trade off how aggressively you go after that "why" signal.</p>
+</div>
+
+<hr>
+
+<h2>Solution A — Blotato-only baseline</h2>
+<div class="panel">
+<div class="tldr"><strong>TL;DR:</strong> Use the API you already have, ship in a day, accept that "why" stays a guess.</div>
+
+<h3>What it covers</h3>
+<div class="six-signal">
+  <div class="k">Views / impressions / reach</div><div class="v"><span class="pill good">✅ full</span></div>
+  <div class="k">Engagement (likes, comments, shares, saves)</div><div class="v"><span class="pill good">✅ full</span></div>
+  <div class="k">Retention curves</div><div class="v"><span class="pill bad">❌ none</span></div>
+  <div class="k">Traffic source</div><div class="v"><span class="pill bad">❌ none</span></div>
+  <div class="k">Follower growth</div><div class="v"><span class="pill bad">❌ none</span></div>
+  <div class="k">Demographics</div><div class="v"><span class="pill bad">❌ none</span></div>
+</div>
+
+<h3>Per-channel coverage</h3>
+<p>All 7 channels covered uniformly (YouTube, Instagram, TikTok, Bluesky, Facebook, Threads, Twitter). Same endpoints, same data shape.</p>
+
+<h3>Setup</h3>
+<div class="grid">
+  <div class="k">Time</div><div>~4 hours of Steve's time.</div>
+  <div class="k">Auth</div><div>None new — API key already in <code>.mcp.json</code>.</div>
+  <div class="k">Build</div><div>One Python script. Loops <code>GET /v2/posts</code>, fans out to <code>GET /v2/posts/{id}/analytics</code>, writes JSON to <code>analytics/</code>.</div>
+  <div class="k">Wait</div><div>None.</div>
+</div>
+
+<h3>Cost</h3>
+<p>$0 one-time, $0 recurring.</p>
+
+<h3>Ongoing burden</h3>
+<p>None. Cron weekly. Operator clicks: 0.</p>
+
+<h3>Failure modes</h3>
+<ul>
+  <li>Diagnostic ceiling. Can spot dead channels but not <em>why</em> — the analysis becomes "channel X has 100 views, channel Y has 10,000, here are some guesses."</li>
+  <li>Blotato's metrics only track posts Blotato published. Anything posted manually is invisible.</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>Solution B — Hybrid: Blotato + YouTube Analytics API + Apify + Bluesky</h2>
+<div class="panel rec">
+<div class="tldr"><strong>TL;DR:</strong> Skip the multi-week Meta/TikTok app reviews. Use Blotato as the spine, layer in free YouTube Analytics for retention curves, and use cheap Apify scrapers for TikTok/Instagram. ~$5–15/mo, deployable in a week. <strong>Recommended.</strong></div>
+
+<h3>What it covers</h3>
+<div class="six-signal">
+  <div class="k">Views / impressions / reach</div><div class="v"><span class="pill good">✅ full</span></div>
+  <div class="k">Engagement</div><div class="v"><span class="pill good">✅ full</span></div>
+  <div class="k">Retention curves</div><div class="v"><span class="pill warn">🟡 YouTube only — but YT is where the cadence is</span></div>
+  <div class="k">Traffic source</div><div class="v"><span class="pill warn">🟡 YT + TT + IG (via Apify), missing for FB/Threads/Twitter</span></div>
+  <div class="k">Follower growth</div><div class="v"><span class="pill warn">🟡 YT full, others snapshot-based</span></div>
+  <div class="k">Demographics</div><div class="v"><span class="pill warn">🟡 YouTube only</span></div>
+</div>
+
+<h3>Per-channel coverage</h3>
+<table>
+  <thead><tr><th>Channel</th><th>Source</th><th>Extra signal beyond Blotato</th></tr></thead>
+  <tbody>
+    <tr><td>YouTube Shorts</td><td>YouTube Analytics API (free, OAuth)</td><td>Audience retention curve, traffic source, age/gender, click-through rate, subscriber delta per video</td></tr>
+    <tr><td>TikTok</td><td>Apify TikTok Scraper</td><td>Public engagement counts at higher resolution than Blotato; trend signals from hashtag/sound</td></tr>
+    <tr><td>Instagram Reels</td><td>Apify Instagram Scraper</td><td>Per-post likes, comments, plays trend without Meta app review</td></tr>
+    <tr><td>Bluesky</td><td>Public atproto API (free, no auth)</td><td>Likes, reposts, replies per post; follower count over time</td></tr>
+    <tr><td>Facebook</td><td>Blotato only</td><td>—</td></tr>
+    <tr><td>Threads</td><td>Blotato only</td><td>—</td></tr>
+    <tr><td>Twitter / X</td><td>Blotato only</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h3>Setup</h3>
+<div class="grid">
+  <div class="k">Time</div><div>~2 days of Steve's time (incl. testing).</div>
+  <div class="k">Auth</div><div>1 OAuth flow for YouTube (operator clicks once). Apify account: email signup. Bluesky: nothing.</div>
+  <div class="k">Build</div><div>4 small Python scripts, one per data source. All write to <code>analytics/&lt;scene_id&gt;/&lt;platform&gt;.json</code>.</div>
+  <div class="k">Wait</div><div>None — no app reviews needed.</div>
+</div>
+
+<h3>Cost</h3>
+<p>$0 one-time. ~$5–15/mo recurring (Apify usage at current Zane volume: ~90 posts/mo each platform × $0.0005 ≈ negligible; mostly the Apify $5 base credit).</p>
+
+<h3>Ongoing burden</h3>
+<p>Operator clicks: 0 weekly. Re-auth YouTube once a year (Google refresh token expiry). Monitor for Apify selector breaks via simple "did we get data this week?" check.</p>
+
+<h3>Why this is the recommendation</h3>
+<ul>
+  <li>The single highest-value signal across all 7 channels is the YouTube retention curve, because <strong>YouTube is your highest-cadence channel (3×/day)</strong> and you can directly see whether viewers drop at second 1 (hook fail), second 15 (body fail), or second 45 (no payoff). This signal is free and takes 30 minutes to wire up.</li>
+  <li>Apify gives you 80% of the IG/TT depth without Meta/TikTok's business-account approval gauntlet. If a scraper breaks, you replace it; you don't wait 2 weeks for app re-approval.</li>
+  <li>Facebook/Threads/Twitter are likely cold-start losers regardless — pouring engineering effort into deep analytics there before fixing the content-fit problem is misallocated. Solution C escalates only if needed.</li>
+</ul>
+
+<h3>Failure modes</h3>
+<ul>
+  <li>Apify selector breakage when TikTok/IG update their HTML. Mitigation: weekly "got data?" health check; swap actors if needed (multiple competing actors exist).</li>
+  <li>YouTube Analytics API has a 1–3 day data freshness lag. Pull data 48h after post for stable numbers.</li>
+  <li>No retention data on the 6 non-YT channels. If the dead channels turn out to be TT/IG specifically, we still won't know <em>why</em> the body failed there — only that it did.</li>
+</ul>
+</div>
+
+<hr>
+
+<h2>Solution C — Native APIs everywhere (or Metricool shortcut)</h2>
+<div class="panel">
+<div class="tldr"><strong>TL;DR:</strong> Maximum signal depth. Either grind through Meta + TikTok app reviews (free but 2–4 weeks of waiting) or pay Metricool ~$58/mo to wrap most of it.</div>
+
+<h3>What it covers</h3>
+<div class="six-signal">
+  <div class="k">Views / impressions / reach</div><div class="v"><span class="pill good">✅ full, all 7 channels</span></div>
+  <div class="k">Engagement</div><div class="v"><span class="pill good">✅ full</span></div>
+  <div class="k">Retention curves</div><div class="v"><span class="pill warn">🟡 YT + TT (TikTok Business gives watch-time)</span></div>
+  <div class="k">Traffic source</div><div class="v"><span class="pill good">✅ YT, IG, FB, Threads, TT</span></div>
+  <div class="k">Follower growth</div><div class="v"><span class="pill good">✅ all platforms with native API</span></div>
+  <div class="k">Demographics</div><div class="v"><span class="pill good">✅ YT, IG, FB, TT</span></div>
+</div>
+
+<h3>Per-channel coverage</h3>
+<table>
+  <thead><tr><th>Channel</th><th>Native API</th><th>Setup gate</th></tr></thead>
+  <tbody>
+    <tr><td>YouTube</td><td>YouTube Analytics API</td><td>OAuth, ~30 min</td></tr>
+    <tr><td>Instagram</td><td>Meta Graph API (Instagram Insights)</td><td>FB business account + app review, 1–2 weeks</td></tr>
+    <tr><td>Facebook</td><td>Meta Graph API (Page Insights)</td><td>Same app as Instagram, no extra review</td></tr>
+    <tr><td>Threads</td><td>Threads Insights API</td><td>Same Meta app; Threads endpoint added</td></tr>
+    <tr><td>TikTok</td><td>TikTok Business API</td><td>Business verification + 3–7 day review; may reject if no ad spend</td></tr>
+    <tr><td>Bluesky</td><td>atproto public</td><td>None</td></tr>
+    <tr><td>Twitter / X</td><td>X API Basic ($200/mo) OR scrape</td><td>Paid tier or fragile scraping</td></tr>
+  </tbody>
+</table>
+
+<h3>Setup</h3>
+<div class="grid">
+  <div class="k">Time</div><div>~1 week of Steve's time spread over 2–4 weeks of waiting on reviews.</div>
+  <div class="k">Auth</div><div>4 separate OAuth flows, 2 app submissions (Meta, TikTok), 1 business verification.</div>
+  <div class="k">Build</div><div>5 platform integrations or 1 Metricool integration.</div>
+  <div class="k">Wait</div><div>2–4 weeks before all data flows.</div>
+</div>
+
+<h3>Cost</h3>
+<p>Two sub-options:</p>
+<ul>
+  <li><strong>C1 — DIY native APIs:</strong> $0/mo if Twitter is scraped, $200/mo if X API Basic is used.</li>
+  <li><strong>C2 — Metricool Advanced:</strong> $53/mo + $5/mo X add-on = $58/mo. Wraps IG/FB/TT/YT/Threads/Bluesky in one auth flow per platform. API access included.</li>
+</ul>
+
+<h3>Ongoing burden</h3>
+<p>C1: token refresh maintenance, occasional re-approval pings from Meta. C2: zero — Metricool handles the platform side.</p>
+
+<h3>Failure modes</h3>
+<ul>
+  <li>Meta app review can reject without clear reason, especially for AI-generated content; might require disclosure language adjustments.</li>
+  <li>TikTok Business approval often denied for accounts with no ad spend history.</li>
+  <li>Metricool has weaker per-video retention data than going direct to YouTube Analytics API.</li>
+</ul>
+</div>
+
+<hr>
+
+<div class="panel rec">
+<h2 style="margin-top:0">Recommendation</h2>
+<p><strong>Start with B this week. Reconsider C in 30 days.</strong></p>
+<p>The reason: you said you have no clue which channels died. Before investing 2–4 weeks in app reviews, spend 2 days on Solution B so you actually <em>know</em> the shape of the problem. The YouTube retention curve alone — free, 30 minutes — will probably tell you 70% of what you need.</p>
+<p>Decision point at day 30: if the dead channels are Meta/TikTok and you need follower-vs-non-follower reach split or demographics to diagnose, escalate to Metricool ($58/mo, no build work, ready in 2 days) rather than the full app-review path. Skip C1 unless you have a specific reason to want raw API access.</p>
+</div>
+
+<h2>Rejected options</h2>
+<ul>
+  <li><strong>X API Basic ($200/mo)</strong> — not worth it for a low-priority channel at this volume. Use Blotato data; revisit only if X unexpectedly becomes a top-3 channel.</li>
+  <li><strong>Phyllo (pay-per-call developer API)</strong> — no clear advantage over native APIs + Apify mix at this scale; gets expensive fast.</li>
+  <li><strong>SocialInsider / Sprout / HeyOrca</strong> — agency-priced ($100–300/mo). Overkill for one operator.</li>
+  <li><strong>Hand-screenshotting native dashboards</strong> — violates the "minimum human involvement" requirement.</li>
+  <li><strong>Building a custom scraping stack with Playwright self-hosted</strong> — Apify already solves this; don't reinvent.</li>
+</ul>
+
+<h2>Minimum first step this week</h2>
+<ol>
+  <li>Steve writes a one-off script: hit <code>GET /v2/posts?status=published&amp;since=&lt;launch&gt;</code> via the Blotato API, dump the post-id list to <code>analytics/post-index.json</code>. ~30 min.</li>
+  <li>For each post id, hit <code>GET /v2/posts/{id}/analytics</code>, append result to <code>analytics/{platform}-{post_id}.json</code>. ~1 hour.</li>
+  <li>Eyeball the rollup. You'll know which channels are dead within 5 minutes of looking at views per channel over time.</li>
+  <li>Then — and only then — decide whether the missing-why signal is worth Solution B's incremental investment, or whether the channels are obviously dead for a reason you can already see (e.g. follower count never grew).</li>
+</ol>
+
+<div class="footer-note">Generated 2026-05-12 · Based on Blotato API docs, current platform API gate requirements, and Apify pricing as of May 2026.</div>
+
+</div>
+</body>
+</html>

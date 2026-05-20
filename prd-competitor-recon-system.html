@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRD — Competitive Recon System</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+         background:#0a0a12; color:#e6e6f0; max-width:900px; margin:0 auto; padding:48px 32px 120px; line-height:1.65; }
+  .doc-meta { color:#6b6b85; font-size:12px; letter-spacing:2px; font-weight:700; margin-bottom:10px; }
+  h1 { font-size:36px; margin:0 0 8px; color:#fff; font-weight:800; letter-spacing:-0.5px; }
+  .strapline { color:#8b8ba0; margin-bottom:40px; }
+  h2 { font-size:22px; margin:48px 0 16px; color:#fff; padding-bottom:8px; border-bottom:1px solid #1e1e2e; }
+  h2 .num { color:#c89eff; font-weight:600; margin-right:10px; }
+  h3 { font-size:16px; margin:24px 0 10px; color:#dadafa; }
+  p, li { color:#c8c8d8; }
+  ul { padding-left: 22px; }
+  ol { padding-left: 22px; }
+  ol li { padding-left:6px; margin-bottom:8px; }
+  code { background:#15151f; padding:2px 7px; border-radius:4px; font-size:13px; color:#ffd9a3; }
+  .box { background:#0d0d18; border:1px solid #1e1e2e; border-radius:12px; padding:20px 24px; margin:16px 0; }
+  .box-purple { background:linear-gradient(135deg,#1a0e2a,#10081a); border-color:#4a1e7a; }
+  .box-green { background:linear-gradient(135deg,#0a1a10,#06170a); border-color:#1a4a2a; }
+  .box-amber { background:linear-gradient(135deg,#1a1408,#10080a); border-color:#4a3a1a; }
+  .box-red { background:linear-gradient(135deg,#1a0808,#100404); border-color:#4a1a1a; }
+  .module { background:#0d0d18; border:1px solid #1e1e2e; border-radius:10px; padding:16px 20px; margin:10px 0; }
+  .module-name { color:#5edb95; font-weight:700; font-size:15px; margin-bottom:4px; }
+  .module-tag { display:inline-block; font-size:10px; letter-spacing:1.5px; font-weight:700; padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle; }
+  .tag-deep { background:#1a4a2a; color:#5edb95; }
+  .tag-shallow { background:#2a2a4a; color:#8fb8e6; }
+  .tag-must { background:#4a1e1a; color:#ff8a5c; }
+  .tag-should { background:#1a3a4a; color:#6acdff; }
+  .tag-later { background:#2a2a3a; color:#a0a0b8; }
+  .matrix { width:100%; border-collapse:collapse; font-size:13px; margin:14px 0; }
+  .matrix th, .matrix td { padding:10px 12px; border:1px solid #1e1e2e; text-align:left; vertical-align:top; }
+  .matrix th { background:#15151f; color:#8b8ba0; font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+  .hour-row td:first-child { background:#15151f; color:#c89eff; font-weight:700; width:60px; text-align:center; }
+  .decision-pass { color:#5edb95; font-weight:700; }
+  .decision-warn { color:#ffd060; font-weight:700; }
+  .decision-fail { color:#ff8a8a; font-weight:700; }
+  .module-iface { color:#a0a0b8; font-size:13px; margin-top:4px; }
+  .question { background:#1a1408; border-left:3px solid #ffd060; padding:12px 18px; margin:14px 0; border-radius:0 8px 8px 0; }
+  .question strong { color:#ffd060; }
+  table { width:100%; border-collapse:collapse; margin:14px 0; font-size:14px; }
+  th, td { padding:8px 12px; border-bottom:1px solid #1e1e2e; text-align:left; }
+  th { color:#8b8ba0; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="doc-meta">PRODUCT REQUIREMENTS DOCUMENT · 2026-05-12</div>
+<h1>Competitive Recon System</h1>
+<div class="strapline">An internal pipeline that captures competitors' engineering artifacts — UI code, API specs, AI prompts — instead of typing notes about them.</div>
+
+<h2><span class="num">1.</span>Problem Statement</h2>
+<div class="box">
+<p>Dainis (founder/PM at DRT) needs deep competitive reconnaissance on 5 paid AI-companion competitors (Candy.AI, OurDream.AI, SecretDesires.AI, and 2 others). The current plan is fully manual: open each site, take screenshots by hand, type qualitative notes, move on. Budget: 1-2 hours per site = 5-10 hours of repetitive work, repeated whenever a competitor ships.</p>
+<p>The deeper problem isn't time — it's <strong>artifact quality</strong>. Manual screenshots and prose notes give Steve descriptions ("they have a chat layout with images inline"). What Steve actually needs to build features is the engineering substrate: the API contracts, the actual frontend code, and the competitor's literal LLM prompts. None of those are produced by manual recon.</p>
+<p>A secondary problem: many cloud AI tools refuse to operate on adult content sites, and uploading credentials/screenshots from paid accounts to third-party clouds is a privacy and TOS risk.</p>
+</div>
+
+<h2><span class="num">2.</span>Solution</h2>
+<div class="box box-purple">
+<p>A locally-run, three-pass recon pipeline that Steve sets up once and Dainis reuses indefinitely.</p>
+<ul>
+<li><strong>Pass 1 — Passive Capture:</strong> Dainis triggers a recon run on a competitor. The system launches mitmproxy, a dedicated browser profile, OBS screen recording, and a Browser Use autonomous agent. Dainis can run alongside for qualitative voice notes.</li>
+<li><strong>Pass 2 — AI Extraction:</strong> The system converts raw captures into structured artifacts: OpenAPI 3.0 spec, intercepted LLM prompts, cloned React components, vision-model quality ratings, and a feature inventory.</li>
+<li><strong>Pass 3 — Delta Automation:</strong> A scheduled Stagehand script re-runs the recon weekly and produces a diff report ("OurDream added 2 endpoints + a voice settings screen since last Monday").</li>
+</ul>
+<p>Everything runs locally. No cloud uploads. No content filters. Output bundle per competitor is a clean folder Dainis can hand to Steve.</p>
+</div>
+
+<h2><span class="num">3.</span>User Stories</h2>
+
+<h3>Dainis (operator)</h3>
+<ol>
+<li>As Dainis, I want to start a recon run with one command, so that I don't have to set up tooling each time.</li>
+<li>As Dainis, I want an AI agent to autonomously click through a competitor's features, so that I don't have to do it manually.</li>
+<li>As Dainis, I want every API call captured automatically, so that Steve has the exact backend contract.</li>
+<li>As Dainis, I want competitor system prompts intercepted and saved, so that I know their AI strategy.</li>
+<li>As Dainis, I want competitor screens converted to React code, so that Steve can use them as starter components.</li>
+<li>As Dainis, I want vision-model ratings (1-10) for voice quality, image quality, and latency, so that I have quantitative comparisons.</li>
+<li>As Dainis, I want to narrate qualitative impressions while browsing, so that subjective feel is captured alongside structured data.</li>
+<li>As Dainis, I want weekly delta reports, so that I'm alerted when competitors ship new features.</li>
+<li>As Dainis, I want everything to run locally with no cloud uploads, so that adult content and credentials stay private.</li>
+<li>As Dainis, I want each competitor's outputs in a structured folder, so that I can hand a clean bundle to Steve.</li>
+<li>As Dainis, I want to choose which features to deep-dive vs skim, so that I focus the AI on high-priority areas.</li>
+<li>As Dainis, I want failures (CAPTCHA, login walls, blocked flows) flagged clearly, so that I know what needs manual follow-up.</li>
+<li>As Dainis, I want a top-level summary that diffs competitors against each other, so that I can quickly see who has what.</li>
+<li>As Dainis, I want one browser profile per competitor, so that cookies and credentials don't cross sites.</li>
+<li>As Dainis, I want a "test on safe target" mode, so that I can dry-run the pipeline before hitting paid sites.</li>
+<li>As Dainis, I want cost-per-run visibility, so that I know when API spend creeps up.</li>
+<li>As Dainis, I want to pause and resume a recon run, so that long sessions can survive interruptions.</li>
+</ol>
+
+<h3>Steve (developer / downstream consumer)</h3>
+<ol start="18">
+<li>As Steve, I want an OpenAPI spec per competitor, so that I can implement against a real contract instead of a description.</li>
+<li>As Steve, I want intercepted LLM prompts in plain text, so that I can compare prompt strategies and copy proven patterns.</li>
+<li>As Steve, I want recon scripts to be re-runnable, so that I don't rebuild them each cycle.</li>
+<li>As Steve, I want competitor source maps extracted when available, so that I can see hidden features behind paywalls.</li>
+<li>As Steve, I want all artifacts in a predictable folder structure, so that I can write tooling on top of the output.</li>
+<li>As Steve, I want each module to be testable in isolation, so that I can extend the pipeline without breaking what works.</li>
+</ol>
+
+<h2><span class="num">4.</span>Phase 0 — Prototype Spike (precondition to build)</h2>
+<div class="box box-amber">
+<p><strong>Purpose:</strong> burn 2 days of Steve's time before committing to v1, to verify the four assumptions that could quietly kill the project. v1 build is gated on this spike passing.</p>
+
+<h3>The four kill-the-project assumptions</h3>
+<table>
+<tr><th>#</th><th>Assumption</th><th>If it fails…</th></tr>
+<tr><td>1</td><td>mitmproxy can capture traffic on these specific sites (no cert pinning, WAF blocking, custom auth handshakes)</td><td>The "X-ray the backend" pitch dies. Pivot to a different proxy strategy or scrap the backend layer.</td></tr>
+<tr><td>2</td><td>Browser-Use can navigate AI-companion UIs (custom chat DOMs, age gates, paywall modals)</td><td>The "robot inspector" promise dies. Manual recon stays the plan, or invest in heavier scripting.</td></tr>
+<tr><td>3</td><td>Open-Lovable produces useful code on these specific pages (dynamic chat UIs are hard targets)</td><td>Drop UI Cloner from v1.5. Steve hand-rebuilds UIs from screenshots.</td></tr>
+<tr><td>4</td><td>Local Qwen2-VL is sharp enough on screenshots</td><td>Fall back to Gemini API (~$30/run). Not a project-killer, just a cost adjustment.</td></tr>
+</table>
+
+<h3>Day 1 — Risk burndown on one competitor (~4-5 hours)</h3>
+<p>Pick the simplest target. Probably <strong>SecretDesires</strong> (we already have rich data on it, suggesting accessible architecture), or whichever competitor Dainis finds easiest to log into.</p>
+<table class="matrix">
+<tr><th>Hour</th><th>Task</th><th>What "passes" looks like</th></tr>
+<tr class="hour-row"><td>1</td><td>Install mitmproxy, set up CA cert in a fresh Chrome profile, browse site for 5 min while logged in.</td><td>mitmproxy console shows live API calls with full request/response bodies. <span class="decision-fail">Empty or all-encrypted = fail.</span></td></tr>
+<tr class="hour-row"><td>2</td><td>Run <code>mitmproxy2swagger</code> on the capture. Grep for <code>openai.com</code> / <code>anthropic.com</code> / known LLM endpoints.</td><td>Produces non-empty <code>api.yaml</code> with 5+ recognisable endpoints. <span class="decision-pass">Bonus: visible LLM system prompts.</span></td></tr>
+<tr class="hour-row"><td>3</td><td>Install Browser-Use + Ollama + a vision-capable open model. Run mission: <em>"log in, open chat, send 3 messages, screenshot each screen."</em></td><td>Agent completes without refusing. Screenshots exist. Mission log shows coherent reasoning.</td></tr>
+<tr class="hour-row"><td>4</td><td>Paste site homepage URL into Open-Lovable. Open the output in a sandbox.</td><td>Cloned React/Next.js code visually resembles the original. Layout recognisable, components mapped.</td></tr>
+<tr class="hour-row"><td>5</td><td>Feed 5 Day-1 screenshots to local Qwen2-VL with prompt <em>"rate image quality 1-10, identify UI elements."</em></td><td>Ratings are varied and defensible. <span class="decision-warn">Garbage = use Gemini fallback.</span></td></tr>
+</table>
+
+<h3>Day 2 — Coverage spike on remaining 4 competitors (~4 hours)</h3>
+<p>Don't go deep. For each remaining site, run only the two highest-risk tests (mitmproxy + Browser-Use). Skip Open-Lovable and Qwen2-VL — they're site-agnostic, proven once = proven enough.</p>
+
+<p><strong>Output: a coverage matrix.</strong></p>
+<table class="matrix">
+<tr><th>Site</th><th>mitmproxy</th><th>Browser-Use</th><th>Notes / blockers found</th></tr>
+<tr><td>Candy.AI</td><td>✅ / ❌</td><td>✅ / ❌</td><td>e.g. "age gate blocked agent on first attempt"</td></tr>
+<tr><td>OurDream.AI</td><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>SecretDesires.AI</td><td>…</td><td>…</td><td>(if used as Day 1 target, already filled)</td></tr>
+<tr><td>Site 4</td><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>Site 5</td><td>…</td><td>…</td><td>…</td></tr>
+</table>
+
+<h3>Day 3 — Decision (1 hour, Dainis + Steve)</h3>
+<p>Steve writes a one-pager: what worked, what didn't, recommended v1 scope adjustments.</p>
+<table class="matrix">
+<tr><th>What the matrix shows</th><th>Decision</th></tr>
+<tr><td>4-5 sites pass both tests</td><td><span class="decision-pass">✅ Green-light v1 as scoped (2-3 weeks).</span></td></tr>
+<tr><td>2-3 sites pass</td><td><span class="decision-warn">🟡 Build v1 for passers. Plan manual recon for blockers.</span></td></tr>
+<tr><td>0-1 sites pass</td><td><span class="decision-fail">❌ Scrap autonomous-agent angle. Fall back to manual + mitmproxy only — still gets the API spec layer (most valuable artifact).</span></td></tr>
+<tr><td>mitmproxy fails on most sites</td><td><span class="decision-fail">❌ Hard pivot. Investigate frida / Charles / a different proxy strategy before any v1 work.</span></td></tr>
+</table>
+
+<h3>Spike cost</h3>
+<ul>
+<li><strong>Steve time:</strong> ~2 days (16 hours)</li>
+<li><strong>Cash:</strong> ~$0 (all local tooling)</li>
+<li><strong>Risk reduced:</strong> all 4 project-killer assumptions verified before any module code is written</li>
+</ul>
+</div>
+
+<h2><span class="num">5.</span>Implementation Decisions</h2>
+
+<h3>Modules (tiered by phase)</h3>
+<p>Seven modules across three phases. Build v1 first (4 modules), run it once, then decide on v1.5.</p>
+<ul style="font-size:13px; color:#a0a0b8;">
+<li><span class="module-tag tag-must">v1 MUST</span> = ship in first release, ~1.5-2.5 weeks of Steve time</li>
+<li><span class="module-tag tag-should">v1.5 SHOULD</span> = adds ~4-7 days after v1 proves itself</li>
+<li><span class="module-tag tag-later">v2 LATER</span> = only valuable once baseline runs exist</li>
+<li><span class="module-tag tag-deep">DEEP</span> = simple in/out interface, prioritised for isolated tests</li>
+</ul>
+
+<div class="module">
+<div class="module-name">1. Capture Orchestrator <span class="module-tag tag-must">v1 MUST</span> <span class="module-tag tag-shallow">shallow</span></div>
+<div class="module-iface">In: competitor config (name, URL, profile, mission). Out: a populated <code>./recon/{competitor}/raw/</code> folder with mitmproxy flows, OBS video, screenshots, Browser Use logs.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Wraps four external processes (mitmproxy, OBS, browser, Browser Use agent). Shallow because most of its body is process management and config.</p>
+</div>
+
+<div class="module">
+<div class="module-name">2. Network Capture Exporter <span class="module-tag tag-must">v1 MUST</span> <span class="module-tag tag-deep">DEEP</span></div>
+<div class="module-iface">In: mitmproxy flows file. Out: <code>api.yaml</code> (OpenAPI 3.0), <code>llm-prompts.json</code> (intercepted system prompts + model params), <code>raw.har</code>.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Pure transformation. Internally uses mitmproxy2swagger plus a custom extractor that scans for known LLM provider endpoints (api.openai.com, api.anthropic.com, etc.) and pulls request bodies. Easy to test with fixture flow files.</p>
+</div>
+
+<div class="module">
+<div class="module-name">3. Browser-Use Mission Runner <span class="module-tag tag-must">v1 MUST</span> <span class="module-tag tag-shallow">shallow</span></div>
+<div class="module-iface">In: mission prompt (e.g. "explore all 30 features"), browser profile path, target URL. Out: <code>screenshots/</code>, <code>features.json</code>, <code>mission-log.txt</code>.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Thin wrapper over the Browser Use library + local Ollama. Includes retry/checkpoint logic so long missions can resume. Not deep-tested — stochastic external dependency, validated via dry runs instead.</p>
+</div>
+
+<div class="module">
+<div class="module-name">4. UI Cloner <span class="module-tag tag-should">v1.5 SHOULD</span> <span class="module-tag tag-shallow">shallow</span></div>
+<div class="module-iface">In: list of URLs + optional screenshot paths. Out: <code>components/{name}.tsx</code> files.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Wraps Open-Lovable / v0 / Magic Patterns APIs. Bonus path: if source maps detected on the target, runs unwebpack-sourcemap and dumps the recovered React tree.</p>
+</div>
+
+<div class="module">
+<div class="module-name">5. Vision Rater <span class="module-tag tag-should">v1.5 SHOULD</span> <span class="module-tag tag-deep">DEEP</span></div>
+<div class="module-iface">In: screenshot folder + rubric (list of dimensions like "voice realism 1-10", "image quality 1-10"). Out: <code>ratings.json</code> with per-screenshot scores + overall aggregates.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Wraps Qwen2-VL via Ollama with a structured-output prompt. Pure transformation given a fixed model + rubric. Easy to test with golden screenshots and tolerance windows.</p>
+</div>
+
+<div class="module">
+<div class="module-name">6. Delta Engine <span class="module-tag tag-later">v2 LATER</span> <span class="module-tag tag-shallow">shallow</span></div>
+<div class="module-iface">In: two recon-run output folders for the same competitor. Out: <code>diff.md</code> highlighting new/removed endpoints, new screens, prompt changes, rating shifts.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Mostly diffing structured JSON. Deepish, but only one real consumer (the weekly cron), so kept simple.</p>
+</div>
+
+<div class="module">
+<div class="module-name">7. Report Bundler <span class="module-tag tag-must">v1 MUST</span> <span class="module-tag tag-shallow">shallow</span></div>
+<div class="module-iface">In: the full <code>./recon/{competitor}/</code> folder. Out: an HTML index + a zipped bundle for handoff to Steve.</div>
+<p style="color:#a0a0b8;font-size:13px;margin:6px 0 0">Templating + file collection. Trivial; mentioned for completeness.</p>
+</div>
+
+<h3>Architectural decisions</h3>
+<ul>
+<li><strong>Everything local.</strong> No data leaves the machine unless Dainis explicitly opts into v0/Open-Lovable cloud APIs for a specific clone step. Default: fully air-gapped.</li>
+<li><strong>One Chrome profile per competitor.</strong> Profiles live in <code>./profiles/{competitor}/</code>. Cookies, mitmproxy CA cert, and login state isolated.</li>
+<li><strong>Filesystem as the database.</strong> All artifacts are files on disk in a predictable structure. No database. Steve can grep, diff, version-control them directly.</li>
+<li><strong>Local LLM by default.</strong> Browser Use and Vision Rater both target Ollama locally. API keys (Gemini, Anthropic) are opt-in fallbacks for specific tasks.</li>
+<li><strong>Failures are first-class output.</strong> When the agent hits a CAPTCHA, login wall, or refusal, it logs a structured <code>blockers.json</code> entry rather than crashing.</li>
+</ul>
+
+<h3>Folder contract</h3>
+<pre style="background:#15151f;padding:14px 18px;border-radius:8px;color:#c8c8d8;font-size:13px;line-height:1.5;overflow-x:auto;">./recon/{competitor}/
+├── {timestamp}/
+│   ├── raw/
+│   │   ├── flows.mitm
+│   │   ├── browse.mov
+│   │   ├── screenshots/
+│   │   └── mission-log.txt
+│   ├── extracted/
+│   │   ├── api.yaml
+│   │   ├── llm-prompts.json
+│   │   ├── components/*.tsx
+│   │   ├── ratings.json
+│   │   └── features.json
+│   └── bundle.zip
+└── deltas/
+    └── {old}_vs_{new}.md</pre>
+
+<h2><span class="num">6.</span>Testing Decisions</h2>
+<div class="box">
+<p><strong>Principle:</strong> test only external behavior of each module — given input X, does it produce output Y? Don't test internal helpers. Don't mock external services; use fixtures instead.</p>
+<p><strong>Tested modules</strong> (both deep):</p>
+<ul>
+<li><strong>Network Capture Exporter</strong> — fixture: a small captured <code>flows.mitm</code> from a safe target (e.g. a public weather API + a known LLM call). Assertion: produced <code>api.yaml</code> matches a golden file; <code>llm-prompts.json</code> contains the expected system prompt.</li>
+<li><strong>Vision Rater</strong> — fixture: 5 screenshots with known ground-truth ratings. Assertion: model output is within ±1 of ground truth on each dimension. Tolerance window because the model is non-deterministic.</li>
+</ul>
+<p><strong>Untested modules</strong> (validated by dry runs, not unit tests):</p>
+<ul>
+<li><strong>Capture Orchestrator</strong> — too many external processes; smoke-tested via the "test on safe target" mode.</li>
+<li><strong>Browser-Use Mission Runner</strong> — stochastic LLM-driven agent. Test by running on a known SaaS target and checking the output folder is non-empty + features.json has expected shape.</li>
+<li><strong>UI Cloner</strong> — wraps external APIs; testing would just test their stubs.</li>
+<li><strong>Delta Engine, Report Bundler</strong> — small, transparent, low-risk.</li>
+</ul>
+<p><strong>Prior art:</strong> none — this is a greenfield project. Steve sets conventions.</p>
+</div>
+
+<h2><span class="num">7.</span>Out of Scope</h2>
+<div class="box box-amber">
+<ul>
+<li><strong>CAPTCHA / anti-bot bypass</strong> — when the agent hits one, log it as a blocker and skip. Dainis handles manually.</li>
+<li><strong>Mobile app recon</strong> — web only for v1. (Cert pinning makes mobile mitmproxy painful.)</li>
+<li><strong>Sites with HTTP cert pinning</strong> — rare on web, but if hit, log as a blocker.</li>
+<li><strong>Real-time alerting</strong> — weekly cron only. No Slack/email push for v1.</li>
+<li><strong>Multi-user / team collaboration</strong> — single-machine, single-operator (Dainis).</li>
+<li><strong>Paid subscription auto-purchase</strong> — Dainis subscribes manually; the system uses his logged-in session.</li>
+<li><strong>Custom dashboards / pretty UIs</strong> — the output is files in folders. If Dainis wants a dashboard later, that's a follow-up project.</li>
+<li><strong>Re-implementing competitor features</strong> — this system <em>captures</em> intel. Building DRT's competing features is Steve's separate work using the artifacts.</li>
+</ul>
+</div>
+
+<h2><span class="num">8.</span>Further Notes</h2>
+<div class="box">
+<ul>
+<li><strong>Browser Use success rate caveat:</strong> the 89.1% benchmark is on general web. AI-companion sites have heavy custom JS, modal flows, and dynamic chat UIs — expect closer to 60-70% one-shot success. Plan for 1-2 reruns per site.</li>
+<li><strong>System prompt extraction depends on architecture.</strong> If a competitor proxies LLM calls through their own backend (most do), mitmproxy catches them. If they call LLM providers client-side, it still catches them. The only miss is if they use an on-prem LLM with no external API call — unlikely at this market stage.</li>
+<li><strong>Source maps are a coin flip.</strong> Some competitors leak them, some don't. Detect-and-extract is a bonus path, not a guaranteed deliverable.</li>
+<li><strong>Cost ceiling:</strong> entirely local stack is $0/run. Adding Gemini API for vision ratings tops out around $10-30 for a full 5-site sweep. Adding v0 / Open-Lovable Pro is ~$20/mo flat.</li>
+<li><strong>Legal note (not a blocker, just awareness):</strong> reverse-engineering for competitive analysis is a normal industry practice, but Dainis should not publish extracted system prompts or cloned components verbatim. Use them as engineering reference, not as shipped code.</li>
+</ul>
+</div>
+
+</body>
+</html>

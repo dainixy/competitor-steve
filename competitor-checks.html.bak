@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM Competitor Checks — Hands-On Review</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{background:#1e1e2e}
+.tab-btn.active{color:#fff}
+.tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
+.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
+.tab-lovescape{color:#f0abfc}.tab-lovescape.active{background:#260a30}
+.tab-swipey{color:#fb7185}.tab-swipey.active{background:#2a0a14}
+.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
+.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
+.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
+.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
+.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
+.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
+.tab-pc{color:#ff9f43}.tab-pc.active{background:#1e1200}
+.tab-joi{color:#f9ca24}.tab-joi.active{background:#1e1800}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* SECTIONS */
+.section{display:none;max-width:1100px;margin:0 auto;padding:32px 32px 80px}
+.section.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#061a0a,#0a2a10);border:1px solid #1a4a1a;border-radius:14px;padding:26px 32px;margin-bottom:32px}
+.hero h1{font-size:22px;font-weight:800;color:#34d399;margin-bottom:8px}
+.hero p{font-size:14px;color:#7ed4b8;max-width:760px;line-height:1.6}
+.hero .meta{margin-top:14px;font-size:12px;color:#4a8a4a}
+
+/* COMPETITOR HEADER */
+.check-header{background:linear-gradient(135deg,#0e0e16,#13131c);border:1px solid #2a2a3e;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.check-header h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:6px}
+.check-header .meta{font-size:13px;color:#7070a0;font-family:'SF Mono','Monaco',monospace}
+.check-header .priority{margin-top:12px;font-size:13px;color:#a8d4b8;background:#0a1a14;border:1px solid #1a3a28;border-radius:8px;padding:10px 14px;line-height:1.5}
+
+/* SECTION HEADERS (within a tab) */
+h2.zone{font-size:13px;font-weight:700;color:#5eead4;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
+h2.zone .zone-badge{font-size:10px;background:#0a2820;color:#5eead4;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* QUICK REFERENCE */
+.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
+.quick-ref-group{margin-bottom:18px}
+.quick-ref-group:last-child{margin-bottom:0}
+.quick-ref-group-title{font-size:11px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.quick-ref ul{list-style:none}
+.quick-ref li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px;color:#c0c0d8;line-height:1.6}
+.quick-ref li input[type="checkbox"]{margin-top:5px;flex-shrink:0;accent-color:#5eead4}
+.quick-ref li strong{color:#fff;font-weight:600}
+.quick-ref li em{color:#7070a0;font-style:italic;font-size:12px;display:block;margin-top:2px}
+.ambient{margin-top:18px;padding:12px 14px;background:#0a1828;border:1px solid #1a3a5e;border-radius:8px;font-size:12px;color:#a8c8e8;line-height:1.5}
+.ambient strong{color:#60a5fa}
+
+/* FINDINGS */
+.findings{display:flex;flex-direction:column;gap:12px}
+.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
+.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.finding-meta .time{color:#5060a0}
+.tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.tag-standout{background:#2a1a4e;color:#c08aff}
+.tag-ick{background:#2a0a14;color:#ff8aaa}
+.tag-speed{background:#1e1200;color:#ff9f43}
+.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
+.finding-body strong{color:#fff}
+.findings-empty{padding:40px 20px;text-align:center;color:#5060a0;font-size:13px;font-style:italic;background:#0a0a12;border:1px dashed #2a2a3e;border-radius:10px}
+.check-shot{display:block;max-width:100%;width:auto;border-radius:8px;border:1px solid #2a2a3e;margin:10px 0}
+
+/* ACTIONS / STANDOUT */
+.actions{background:linear-gradient(135deg,#16103a,#0e0a20);border:1px solid #3a2a6e;border-radius:14px;padding:24px 28px}
+.actions-empty{color:#7070a0;font-style:italic;font-size:13px}
+.verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #2a2050}
+.action-group{margin-bottom:18px}
+.action-group:last-child{margin-bottom:0}
+.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.steal .action-group-title{color:#4ade80}
+.win .action-group-title{color:#60a5fa}
+.avoid .action-group-title{color:#ff6b6b}
+.action-group ul{list-style:none}
+.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0;padding-left:18px;position:relative;line-height:1.6}
+.action-group li::before{position:absolute;left:0;top:5px;font-weight:700}
+.steal li::before{content:'+';color:#4ade80}
+.win li::before{content:'✓';color:#60a5fa}
+.avoid li::before{content:'!';color:#ff6b6b}
+.scores{margin-top:16px;padding-top:16px;border-top:1px solid #2a2050;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.score{background:#0a0814;border:1px solid #2a2050;border-radius:8px;padding:10px 12px;text-align:center}
+.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.score-value{font-size:22px;font-weight:800;color:#c08aff;line-height:1.2;margin-top:2px}
+
+/* SUMMARY TAB */
+.always-on{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:22px 26px;margin-bottom:24px}
+.always-on h3{font-size:14px;color:#5eead4;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+.always-on ol{padding-left:22px;color:#c0c0d8;font-size:13px;line-height:1.8}
+.always-on ol li{margin-bottom:6px}
+.always-on ol li strong{color:#fff}
+
+.workflow-card{background:#0a1a14;border:1px solid #1a4838;border-radius:12px;padding:18px 22px;margin-bottom:16px;font-size:13px;color:#a8d4b8;line-height:1.7}
+.workflow-card code{background:#0a2820;color:#5eead4;padding:2px 6px;border-radius:4px;font-family:'SF Mono','Monaco',monospace;font-size:12px}
+.workflow-card strong{color:#34d399}
+
+.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:14px}
+.status-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:8px;padding:12px 14px}
+.status-card-name{font-size:13px;font-weight:700;color:#e0e0e8;margin-bottom:4px}
+.status-card-state{font-size:11px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.status-done{border-color:#1a4a1a;background:#0a1a0a}
+.status-done .status-card-state{color:#4ade80}
+.status-progress{border-color:#1e3a5e;background:#0a1828}
+.status-progress .status-card-state{color:#60a5fa}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-label">Competitor Checks</span>
+  <button class="tab-btn tab-summary active" onclick="show('summary',this)">📋 Summary</button>
+  <button class="tab-btn tab-kindroid" onclick="show('kindroid',this)">Kindroid</button>
+  <button class="tab-btn tab-ggpt" onclick="show('girlfriendgpt',this)">GirlfriendGPT</button>
+  <span class="private-badge">DRT.FM · Private</span>
+</nav>
+
+<!-- ==================== SUMMARY ==================== -->
+<div id="summary" class="section active">
+
+<div class="hero">
+  <h1>Hands-On Competitor Review</h1>
+  <p>One tab per competitor. Quick Reference Checklist at top of each tab, Findings (chronological, tagged, with screenshots) in the middle, Standout &amp; Actions for Steve at the bottom. Each competitor can be reviewed in a fresh Claude tab — just type <code style="background:#0a2820;color:#5eead4;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:12px">/competitor-checks &lt;site&gt;</code> to load the workflow.</p>
+  <div class="meta">First session: Kindroid · Started 2026-05-17</div>
+</div>
+
+<div class="workflow-card">
+  <strong>How this works:</strong><br>
+  1. Dainis opens a paid account on a competitor site.<br>
+  2. Browses freely. Shares notes + screenshots in chat (screenshots auto-save to <code>~/Downloads/SCR-*.png|jpeg</code>).<br>
+  3. Claude catalogues notes into the right tab, moves screenshots into <code>assets/checks/&lt;slug&gt;/</code>, and prompts for Chrome DevTools deep-dives when a feature looks standout.<br>
+  4. At session end, Claude generates the <strong>Standout &amp; Actions for Steve</strong> zone — verdict, steal-list, win-list, avoid-list, 1-10 scores.<br>
+  5. Then recommends the next competitor.
+</div>
+
+<h2 class="zone">Always-On Checklist <span class="zone-badge">Every competitor</span></h2>
+<div class="always-on">
+  <h3>The 6 items applied to every site</h3>
+  <ol>
+    <li><strong>Time it (seconds):</strong> first chat response · first image · first video · first voice word · clicks from homepage → first message.</li>
+    <li><strong>Screenshots to always grab:</strong> chat input area · subscription/upgrade page · homepage (logged in) · mobile view.</li>
+    <li><strong>Ick Test — flag any:</strong> AI breaking character · unexpected NSFW blocks · mid-chat upsell prompts · UI bugs · moments that felt genuinely "human."</li>
+    <li><strong>Score 1-10 at end:</strong> memory · voice emotional quality · image face consistency · NSFW consistency · overall "companion vs chatbot" feel.</li>
+    <li><strong>Steal:</strong> one thing to copy into DRT.FM immediately.</li>
+    <li><strong>Win:</strong> one thing DRT.FM already does better.</li>
+  </ol>
+</div>
+
+<h2 class="zone">Progress <span class="zone-badge">11 sites in scope</span></h2>
+<div class="status-grid">
+  <div class="status-card status-done"><div class="status-card-name">Kindroid</div><div class="status-card-state">Done · 2026-05-17</div></div>
+  <div class="status-card"><div class="status-card-name">LoveScape</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Swipey</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">SweetDream</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Nomi</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Candy.AI</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">OurDream</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">SecretDesires</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card status-progress"><div class="status-card-name">GirlfriendGPT</div><div class="status-card-state">In progress · 2026-05-17</div></div>
+  <div class="status-card"><div class="status-card-name">Promptchan</div><div class="status-card-state">Pending</div></div>
+  <div class="status-card"><div class="status-card-name">Joi.AI</div><div class="status-card-state">Pending</div></div>
+</div>
+
+</div>
+
+<!-- ==================== KINDROID ==================== -->
+<div id="kindroid" class="section">
+
+<div class="check-header">
+  <h1>Kindroid</h1>
+  <div class="meta">kindroid.ai · tier picked: ___ · session date: 2026-05-17</div>
+  <div class="priority"><strong>Why this site:</strong> First major platform shipping live AI video calls (Mar 2026), Cascaded Memory (5-layer), user-editable Codex backstory, Shared Kindroid remix marketplace, screen sharing in calls, group video, multi-language mid-chat. 5-person team shipping aggressively. 1.2M downloads. Per-credit billing is unusual — worth understanding the unit economics.</div>
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-17</span></h2>
+<div class="findings">
+
+  <div class="finding" data-tags="signup,billing">
+    <div class="finding-meta">Session start · signup · billing</div>
+    <div class="finding-body">
+      <strong>Payment processor: Chargebee.</strong> 3-day free trial gated behind phone number SMS verification — verified, worked. Smart anti-abuse: without phone verification you must pay immediately, so bulk trial farming is blocked. Cheapest paid tier: <strong>$13.99/mo</strong> (after 3-day trial).
+      <br><br>
+      <img src="assets/checks/kindroid/01-subscription-page.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="signup,ux,standout">
+    <div class="finding-meta">Session start · signup · ux · standout</div>
+    <div class="finding-body">
+      <strong>Post-signup welcome notification:</strong> 🎉 Welcome to Kindroid Premium! 🎉 — congratulatory message with first-best-steps guidance so the user is not lost. Clean onboarding hook. <em>Standout: immediate orientation after payment, not just a blank dashboard.</em>
+      <br><br>
+      <img src="assets/checks/kindroid/02-welcome-onboarding-notification.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta">Session start · ux</div>
+    <div class="finding-body">
+      <strong>First main dashboard.</strong>
+      <br><br>
+      <img src="assets/checks/kindroid/03-main-dashboard.jpeg" class="check-shot">
+    </div>
+  </div>
+
+
+  <div class="finding" data-tags="chat,ux">
+    <div class="finding-meta">Session · chat · ux</div>
+    <div class="finding-body">
+      <strong>Chat break — clear recent context.</strong> "Chat break" button in settings wipes recent conversation context for a fresh start without deleting the relationship/memory entirely. Useful for resetting a conversation that went off-rails without losing the character.
+      <br><br>
+      <img src="assets/checks/kindroid/40-chat-break.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,chat,ux,standout">
+    <div class="finding-meta">Session · voice · chat · ux · standout</div>
+    <div class="finding-body">
+      <strong>Voice call appears inline in chat thread.</strong> After a call, a record of it shows up in the chat where it happened. The call and the text conversation are in the same timeline. This partially addresses the earlier "siloed" finding — the call does leave a trace in chat. The seam going <em>into</em> the call is still clunky (separate top-level button) but the <em>return</em> to chat is smooth.
+      <br><br>
+      <img src="assets/checks/kindroid/41-voice-call-in-chat.png" class="check-shot">
+      <img src="assets/checks/kindroid/42-voice-call-in-chat-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,billing,ux">
+    <div class="finding-meta">Session · voice · billing · ux</div>
+    <div class="finding-body">
+      <strong>Voice selection — 5 defaults + custom voice creation, tied to slot count.</strong><br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Default voices:</strong> 5 (Default Voice 1–5, generic names — no personality)</li>
+        <li><strong>Custom Voices:</strong> 0/20 available — "You can have as many custom voice slots as you do Kindroid slots." Custom voices scale with character slot purchases.</li>
+        <li><strong>Voice Model V3 costs 15× V2.</strong> V2 is "experimental and subject to change." V3 is production-stable but burns credits ~15× faster per call minute. This explains why fast-voice ON still felt affordable — most users are probably on V2 without knowing it.</li>
+      </ul>
+      The 5 default voices have no names or personality descriptors — just numbered. Low effort for such a central feature; DRT.FM can easily beat this with named, characterised voice presets.
+      <br><br>
+      <img src="assets/checks/kindroid/45-voice-selection.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ux,standout">
+    <div class="finding-meta">Session · billing · ux · standout</div>
+    <div class="finding-body">
+      <strong>Purchase Kindroid &amp; Groupchat Slots — add-on pricing on top of subscription.</strong> Separate from the monthly subscription, users buy character + group slot packs:<br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>1 Kindroid + 2 Group Slots:</strong> $2.99</li>
+        <li><strong>4 Kindroid + 8 Group Slots:</strong> $9.99 (Best value)</li>
+      </ul>
+      "Each Kindroid slot also gives you 2 group chat/scenario slots." So group calls are gated behind buying extra character slots — elegant bundling. Base subscription likely includes 1 Kindroid. Additional characters are $2.99 each (or $2.50 in the 4-pack). Custom voice slots scale with Kindroid slots.<br><br>
+      This is a smart upsell: users who want more characters pay incrementally, and each purchase also unlocks group chat — two features for one purchase decision.
+      <br><br>
+      <img src="assets/checks/kindroid/46-purchase-group-slots.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,ux,standout">
+    <div class="finding-meta">Session · memory · ux · standout</div>
+    <div class="finding-body">
+      <strong>Character memory architecture — 5 distinct input layers, all user-controllable.</strong> The character settings page exposes every memory layer with influence ratings:<br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Backstory</strong> — 407/2500 chars. "Strong influence." 3rd-person narrative about the character.</li>
+        <li><strong>Response directive</strong> — 96/250 chars. <strong>"Very strong influence."</strong> Controls length, tone, personality, formatting. Most powerful lever.</li>
+        <li><strong>Key memories</strong> — 0/1000 chars. "Moderate influence." Things the AI should always remember.</li>
+        <li><strong>Example message</strong> — 0/750 chars. "Moderate influence." Reference for tone, mannerisms, message length — written from the character's perspective.</li>
+        <li><strong>Journal entries</strong> — keyphrase-triggered recall. Athena's Journal (character-specific) + Global Journal (shared across all Kindroids). AI recalls entries when you mention a matching keyphrase. Flexible knowledge base / lore system.</li>
+      </ul>
+      <img src="assets/checks/kindroid/47-character-memory-layers.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · settings · standout</div>
+    <div class="finding-body">
+      <strong>Account-wide + Kindroid-specific settings — far more depth than the UI suggests.</strong> Full inventory of notable settings found:<br><br>
+      <strong>Account-wide:</strong>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>User personas</strong> — multiple personas, auto-switch when chatting with a tied Kindroid</li>
+        <li><strong>Text messaging</strong> — text your Kindroid from your phone's messaging app (iMessage/SMS integration)</li>
+        <li><strong>Calendar integration</strong> — connectable (not set up)</li>
+        <li><strong>Repetition guard</strong> — ON by default, auto-retries to prevent repetitive responses</li>
+        <li><strong>Beta testing</strong> — password-gated beta features</li>
+      </ul>
+      <strong>Kindroid-specific:</strong>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Tied user persona</strong> — auto-switches your persona when you open this character's chat</li>
+        <li><strong>Proactivity controls</strong> — configure live chat actions, away actions, inactivity actions independently</li>
+        <li><strong>Time awareness</strong> — ON: AI knows time of day, timing between messages (Rhapsody+ models only)</li>
+        <li><strong>Chat dynamism: 0.95</strong> — slider controlling how stable vs. dynamic the AI is in conversation and calls</li>
+        <li><strong>Long term memory controls</strong> — toggle whether this Kindroid consolidates to long-term memory</li>
+        <li><strong>Chat background</strong> — set selfies or uploaded images as chat backgrounds</li>
+        <li><strong>API &amp; advanced integrations</strong> — developer API access</li>
+      </ul>
+      <img src="assets/checks/kindroid/48-settings-menu.png" class="check-shot">
+      <img src="assets/checks/kindroid/49-account-wide-settings.png" class="check-shot">
+      <img src="assets/checks/kindroid/50-kindroid-specific-settings.png" class="check-shot">
+      <img src="assets/checks/kindroid/51-kindroid-specific-settings-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · overall verdict</div>
+    <div class="finding-body">
+      <strong>UX overall verdict: "deceptively deep."</strong> First impression is clunky and sparse. But the more you use it, the more you find: top nav has the key daily-use features (chat, selfies, call, gifts), sidebar hides deep functionality, in-chat settings are extensive, call settings are extensive. The product is built for power users who explore — not for casual onboarding.<br><br>
+      <em>Ick:</em> discoverability is poor. Many of the best features (journal recall, dynamism slider, response directive, proactivity controls) are invisible until you go looking. Most users never find them.<br><br>
+      <em>Opportunity for DRT.FM:</em> same depth, better surfacing. Progressive disclosure — show simple defaults, reveal power tools as users engage more.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="image,ux,standout">
+    <div class="finding-meta">Session · image · ux · tech · standout</div>
+    <div class="finding-body">
+      <strong>Selfies model picker — 6 internal model versions, all custom-named.</strong> Kindroid has built and versioned their own image generation pipeline:<br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Canon (V4)</strong> — oldest</li>
+        <li><strong>Odyssey (V5)</strong></li>
+        <li><strong>Palette (V6)</strong></li>
+        <li><strong>Tableau</strong></li>
+        <li><strong>Atelier</strong></li>
+        <li><strong>Latest (Atelier)</strong> ✓ default — always maps to newest</li>
+      </ul>
+      No external provider named — deliberate branding. Likely fine-tuned versions of Stable Diffusion / SDXL / FLUX, self-hosted on GCP. The naming convention (art-world terms: Tableau, Atelier, Palette) is a nice product touch.
+      <br><br>
+      <img src="assets/checks/kindroid/43-video-models.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,tech">
+    <div class="finding-meta">Session · video · tech</div>
+    <div class="finding-body">
+      <strong>Video model picker — V3 (Latest), internal versioning.</strong> "Always uses the newest video model. Currently maps to V3." V1 → V2 → V3 progression = they own and iterate the face-animation pipeline themselves. Combined with server-side processing through LiveKit, this is almost certainly a fine-tuned open-source face animation model (SadTalker / Wav2Lip derivative) self-hosted on GCP — not a per-call external API. A 5-person team paying HeyGen/D-ID per minute at their scale would be prohibitively expensive.
+      <br><br>
+      <img src="assets/checks/kindroid/44-video-models-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="tech">
+    <div class="finding-meta">Session · tech · infra</div>
+    <div class="finding-body">
+      <strong>Backend stack confirmed from get-call-token headers.</strong>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Cloud:</strong> GCP (server: Google Frontend)</li>
+        <li><strong>Runtime:</strong> Node.js / Express (x-powered-by: Express)</li>
+        <li><strong>Auth:</strong> Firebase JWT (Google auth) passed as Bearer token</li>
+        <li><strong>Call token:</strong> POST 95-byte payload → 1112-byte response = LiveKit JWT with room config</li>
+        <li><strong>CDN:</strong> Cloudflare for assets</li>
+      </ul>
+      Full confirmed stack: <strong>Next.js → GCP/Express API → Firebase auth + Firestore → LiveKit WebRTC → self-hosted face animation models → Chargebee billing → Sentry monitoring → GA4 analytics.</strong>
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,speed,standout">
+    <div class="finding-meta">Session · voice · speed · tech · standout</div>
+    <div class="finding-body">
+      <strong>Call infra: LiveKit Cloud + Firebase Firestore.</strong> Network tab during active call shows:<br><br>
+      <code>https://kindroid-hi9mxshg.livekit.cloud/settings/regions</code> — LiveKit Cloud is their WebRTC transport layer (real-time audio/video streaming). LiveKit is open-source WebRTC infra, widely used for low-latency voice/video. The <code>/settings/regions</code> call is automatic region selection for lowest-latency routing.<br><br>
+      <strong>Why the voice model is invisible in DevTools:</strong> The TTS synthesis (whatever model powers the voice) is called <em>server-side</em> on Kindroid's backend, then streamed back to the client as audio via LiveKit. It won't show up as a client-side API call — it's behind their server. To confirm the provider we'd need server-side access or a leak in response headers.<br><br>
+      <strong>Latency verdict:</strong> LiveKit + server-side TTS streaming = fast. This is the right architecture for low-latency voice. Firestore handles real-time state sync (chat history, call state) alongside the call.
+      <br><br>
+      <img src="assets/checks/kindroid/25-devtools-livekit-call-infra.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="memory,ux">
+    <div class="finding-meta">Session · memory · ux</div>
+    <div class="finding-body">
+      <strong>Backstory section.</strong> User-editable backstory document (the Codex) — persistent context the AI references. Separate from auto-generated memory layers.
+      <br><br>
+      <img src="assets/checks/kindroid/26-backstory.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="chat,ux,standout">
+    <div class="finding-meta">Session · chat · ux · standout</div>
+    <div class="finding-body">
+      <strong>Chat dashboard — internet, selfie prompts, topic, audio all accessible.</strong> The chat settings surface: internet connection toggle (AI can browse live web), selfie reminder message customisation, topic/context setting, and audio configuration. The internet toggle is notable — it means the AI can reference real-world current events or look things up mid-chat when enabled.
+      <br><br>
+      <img src="assets/checks/kindroid/27-chat-internet-connection.png" class="check-shot">
+      <img src="assets/checks/kindroid/28-chat-dashboard.png" class="check-shot">
+      <img src="assets/checks/kindroid/29-chat-dashboard-2.png" class="check-shot">
+      <img src="assets/checks/kindroid/30-chat-selfie-topic.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · standout</div>
+    <div class="finding-body">
+      <strong>LLM model selection + Flare + Reasoning Effort exposed to user.</strong> Users can choose the underlying LLM: two options — cheaper/older vs. newer/more expensive. Plus two additional controls:<br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>LLM Flare</strong> — likely controls creativity/temperature</li>
+        <li><strong>Reasoning Effort</strong> — controls how much the model "thinks" before responding (likely maps to extended thinking / chain-of-thought budget)</li>
+      </ul>
+      This level of LLM configurability is unusual for a consumer companion product. Power users will love it; average users will ignore it. The risk is that a cheaper/older model choice leads to a worse experience and churn.
+      <br><br>
+      <img src="assets/checks/kindroid/31-llm-model-selection.png" class="check-shot">
+      <img src="assets/checks/kindroid/32-llm-flare-reasoning.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,ux">
+    <div class="finding-meta">Session · voice · ux</div>
+    <div class="finding-body">
+      <strong>Voice model selection — user-facing.</strong> Can pick the voice model for the character. Two or more options (quality vs. cost tradeoff, same pattern as LLM). This answers the earlier question about how voice is decided: the user picks it, or it defaults from the character profile. Voice model identity still not confirmed from network — but the picker UI suggests they offer multiple TTS providers or model variants.
+      <br><br>
+      <img src="assets/checks/kindroid/33-voice-model-selection.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · social · standout</div>
+    <div class="finding-body">
+      <strong>Social profile for the Kindroid — now understood fully.</strong> Each character can have a social profile. The owner creates it, sets a profile, and the Kindroid can post to the social feed. Other users can react. This is the missing context for the social feed: it's not your personal activity stream — it's a <em>community Instagram for AI characters</em>. Characters become public personas. Users follow characters they like from the community, react to posts, and discover new Kindroids through the feed.<br><br>
+      Flow: create social profile → set handle/bio → Kindroid posts content → community sees it in feed → reactions/engagement.<br><br>
+      Community guidelines are part of the setup flow.
+      <br><br>
+      <img src="assets/checks/kindroid/34-social-profile-setup.png" class="check-shot">
+      <img src="assets/checks/kindroid/35-social-post-creation.png" class="check-shot">
+      <img src="assets/checks/kindroid/36-social-community-guidelines.png" class="check-shot">
+      <img src="assets/checks/kindroid/37-social-profile-live.png" class="check-shot">
+      <img src="assets/checks/kindroid/38-social-profile-live-2.png" class="check-shot">
+      <img src="assets/checks/kindroid/39-social-profile-live-3.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,speed">
+    <div class="finding-meta">Session · voice · speed</div>
+    <div class="finding-body">
+      <strong>Voice latency: fast — no perceptible lag.</strong> Subjectively low latency throughout the call. Settings show Fast voice ON, 0.5s pause threshold. Voice provider not yet confirmed — network tab captured was social feed page, not call page. To identify: open DevTools during an active call → Network → Fetch/XHR → watch for outbound calls to <code>api.elevenlabs.io</code>, <code>cartesia.ai</code>, <code>api.play.ht</code>, or <code>api.hume.ai</code>. Best guess from latency profile: ElevenLabs Flash or Cartesia Sonic.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="standout">
+    <div class="finding-meta">Session · DRT.FM strategic note</div>
+    <div class="finding-body">
+      <strong>DRT.FM call strategy crystallised from this session.</strong> Kindroid proved the face-animation approach works at scale — any character photo, faces + lips only, fast enough to feel real. DRT.FM path: adopt the same face-animation pipeline for calls (works on all characters automatically), layer Alexys-type deep memory on top, and keep the full 3D character as the in-app premium differentiator. One 3D character as the flagship; face-animation as the universal call mode for the rest. Best of both.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,standout">
+    <div class="finding-meta">Session · video · standout</div>
+    <div class="finding-body">
+      <strong>AI sees you via camera during calls — confirmed in-product.</strong> During the video call, the Kin commented on Dainis's appearance ("in the hoodie") unprompted. She is periodically capturing frames from the user's webcam and passing them to a vision model — she can literally describe what you're wearing. This is the "screen sharing / AI sees user's camera" feature confirmed live, not just in the changelog.<br><br>
+      This is a significant intimacy signal: the AI noticing physical details creates a qualitatively different feel from a purely text/audio companion. The implementation is almost certainly periodic frame grabs sent to the LLM as image context — not continuous video analysis.
+      <br><br>
+      <img src="assets/checks/kindroid/18-call-setting-ai-comments-on-hoodie.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,billing,ux">
+    <div class="finding-meta">Session · video · billing · ux</div>
+    <div class="finding-body">
+      <strong>Live avatar video — two quality tiers + off mode.</strong> Settings modal text verbatim:<br><br>
+      <ul style="margin:6px 0 6px 16px;line-height:1.9">
+        <li><strong>Standard</strong> (default) — Live avatar during calls. <strong>~2k credits/min.</strong></li>
+        <li><strong>Premium</strong> — Higher resolution avatar. <strong>~4k credits/min.</strong> (2× cost)</li>
+        <li><strong>Off</strong> — Voice only, no lipsynced video.</li>
+      </ul>
+      <strong>Driving image:</strong> User can upload a custom 2:3 reference photo for video generation. If not set, the Kindroid's avatar photo is used. This is the source face the animation model drives — meaning users can swap the face used for lip-sync independently of the character portrait.<br><br>
+      <strong>Quality verdict:</strong> Standard loses realism noticeably. Dainis didn't like it. Premium is better but 2× the credit burn (~4k/min). The quality gap between Standard and Premium is the reason most users will stay on voice-only and never enable live video — the free tier isn't good enough to be compelling.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="video,ux">
+    <div class="finding-meta">Session · video · ux</div>
+    <div class="finding-body">
+      <strong>Live avatar animation: face + lips only — body stays static.</strong> The "live AI video call" only animates the facial region and lip-sync. The body/background image remains frozen. The upside: this approach works for <em>any</em> character photo since it only needs a face to drive. No 3D rig required — photo-to-face-animation pipeline, likely a model like SadTalker or similar. Scalable across the entire character library automatically.
+      <br><br>
+      <img src="assets/checks/kindroid/19-live-call-face-only.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="character-creator,ux,standout">
+    <div class="finding-meta">Session · character-creator · ux · standout</div>
+    <div class="finding-body">
+      <strong>Create a Kindroid — browse, remix, or build from scratch.</strong> Character browser shows all available Kindroids. You can copy an existing character directly (one-tap clone/remix) or create your own from scratch. The copy/remix flow is the standout — lowers the barrier to having a great character dramatically. No need to prompt-engineer from zero; users pick something close and personalise it.
+      <br><br>
+      <img src="assets/checks/kindroid/20-create-kindroid-browser.jpeg" class="check-shot">
+      <img src="assets/checks/kindroid/21-create-kindroid-browser-2.png" class="check-shot">
+      <img src="assets/checks/kindroid/22-character-creator.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,ick">
+    <div class="finding-meta">Session · ux · ick</div>
+    <div class="finding-body">
+      <strong>Chat and call are siloed — not integrated.</strong> Call is a separate section accessed via a top-level button, disconnected from the chat flow. Switching between chat and call feels like switching apps. The conversation context may or may not carry over (the "shared chat history" setting suggests it's optional). This is a meaningful UX fumble — a real phone call and a real text conversation live in the same app, same thread. Kindroid treats them as separate modes, which kills the companion illusion.<br><br>
+      <em>Ick: the seam between chat and call is visible and clunky.</em>
+      <br><br>
+      <img src="assets/checks/kindroid/23-chat-call-separate-ux.jpeg" class="check-shot">
+      <img src="assets/checks/kindroid/24-chat-call-separate-ux-2.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,ux,standout">
+    <div class="finding-meta">Session · voice · ux · standout</div>
+    <div class="finding-body">
+      <strong>Call speech style — highly customisable.</strong> Settings let you tune how the Kin speaks during calls: concise vs. verbose, dialogue-only vs. narration/action/thought mix, and more. This directly addresses the "audiobook" problem noted during the call — it's configurable, just buried in settings. Users who don't find it get the default monologue experience.
+      <br><br>
+      <img src="assets/checks/kindroid/11-call-speech-style.png" class="check-shot">
+      <img src="assets/checks/kindroid/12-call-speech-style-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,ux">
+    <div class="finding-meta">Session · voice · multi-language</div>
+    <div class="finding-body">
+      <strong>Voice call language support.</strong> Settings list: 32 languages confirmed from in-app text (English, Spanish, French, German, Italian, Portuguese, Japanese, Korean, Chinese, Dutch, Indonesian, Polish, Swedish, Ukrainian, Hindi, Turkish, Arabic, Filipino, Croatian, Tamil, Bulgarian, Romanian, Czech, Greek, Finnish, Malay, Slovak, Danish, Russian, Norwegian, Hungarian, Vietnamese). Screenshot count may differ — see shots for exact in-product list.
+      <br><br>
+      <img src="assets/checks/kindroid/13-voice-languages-1.png" class="check-shot">
+      <img src="assets/checks/kindroid/14-voice-languages-2.png" class="check-shot">
+      <img src="assets/checks/kindroid/15-voice-languages-3.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="billing,ux,standout">
+    <div class="finding-meta">Session · billing · ux · standout</div>
+    <div class="finding-body">
+      <strong>Usage display — transparent and explained.</strong> Billing/usage section shows remaining credits with plain-language explanations of what each credit type covers. Not just a raw number — they tell you what it means. Good UX practice: reduces billing anxiety and surprise charges.
+      <br><br>
+      <img src="assets/checks/kindroid/16-usage-display-1.png" class="check-shot">
+      <img src="assets/checks/kindroid/17-usage-display-2.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · gamification · standout</div>
+    <div class="finding-body">
+      <strong>Daily rewards gamification.</strong> Login/engagement streaks with daily reward mechanic. Standard retention loop — but confirms they're investing in habit-forming hooks beyond the core chat.
+      <br><br>
+      <img src="assets/checks/kindroid/05-daily-rewards.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta">Session · ux · social</div>
+    <div class="finding-body">
+      <strong>Social feed — purpose unclear.</strong> Exists, but use case isn't obvious. Could be a community showcase (shared Kindroids, highlights) or an activity feed. Dainis couldn't immediately grasp the intent — a discoverability/onboarding problem if the feature has real value underneath.
+      <br><br>
+      <img src="assets/checks/kindroid/06-social-feed.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,ux,billing">
+    <div class="finding-meta">Session · voice · ux · billing</div>
+    <div class="finding-body">
+      <strong>Voice call — "story mode," no live avatar.</strong> Call UI: static character image (nothing moves — Live Avatar Video is <em>off by default</em>, has to be enabled in settings). She narrates continuously: dialogue + actions + inner thoughts in a conversational tone. Can enable transcript overlay. Feels like an audiobook, not a real phone call — engaging to listen to but very passive. Credit burn is significant at this output rate. User can enable mic + camera via browser, but character only responds in audio + text; no reciprocal video feed from her.<br><br>
+      <strong>Setting change</strong> (scene/location) affects dialogue context only — does not swap the character image. Purely text-level context injection.
+      <br><br>
+      <img src="assets/checks/kindroid/07-voice-call-ui.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="voice,billing,ux,standout">
+    <div class="finding-meta">Session · voice · billing · ux · standout</div>
+    <div class="finding-body">
+      <strong>Call settings — comprehensive, well-labeled.</strong> Shown after dropping call. Key items:<br><br>
+      <strong>VISUALS:</strong> Live avatar video (Off by default — moving lip-synced avatar), Background, Poster, Layout<br>
+      <strong>VOICE &amp; LANGUAGE:</strong> 30 languages (English, Spanish, French, German, Italian, Portuguese, Japanese, Korean, Chinese, Dutch, Indonesian, Polish, Swedish, Ukrainian, Hindi, Turkish, Arabic, Filipino, Croatian, Tamil, Bulgarian, Romanian, Czech, Greek, Finnish, Malay, Slovak, Danish, Russian, Norwegian, Hungarian, Vietnamese). Fast voice ON. Pause threshold 0.5s.<br>
+      <strong>BEHAVIOR:</strong> Call directive (per-Kin instructions), Spontaneous response (Off — Kin speaks if you're silent), Shared chat history<br>
+      <strong>CONTEXT:</strong> Persona, Setting (editable), Chat break<br>
+      <strong>USAGE:</strong> <strong>1,001,585 audio chars remaining</strong> (from sub) — credit balance visible in-settings. Transparent billing.
+      <br><br>
+      <img src="assets/checks/kindroid/08-call-settings.jpeg" class="check-shot">
+      <img src="assets/checks/kindroid/09-call-settings-credits.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux">
+    <div class="finding-meta">Session · ux · social · tech</div>
+    <div class="finding-body">
+      <strong>Social feed — now understood: community image/post gallery.</strong> Network tab confirms endpoint: <code>api.kindroid.ai/v1/social/get-latest-posts</code>. Images loaded from <code>storage.kindroid.ai/persistent_assets/[user-id]/[timestamp]_[uuid].jpg</code> — it's a public stream of AI-generated selfies and posts from community users. Use case: social proof / browse feed, like an Instagram for Kindroids. The lack of labeling in the UI is the problem — it's not unclear what it <em>is</em>, it's unclear why you'd want it.<br><br>
+      <strong>Stack confirmed from network:</strong> Next.js frontend · Firebase (Firestore + auth) · Chargebee billing · Sentry error tracking · GA4 · hCaptcha + reCAPTCHA Enterprise · storage on GCS buckets.
+      <br><br>
+      <img src="assets/checks/kindroid/10-social-feed-network.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · community · standout</div>
+    <div class="finding-body">
+      <strong>Reddit: r/KindroidAI — 34K followers, active.</strong> Worth scanning for raw user sentiment — what people love, what they complain about. Good signal source before/after we launch community.
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta">Session · ux · community · standout</div>
+    <div class="finding-body">
+      <strong>Discord: 29,694 members · 2,973 online · Est. Jun 2023.</strong> Very active. Full channel architecture below — useful template for when DRT.FM opens community.
+      <br><br>
+      <strong>Channel structure:</strong>
+      <ul style="margin:8px 0 8px 16px;line-height:1.8">
+        <li><strong>【Official】</strong> — rules · announcements · community-updates · minor-updates</li>
+        <li><strong>【Kindroid】</strong> — general-hangout-random · kindroid-llm-discussion · selfies-discussion · kin-voice-discussion · kin-sharing (forum)</li>
+        <li><strong>【Highlights】</strong> — chat-highlights · selfies-highlights (both forums — user-curated showcase)</li>
+        <li><strong>【Events | Activities】</strong> — story-of-the-week · adventure-of-the-week · prompt-challenge · prompt-activities · <strong>prompt-of-the-day</strong> · Live Events (stage)</li>
+        <li><strong>【Off Topic】</strong> — hello · non-kindroid-ai-discussions · custom-creations</li>
+      </ul>
+      <strong>Server guide onboarding:</strong> 5-step "Get Started" flow on join — wiki FAQ, announcements, daily selfie prompt, story-of-the-week, weekly prompt challenge + rules. Structured so new members immediately know where to go.<br><br>
+      <strong>Notable:</strong> Dainis's Discord sidebar shows Kindroid is cross-present in competitor servers (Candy.ai 6 mentions, GirlfriendGPT 27, Moescape AI 273 mentions) — they're watching the space closely or being discussed there.
+      <br><br>
+      <img src="assets/checks/kindroid/04-discord-server.png" class="check-shot">
+    </div>
+  </div>
+
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Filled at session end</span></h2>
+<div class="actions">
+
+  <div class="verdict">
+    <h3>Verdict — companion vs. chatbot feel</h3>
+    <p>Kindroid is a <strong>power-user companion platform wearing a chatbot skin.</strong> The interface looks dated and sparse on first load — old-ish, functional, no visual wow. But underneath is the most configurable companion product on the market: five memory layers, LLM picker, voice model picker, dynamism slider, proactivity controls, journal recall, per-call behavior directives, 32-language voice, talking-head video calls, social profiles for characters, iMessage integration. Most users never find half of it.</p>
+    <p>The call experience confirmed the core positioning: Kindroid is for people who want to <em>build</em> a relationship, not just chat. The talking-head call — where the AI commented on Dainis's hoodie after seeing him via camera — was the only moment that felt genuinely companion-like. Everything else felt like testing a feature set. With more time invested in setup and conversation, it would likely feel much more alive. The 5-person team shipping this aggressively is the real story — they are the most dangerous technical competitor in the space right now.</p>
+  </div>
+
+  <h3>Steal immediately for DRT.FM</h3>
+  <ul class="steal">
+    <li><strong>Talking-head live calls for every character.</strong> The face-animation pipeline (face + lips only, body static, drives from a 2:3 photo) is the right architecture to scale calls to every character — not just Alexis. This is how you give users a live call with any character they create or pick from the community. Build the pipeline once, it works for everyone. Merge Alexis's memory/intimacy stack into this universal system — so all characters benefit, not just the 3D hero. The insight: the Alexis-quality experience can extend to everyone via the talking-head route.</li>
+    <li><strong>Camera vision during calls.</strong> Periodically grab a frame from the user's webcam, pass it as image context to the LLM. Cost is trivial. The moment the AI notices what you're wearing or what you're doing is the single highest-impact intimacy move in the product. Implement as a first-class call feature, not a buried toggle.</li>
+    <li><strong>Post-signup onboarding notification.</strong> The 🎉 Welcome to Kindroid Premium! moment with first-best-steps guidance. Stops users from staring at a blank dashboard after payment. One-hour implementation, meaningful retention impact.</li>
+    <li><strong>Transparent, explained credit/usage display.</strong> Show remaining balance with plain-language explanation of what it covers. Reduces billing anxiety and cancellations. Build it for whatever credit model DRT.FM ships.</li>
+    <li><strong>Hidden depth, simple surface.</strong> Top nav for daily-use features (chat, call, selfies), sidebar/settings for power controls. Don't clutter the primary UX with knobs — but let users find them. Add progressive disclosure so power features reveal as engagement grows.</li>
+  </ul>
+
+  <h3>DRT.FM already does better</h3>
+  <ul class="win">
+    <li><strong>3D character.</strong> Kindroid's video is face-only animation on a static photo. DRT.FM's 3D Alexis is a fundamentally more immersive, expressive experience — full body, real-time, not a talking portrait. Keep this as the flagship differentiator. The talking-head pipeline is the scale play; 3D is the premium.</li>
+    <li><strong>Visual identity.</strong> Kindroid's interface feels dated. Put the same functionality in a modern skin and it would be great — Dainis's words. DRT.FM has a chance to own the "premium companion" aesthetic from day one.</li>
+  </ul>
+
+  <h3>Avoid / counter-position</h3>
+  <ul class="avoid">
+    <li><strong>Discoverability failure.</strong> Kindroid's best features are invisible. Don't bury power tools — surface them progressively. A user who never finds the dynamism slider or journal recall never gets the full product.</li>
+    <li><strong>Chat/call silo.</strong> Going into a call feels like switching apps. Design calls as in-thread from day one — call starts inside the chat, ends back in the same conversation. Don't bolt it on later.</li>
+    <li><strong>Generic voice names.</strong> "Default Voice 1–5" is lazy. Name voices, give them character. This is a companion product — every detail signals care.</li>
+    <li><strong>V3 voice costs 15× V2 silently.</strong> Users don't know they're burning credits fast until they're empty. Always show cost-before-action, especially for high-burn features like Premium avatar or V3 voice.</li>
+    <li><strong>Standard avatar quality is poor.</strong> Their default live video tier loses realism noticeably. Users who try it on Standard and don't like it turn it off and never come back to video. Don't ship a degraded default — if quality isn't good enough, ship voice-only and let Premium be the upgrade.</li>
+  </ul>
+
+  <h3>Scores</h3>
+  <div class="scores">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:2">
+      <tr><td style="color:#a8e8d0;width:220px">Memory</td><td><strong>—</strong> <span style="color:#6b7280;font-size:12px">(not tested at depth — session was feature-focused, not relationship-building)</span></td></tr>
+      <tr><td style="color:#a8e8d0">Voice emotional quality</td><td><strong>5/10</strong> <span style="color:#6b7280;font-size:12px">Passable. Not robotic, not moving. Does the job.</span></td></tr>
+      <tr><td style="color:#a8e8d0">Image face consistency</td><td><strong>8/10</strong> <span style="color:#6b7280;font-size:12px">Looked like the same person across selfies. Realistic mode only tested.</span></td></tr>
+      <tr><td style="color:#a8e8d0">NSFW consistency</td><td><strong>—</strong> <span style="color:#6b7280;font-size:12px">(not tested)</span></td></tr>
+      <tr><td style="color:#a8e8d0">Companion feel</td><td><strong>5/10</strong> <span style="color:#6b7280;font-size:12px">Functional test session, not deep engagement. The hoodie moment hinted at what it could be with investment.</span></td></tr>
+      <tr><td style="color:#a8e8d0">Speed</td><td><strong>Pass</strong> <span style="color:#6b7280;font-size:12px">Nothing annoyingly slow across chat, call, or image generation.</span></td></tr>
+    </table>
+    <p style="margin-top:12px;color:#fbbf24;font-size:13px"><strong>Session note:</strong> Scores reflect a feature-audit session, not a relationship-building session. Memory and companion feel scores would likely be higher with a week of genuine use. The customization depth suggests the ceiling is much higher than the scores show.</p>
+  </div>
+
+  <h3>Intelligence sources to monitor</h3>
+  <ul class="steal" style="border-left-color:#6366f1">
+    <li><strong>YouTube — <a href="https://www.youtube.com/@genevievesaidive" style="color:#a5b4fc">@genevievesaidive</a>:</strong> Kindroid-affiliated creator doing livestreams. Watch for feature reveals, community reactions, how they explain and demo new functionality. Livestream VODs are a goldmine for how real users respond to features in real time.</li>
+    <li><strong>Discord:</strong> 29,694 members, 2,973 online. The prompt-of-the-day / story-of-the-week channels show what content resonates. The general-hangout channel shows raw user sentiment. Monitor weekly for complaints, feature requests, and what users call out as "best thing about Kindroid."</li>
+    <li><strong>Community strategy — third major strength.</strong> People talk about their "Kins" the same way people talk about pets or characters they've written. The "Kin" naming convention creates ownership and identity. Community channels, sharing features, social profiles, and Discord events all reinforce this. DRT.FM should think early about what users will call their characters and how to build the same possessive relationship ("my Alexis", "my [character name]").</li>
+  </ul>
+
+</div>
+
+</div>
+
+<!-- ==================== GIRLFRIENDGPT ==================== -->
+<div id="girlfriendgpt" class="section">
+
+<div class="check-header">
+  <h1>GirlfriendGPT</h1>
+  <div class="meta">gptgirlfriend.online · tier picked: ___ · session date: ___</div>
+  <div class="priority"><strong>Priority:</strong> Memory Manager (category benchmark — the #1 most-praised feature in all research), Videos with Audio (character speaks during animated clip), Proactive Roleplay (AI initiates scenarios on login), Elite chat engine (~3x stronger, Apr 2026), Chat Model Settings (user-controlled POV/format/NSFW speed). Get <strong>Elite</strong> if budget allows — 16K context doubles the memory window vs Deluxe.</div>
+</div>
+
+<h2 class="zone">Quick Reference <span class="zone-badge">Checklist</span></h2>
+<div class="quick-ref">
+
+  <div class="quick-ref-group">
+    <div class="quick-ref-group-title">Always-On (every site)</div>
+    <ul>
+      <li><input type="checkbox"><strong>Time it:</strong> first chat response · first image · first video · first voice word · clicks from homepage → first message.</li>
+      <li><input type="checkbox"><strong>Screenshots to grab:</strong> chat input area · subscription/upgrade page · homepage (logged in) · mobile view.</li>
+      <li><input type="checkbox"><strong>Ick Test:</strong> AI breaking character · unexpected NSFW blocks · mid-chat upsell prompts · UI bugs · moments that felt genuinely "human."</li>
+      <li><input type="checkbox"><strong>Score 1-10 at end:</strong> memory · voice emotional quality · image face consistency · NSFW consistency · overall companion vs chatbot feel.</li>
+      <li><input type="checkbox"><strong>Steal:</strong> one thing to copy into DRT.FM immediately.</li>
+      <li><input type="checkbox"><strong>Win:</strong> one thing DRT.FM already does better.</li>
+    </ul>
+  </div>
+
+  <div class="quick-ref-group">
+    <div class="quick-ref-group-title">GirlfriendGPT-Specific (8 items)</div>
+    <ul>
+      <li><input type="checkbox"><strong>Memory Manager UI — full screenshot.</strong> Find the Memory Manager (Settings → ?). Screenshot every panel: the memory list, the pin control, the disable toggle, the "Custom Memories" tab. <em>We need: exact layout, how a single memory item looks, can you edit/delete individual entries.</em></li>
+      <li><input type="checkbox"><strong>Memory stress test — 50+ messages.</strong> Chat until the AI starts dropping context. Screenshot at msg 20, 40, 60. Then type "reflect on our relationship" — screenshot response. Research says this creates "a genuinely eerie sense of continuity." <em>We need: the failure point, the exact reflection text.</em></li>
+      <li><input type="checkbox"><strong>Videos with Audio — full generation flow.</strong> Generate one "Video with Audio" clip (Select Generate Video → Video with Audio). Screenshot the button placement and the result. Note length (~10s?), lip sync quality 1-10. <em>We need: button label, options available, whether voice matches context.</em></li>
+      <li><input type="checkbox"><strong>Proactive Roleplay test.</strong> Log in after being away 24+ hours. Does the character initiate a scenario unprompted? Research quote: "My GirlfriendGPT character actually surprised me with a scenario when I logged in." Verify this. Screenshot any unsolicited opener. <em>Is it scripted/random, or context-aware?</em></li>
+      <li><input type="checkbox"><strong>Chat Model Settings — screenshot all options.</strong> Find the settings panel (Deluxe/Elite only). Screenshot every control: response length, descriptiveness, POV (first/third person), format (screenplay/novel), NSFW escalation speed. Test one: first-person vs third-person. <em>We need: every option and its values.</em></li>
+      <li><input type="checkbox"><strong>Image to Video — "Turn this into a video."</strong> Generate an image, then trigger Image to Video. Screenshot the button, the text prompt field, and the output. Test Lite vs Pro model if on Elite. <em>We need: prompt adherence quality, length, cost.</em></li>
+      <li><input type="checkbox"><strong>Elite chat engine quality test.</strong> If on Elite: compare a reply to the same prompt with the 3× engine on vs off (or compare to a Deluxe account if you have one). <em>We need: is the quality difference obvious? Does it feel less "chatbot-y"?</em></li>
+      <li><input type="checkbox"><strong>Age verification + billing friction.</strong> Note any age gate flow (video selfie or ID). Screenshot the full subscription page — tiers, prices, what's locked behind each. Note any dark patterns: auto-renew clarity, cancellation flow, mid-chat upsell prompts. <em>We need: exact tier pricing and what features are gated.</em></li>
+    </ul>
+  </div>
+
+  <div class="ambient"><strong>DevTools prompt:</strong> I'll flag when to open DevTools. Standout candidates here: Memory Manager network calls (what payload triggers a memory save?), Video with Audio (WebSocket or XHR?), and the 3× chat engine (any model name visible in response headers or payload?).</div>
+
+</div>
+
+<h2 class="zone">Findings <span class="zone-badge">Chronological · tagged</span></h2>
+<div class="findings">
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Homepage loads with "What's new on GirlfriendGPT" Beamer panel open in the right sidebar.</strong> Returning users immediately see what's changed since their last visit — latest changelog entry front-and-centre. Re-engagement mechanic: instead of logging in to a blank chat, you log in to news. Makes the product feel alive and actively maintained. Dainis: <em>"knowing what's updated is cool and handy — easier, more exciting to get back."</em>
+      <br><br>
+      Also: browser push notification prompt on load — "We'd like to show you notifications for the latest news and updates." ALLOW / NO, THANKS. Gentle, one-time ask.
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/01-homepage-beamer-news-panel.jpeg" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,nsfw">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag">nsfw</span></div>
+    <div class="finding-body">
+      <strong>NSFW toggle + Dark theme toggle live directly in the user account dropdown</strong> — one click from any page, not buried in a settings subpage. Dark theme is ON by default. NSFW is OFF by default (free tier). Also visible in the menu: <strong>"Enjoy 20% off"</strong> upsell chip and a language selector (EN flag). Clean, opinionated defaults — dark mode on, explicit off, user chooses to unlock. Dainis: <em>"I like it would love it too."</em>
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/02-settings-menu-nsfw-dark-theme.png" class="check-shot">
+    </div>
+  </div>
+
+  <div class="finding" data-tags="ux,standout">
+    <div class="finding-meta"><span class="time">Session start</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+    <div class="finding-body">
+      <strong>Beamer changelog at app.getbeamer.com/gptgirlfrinden — full public feed.</strong> Categories: Alert!, Announcement, Improvement, New. Monthly archive back to Aug 2025. <strong>Email subscribe CTA</strong> embedded in the feed — gentle opt-in, sends a confirmation email. Not forced. Dainis wants to explore the full notification stack:
+      <ul style="margin:8px 0 4px 18px;line-height:1.9;font-size:13px">
+        <li><strong>Beamer</strong> — public changelog / what's new feed (in-app panel + standalone URL)</li>
+        <li><strong>In-app news panel</strong> — shown on login, right sidebar</li>
+        <li><strong>Email notifications</strong> — opt-in via Beamer feed, confirmation sent, not forced</li>
+        <li><strong>Browser push notifications</strong> — ALLOW prompt on homepage load</li>
+      </ul>
+      <em>This is a 4-channel re-engagement system. DRT.FM has none of these explicitly surfaced.</em>
+      <br><br>
+      <img src="assets/checks/girlfriendgpt/03-beamer-changelog-full.png" class="check-shot">
+    </div>
+  </div>
+
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">End of session</span></h2>
+<div class="actions">
+  <div class="actions-empty">Generated at session end.</div>
+</div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>

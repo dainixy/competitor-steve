@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitor Analysis Brief — Steve</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f1117;
+    color: #d4d8e8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 48px 24px;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  header {
+    border-bottom: 1px solid #2a2d3e;
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: #1e2236;
+    color: #6c8aff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #f0f2ff;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    color: #7c82a0;
+    font-size: 15px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #e8eaf6;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e2236;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #a0a8c8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: #c0c6e0;
+  }
+
+  strong {
+    color: #e8eaf6;
+    font-weight: 600;
+  }
+
+  ul, ol {
+    padding-left: 22px;
+    margin-bottom: 16px;
+  }
+
+  li {
+    color: #c0c6e0;
+    margin-bottom: 6px;
+  }
+
+  a {
+    color: #6c8aff;
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+
+  /* callout box */
+  .callout {
+    background: #161b2e;
+    border-left: 3px solid #6c8aff;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .callout p { margin: 0; color: #d4d8e8; }
+
+  .callout.warning { border-left-color: #f0a050; }
+  .callout.warning p { color: #d4d8e8; }
+
+  /* tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 14px;
+  }
+
+  th {
+    background: #1a1f33;
+    color: #8890b0;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #2a2d3e;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e2236;
+    color: #c0c6e0;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:hover td { background: #13172a; }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .badge-done { background: #1a3a2a; color: #4caf82; }
+  .badge-pending { background: #2a2418; color: #c0902a; }
+
+  .strength { color: #4caf82; }
+  .gap { color: #e05858; }
+
+  .step-list {
+    counter-reset: steps;
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+  .step-list li {
+    counter-increment: steps;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+
+  .step-list li::before {
+    content: counter(steps);
+    min-width: 30px;
+    height: 30px;
+    background: #1e2542;
+    color: #6c8aff;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid #1e2236;
+    margin: 48px 0;
+  }
+
+  .north-star {
+    background: linear-gradient(135deg, #161b2e 0%, #1a1230 100%);
+    border: 1px solid #2a2050;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    text-align: center;
+  }
+
+  .north-star p {
+    font-size: 17px;
+    font-style: italic;
+    color: #c8c0f0;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .role-card {
+    background: #161b2e;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .role-card .name {
+    font-weight: 700;
+    color: #e8eaf6;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .role-card .role {
+    font-size: 13px;
+    color: #6c8aff;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .role-card .desc {
+    font-size: 13px;
+    color: #7c82a0;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .layer-card {
+    background: #13172a;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .layer-card h3 {
+    margin-top: 0;
+    color: #6c8aff;
+    border-bottom: 1px solid #1e2236;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .layer-card .question {
+    background: #1a1f33;
+    border-left: 3px solid #4caf82;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 14px;
+    font-style: italic;
+    font-size: 14px;
+    color: #a0c8a8;
+  }
+  .layer-card .question strong { color: #4caf82; }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #1e2236;
+    font-size: 13px;
+    color: #454a63;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">DRT.FM — For Steve</div>
+    <h1>Competitor Analysis Brief</h1>
+    <p class="subtitle">What we're building, why you're doing this, and exactly what to look for — May 2026</p>
+  </header>
+
+  <h2>The Big Picture</h2>
+
+  <p>Right now we're roughly 25% of where our competitors are in terms of feature depth. The goal isn't to copy everything they have — it's to identify the features every serious AI girlfriend user <strong>expects a high-quality platform to have</strong>, ship those, and along the way understand where the market is heading so we're building toward the right future, not just yesterday's standard.</p>
+
+  <p>The competitive landscape has 11 players we need to understand deeply. Dainis has done hands-on reviews of 2 (Kindroid and GirlfriendGPT) and is working through the remaining 9. But the key point: <strong>we both need to experience these products independently</strong> — not just read a summary. Two perspectives, formed separately, then compared. That's how we get the full picture.</p>
+
+  <h2>What We're Building</h2>
+
+  <p>Generalist AI girlfriend platform — competing directly with Candy.AI, GirlfriendGPT, OurDream at their level. Moving away from niche positioning.</p>
+
+  <p><strong>Two things we're building, with different roles:</strong></p>
+
+  <div class="callout">
+    <p><strong>Talking head</strong> — the scaleable experience. The video call layer that works for any character on the platform, including ones users create. Designed to be played with, broken, duplicated. This is the core feature that closes the gap with Kindroid and others.</p>
+  </div>
+
+  <div class="callout" style="border-left-color: #a06cff; margin-top: 12px;">
+    <p><strong>Alexis</strong> — our unique flagship creation. Not scaleable right now, and that doesn't need to change. Alexis is built to be the best: deepest memory, most expressive, most polished. She's Dainis's area to own and refine. The 3D character is what no competitor has — Alexis is how we demonstrate it at its peak.</p>
+  </div>
+
+  <p style="color: #7c82a0; font-size: 14px; margin-top: 8px;">The two aren't in conflict. Talking head is the platform feature users explore freely. Alexis is the proof of what this product can be at its best.</p>
+
+  <h2>Your Role</h2>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="name">Steve</div>
+      <div class="role">DRT.FM — main builder</div>
+      <p class="desc">Owns the platform end to end. Ships features autonomously. Daily updates.</p>
+    </div>
+    <div class="role-card">
+      <div class="name">Dainis</div>
+      <div class="role">Product vision → Marketing</div>
+      <p class="desc">Month 1: working closely with Steve. Long-term goal is to shift to marketing — but not yet. Provides PRDs, high-level direction, jumps in when needed.</p>
+    </div>
+    <div class="role-card">
+      <div class="name">Imari</div>
+      <div class="role">Content + prompts</div>
+      <p class="desc">RunPod, Payload Compact Keyword pages, prompt-related work.</p>
+    </div>
+  </div>
+
+  <p><strong>Month 1 is close collaboration</strong> — Dainis and Steve working together. That's the reality right now. But Steve needs to understand the direction so everything we do now is pointed at it.</p>
+
+  <p><strong>The operating model we're aiming for:</strong> you're clear on 80% of decisions, own the next 10% yourself, and check in only on genuine surprises. Dainis provides the PRD — the high-level destination — but not the specific plan. You figure out how to get there.</p>
+
+  <p>AI-assisted development means we can code, test, and ship to prod 10x–100x faster than before. That's the pace we need.</p>
+
+  <p>Competitor analysis is the foundation for reaching that operating model. The more you understand what we're building and why — the less you need to triple-check anything.</p>
+
+  <h2>The Process</h2>
+
+  <ol class="step-list">
+    <li><div><strong>Dainis reviews first.</strong> Deep hands-on review of each competitor — screenshots, notes, full experience. Done: Kindroid and GirlfriendGPT. Remaining 9 coming.</div></li>
+    <li><div><strong>Dainis shares.</strong> You get access to his notes, the <a href="https://dainixy.github.io/competitor-steve/competitor-checks.html">competitor-checks doc</a>, and the <a href="https://dainixy.github.io/competitor-steve/competitor-analysis-v2.html">feature matrix</a>.</div></li>
+    <li><div><strong>You do your own review.</strong> Same paid account access. Don't just read Dainis's notes — go in yourself and form your own opinion. Especially your technical read.</div></li>
+    <li><div><strong>Both write summaries.</strong> Dainis writes his product read. You write yours. No prescribed format — record and share however works for you.</div></li>
+    <li><div><strong>Alignment session.</strong> Compare notes, agree on what to build first, prototype anything complex.</div></li>
+    <li><div><strong>You build.</strong> Full autonomy, agreed priorities, daily updates.</div></li>
+  </ol>
+
+  <h2>What to Look For</h2>
+
+  <div class="layer-card">
+    <h3>Layer 1 — As a User (30–45 min per competitor)</h3>
+    <p>Experience the product the way a real user would. Don't rush to the dev tools.</p>
+    <ul>
+      <li>Sign up, go through onboarding. How frictionless is it?</li>
+      <li>Start a conversation. Does the character feel like a person?</li>
+      <li>Find the NSFW toggle or unlock. How does it handle the transition?</li>
+      <li>Try image generation. How fast? How consistent is the character appearance?</li>
+      <li>Try voice. How natural? Is there emotional range?</li>
+      <li>Test memory. Does it remember what you said 10 minutes ago? Yesterday?</li>
+      <li>Find the subscription/pricing page. How is it structured?</li>
+      <li>Notice what frustrates you.</li>
+      <li>Notice what surprises you positively.</li>
+    </ul>
+    <div class="question"><strong>The question to answer:</strong> What's the dominant feeling of using this product — and what creates it?</div>
+  </div>
+
+  <div class="layer-card">
+    <h3>Layer 2 — As a Developer (dev tools open)</h3>
+    <p>After forming your user opinion, open DevTools and inspect how it's built.</p>
+    <ul>
+      <li><strong>Network tab:</strong> What API calls happen during chat? Endpoint patterns? Payload structure?</li>
+      <li><strong>Image generation:</strong> How is it triggered? Separate call or streaming? Which service?</li>
+      <li><strong>Voice/audio:</strong> Streaming or chunked? Which TTS provider? What's the latency?</li>
+      <li><strong>Memory:</strong> Anything in network calls that hints at storage or retrieval architecture?</li>
+      <li><strong>Video calls:</strong> WebRTC? WebSockets? Third-party service?</li>
+      <li><strong>Performance:</strong> Time to first chat response. Time to first image. Perceived vs actual speed.</li>
+      <li><strong>Tech stack clues:</strong> Frameworks, CDNs, or services visible in requests or source.</li>
+    </ul>
+    <div class="question"><strong>The question to answer:</strong> How hard would this be to build — and what's the fastest path to something equivalent?</div>
+  </div>
+
+  <h2>The 11 Competitors</h2>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Competitor</th><th>Status</th><th>What to Know</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Kindroid</strong></td>
+        <td><span class="badge badge-done">Dainis done</span></td>
+        <td>Most technically capable competitor. 5-person team shipping fast. Camera vision during calls, 5-layer memory system, talking-head video from photos.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>GirlfriendGPT</strong></td>
+        <td><span class="badge badge-done">Dainis done</span></td>
+        <td>High visual polish, creator economy (359 characters), strong re-engagement notifications.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Candy.AI</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Community characters, Romance Mode in testing, biggest mainstream name in the category.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>OurDream.AI</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>10K+ voices, autonomous story mode, $5K character contests.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>SecretDesires.AI</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>"YouTube of AI companions" vision. Scene-matched video mid-conversation.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>Promptchan</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Image-first approach, "Create Image from Scene" feature.</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>Joi.AI</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Voice-only focus, launched May 2026.</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><strong>Nomi</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><strong>LoveScape</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><strong>Swipey</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td><strong>SweetDream</strong></td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Account Access</h2>
+
+  <p>All premium accounts: <strong>boss@thehumblehackers.com</strong></p>
+  <ul>
+    <li>Kindroid — active</li>
+    <li>GirlfriendGPT — active</li>
+    <li>Remaining 9 — Dainis sets up and shares credentials as he completes each review</li>
+  </ul>
+
+  <div class="callout warning">
+    <p><strong>Don't pay for anything yourself.</strong> If you hit a paywall, flag it — Dainis will sort the account.</p>
+  </div>
+
+  <h2>Why Your Technical Background Changes This</h2>
+
+  <p>Dainis can navigate these products and spot what's working — he's technical enough to do the checks. But he's not a coder. He uses Claude Code now, but he doesn't have years of hands-on development experience like you do.</p>
+
+  <p>A concrete example: Dainis proposed doing competitor research with AI. You explained from experience why that approach wouldn't work and suggested a better path. That saved significant time. That kind of practical judgment is exactly what you bring that Dainis can't replicate.</p>
+
+  <p>Your lens is different. You can see the seams. You can tell when image generation is slow because it's not streaming, or when voice is laggy because there's no pre-buffering. You can spot when "memory" is just prompt injection versus a real retrieval system. You can look at a network tab and estimate how hard something is to replicate.</p>
+
+  <p>When you both review the same product independently — Dainis sees the product experience, you see the technical implementation and feasibility. Together that's the full picture.</p>
+
+  <p><strong>No prescribed format for your notes.</strong> Record and share findings in whatever way works for you.</p>
+
+  <h2>After the Analysis</h2>
+
+  <ol class="step-list">
+    <li><div><strong>Alignment session</strong> — review both sets of notes, agree on top features, factor in your current connectivity and setup constraints.</div></li>
+    <li><div><strong>Prototyping</strong> — quick prototypes for anything complex to de-risk before full build.</div></li>
+    <li><div><strong>Priority list</strong> — ranked, agreed together.</div></li>
+    <li><div><strong>Full autonomy</strong> — you build. Daily updates are enough. Dainis trusts your implementation judgment.</div></li>
+  </ol>
+
+  <div class="north-star">
+    <p>The goal isn't perfect analysis. It's shared understanding — enough that you and Dainis are seeing the same product and the same gaps, and you can ship without constant back-and-forth.</p>
+  </div>
+
+  <footer>
+    DRT.FM — Competitor Analysis Brief — May 2026
+  </footer>
+
+</div>
+</body>
+</html>

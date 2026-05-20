@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM Competitor Deep Analysis — May 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e0e0e8; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #1a0a2e, #2d1b4e); padding: 48px 48px 36px; border-bottom: 1px solid #2a2a3e; }
+  .header h1 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .header p { color: #9090a8; font-size: 14px; }
+  .badge { display: inline-block; background: #3a1020; border: 1px solid #6a2040; color: #ff8aaa; font-size: 11px; padding: 2px 10px; border-radius: 20px; margin-left: 12px; vertical-align: middle; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 48px; }
+
+  h2 { font-size: 17px; font-weight: 700; color: #fff; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid #2a2a3e; letter-spacing: 0.3px; }
+  h3 { font-size: 14px; font-weight: 700; color: #c08aff; margin: 22px 0 10px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+  /* Platform section */
+  .platform { background: #13131c; border: 1px solid #2a2a3e; border-radius: 14px; padding: 28px; margin-bottom: 24px; }
+  .platform-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; }
+  .platform-name { font-size: 20px; font-weight: 800; color: #fff; }
+  .platform-url { font-size: 13px; color: #5a5a7a; }
+  .score-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .score-chip { background: #1e1e2e; border: 1px solid #3a3a5e; border-radius: 8px; padding: 6px 14px; font-size: 12px; }
+  .score-chip span { font-weight: 700; }
+  .score-chip.good span { color: #4ade80; }
+  .score-chip.bad span { color: #ff6b6b; }
+  .score-chip.mid span { color: #facc15; }
+  .score-chip.na span { color: #5a5a7a; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .col-loved { background: #0d1a0d; border: 1px solid #1a3a1a; border-radius: 10px; padding: 16px; }
+  .col-hated { background: #1a0d0d; border: 1px solid #3a1a1a; border-radius: 10px; padding: 16px; }
+  .col-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .col-loved .col-label { color: #4ade80; }
+  .col-hated .col-label { color: #ff6b6b; }
+
+  ul.findings { list-style: none; padding: 0; }
+  ul.findings li { font-size: 13px; color: #c0c0d8; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 8px; }
+  ul.findings li:last-child { border-bottom: none; }
+  ul.findings li::before { content: ''; flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; margin-top: 8px; }
+  .col-loved ul.findings li::before { background: #4ade80; }
+  .col-hated ul.findings li::before { background: #ff6b6b; }
+
+  .quote { font-size: 12px; color: #7070a0; font-style: italic; margin-top: 4px; padding-left: 13px; }
+
+  /* Feature table */
+  .feature-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .feature-table th { background: #16161f; color: #6060a0; text-align: left; padding: 9px 14px; border-bottom: 2px solid #2a2a3e; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .feature-table td { padding: 9px 14px; border-bottom: 1px solid #1a1a26; vertical-align: top; color: #b0b0c8; }
+  .feature-table tr:hover td { background: #16161f; }
+  .feature-table td:first-child { color: #e0e0f0; font-weight: 600; white-space: nowrap; }
+  .good { color: #4ade80; }
+  .bad { color: #ff6b6b; }
+  .mid { color: #facc15; }
+  .na { color: #3a3a5a; }
+  .drt { color: #c08aff; font-weight: 700; }
+
+  /* Verdict */
+  .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .verdict-best, .verdict-worst { border-radius: 10px; padding: 14px 18px; font-size: 13px; }
+  .verdict-best { background: #0d1a0d; border: 1px solid #1a3a1a; }
+  .verdict-worst { background: #1a0d0d; border: 1px solid #3a1a1a; }
+  .verdict-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .verdict-best .verdict-label { color: #4ade80; }
+  .verdict-worst .verdict-label { color: #ff6b6b; }
+  .verdict-text { color: #d0d0e8; }
+
+  /* Cross-platform section */
+  .pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
+  .pattern-card { border-radius: 12px; padding: 20px; }
+  .pattern-card.universal { background: #0a0a18; border: 1px solid #c08aff44; }
+  .pattern-card.killer { background: #1a0808; border: 1px solid #ff4a4a44; }
+  .pattern-card.opportunity { background: #080d14; border: 1px solid #60a5fa44; }
+  .pattern-card.billing { background: #100a00; border: 1px solid #facc1544; }
+  .pattern-number { font-size: 32px; font-weight: 900; margin-bottom: 8px; line-height: 1; }
+  .pattern-card.universal .pattern-number { color: #c08aff; }
+  .pattern-card.killer .pattern-number { color: #ff4a4a; }
+  .pattern-card.opportunity .pattern-number { color: #60a5fa; }
+  .pattern-card.billing .pattern-number { color: #facc15; }
+  .pattern-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .pattern-body { font-size: 13px; color: #8080a0; line-height: 1.7; }
+
+  /* DRT.FM gap analysis */
+  .gap-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .gap-table th { background: #1a1028; color: #9060c8; text-align: left; padding: 10px 16px; border-bottom: 2px solid #3a2a5e; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .gap-table td { padding: 10px 16px; border-bottom: 1px solid #1e1a2a; vertical-align: top; }
+  .gap-table td:first-child { color: #e0e0f0; font-weight: 600; }
+  .status-win { color: #4ade80; font-weight: 700; }
+  .status-gap { color: #ff6b6b; font-weight: 700; }
+  .status-partial { color: #facc15; font-weight: 700; }
+  .status-unknown { color: #5a5a7a; font-weight: 700; }
+
+  /* Priority list */
+  .priority-list { list-style: none; margin-top: 16px; }
+  .priority-list > li { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid #1e1e2a; }
+  .priority-list > li:last-child { border-bottom: none; }
+  .p-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .p1 .p-num { background: #ff4a4a; color: #fff; }
+  .p2 .p-num { background: #facc15; color: #000; }
+  .p3 .p-num { background: #4ade80; color: #000; }
+  .p4 .p-num { background: #60a5fa; color: #000; }
+  .p5 .p-num { background: #c08aff; color: #000; }
+  .p-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .p-why { font-size: 13px; color: #7070a0; margin-bottom: 4px; }
+  .p-evidence { font-size: 12px; color: #5a5a7a; font-style: italic; }
+
+  .private-note { background: #1a1200; border: 1px solid #4a3000; border-radius: 10px; padding: 16px 20px; font-size: 13px; color: #a07030; margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DRT.FM Competitor Deep Analysis <span class="badge">PRIVATE — DO NOT SHARE</span></h1>
+  <p>Real user feedback from Reddit, Trustpilot & reviews across 5 AI companion platforms · May 2026 · Source: user reviews, not marketing copy</p>
+</div>
+
+<div class="container">
+
+  <!-- ===================== PLATFORM BREAKDOWNS ===================== -->
+  <h2>Platform-by-Platform Breakdown</h2>
+
+  <!-- CANDY.AI -->
+  <div class="platform">
+    <div class="platform-header">
+      <span class="platform-name">Candy.AI</span>
+      <span class="platform-url">candy.ai · ~900K active users · Trustpilot 3.7★</span>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><span class="good">BEST</span> Image quality</div>
+      <div class="score-chip"><span class="mid">OK</span> Memory (fails mid-session)</div>
+      <div class="score-chip"><span class="bad">WEAK</span> Voice (3.1/5, robotic)</div>
+      <div class="score-chip"><span class="good">BEST</span> Story Mode + Live Video</div>
+      <div class="score-chip"><span class="bad">WORST</span> Token system resentment</div>
+    </div>
+    <div class="two-col">
+      <div class="col-loved">
+        <div class="col-label">What users love</div>
+        <ul class="findings">
+          <li><div><strong>Story Mode</strong> — pick a scenario (romance, adventure) and the AI generates contextual images that match the narrative as it progresses. Users call this the most distinctive feature on the market.
+            <div class="quote">"It's not just a simple chatbot, there's room to be really creative"</div>
+          </div></li>
+          <li><div><strong>V2 image engine</strong> — "hard to tell if these are AI or real girls." Generates realistic, high-fidelity images. The biggest quality leap from any competitor.
+            <div class="quote">"Highly realistic and visually stunning images"</div>
+          </div></li>
+          <li><div><strong>Live Action video (Dec 2025)</strong> — 120-second animated clips where the companion moves, gestures, and reacts to your message. No competitor has this at this quality.</div></li>
+          <li><div><strong>Character variety</strong> — 100+ characters with distinct personalities and backstories. Each shapes conversation flow differently.
+            <div class="quote">"Each character possesses a distinct personality, preventing conversations [from feeling the same]"</div>
+          </div></li>
+          <li><div><strong>Rapid development pace</strong> — weekly feature additions. Users notice and it builds trust.
+            <div class="quote">"I feel every time I log back to the site, there is something new"</div>
+          </div></li>
+          <li><div><strong>Discord community</strong> — active, staff responds to suggestions within minutes. Users learn prompting techniques. 20% of positive reviews mention this specifically.</div></li>
+        </ul>
+      </div>
+      <div class="col-hated">
+        <div class="col-label">What causes cancellations</div>
+        <ul class="findings">
+          <li><div><strong>Memory failures — #1 complaint (60% of ALL reviews)</strong> — AI forgets plot, character identity, setting mid-conversation. Even 5-star reviewers mention it.
+            <div class="quote">"It's like trying to interact with someone with Alzheimer's"</div>
+          </div></li>
+          <li><div><strong>Token system on top of subscription</strong> — Images cost 2-4 tokens, videos 10-20 tokens, no refund on failures. Some users spend $300/month extra.
+            <div class="quote">"Fake ads, hidden fees...tokens lost in less than half an hour"</div>
+          </div></li>
+          <li><div><strong>NSFW video costs disproportionate</strong> — "Several times more than your monthly subscription" for a single NSFW video generation.</div></li>
+          <li><div><strong>Image prompt inaccuracy</strong> — Wrong colors, wrong clothing, wrong poses. Basic instructions ignored 25% of the time.
+            <div class="quote">"Simple things like a color of a dress are ignored"</div>
+          </div></li>
+          <li><div><strong>Inconsistent censorship on an NSFW platform</strong> — "Wannabe NSFW, but end up failing inconsistent censorship." Immersion killer.</div></li>
+          <li><div><strong>Robotic voice</strong> — Rated 3.1/5 by testers. "Lacks emotional depth." Real-time calls feel hollow.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-best"><div class="verdict-label">Best at</div><div class="verdict-text">Visual quality + Story Mode. The premium image/video experience in the category. If you want your companion to "show up" visually, this is the benchmark.</div></div>
+      <div class="verdict-worst"><div class="verdict-label">Worst at</div><div class="verdict-text">Making users feel they got what they paid for. The subscription is a door fee; the real cost is tokens. Users feel trapped and ripped off mid-month.</div></div>
+    </div>
+  </div>
+
+  <!-- OURDREAM.AI -->
+  <div class="platform">
+    <div class="platform-header">
+      <span class="platform-name">OurDream.AI</span>
+      <span class="platform-url">ourdream.ai · 10M+ users · browser-only</span>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><span class="good">BEST</span> Character builder depth</div>
+      <div class="score-chip"><span class="good">GOOD</span> Roleplay consistency</div>
+      <div class="score-chip"><span class="bad">WORST</span> Voice (flat, emotionless)</div>
+      <div class="score-chip"><span class="mid">OK</span> Image gen (face consistency good, prompts miss)</div>
+      <div class="score-chip"><span class="bad">BAD</span> Pricing confusion</div>
+    </div>
+    <div class="two-col">
+      <div class="col-loved">
+        <div class="col-label">What users love</div>
+        <ul class="findings">
+          <li><div><strong>Deepest character builder in the category</strong> — 100+ occupations, 100+ hobbies, 60+ fetishes, 20+ relationship dynamics. No competitor comes close.
+            <div class="quote">"Impressive depth that rivals premium competitors"</div>
+          </div></li>
+          <li><div><strong>Roleplay consistency</strong> — AI stays fully in character across complex scenarios (boss/employee, trainer, etc.). Characters don't break role randomly.
+            <div class="quote">"Stayed fully in character with engaging dynamics"</div>
+          </div></li>
+          <li><div><strong>Image quality + face consistency</strong> — "Crisp and detailed, realistic lighting." The Vivid Engine maintains consistent character appearance across multiple generations.</div></li>
+          <li><div><strong>Group chat (up to 4 AI characters)</strong> — Unique feature, no competitor has it. Users describe it as "chaotic, entertaining, unlike anything else."</div></li>
+          <li><div><strong>Memory on higher tiers</strong> — Custom instructions and persistent memory across conversations when you pay for it.</div></li>
+          <li><div><strong>Best value/price ratio</strong> — Most features per dollar compared to Candy.ai at comparable tier.</div></li>
+        </ul>
+      </div>
+      <div class="col-hated">
+        <div class="col-label">What causes cancellations</div>
+        <ul class="findings">
+          <li><div><strong>Voice is the worst feature on the platform</strong> — 19 voice options, all "flat and emotionless." Critically: during intimate scenarios voices don't adapt emotionally or show excitement.
+            <div class="quote">"The platform's weakest feature by far"</div>
+          </div></li>
+          <li><div><strong>DreamCoin pricing confusion</strong> — Voice messages: 5-10 coins. Images: 10 coins. Voice calls: 50 coins/minute. Videos: 100-300 coins. On top of $9.99-$19.99/month.
+            <div class="quote">"Constantly calculating actual expenses"</div>
+          </div></li>
+          <li><div><strong>Memory resets on lower tiers</strong> — Lower-tier users re-establish context every session. "Ourdream's memory resets between sessions."</div></li>
+          <li><div><strong>Rapid NSFW escalation</strong> — Even at "medium lust" settings, conversations go explicit quickly. Hard to maintain emotional, non-explicit conversation.</div></li>
+          <li><div><strong>Image prompts don't follow instructions</strong> — "Wrong clothing, wrong anatomy, wrong scene" reported on Trustpilot. Occasional "random elf ears" on generated characters.</div></li>
+          <li><div><strong>Privacy concerns</strong> — Collects all chat data, no mention of encryption in privacy policy.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-best"><div class="verdict-label">Best at</div><div class="verdict-text">Character depth and customization. The builder is genuinely unmatched. Also the only platform with group chat (4 AI characters simultaneously).</div></div>
+      <div class="verdict-worst"><div class="verdict-label">Worst at</div><div class="verdict-text">Voice. The voice doesn't adapt emotionally — which is fatal for an intimate companion platform. Users know immediately it's a robot.</div></div>
+    </div>
+  </div>
+
+  <!-- PROMPTCHAN -->
+  <div class="platform">
+    <div class="platform-header">
+      <span class="platform-name">Promptchan</span>
+      <span class="platform-url">promptchan.com · 20M+ community images</span>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><span class="good">BEST</span> Visual image quality</div>
+      <div class="score-chip"><span class="good">UNIQUE</span> Companion Loop (image+context mid-chat)</div>
+      <div class="score-chip"><span class="bad">BAD</span> Every message costs Gems</div>
+      <div class="score-chip"><span class="bad">BAD</span> No customer support</div>
+      <div class="score-chip"><span class="bad">WORST</span> Charges after cancel</div>
+    </div>
+    <div class="two-col">
+      <div class="col-loved">
+        <div class="col-label">What users love</div>
+        <ul class="findings">
+          <li><div><strong>AI Companion Loop</strong> — The 2026 breakout concept: character remembers context AND generates images mid-conversation that match the narrative AND maintain visual consistency across all generations. No competitor does all three together.</div></li>
+          <li><div><strong>Image quality</strong> — "Stunning." Community gallery of 20M+ images is both social proof and inspiration. Users can browse what's possible before subscribing.</div></li>
+          <li><div><strong>Gems system for onboarding</strong> — Free Gems let users test premium features before committing. Reduces trial-to-paid friction significantly.
+            <div class="quote">"It let me test the features before fully committing, which felt fair and flexible"</div>
+          </div></li>
+          <li><div><strong>Emotional chat depth</strong> — "Personality and emotional depth that felt more real than expected." Chat quality punches above its category.</div></li>
+          <li><div><strong>Style variety</strong> — Anime, realistic, artistic. Widest style range in the category.</div></li>
+        </ul>
+      </div>
+      <div class="col-hated">
+        <div class="col-label">What causes cancellations</div>
+        <ul class="findings">
+          <li><div><strong>Every chat message costs Gems</strong> — Chat is not included in subscription. Each message drains currency.
+            <div class="quote">"The chat is useless: every message costs money, and it drains all the available gems"</div>
+          </div></li>
+          <li><div><strong>Policy violations on normal descriptions</strong> — "Any attempt at describing something in particular results in being accused of policy violations." Severe false positives.</div></li>
+          <li><div><strong>Removed popular features without warning</strong> — Removed the ability to base a character on an uploaded image. Users cite this as the reason they left.</div></li>
+          <li><div><strong>Charges continue after cancellation</strong> — Multiple Trustpilot reports of billing after cancel with no customer support response.</div></li>
+          <li><div><strong>Platform feels technically abandoned</strong> — Crashes, bugs, no customer support. "Looks technically abandoned."</div></li>
+          <li><div><strong>Voice laggy and out of context</strong> — Voice messages don't align with conversation context. Latency issues.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-best"><div class="verdict-label">Best at</div><div class="verdict-text">The Companion Loop concept — images generated inside chat that match the story and character consistently. This is the direction the whole category is moving.</div></div>
+      <div class="verdict-worst"><div class="verdict-label">Worst at</div><div class="verdict-text">Trust and reliability. Charging after cancel + no support + removed features = users leave angry and don't come back. High churn from billing betrayal.</div></div>
+    </div>
+  </div>
+
+  <!-- JOI.AI -->
+  <div class="platform">
+    <div class="platform-header">
+      <span class="platform-name">Joi.AI</span>
+      <span class="platform-url">joi.ai · character catalog model · Trustpilot varies</span>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><span class="good">BEST</span> Personality depth + adaptation</div>
+      <div class="score-chip"><span class="good">GOOD</span> 6 LLM models switchable</div>
+      <div class="score-chip"><span class="na">NONE</span> Voice (literally zero)</div>
+      <div class="score-chip"><span class="bad">BAD</span> Image/video quality (artifacts)</div>
+      <div class="score-chip"><span class="bad">WORST</span> Upsell on every feature</div>
+    </div>
+    <div class="two-col">
+      <div class="col-loved">
+        <div class="col-label">What users love</div>
+        <ul class="findings">
+          <li><div><strong>Personality adaptation</strong> — By session 3, the AI anticipates response patterns and references jokes from previous nights. Deepest personality learning in the category.
+            <div class="quote">"By the third night, the AI was anticipating responses and referencing jokes from the night before"</div>
+          </div></li>
+          <li><div><strong>6 LLM models</strong> — Users can switch the underlying model to match their preferred interaction style. No other platform exposes this.</div></li>
+          <li><div><strong>Fantasy/anime characters</strong> — Elves, orcs, angels. Widest non-realistic character range.</div></li>
+          <li><div><strong>Game-like progression</strong> — Relationship progression mechanics keep users coming back daily.
+            <div class="quote">"The game-like progression keeps people coming back"</div>
+          </div></li>
+          <li><div><strong>Easy character browsing</strong> — Well-organized catalog with search and filtering. Low friction to find a character you like.</div></li>
+        </ul>
+      </div>
+      <div class="col-hated">
+        <div class="col-label">What causes cancellations</div>
+        <ul class="findings">
+          <li><div><strong>Zero voice capability</strong> — Joi.ai has NO voice. None. In a category where voice is the most-desired feature, this is a critical gap.
+            <div class="quote">"No voice generation capability whatsoever"</div>
+          </div></li>
+          <li><div><strong>Premium subscription excludes core features</strong> — Extra characters cost 1,000 Neurons (~$20 each). Image/video galleries locked behind per-unlock paywalls (60-1,000 Neurons). Premium is a door fee.
+            <div class="quote">"Some of the promises about what the subscription includes are misleading"</div>
+          </div></li>
+          <li><div><strong>Constant upselling</strong> — "Tried to rip me off at every opportunity." "Always being requested to pay more."</div></li>
+          <li><div><strong>NSFW rejection despite premium promises</strong> — Characters consistently reject roleplay scenarios. Intimate dialogue breaks immersion.
+            <div class="quote">"Out-of-context flirting feels mechanical rather than authentic"</div>
+          </div></li>
+          <li><div><strong>Image/video quality poor</strong> — AI artifacts, misaligned faces, distorted objects. "Limbs, digits, and even heads appear in unconvincing places."</div></li>
+          <li><div><strong>Non-discreet billing</strong> — Shows as "joi.com" on bank statements. Privacy-sensitive users notice.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-best"><div class="verdict-label">Best at</div><div class="verdict-text">Conversation depth and personality adaptation. The AI learns you over time better than any competitor. Pure chat experience is the strongest in the category.</div></div>
+      <div class="verdict-worst"><div class="verdict-label">Worst at</div><div class="verdict-text">Voice — they simply don't have it. For a product that lives on intimacy, this is disqualifying for a large portion of the market.</div></div>
+    </div>
+  </div>
+
+  <!-- GPTGIRLFRIEND -->
+  <div class="platform">
+    <div class="platform-header">
+      <span class="platform-name">GPTGirlfriend Online</span>
+      <span class="platform-url">gptgirlfriend.online · Trustpilot 2.8★ · Trust score 39/100</span>
+    </div>
+    <div class="score-row">
+      <div class="score-chip"><span class="mid">OK</span> Large character library (25K+)</div>
+      <div class="score-chip"><span class="mid">CLAIMED</span> Voice + image + video in chat</div>
+      <div class="score-chip"><span class="bad">BAD</span> Core features don't work reliably</div>
+      <div class="score-chip"><span class="bad">WORST</span> Lowest trust/legitimacy in category</div>
+    </div>
+    <div class="two-col">
+      <div class="col-loved">
+        <div class="col-label">What users love</div>
+        <ul class="findings">
+          <li><div><strong>25,000+ character library</strong> — Largest raw character count of any platform. Lots to browse.</div></li>
+          <li><div><strong>Creator economy</strong> — Users earn 40% commission when others subscribe to chat with their created character. Unique monetization angle.</div></li>
+          <li><div><strong>All modalities claimed</strong> — Text, in-chat images, voice messages, and video generation all advertised in one place.</div></li>
+        </ul>
+      </div>
+      <div class="col-hated">
+        <div class="col-label">What causes cancellations</div>
+        <ul class="findings">
+          <li><div><strong>Basic functions don't work</strong> — Trustpilot: 100% 1-star ratings from verified users.
+            <div class="quote">"Even basic functions flat out don't work"</div>
+          </div></li>
+          <li><div><strong>Laggy and repetitive</strong> — "Laggy af." Despite different prompts, repeatedly creates exactly the same output.
+            <div class="quote">"Regardless of different prompts it creates exactly the same thing"</div>
+          </div></li>
+          <li><div><strong>Low legitimacy signals</strong> — Trust score 39/100 per security analysis. Registered in Cyprus + Delaware (offshore), which privacy-aware users notice.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">
+      <div class="verdict-best"><div class="verdict-label">Best at</div><div class="verdict-text">Creator economy concept. 40% commission on character subscriptions is genuinely novel and could build a self-sustaining content library.</div></div>
+      <div class="verdict-worst"><div class="verdict-label">Worst at</div><div class="verdict-text">Reliability. The product doesn't work consistently. Lowest-trust platform in the comparison. Not a meaningful competitive threat currently.</div></div>
+    </div>
+  </div>
+
+
+  <!-- ===================== CROSS-PLATFORM SYNTHESIS ===================== -->
+  <h2>Cross-Platform Synthesis — What This Means</h2>
+
+  <h3>Universal Pain Points (Every Platform Fails Here)</h3>
+  <div class="pattern-grid">
+
+    <div class="pattern-card killer">
+      <div class="pattern-number">#1</div>
+      <div class="pattern-title">Memory failures destroy immersion</div>
+      <div class="pattern-body">The single most-mentioned complaint across ALL five platforms. Candy: "like Alzheimer's" (60% of all reviews). OurDream: resets between sessions on lower tiers. Joi: limits on free plan. Promptchan: context lost across sessions.<br><br><strong>This is the biggest unmet need in the entire category.</strong> Any platform that solves persistent, reliable memory — and makes it visible to the user — owns a massive retention advantage.</div>
+    </div>
+
+    <div class="pattern-card billing">
+      <div class="pattern-number">#2</div>
+      <div class="pattern-title">Token/coin systems cause rage-cancels</div>
+      <div class="pattern-body">Every single platform layers a secondary currency on top of subscription. Every single platform generates resentment for it. Candy ($300/month extra), OurDream (50 coins/minute for voice calls), Joi ($20 per extra character), Promptchan (gems per message).<br><br>Users don't hate paying — they hate <em>not knowing what they're paying for</em>. "Constantly calculating actual expenses" is the exact quote. Flat pricing with clear limits wins trust.</div>
+    </div>
+
+    <div class="pattern-card killer">
+      <div class="pattern-number">#3</div>
+      <div class="pattern-title">Voice is the most-wanted, least-delivered feature</div>
+      <div class="pattern-body">Joi has zero voice. OurDream's is "flat and emotionless, doesn't adapt during intimate scenes." Candy's is rated 3.1/5 "robotic." Promptchan's lags and doesn't match context.<br><br>Users don't care about TTS — they want voice that <em>reacts</em>. That speeds up, gets breathy, laughs. This is the emotional core of the product and nobody has solved it.</div>
+    </div>
+
+    <div class="pattern-card killer">
+      <div class="pattern-number">#4</div>
+      <div class="pattern-title">NSFW censorship on NSFW platforms</div>
+      <div class="pattern-body">Candy, OurDream, Joi, Promptchan all have inconsistent content moderation that randomly blocks explicitly adult conversations on platforms marketed as uncensored.<br><br>"Wannabe NSFW, but failing." "Characters reject roleplay despite premium promises." This breaks trust immediately. Users subscribed specifically for this — getting blocked mid-scene is an immediate cancellation trigger.</div>
+    </div>
+
+  </div>
+
+  <h3>Table Stakes — Every Serious Competitor Has These</h3>
+  <table class="feature-table" style="margin-top:12px;">
+    <thead>
+      <tr><th>Feature</th><th>Why it's required</th><th>Who does it best</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>In-chat image generation</td><td>Users want the character to "show up" visually during conversation, not just text</td><td>Candy.ai (Story Mode) / Promptchan (Companion Loop)</td></tr>
+      <tr><td>Voice/TTS</td><td>Intimacy without voice feels hollow. Even bad voice beats no voice.</td><td>Candy.ai (best of a weak field)</td></tr>
+      <tr><td>Persistent memory across sessions</td><td>Without it, every session starts over. No relationship forms.</td><td>Joi.ai (personality), Candy.ai (facts)</td></tr>
+      <tr><td>Subscription includes unlimited text chat</td><td>Per-message costs kill engagement. Chat must feel "free" once subscribed.</td><td>Candy.ai (unlimited text on subscription)</td></tr>
+      <tr><td>Consistent NSFW without random blocks</td><td>The entire value prop for this market segment. Inconsistency = immediate churn.</td><td>OurDream.ai (most consistent, still imperfect)</td></tr>
+    </tbody>
+  </table>
+
+
+  <!-- ===================== DRT.FM GAP ANALYSIS ===================== -->
+  <h2>DRT.FM Gap Analysis vs Competitors</h2>
+  <table class="gap-table">
+    <thead>
+      <tr><th>Feature</th><th>DRT.FM Status</th><th>Competitive Gap / Opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3D animated character</td>
+        <td><span class="status-win">UNIQUE ADVANTAGE</span></td>
+        <td>Zero competitors have this. It is not being marketed. The homepage should lead with a live 3D demo — it's the only genuine differentiator in the category.</td>
+      </tr>
+      <tr>
+        <td>Voice quality (Hume AI)</td>
+        <td><span class="status-win">LIKELY BEST IN CLASS</span></td>
+        <td>Hume AI produces emotionally adaptive voice. Competitors use flat TTS. If Hume adapts to emotional context, this is a category-defining advantage. Needs to be front and center.</td>
+      </tr>
+      <tr>
+        <td>Persistent memory (semantic_memories)</td>
+        <td><span class="status-unknown">EXISTS — UX UNKNOWN</span></td>
+        <td>Memory is in MongoDB but is it visible to users? Do they know it's there? Joi.ai wins on <em>perceived</em> memory even if technically inferior. Make memory visible — show users "Alexis remembers 7 things about you."</td>
+      </tr>
+      <tr>
+        <td>In-chat image generation</td>
+        <td><span class="status-partial">PARTIAL — NOT INLINE</span></td>
+        <td>Image gen exists (Replicate + RunPod) but unclear if it triggers mid-conversation narratively. Promptchan's Companion Loop and Candy's Story Mode are the benchmark — images should appear inside chat flow, matching the scene.</td>
+      </tr>
+      <tr>
+        <td>Video generation</td>
+        <td><span class="status-partial">EXISTS — NOT USER-FACING</span></td>
+        <td>RunPod infra exists. Candy's Live Action video is the 2026 headline feature. Making this user-accessible (even a simple "ask Alexis for a video" button) would match the market leader.</td>
+      </tr>
+      <tr>
+        <td>Consistent NSFW without random blocks</td>
+        <td><span class="status-unknown">UNKNOWN</span></td>
+        <td>The #4 universal pain point. If DRT.FM has more consistent NSFW execution than competitors, this should be explicitly marketed. "No random blocks" is a genuine selling point in this market.</td>
+      </tr>
+      <tr>
+        <td>Billing model (credits)</td>
+        <td><span class="status-partial">DOUBLE CURRENCY EXISTS</span></td>
+        <td>messageCredits + genCredits = same structure users hate everywhere. Risk of "constantly calculating expenses" resentment. Consider: unlimited text chat included in subscription, only generation (images/video) costs credits. Or a clear visible credit balance with predictable costs.</td>
+      </tr>
+      <tr>
+        <td>Character customization / builder</td>
+        <td><span class="status-gap">GAP — ONE CHARACTER</span></td>
+        <td>4 of 5 competitors let users build characters. DRT.FM has one (Alexis). This can be a brand strength (focused, premium, one iconic character) — but needs a deliberate decision, not an accident.</td>
+      </tr>
+      <tr>
+        <td>Face consistency across image gens</td>
+        <td><span class="status-unknown">UNKNOWN</span></td>
+        <td>OurDream's Vivid Engine and Promptchan both market face consistency as a named feature. Users notice when generated images look like a different person. LoRA/character embedding needed.</td>
+      </tr>
+      <tr>
+        <td>Rapid development visibility</td>
+        <td><span class="status-unknown">UNKNOWN</span></td>
+        <td>Candy.ai users specifically cite "something new every login" as a retention factor. A changelog, "what's new" banner, or release notes visible to users builds trust and reduces churn.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ===================== STEVE'S PRIORITY LIST ===================== -->
+  <h2>Feature Priority List for Steve (Awaiting Your Approval)</h2>
+  <ul class="priority-list">
+    <li class="p1">
+      <div class="p-num">1</div>
+      <div>
+        <div class="p-title">Make memory visible to users</div>
+        <div class="p-why">semantic_memories exists in MongoDB. Users don't know. Add a UI surface: "Alexis remembers X things about you" — show 3-5 facts she knows. This single change transforms the product from "AI chat" to "relationship." Joi.ai wins on this perception alone despite potentially inferior implementation.</div>
+        <div class="p-evidence">Evidence: Memory failure is the #1 complaint across ALL 5 competitors (60% of Candy reviews). The platform that makes memory feel reliable and visible wins retention.</div>
+      </div>
+    </li>
+    <li class="p2">
+      <div class="p-num">2</div>
+      <div>
+        <div class="p-title">Inline image generation during chat (Companion Loop concept)</div>
+        <div class="p-why">When the scene in chat matches a visual moment, Alexis sends a photo of herself matching the scene. RunPod + Replicate infra exists. This is wiring, not new capability. Promptchan calls it "Companion Loop" — it's the most praised 2026 feature in the category.</div>
+        <div class="p-evidence">Evidence: In-chat images are the #1 differentiator between platforms users call "immersive" vs "just a chatbot." Story Mode (Candy) and Companion Loop (Promptchan) are cited in nearly every positive review.</div>
+      </div>
+    </li>
+    <li class="p3">
+      <div class="p-num">3</div>
+      <div>
+        <div class="p-title">Lead the homepage with the 3D demo</div>
+        <div class="p-why">Zero competitors have 3D. This is DRT.FM's only truly uncontested advantage and it may not be visible in the first 5 seconds of the site. The hero should be a live or video demo of Alexis in 3D — not copy. Visitors who see 3D and then see that no competitor has it will convert.</div>
+        <div class="p-evidence">Evidence: No competitor feature matrix — 0 of 5 platforms have 3D. This is invisible in current marketing.</div>
+      </div>
+    </li>
+    <li class="p4">
+      <div class="p-num">4</div>
+      <div>
+        <div class="p-title">User-triggered video generation</div>
+        <div class="p-why">Candy's "Live Action video" (120-sec clips of companion moving and reacting) is the 2026 headline feature that users cite most in new subscriptions. RunPod video gen exists on DRT.FM. Even a simple user-facing button — "Ask Alexis for a video" — puts DRT.FM on par with the market leader.</div>
+        <div class="p-evidence">Evidence: Candy's Live Action video launched Dec 2025 and is now cited in 30%+ of positive Candy reviews as the reason they subscribed or stayed.</div>
+      </div>
+    </li>
+    <li class="p5">
+      <div class="p-num">5</div>
+      <div>
+        <div class="p-title">Fix the billing model perception</div>
+        <div class="p-why">messageCredits + genCredits is the same double-currency structure users call a "trap" on every competitor. Consider: unlimited text chat included in subscription, only image/video generation costs credits. Make the credit balance visible and costs predictable before users spend. "You have 45 image credits" is better than vague tokens.</div>
+        <div class="p-evidence">Evidence: Token/coin resentment is the #2 universal complaint and the #1 cancellation driver after memory failures. It's the easiest trust win that requires no new feature development.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="private-note">
+    ⚠️ This is an internal reference document only. Steve will conduct his own independent paid-account analysis of these same platforms. Do not share this doc with him — his findings should be independent. Use this to validate or challenge his conclusions when he delivers his report.
+  </div>
+
+</div>
+</body>
+</html>

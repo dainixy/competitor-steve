@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitor Discovery Prompt — AI Girlfriend Category</title>
+<style>
+  :root {
+    --bg: #0d0d14;
+    --panel: #16161f;
+    --panel-2: #1c1c28;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #9090a8;
+    --text-faint: #6a6a80;
+    --accent: #c08aff;
+    --accent-2: #7a9aff;
+    --warn: #ff6b6b;
+    --ok: #6ad48d;
+    --kimi: #ff9d4d;
+    --grok: #4dd2ff;
+    --opus: #c08aff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 24px 80px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.4px;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .how-to {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .how-to h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dim);
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  .how-to ol { margin: 0; padding-left: 20px; color: var(--text); }
+  .how-to li { margin-bottom: 4px; }
+  .how-to code {
+    background: var(--panel-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--accent-2);
+  }
+  .block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .block-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tool-badge {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .badge-kimi { background: rgba(255, 157, 77, 0.15); color: var(--kimi); }
+  .badge-grok { background: rgba(77, 210, 255, 0.15); color: var(--grok); }
+  .badge-opus { background: rgba(192, 138, 255, 0.15); color: var(--opus); }
+  .block-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .block-sub {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+  .copy-btn {
+    background: var(--accent);
+    color: #16161f;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .copy-btn:hover { background: #d4a5ff; }
+  .copy-btn.copied { background: var(--ok); }
+  .prompt-text {
+    white-space: pre-wrap;
+    padding: 18px 22px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .prompt-text::-webkit-scrollbar { width: 8px; }
+  .prompt-text::-webkit-scrollbar-track { background: var(--panel-2); }
+  .prompt-text::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .opus-note {
+    padding: 12px 20px;
+    background: rgba(192, 138, 255, 0.08);
+    border-top: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .section-divider {
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<h1>Competitor Discovery Prompt — AI Girlfriend Category</h1>
+<div class="subtitle">For Kimi Deep Research, Grok, and Claude Opus. Purpose: find competitors missing from <code style="background:#1c1c28;padding:1px 6px;border-radius:4px;color:#7a9aff">competitor-analysis-v2.html</code>.</div>
+
+<div class="how-to">
+  <h2>How to use</h2>
+  <ol>
+    <li>Copy the <strong>Kimi</strong> block → paste into Kimi Deep Research. Wait for output.</li>
+    <li>Copy the <strong>Grok</strong> block → paste into Grok. Run in parallel with Kimi.</li>
+    <li>Once both finish, copy the <strong>Opus</strong> block → paste into Claude Opus, then paste Kimi's output and Grok's output where indicated.</li>
+    <li>Manually verify (Dainis Checks) the Opus output's verification queue before adding anything to v2.</li>
+  </ol>
+</div>
+
+<div class="section-divider">Step 1 &amp; 2 — Run in Parallel</div>
+
+<!-- KIMI BLOCK -->
+<div class="block">
+  <div class="block-header">
+    <div class="block-title">
+      <span class="tool-badge badge-kimi">Kimi</span>
+      <div>
+        <div class="block-name">Kimi Deep Research</div>
+        <div class="block-sub">Press, Reddit, YouTube, changelog sweep · forces freshness check</div>
+      </div>
+    </div>
+    <button class="copy-btn" onclick="copyBlock('kimi-prompt', this)">Copy</button>
+  </div>
+  <div class="prompt-text" id="kimi-prompt">You are doing competitor discovery for an AI girlfriend product. Today's date is May 17, 2026. I have already deeply analyzed 6 incumbents. Your job is to find what I am missing — recent fast-growers and innovators — not to re-analyze what I already know.
+
+WHAT I ALREADY HAVE (do NOT re-research these)
+Existing v2 matrix covers: Candy.AI, OurDream.AI, SecretDesires.AI, GirlfriendGPT, Promptchan, Joi.AI.
+
+HARD EXCLUSIONS (do NOT include — different research track)
+- Replika and Oshikoi.io — reserved for a separate flagship-product research track. Skip them entirely.
+- Any SFW-only / wellness / therapy positioning (e.g., Pi, Woebot) — different category.
+- Any B2B chatbot platform — different category.
+- Any product shut down, region-locked outside English markets, or only available in non-English regions.
+
+YOUR JOB
+Find the AI girlfriend competitors that should be added to my v2 analysis because they are either (a) where users are actually going right now, or (b) shipping innovation the incumbents are about to copy. Then return them in the exact output format below.
+
+SELECTION CRITERIA — must hit at least 2 of 3
+1. Traffic / audience momentum. Either large absolute traffic OR meaningful growth in the last 6 months. Triangulate from:
+   - Press mentions (TechCrunch, The Verge, Wired, Decoder, etc.)
+   - Reddit thread volume and upvotes (r/AICompanions, r/CharacterAI_NSFW, r/AIGirlfriend, etc.)
+   - YouTube review video view counts and recency
+   - X/Twitter mentions and creator buzz
+   - Public traffic claims from the company itself (PR / pitch decks / "we hit X users" announcements)
+   - SimilarWeb snippets if they appear in search results
+   There is no clean SimilarWeb-equivalent API for you. Triangulate. Cite every source.
+2. Recent innovation. Shipped a notable feature in the last 6-12 months that is NOT already a row on my v2 matrix (columns listed below). Anything outside those columns is potentially "net new" and should be flagged.
+3. NSFW-capable subscription product. Matches the shape of our product. NSFW must be a real, working capability — not "coming soon" or jailbreak.
+
+SCOPE — narrow main list + active carve-out
+- Main shortlist: subscription-based AI girlfriend products (same product shape as the incumbents).
+- Active carve-out — "Adoptable Patterns from Character-Roleplay Platforms": Separately look at character-card roleplay platforms (Janitor.ai, Chub.ai, SpicyChat, and similar). Do NOT put them on the main shortlist — their business model is different (free / BYO-API, user-generated marketplaces). But these platforms have huge audiences and ship UX patterns that subscription sites are starting to adopt or could profitably adopt (character cards, lorebooks, persona swapping, open-source model integration, group chats, etc.). I want to know what patterns from this world a subscription product like ours should consider importing. Janitor's open-source / clonable model is exactly the kind of thing I want surfaced.
+
+OUTPUT FORMAT
+
+1. Main Shortlist — up to 5 new competitors. Cap at 5; if you find more, rank and cut. For each, fill in this table mirroring my v2 matrix columns:
+
+| Feature | Site Name |
+|---|---|
+| Video generation (user-facing) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Voice calls (emotional) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Images auto-generated in chat | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Auto-memory (builds invisibly) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Memory visible to user | ✓ / ✗ / ~ + 1-line annotation + URL |
+| 3D animated character | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Named video engines + flat pricing | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Character creator / community | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Romance/progression mechanic | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Gift-giving mechanic | ✓ / ✗ / ~ + 1-line annotation + URL |
+| User sends images to character | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Age verification compliance | ✓ / ✗ / ~ + 1-line annotation + URL |
+| NSFW sound in video | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Content private by default | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Multi-language chat | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Dainis Checks | (leave empty — Dainis fills manually) |
+
+Plus per site:
+- Why included (which 2-of-3 criteria it hits, with evidence)
+- Traffic / momentum evidence (cite all sources used to triangulate)
+- Net-new features — anything this site does that is NOT a row on the v2 matrix above. This is the most valuable part of your answer. If 3 sites all do the same net-new thing, that's a candidate new row on my matrix.
+- Freshness flag — for any claim, if the source page is older than 6 months or you can't confirm it currently exists, mark it ⚠ STALE with explanation. Do not fill in from training data without a current URL.
+
+2. Honorable Mentions — up to 5 more. Sites that were close but didn't make the cut. One paragraph each explaining why included, why not in top 5. Same Dainis-Checks-friendly format (URL-cited claims).
+
+3. Adoptable Patterns from Character-Roleplay Platforms. Separate section. 2-5 specific patterns from Janitor.ai / Chub.ai / SpicyChat / similar that a subscription product like ours could adopt. For each: pattern name, where it lives (which site, with URL), why it works there, how it would translate to a subscription product. Janitor's open-source / clonable model is one candidate — find the others.
+
+STYLE REQUIREMENTS
+- Every claim needs a URL. Changelog page, pricing page, feature page, press article, Reddit thread, X post. No URL = don't include the claim.
+- No screenshots. URLs are sufficient.
+- Today is May 17, 2026. If your training data is older, say so. Filter sources by date. Anything you can't verify against a post-November 2025 source must be marked ⚠ STALE.
+- You are producing leads for manual verification, not truth claims. Dainis will check every site before adding to v2. Optimize for "did I surface the right candidates with enough evidence to verify quickly," not "did I write a polished report."
+- Do not pad. If you only find 3 sites that meet criteria, return 3. Five honorable mentions is a cap, not a floor.
+
+EXAMPLE ROWS FROM V2 (so you see the shape and tone)
+
+Candy.AI (existing — for reference only):
+| Video generation (user-facing) | ✓ "Live Action Video" Feb 2026 — https://candy.ai/... |
+| Voice calls (emotional) | ✓ standard quality — https://candy.ai/... |
+| Images auto-generated in chat | ✓ Story Mode — https://candy.ai/blog/story-mode |
+| Auto-memory (builds invisibly) | ~ testing — https://candy.ai/changelog |
+| 3D animated character | ✗ |
+| Named video engines + flat pricing | ✓ — https://candy.ai/pricing |
+| Character creator / community | ✓ — https://candy.ai/community |
+
+SecretDesires.AI (existing — for reference only):
+| Video generation (user-facing) | ✓ "Inferno" Apr 2026 — https://secretdesires.ai/inferno |
+| NSFW sound in video | ✓ Inferno — https://secretdesires.ai/inferno |
+| Named video engines + flat pricing | ✓ Inferno flat pricing — https://secretdesires.ai/pricing |
+| Memory visible to user | ~ partial — https://secretdesires.ai/... |
+| 3D animated character | ✗ |
+
+That's the level of brevity per cell. One-line annotation + URL. Nothing more.
+
+KIMI-SPECIFIC INSTRUCTION
+Today is May 17, 2026. Your training data may be 3-6 months stale on this category, which moves fast. Do not rely on training data. For every site you surface and every feature you claim:
+- The URL must resolve, and the page content must be from the last 6 months. Prefer changelog pages, recent press, recent Reddit threads, recent YouTube reviews.
+- If you can only find a source older than 6 months, mark the claim ⚠ STALE with the source date.
+- Prioritize multi-step web search across press (TechCrunch, The Verge, Decoder), Reddit (r/AICompanions, r/AIGirlfriend, NSFW-specific subs), YouTube reviews, and product changelog pages.
+- Specifically check product launch announcements from the last 6 months — that's where the fast-growers will surface.</div>
+</div>
+
+<!-- GROK BLOCK -->
+<div class="block">
+  <div class="block-header">
+    <div class="block-title">
+      <span class="tool-badge badge-grok">Grok</span>
+      <div>
+        <div class="block-name">Grok</div>
+        <div class="block-sub">Real-time X/Twitter sweep · trending sites, creator buzz</div>
+      </div>
+    </div>
+    <button class="copy-btn" onclick="copyBlock('grok-prompt', this)">Copy</button>
+  </div>
+  <div class="prompt-text" id="grok-prompt">You are doing competitor discovery for an AI girlfriend product. Today's date is May 17, 2026. I have already deeply analyzed 6 incumbents. Your job is to find what I am missing — recent fast-growers and innovators — not to re-analyze what I already know.
+
+WHAT I ALREADY HAVE (do NOT re-research these)
+Existing v2 matrix covers: Candy.AI, OurDream.AI, SecretDesires.AI, GirlfriendGPT, Promptchan, Joi.AI.
+
+HARD EXCLUSIONS (do NOT include — different research track)
+- Replika and Oshikoi.io — reserved for a separate flagship-product research track. Skip them entirely.
+- Any SFW-only / wellness / therapy positioning (e.g., Pi, Woebot) — different category.
+- Any B2B chatbot platform — different category.
+- Any product shut down, region-locked outside English markets, or only available in non-English regions.
+
+YOUR JOB
+Find the AI girlfriend competitors that should be added to my v2 analysis because they are either (a) where users are actually going right now, or (b) shipping innovation the incumbents are about to copy. Then return them in the exact output format below.
+
+SELECTION CRITERIA — must hit at least 2 of 3
+1. Traffic / audience momentum. Either large absolute traffic OR meaningful growth in the last 6 months. Triangulate from:
+   - Press mentions (TechCrunch, The Verge, Wired, Decoder, etc.)
+   - Reddit thread volume and upvotes (r/AICompanions, r/CharacterAI_NSFW, r/AIGirlfriend, etc.)
+   - YouTube review video view counts and recency
+   - X/Twitter mentions and creator buzz
+   - Public traffic claims from the company itself (PR / pitch decks / "we hit X users" announcements)
+   - SimilarWeb snippets if they appear in search results
+   There is no clean SimilarWeb-equivalent API for you. Triangulate. Cite every source.
+2. Recent innovation. Shipped a notable feature in the last 6-12 months that is NOT already a row on my v2 matrix (columns listed below). Anything outside those columns is potentially "net new" and should be flagged.
+3. NSFW-capable subscription product. Matches the shape of our product. NSFW must be a real, working capability — not "coming soon" or jailbreak.
+
+SCOPE — narrow main list + active carve-out
+- Main shortlist: subscription-based AI girlfriend products (same product shape as the incumbents).
+- Active carve-out — "Adoptable Patterns from Character-Roleplay Platforms": Separately look at character-card roleplay platforms (Janitor.ai, Chub.ai, SpicyChat, and similar). Do NOT put them on the main shortlist — their business model is different (free / BYO-API, user-generated marketplaces). But these platforms have huge audiences and ship UX patterns that subscription sites are starting to adopt or could profitably adopt (character cards, lorebooks, persona swapping, open-source model integration, group chats, etc.). I want to know what patterns from this world a subscription product like ours should consider importing. Janitor's open-source / clonable model is exactly the kind of thing I want surfaced.
+
+OUTPUT FORMAT
+
+1. Main Shortlist — up to 5 new competitors. Cap at 5; if you find more, rank and cut. For each, fill in this table mirroring my v2 matrix columns:
+
+| Feature | Site Name |
+|---|---|
+| Video generation (user-facing) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Voice calls (emotional) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Images auto-generated in chat | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Auto-memory (builds invisibly) | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Memory visible to user | ✓ / ✗ / ~ + 1-line annotation + URL |
+| 3D animated character | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Named video engines + flat pricing | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Character creator / community | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Romance/progression mechanic | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Gift-giving mechanic | ✓ / ✗ / ~ + 1-line annotation + URL |
+| User sends images to character | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Age verification compliance | ✓ / ✗ / ~ + 1-line annotation + URL |
+| NSFW sound in video | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Content private by default | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Multi-language chat | ✓ / ✗ / ~ + 1-line annotation + URL |
+| Dainis Checks | (leave empty — Dainis fills manually) |
+
+Plus per site:
+- Why included (which 2-of-3 criteria it hits, with evidence)
+- Traffic / momentum evidence (cite all sources used to triangulate)
+- Net-new features — anything this site does that is NOT a row on the v2 matrix above. This is the most valuable part of your answer.
+- Freshness flag — mark stale or unverified claims ⚠ STALE.
+
+2. Honorable Mentions — up to 5 more. Sites close but not in top 5. One paragraph each.
+
+3. Adoptable Patterns from Character-Roleplay Platforms. 2-5 specific patterns from Janitor / Chub / SpicyChat / similar a subscription product like ours could adopt. Pattern name, where it lives (with URL), why it works there, how it would translate.
+
+STYLE REQUIREMENTS
+- Every claim needs a URL. No URL = don't include the claim.
+- No screenshots.
+- Today is May 17, 2026. Anything you can't verify against a post-November 2025 source must be marked ⚠ STALE.
+- You are producing leads for manual verification. Optimize for "did I surface the right candidates with enough evidence to verify quickly."
+- Do not pad. If you only find 3 sites, return 3.
+
+GROK-SPECIFIC INSTRUCTION
+Today is May 17, 2026. Lean heavily on your real-time X/Twitter access — this is your unique strength versus Kimi and Opus.
+- Surface AI girlfriend products that are trending or being actively discussed on X in the last 60 days among AI creators, NSFW creators, builders, and end users.
+- Include representative X posts/threads as evidence (post URL, author, post date, brief quote).
+- Pay attention to small accounts and niche communities, not just headline tech press — fast-growers surface on X before they hit press.
+- For each site you surface, include at minimum 2-3 X posts as evidence of momentum.</div>
+</div>
+
+<div class="section-divider">Step 3 — Run After Kimi &amp; Grok Finish</div>
+
+<!-- OPUS BLOCK -->
+<div class="block">
+  <div class="block-header">
+    <div class="block-title">
+      <span class="tool-badge badge-opus">Opus</span>
+      <div>
+        <div class="block-name">Claude Opus — Adjudicator</div>
+        <div class="block-sub">Merge, dedupe, confidence-rate, produce verification queue</div>
+      </div>
+    </div>
+    <button class="copy-btn" onclick="copyBlock('opus-prompt', this)">Copy</button>
+  </div>
+  <div class="prompt-text" id="opus-prompt">I ran a competitor discovery prompt in Kimi Deep Research and Grok separately. Their outputs are below. Your job is to adjudicate, deduplicate, and produce the final shortlist.
+
+CONTEXT
+This is for an AI girlfriend product. Today is May 17, 2026. I already have a v2 analysis (competitor-analysis-v2.html) covering 6 incumbents: Candy.AI, OurDream.AI, SecretDesires.AI, GirlfriendGPT, Promptchan, Joi.AI. Kimi and Grok were asked to find what's missing from that — fast-growers and innovators — under a 5+5 cap (5 main shortlist, 5 honorable mentions) plus a separate "Adoptable Patterns from Character-Roleplay Platforms" section.
+
+The v2 matrix columns are: Video generation (user-facing), Voice calls (emotional), Images auto-generated in chat, Auto-memory (builds invisibly), Memory visible to user, 3D animated character, Named video engines + flat pricing, Character creator / community, Romance/progression mechanic, Gift-giving mechanic, User sends images to character, Age verification compliance, NSFW sound in video, Content private by default, Multi-language chat.
+
+INPUTS
+
+=== KIMI OUTPUT ===
+[PASTE KIMI'S FULL RESPONSE HERE]
+
+=== GROK OUTPUT ===
+[PASTE GROK'S FULL RESPONSE HERE]
+
+YOUR TASK
+1. Overlap = high confidence. Any site both Kimi and Grok independently surfaced is a strong candidate. Promote these.
+2. Disagreement = verification queue. Sites only one tool found: assess evidence quality. Strong evidence from one tool can still be a real lead; thin evidence is probably noise. Flag as "needs Dainis check first."
+3. Novelty check. For every "net-new feature" claim, verify it's actually not already on the v2 matrix columns listed above. Reject claims that are just rebrands of existing v2 features.
+4. Freshness audit. Flag any claim with stale or missing sources. Do not promote any claim where the URL is older than November 2025 unless it's foundational (e.g., the site's existence).
+5. Adoptable Patterns section. Merge Kimi's and Grok's lists; cut duplicates; rank by adoptability (how easily a subscription product like ours could import the pattern).
+
+FINAL OUTPUT
+- Final Main Shortlist (≤5 sites) — same table format as the original prompt, with a confidence rating per site (HIGH / MEDIUM / LOW) based on overlap and evidence quality.
+- Final Honorable Mentions (≤5 sites) — same format, with confidence ratings.
+- Final Adoptable Patterns — merged, deduplicated, ranked by adoptability.
+- Verification queue — explicit list of claims Dainis needs to manually verify before adding anything to v2, ordered by how load-bearing each claim is to the recommendation.
+
+Optimize for: Dainis can open this doc, do manual checks against the verification queue, and decide what to add to v2 in under 30 minutes.</div>
+  <div class="opus-note">Don't forget to paste Kimi's and Grok's outputs into the two [PASTE ... HERE] slots before running.</div>
+</div>
+
+<script>
+function copyBlock(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>

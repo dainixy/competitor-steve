@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Content Formats — Visual Guide</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg2: #13131a;
+    --bg3: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #7c6bff;
+    --accent2: #ff6b9d;
+    --accent3: #6bffb8;
+    --accent4: #ffd166;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --card-radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 64px 24px 48px;
+    background: linear-gradient(180deg, #1a0a2e 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,107,255,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+  }
+  .header p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-top: 12px;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(124,107,255,0.15);
+    border: 1px solid rgba(124,107,255,0.35);
+    color: #a89fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  /* ── Category nav ── */
+  .categories {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,15,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 50;
+  }
+  .cat-pill {
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+    padding: 40px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(124,107,255,0.5);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,107,255,0.1);
+  }
+
+  /* Visual preview area */
+  .preview {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card body */
+  .card-body {
+    padding: 20px 22px 24px;
+  }
+  .card-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  /* AI ideas */
+  .ai-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .ai-label svg { opacity: 0.8; }
+  .ideas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .idea {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--bg3);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    border: 1px solid var(--border);
+  }
+  .idea-num {
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Visual components (SVG-based previews) ── */
+  .preview svg { width: 100%; height: 100%; }
+
+  /* gradient backgrounds per category */
+  .grad-purple  { background: linear-gradient(135deg, #1e1030 0%, #2a1545 100%); }
+  .grad-blue    { background: linear-gradient(135deg, #0d1f35 0%, #0d2d50 100%); }
+  .grad-teal    { background: linear-gradient(135deg, #0d2a25 0%, #0d3535 100%); }
+  .grad-pink    { background: linear-gradient(135deg, #2a0d1a 0%, #3a0d28 100%); }
+  .grad-orange  { background: linear-gradient(135deg, #2a1a0d 0%, #3a2a0d 100%); }
+  .grad-green   { background: linear-gradient(135deg, #0d2a10 0%, #0d3520 100%); }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* tooltip tag on preview */
+  .preview-tag {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Creator Playbook 2025</div>
+  <h1>20 Content Formats</h1>
+  <p>Visual guide + 3 AI-powered ideas for every format</p>
+</div>
+
+<div class="categories">
+  <span class="cat-pill">Camera-Based</span>
+  <span class="cat-pill">Editing-Heavy</span>
+  <span class="cat-pill">Data / Lists</span>
+  <span class="cat-pill">Reaction</span>
+  <span class="cat-pill">Teaching</span>
+  <span class="cat-pill">High Production</span>
+</div>
+
+<div class="grid">
+
+<!-- 1. YAP -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- phone frame -->
+      <rect x="130" y="15" width="100" height="155" rx="14" fill="#1a1030" stroke="#7c6bff" stroke-width="1.5"/>
+      <rect x="135" y="25" width="90" height="135" rx="8" fill="#2a1845"/>
+      <!-- face -->
+      <circle cx="180" cy="75" r="28" fill="#3a2460"/>
+      <ellipse cx="172" cy="70" rx="4" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="188" cy="70" rx="4" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <path d="M168 88 Q180 98 192 88" stroke="#ff6b9d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- speech waves -->
+      <path d="M215 65 Q222 72 215 80" stroke="#7c6bff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M221 60 Q232 72 221 84" stroke="#7c6bff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- energy lines -->
+      <path d="M30 50 L80 55 M30 70 L75 72 M30 90 L80 88" stroke="#7c6bff" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      <!-- caption bar -->
+      <rect x="138" y="140" width="84" height="12" rx="4" fill="#7c6bff" opacity="0.25"/>
+      <rect x="148" y="143" width="40" height="6" rx="3" fill="#7c6bff" opacity="0.5"/>
+      <!-- label -->
+      <text x="180" y="170" text-anchor="middle" fill="#a89fff" font-size="9" font-family="sans-serif" font-weight="700">VERTICAL · CASUAL</text>
+    </svg>
+    <div class="preview-tag">Unfiltered</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 01</div>
+    <div class="card-title">Yap</div>
+    <div class="card-desc">Pure high-energy talking to camera — raw, on the go, zero polish. The authenticity IS the format.</div>
+    <div class="ai-label">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      3 AI Ideas
+    </div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to generate a spicy hot-take on your niche — then yap your raw, unfiltered response to camera.</div>
+      <div class="idea"><span class="idea-num">2</span>Paste a Reddit thread into ChatGPT, get "the most outrageous take," then yap a live reaction while driving.</div>
+      <div class="idea"><span class="idea-num">3</span>AI writes 10 controversial opinions in your niche. You react to each one in 30 seconds. Film it all as one yap session, cut into clips.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. GREEN SCREEN -->
+<div class="card">
+  <div class="preview grad-blue">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- background "article" -->
+      <rect x="20" y="20" width="320" height="140" rx="8" fill="#0d1f35"/>
+      <rect x="30" y="30" width="200" height="10" rx="3" fill="#1d4ed8" opacity="0.5"/>
+      <rect x="30" y="48" width="280" height="5" rx="2" fill="#334155" opacity="0.6"/>
+      <rect x="30" y="60" width="250" height="5" rx="2" fill="#334155" opacity="0.5"/>
+      <rect x="30" y="72" width="270" height="5" rx="2" fill="#334155" opacity="0.4"/>
+      <rect x="30" y="84" width="220" height="5" rx="2" fill="#334155" opacity="0.3"/>
+      <!-- creator cutout bottom-right -->
+      <ellipse cx="290" cy="140" rx="45" ry="55" fill="#1a3a50" opacity="0.8"/>
+      <circle cx="290" cy="110" r="20" fill="#2a5070"/>
+      <ellipse cx="283" cy="107" rx="3" ry="4" fill="#6bffb8" opacity="0.8"/>
+      <ellipse cx="297" cy="107" rx="3" ry="4" fill="#6bffb8" opacity="0.8"/>
+      <!-- green screen label -->
+      <rect x="20" y="150" width="80" height="14" rx="4" fill="#16a34a" opacity="0.3"/>
+      <text x="60" y="161" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif" font-weight="700">GREEN SCREEN</text>
+      <!-- pointer arrow -->
+      <path d="M230 125 L265 118" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)" opacity="0.8"/>
+      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffd166"/></marker></defs>
+    </svg>
+    <div class="preview-tag">Commentary</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 02</div>
+    <div class="card-title">Green Screen</div>
+    <div class="card-desc">You appear over a background (tweet, chart, article) to comment on it. The background does the heavy lifting visually.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use Midjourney or Ideogram to generate a fake "leaked memo" or chart in your niche. Green-screen yourself reacting to it.</div>
+      <div class="idea"><span class="idea-num">2</span>Feed a news headline to AI, get a bold counter-argument, then present it green-screened over the original article screenshot.</div>
+      <div class="idea"><span class="idea-num">3</span>AI generates a "stats infographic" (use Canva AI or ChatGPT + code interpreter). You appear over it explaining what most people miss.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. TALKING HEAD -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- studio bg -->
+      <rect x="0" y="0" width="360" height="180" fill="#1a1030"/>
+      <ellipse cx="180" cy="90" rx="140" ry="90" fill="#200d40" opacity="0.7"/>
+      <!-- ring light -->
+      <circle cx="180" cy="80" r="55" fill="none" stroke="#7c6bff" stroke-width="3" opacity="0.3"/>
+      <circle cx="180" cy="80" r="50" fill="none" stroke="white" stroke-width="1" opacity="0.1"/>
+      <!-- body -->
+      <rect x="140" y="130" width="80" height="50" rx="12" fill="#2a1845"/>
+      <!-- head -->
+      <circle cx="180" cy="80" r="32" fill="#2a1845"/>
+      <ellipse cx="171" cy="76" rx="5" ry="6" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="189" cy="76" rx="5" ry="6" fill="#7c6bff" opacity="0.9"/>
+      <path d="M170 93 Q180 101 190 93" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- mic -->
+      <rect x="175" y="112" width="10" height="22" rx="5" fill="#3a2860" stroke="#7c6bff" stroke-width="1"/>
+      <path d="M168 125 Q168 135 180 135 Q192 135 192 125" stroke="#7c6bff" stroke-width="1.5" fill="none"/>
+      <!-- bookshelf bg suggestion -->
+      <rect x="60" y="50" width="50" height="70" rx="4" fill="#150830" opacity="0.5"/>
+      <rect x="70" y="58" width="6" height="50" rx="2" fill="#7c6bff" opacity="0.3"/>
+      <rect x="79" y="62" width="5" height="46" rx="2" fill="#ff6b9d" opacity="0.3"/>
+      <rect x="87" y="58" width="7" height="50" rx="2" fill="#6bffb8" opacity="0.2"/>
+      <rect x="250" y="50" width="50" height="70" rx="4" fill="#150830" opacity="0.5"/>
+      <rect x="260" y="58" width="6" height="50" rx="2" fill="#ffd166" opacity="0.3"/>
+      <rect x="269" y="62" width="5" height="46" rx="2" fill="#7c6bff" opacity="0.3"/>
+      <!-- frame/rule of thirds lines -->
+      <line x1="120" y1="0" x2="120" y2="180" stroke="white" stroke-width="0.5" stroke-dasharray="3,6" opacity="0.1"/>
+      <line x1="240" y1="0" x2="240" y2="180" stroke="white" stroke-width="0.5" stroke-dasharray="3,6" opacity="0.1"/>
+      <line x1="0" y1="60" x2="360" y2="60" stroke="white" stroke-width="0.5" stroke-dasharray="3,6" opacity="0.1"/>
+      <line x1="0" y1="120" x2="360" y2="120" stroke="white" stroke-width="0.5" stroke-dasharray="3,6" opacity="0.1"/>
+    </svg>
+    <div class="preview-tag">Structured</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 03</div>
+    <div class="card-title">Talking Head</div>
+    <div class="card-desc">Classic structured video essay — clean framing, good lighting, professional mic. You own the frame and deliver.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to write a full video script in your style (paste 3 past videos as examples). Read it cold — the teleprompter app PromptSmart works great.</div>
+      <div class="idea"><span class="idea-num">2</span>Ask AI to "steelman the opposite of my opinion on [topic]." Film yourself dismantling it argument by argument.</div>
+      <div class="idea"><span class="idea-num">3</span>Use Descript or Captions.ai to auto-subtitle the talking head and auto-punch-in on key phrases for dynamic cuts.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. INTERVIEW -->
+<div class="card">
+  <div class="preview grad-blue">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d1f35"/>
+      <!-- split cameras -->
+      <rect x="10" y="20" width="155" height="140" rx="8" fill="#0d2d50" stroke="#1d4ed8" stroke-width="1"/>
+      <rect x="195" y="20" width="155" height="140" rx="8" fill="#0d2540" stroke="#1d4ed8" stroke-width="1"/>
+      <!-- host face -->
+      <circle cx="87" cy="80" r="28" fill="#1a3a5c"/>
+      <ellipse cx="79" cy="76" rx="4" ry="5" fill="#6bffb8" opacity="0.9"/>
+      <ellipse cx="95" cy="76" rx="4" ry="5" fill="#6bffb8" opacity="0.9"/>
+      <path d="M78 92 Q87 100 96 92" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="87" y="145" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif" font-weight="700">HOST</text>
+      <!-- guest face -->
+      <circle cx="272" cy="80" r="28" fill="#1a4a3c"/>
+      <ellipse cx="264" cy="76" rx="4" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="280" cy="76" rx="4" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <path d="M263 92 Q272 99 281 92" stroke="#ffd166" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="272" y="145" text-anchor="middle" fill="#a89fff" font-size="8" font-family="sans-serif" font-weight="700">GUEST</text>
+      <!-- REC indicator -->
+      <circle cx="25" cy="32" r="5" fill="#ef4444"/>
+      <text x="34" y="36" fill="#ef4444" font-size="8" font-family="sans-serif" font-weight="700">REC</text>
+      <!-- wide shot indicator -->
+      <rect x="145" y="155" width="70" height="16" rx="4" fill="#1d4ed8" opacity="0.2"/>
+      <text x="180" y="167" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif">WIDE SHOT</text>
+    </svg>
+    <div class="preview-tag">Multi-camera</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 04</div>
+    <div class="card-title">Interview</div>
+    <div class="card-desc">Dynamic conversation between host and guest. Multi-camera captures reactions, expressions, and energy exchange.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to generate 20 spiky interview questions for your guest based on their Twitter/X profile and last 10 posts. Pick the 7 sharpest.</div>
+      <div class="idea"><span class="idea-num">2</span>After filming, drop the transcript into Claude and ask: "Pull the 3 most quotable moments." Use those as captions/clips.</div>
+      <div class="idea"><span class="idea-num">3</span>Use a tool like Riverside.fm (built-in AI) to auto-generate a short-form highlight clip from the long-form interview.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. MAN ON THE STREET -->
+<div class="card">
+  <div class="preview grad-teal">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d2a25"/>
+      <!-- street background -->
+      <rect x="0" y="120" width="360" height="60" fill="#0a1f1a"/>
+      <rect x="0" y="115" width="360" height="10" fill="#0d3530" opacity="0.5"/>
+      <!-- people silhouettes -->
+      <ellipse cx="60" cy="118" rx="15" ry="40" fill="#0d3530"/>
+      <circle cx="60" cy="78" r="12" fill="#0d3530"/>
+      <ellipse cx="300" cy="120" rx="12" ry="35" fill="#0d3530"/>
+      <circle cx="300" cy="86" r="10" fill="#0d3530"/>
+      <!-- interviewer -->
+      <ellipse cx="150" cy="115" rx="18" ry="45" fill="#1a4a3c"/>
+      <circle cx="150" cy="70" r="22" fill="#1a4a3c"/>
+      <!-- big handheld mic -->
+      <rect x="162" y="55" width="10" height="30" rx="5" fill="#6bffb8" opacity="0.8"/>
+      <rect x="160" y="50" width="14" height="8" rx="4" fill="#6bffb8"/>
+      <!-- interviewee -->
+      <ellipse cx="230" cy="120" rx="18" ry="42" fill="#134a3a"/>
+      <circle cx="230" cy="78" r="22" fill="#134a3a"/>
+      <ellipse cx="222" cy="74" rx="4" ry="4.5" fill="#ffd166" opacity="0.9"/>
+      <ellipse cx="238" cy="74" rx="4" ry="4.5" fill="#ffd166" opacity="0.9"/>
+      <path d="M222 90 Q230 96 238 90" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- speech bubble -->
+      <rect x="250" y="55" width="90" height="35" rx="8" fill="#0d4535" stroke="#6bffb8" stroke-width="1"/>
+      <path d="M255 90 L245 100 L265 90" fill="#0d4535"/>
+      <text x="295" y="73" text-anchor="middle" fill="#6bffb8" font-size="9" font-family="sans-serif">???</text>
+      <text x="295" y="85" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif">Public</text>
+    </svg>
+    <div class="preview-tag">Handheld</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 05</div>
+    <div class="card-title">Man on the Street</div>
+    <div class="card-desc">Unscripted public interviews. Gauge opinions, test knowledge, or create comedy by contrasting public answers with expert takes.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Prompt AI: "Give me 5 deceptively simple questions about [niche] that most people get wrong." These make perfect street questions.</div>
+      <div class="idea"><span class="idea-num">2</span>Use AI to write a "myth vs. fact" sheet before filming. Use people's wrong answers as the hook, then deliver the fact in your VO.</div>
+      <div class="idea"><span class="idea-num">3</span>After filming, use Whisper AI to transcribe all answers. Feed to Claude: "Find the funniest contrast between answers." Use that as your edit structure.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. TEXT + B-ROLL -->
+<div class="card">
+  <div class="preview grad-orange">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#2a1a0d"/>
+      <!-- cinematic b-roll bg -->
+      <rect x="0" y="0" width="360" height="60" fill="#1a0d05" opacity="0.8"/>
+      <rect x="0" y="120" width="360" height="60" fill="#1a0d05" opacity="0.8"/>
+      <!-- b-roll scene (cityscape) -->
+      <rect x="0" y="55" width="360" height="70" fill="#0d0805"/>
+      <rect x="20" y="60" width="40" height="65" fill="#3a2010" opacity="0.6"/>
+      <rect x="30" y="70" width="20" height="55" fill="#2a1508" opacity="0.8"/>
+      <rect x="80" y="45" width="55" height="80" fill="#3a2010" opacity="0.5"/>
+      <rect x="90" y="55" width="35" height="70" fill="#2a1508" opacity="0.7"/>
+      <rect x="160" y="55" width="45" height="70" fill="#3a2015" opacity="0.6"/>
+      <rect x="230" y="40" width="60" height="85" fill="#3a2010" opacity="0.5"/>
+      <rect x="310" y="60" width="40" height="65" fill="#3a2010" opacity="0.6"/>
+      <!-- windows glow -->
+      <rect x="85" y="65" width="6" height="6" rx="1" fill="#ffd166" opacity="0.5"/>
+      <rect x="95" y="65" width="6" height="6" rx="1" fill="#ffd166" opacity="0.3"/>
+      <rect x="95" y="75" width="6" height="6" rx="1" fill="#ffd166" opacity="0.5"/>
+      <rect x="165" y="65" width="6" height="6" rx="1" fill="#ffd166" opacity="0.4"/>
+      <rect x="235" y="50" width="6" height="6" rx="1" fill="#ffd166" opacity="0.5"/>
+      <rect x="245" y="60" width="6" height="6" rx="1" fill="#ffd166" opacity="0.4"/>
+      <!-- text overlay -->
+      <text x="180" y="85" text-anchor="middle" fill="white" font-size="18" font-family="sans-serif" font-weight="900" letter-spacing="-0.5">THE SYSTEM IS</text>
+      <text x="180" y="108" text-anchor="middle" fill="#ffd166" font-size="20" font-family="sans-serif" font-weight="900" letter-spacing="-0.5">BROKEN.</text>
+      <!-- VO waveform at bottom -->
+      <rect x="80" y="150" width="200" height="20" rx="4" fill="#1a0d05" opacity="0.7"/>
+      <path d="M90 160 L100 155 L110 165 L120 158 L130 162 L140 154 L150 160 L160 156 L170 163 L180 158 L190 161 L200 155 L210 162 L220 159 L230 164 L240 157 L250 161 L260 160 L270 160" stroke="#ffd166" stroke-width="1.5" fill="none" opacity="0.8"/>
+    </svg>
+    <div class="preview-tag">No Face</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 06</div>
+    <div class="card-title">Text with B-Roll</div>
+    <div class="card-desc">Cinematic footage + bold text on screen + voiceover. Story told without showing your face. Highest viral-per-effort ratio.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use ElevenLabs to generate a cinematic voiceover from an AI-written script. Pair with free Pexels/Pixabay B-roll. Full video, zero camera time.</div>
+      <div class="idea"><span class="idea-num">2</span>Use Sora or Runway to generate custom B-roll that matches your script perfectly — no more generic stock footage.</div>
+      <div class="idea"><span class="idea-num">3</span>Ask AI to write a "cold open hook" (first 3 seconds = curiosity gap). Then build the text-B-roll video around revealing the answer.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. SPLIT SCREEN -->
+<div class="card">
+  <div class="preview grad-pink">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#2a0d1a"/>
+      <!-- left panel (gameplay/satisfying video) -->
+      <rect x="0" y="0" width="180" height="180" fill="#1a0d15"/>
+      <!-- right panel (talking head) -->
+      <rect x="180" y="0" width="180" height="180" fill="#200d1a"/>
+      <!-- divider -->
+      <line x1="180" y1="0" x2="180" y2="180" stroke="#ff6b9d" stroke-width="2"/>
+      <!-- left panel content: game -->
+      <rect x="10" y="20" width="160" height="100" rx="6" fill="#3a0d25" opacity="0.7"/>
+      <circle cx="90" cy="70" r="25" fill="#ff6b9d" opacity="0.2"/>
+      <rect x="60" y="55" width="60" height="30" rx="4" fill="#3a0d30" opacity="0.8"/>
+      <text x="90" y="75" text-anchor="middle" fill="#ff6b9d" font-size="14" font-family="sans-serif" font-weight="900">GAME</text>
+      <!-- score bar -->
+      <rect x="20" y="135" width="140" height="10" rx="5" fill="#1a0d15"/>
+      <rect x="20" y="135" width="85" height="10" rx="5" fill="#ff6b9d" opacity="0.6"/>
+      <!-- right panel content: reaction face -->
+      <circle cx="270" cy="75" r="40" fill="#3a1025"/>
+      <ellipse cx="259" cy="70" rx="5.5" ry="6" fill="#ff6b9d" opacity="0.9"/>
+      <ellipse cx="281" cy="70" rx="5.5" ry="6" fill="#ff6b9d" opacity="0.9"/>
+      <path d="M258 90 Q270 102 282 90" stroke="#ffd166" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- label top bars -->
+      <rect x="5" y="5" width="70" height="12" rx="4" fill="#ff6b9d" opacity="0.2"/>
+      <text x="40" y="15" text-anchor="middle" fill="#ff6b9d" font-size="7" font-family="sans-serif" font-weight="700">HOOK CONTENT</text>
+      <rect x="185" y="5" width="70" height="12" rx="4" fill="#7c6bff" opacity="0.2"/>
+      <text x="220" y="15" text-anchor="middle" fill="#a89fff" font-size="7" font-family="sans-serif" font-weight="700">EDUCATION</text>
+    </svg>
+    <div class="preview-tag">Dual Attention</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 07</div>
+    <div class="card-title">Split Screen</div>
+    <div class="card-desc">Two content streams simultaneously — a visual hook (gameplay, satisfying video) alongside educational content to retain attention.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to write a "facts that feel illegal to know" script. Record yourself talking head. Pair with satisfying Subway Surfers gameplay below.</div>
+      <div class="idea"><span class="idea-num">2</span>AI generates a "rapid-fire quiz" in your niche. You read it aloud (top half), score ticker shown in the bottom half. Viewers track their own score.</div>
+      <div class="idea"><span class="idea-num">3</span>Use Runway or Pika to generate looping abstract/satisfying AI video for the bottom panel. Zero B-roll hunting needed.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. CLONE -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#1e1030"/>
+      <!-- clone 1 (left) -->
+      <ellipse cx="115" cy="140" rx="40" ry="55" fill="#2a1845" opacity="0.9"/>
+      <circle cx="115" cy="80" r="30" fill="#2a1845"/>
+      <ellipse cx="105" cy="75" rx="4.5" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="125" cy="75" rx="4.5" ry="5" fill="#7c6bff" opacity="0.9"/>
+      <path d="M105 92 Q115 100 125 92" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- speech bubble left -->
+      <rect x="20" y="50" width="70" height="30" rx="8" fill="#2a1845" stroke="#7c6bff" stroke-width="1"/>
+      <path d="M85 65 L100 72 L80 72" fill="#2a1845" stroke="#7c6bff" stroke-width="1"/>
+      <text x="55" y="62" text-anchor="middle" fill="#a89fff" font-size="7" font-family="sans-serif">You're wrong</text>
+      <text x="55" y="74" text-anchor="middle" fill="#a89fff" font-size="7" font-family="sans-serif">about this...</text>
+      <!-- clone 2 (right) -->
+      <ellipse cx="245" cy="140" rx="40" ry="55" fill="#2a1040" opacity="0.9"/>
+      <circle cx="245" cy="80" r="30" fill="#2a1040"/>
+      <ellipse cx="235" cy="75" rx="4.5" ry="5" fill="#ff6b9d" opacity="0.9"/>
+      <ellipse cx="255" cy="75" rx="4.5" ry="5" fill="#ff6b9d" opacity="0.9"/>
+      <path d="M235 92 Q245 99 255 92" stroke="#ffd166" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- speech bubble right -->
+      <rect x="270" y="50" width="70" height="30" rx="8" fill="#2a1040" stroke="#ff6b9d" stroke-width="1"/>
+      <path d="M275 65 L260 72 L280 72" fill="#2a1040" stroke="#ff6b9d" stroke-width="1"/>
+      <text x="305" y="62" text-anchor="middle" fill="#ffaacc" font-size="7" font-family="sans-serif">No no, let</text>
+      <text x="305" y="74" text-anchor="middle" fill="#ffaacc" font-size="7" font-family="sans-serif">me explain</text>
+      <!-- VS badge -->
+      <circle cx="180" cy="90" r="20" fill="#3a2060" stroke="#7c6bff" stroke-width="1.5"/>
+      <text x="180" y="95" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" font-weight="900">VS</text>
+      <!-- tripod indicator -->
+      <line x1="180" y1="155" x2="165" y2="175" stroke="#555" stroke-width="1.5"/>
+      <line x1="180" y1="155" x2="180" y2="175" stroke="#555" stroke-width="1.5"/>
+      <line x1="180" y1="155" x2="195" y2="175" stroke="#555" stroke-width="1.5"/>
+      <rect x="170" y="145" width="20" height="12" rx="4" fill="#2a1845" stroke="#555" stroke-width="1"/>
+    </svg>
+    <div class="preview-tag">Locked Tripod</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 08</div>
+    <div class="card-title">Clone</div>
+    <div class="card-desc">You interact with a duplicate of yourself — debate, skit, or two perspectives. Filmed twice on locked tripod, composited in edit.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to write a full debate script — "Past You vs. Current You" on a belief you've changed. Play both sides.</div>
+      <div class="idea"><span class="idea-num">2</span>Prompt: "Write a 60-second argument between a beginner and an expert about [topic]." Film both characters as yourself.</div>
+      <div class="idea"><span class="idea-num">3</span>Use HeyGen to create an AI avatar "clone" — one real you, one AI you. Run a dialogue between them with no filming needed at all.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. TRIPLE CLONE -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#1a0d30"/>
+      <!-- three versions -->
+      <!-- rookie (left) -->
+      <ellipse cx="60" cy="145" rx="35" ry="48" fill="#1a2060" opacity="0.9"/>
+      <circle cx="60" cy="90" r="26" fill="#1a2060"/>
+      <ellipse cx="52" cy="86" rx="4" ry="4.5" fill="#6bffb8" opacity="0.7"/>
+      <ellipse cx="68" cy="86" rx="4" ry="4.5" fill="#6bffb8" opacity="0.7"/>
+      <path d="M53 100 Q60 106 67 100" stroke="#6bffb8" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <rect x="20" y="155" width="80" height="16" rx="5" fill="#1a2060" stroke="#6bffb8" stroke-width="1" opacity="0.7"/>
+      <text x="60" y="167" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif" font-weight="700">THE ROOKIE</text>
+      <!-- manager (center) -->
+      <ellipse cx="180" cy="138" rx="40" ry="52" fill="#2a1860" opacity="0.9"/>
+      <circle cx="180" cy="80" r="32" fill="#2a1860"/>
+      <ellipse cx="170" cy="75" rx="5" ry="5.5" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="190" cy="75" rx="5" ry="5.5" fill="#7c6bff" opacity="0.9"/>
+      <path d="M170 92 Q180 101 190 92" stroke="#ff6b9d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="140" y="152" width="80" height="16" rx="5" fill="#2a1860" stroke="#7c6bff" stroke-width="1.5"/>
+      <text x="180" y="164" text-anchor="middle" fill="#a89fff" font-size="8" font-family="sans-serif" font-weight="700">THE MANAGER</text>
+      <!-- expert (right) -->
+      <ellipse cx="300" cy="145" rx="35" ry="48" fill="#3a1040" opacity="0.9"/>
+      <circle cx="300" cy="90" r="26" fill="#3a1040"/>
+      <ellipse cx="292" cy="86" rx="4" ry="4.5" fill="#ffd166" opacity="0.9"/>
+      <ellipse cx="308" cy="86" rx="4" ry="4.5" fill="#ffd166" opacity="0.9"/>
+      <path d="M292 100 Q300 105 308 100" stroke="#ffd166" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="260" y="155" width="80" height="16" rx="5" fill="#3a1040" stroke="#ffd166" stroke-width="1" opacity="0.7"/>
+      <text x="300" y="167" text-anchor="middle" fill="#ffd166" font-size="8" font-family="sans-serif" font-weight="700">THE EXPERT</text>
+      <!-- glow effects -->
+      <circle cx="180" cy="80" r="38" fill="none" stroke="#7c6bff" stroke-width="1" opacity="0.2"/>
+    </svg>
+    <div class="preview-tag">3-Person Scene</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 09</div>
+    <div class="card-title">Triple Clone</div>
+    <div class="card-desc">Three versions of you simultaneously — Rookie, Manager, Expert — each representing a different perspective or knowledge tier.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Prompt AI: "Write a 90-second roundtable where Year 1 Me, Year 3 Me, and Year 10 Me debate [decision]." Film all three versions of yourself.</div>
+      <div class="idea"><span class="idea-num">2</span>AI writes three simultaneous commentary tracks (rookie, mid-level, expert) for the same situation — like a DVD director's commentary layered three ways.</div>
+      <div class="idea"><span class="idea-num">3</span>Use three different AI voices (ElevenLabs) to narrate three clones of yourself — no filming needed, just three avatars from HeyGen or D-ID.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. VIDEO REACTION -->
+<div class="card">
+  <div class="preview grad-blue">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d1f35"/>
+      <!-- main video playing -->
+      <rect x="10" y="15" width="250" height="155" rx="8" fill="#0d2d50" stroke="#1d4ed8" stroke-width="1.5"/>
+      <!-- video content placeholder -->
+      <rect x="18" y="23" width="234" height="130" rx="5" fill="#0a1a30"/>
+      <circle cx="135" cy="88" r="20" fill="#1d4ed8" opacity="0.4"/>
+      <path d="M126 80 L126 96 L146 88 Z" fill="white" opacity="0.6"/>
+      <!-- video progress bar -->
+      <rect x="18" y="155" width="234" height="6" rx="3" fill="#1a3a60"/>
+      <rect x="18" y="155" width="100" height="6" rx="3" fill="#6bffb8"/>
+      <!-- reaction window (pip) -->
+      <rect x="230" y="95" width="120" height="90" rx="8" fill="#0d2540" stroke="#6bffb8" stroke-width="2"/>
+      <!-- reaction face -->
+      <circle cx="290" cy="130" r="28" fill="#1a3a5c"/>
+      <ellipse cx="281" cy="125" rx="4.5" ry="5" fill="#ffd166" opacity="0.9"/>
+      <ellipse cx="299" cy="125" rx="4.5" ry="5" fill="#ffd166" opacity="0.9"/>
+      <!-- surprised mouth -->
+      <ellipse cx="290" cy="140" rx="7" ry="9" fill="#ff6b9d" opacity="0.7"/>
+      <!-- LIVE badge -->
+      <rect x="238" y="100" width="30" height="12" rx="4" fill="#ef4444"/>
+      <text x="253" y="110" text-anchor="middle" fill="white" font-size="7" font-family="sans-serif" font-weight="700">LIVE</text>
+      <!-- emoji reactions floating -->
+      <text x="35" y="58" fill="#ffd166" font-size="16" opacity="0.5">😱</text>
+      <text x="55" y="38" fill="#ffd166" font-size="12" opacity="0.3">🔥</text>
+      <text x="200" y="50" fill="#ffd166" font-size="14" opacity="0.4">😂</text>
+    </svg>
+    <div class="preview-tag">PiP Reaction</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 10</div>
+    <div class="card-title">Video Reaction</div>
+    <div class="card-desc">Watch a video and give real-time commentary. Your facial expressions add emotion and commentary layer on top of the source content.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to identify the 5 most debated or controversial takes in your niche. React to those videos — pre-loaded controversy = algorithm fuel.</div>
+      <div class="idea"><span class="idea-num">2</span>After filming, use AI to transcribe your reaction and generate a "key timestamps" list for the description. Boosts SEO and watch time.</div>
+      <div class="idea"><span class="idea-num">3</span>Feed source video transcript to AI: "What would a skeptic say at each key claim?" Use those as your reaction talking points so you're never scrambling.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 11. RANKING / TIER LIST -->
+<div class="card">
+  <div class="preview grad-orange">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#2a1a0d"/>
+      <!-- tier list graphic -->
+      <rect x="20" y="15" width="320" height="150" rx="8" fill="#1a0d05"/>
+      <!-- tier rows -->
+      <!-- S tier -->
+      <rect x="20" y="15" width="50" height="30" rx="0" fill="#ef4444"/>
+      <text x="45" y="35" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="900">S</text>
+      <rect x="70" y="15" width="270" height="30" rx="0" fill="#2a1505"/>
+      <rect x="80" y="20" width="50" height="20" rx="4" fill="#3a2010"/>
+      <text x="105" y="34" text-anchor="middle" fill="#ffd166" font-size="9" font-family="sans-serif" font-weight="700">Tool A</text>
+      <rect x="140" y="20" width="50" height="20" rx="4" fill="#3a2010"/>
+      <text x="165" y="34" text-anchor="middle" fill="#ffd166" font-size="9" font-family="sans-serif" font-weight="700">Tool B</text>
+      <!-- A tier -->
+      <rect x="20" y="45" width="50" height="30" fill="#f97316"/>
+      <text x="45" y="65" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="900">A</text>
+      <rect x="70" y="45" width="270" height="30" fill="#221005"/>
+      <rect x="80" y="50" width="50" height="20" rx="4" fill="#2a1508"/>
+      <text x="105" y="64" text-anchor="middle" fill="#ffd166" font-size="9" font-family="sans-serif">Tool C</text>
+      <!-- B tier -->
+      <rect x="20" y="75" width="50" height="30" fill="#eab308"/>
+      <text x="45" y="95" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="900">B</text>
+      <rect x="70" y="75" width="270" height="30" fill="#1a0e05"/>
+      <rect x="80" y="80" width="50" height="20" rx="4" fill="#221005"/>
+      <text x="105" y="94" text-anchor="middle" fill="#aaa" font-size="9" font-family="sans-serif">Tool D</text>
+      <rect x="140" y="80" width="50" height="20" rx="4" fill="#221005"/>
+      <text x="165" y="94" text-anchor="middle" fill="#aaa" font-size="9" font-family="sans-serif">Tool E</text>
+      <!-- C/D tiers -->
+      <rect x="20" y="105" width="50" height="30" fill="#22c55e"/>
+      <text x="45" y="125" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="900">C</text>
+      <rect x="70" y="105" width="270" height="30" fill="#151005"/>
+      <rect x="20" y="135" width="50" height="30" fill="#6366f1"/>
+      <text x="45" y="155" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" font-weight="900">D</text>
+      <rect x="70" y="135" width="270" height="30" fill="#100d1a"/>
+      <!-- dragging animation suggestion -->
+      <rect x="210" y="20" width="50" height="20" rx="4" fill="#ffd166" stroke="#ffd166" stroke-width="2" opacity="0.9"/>
+      <text x="235" y="34" text-anchor="middle" fill="#0d0d0f" font-size="9" font-family="sans-serif" font-weight="900">Tool F</text>
+      <line x1="235" y1="40" x2="235" y2="55" stroke="#ffd166" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.6"/>
+    </svg>
+    <div class="preview-tag">Tier Visual</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 11</div>
+    <div class="card-title">Ranking / Tier List</div>
+    <div class="card-desc">Gamified content ranking items S through F. The visual update of the tier list in real-time keeps viewers hooked to see where things land.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Prompt AI: "Give me 10 items in [niche] that people rank differently. Include one wildly controversial pick." Use that as your tier-list lineup.</div>
+      <div class="idea"><span class="idea-num">2</span>After publishing, feed top comments back to AI: "What items did viewers disagree with most?" Film a "revisited" tier list responding to the controversy.</div>
+      <div class="idea"><span class="idea-num">3</span>Use Canva AI or TierMaker to auto-generate the tier list graphic. Feed in your items, export, overlay in CapCut with drag animations.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 12. LISTICLE -->
+<div class="card">
+  <div class="preview grad-teal">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d2a25"/>
+      <!-- numbered items popping in -->
+      <rect x="20" y="20" width="320" height="32" rx="8" fill="#0d3530" stroke="#6bffb8" stroke-width="1.5"/>
+      <circle cx="46" cy="36" r="12" fill="#6bffb8"/>
+      <text x="46" y="40" text-anchor="middle" fill="#0d2a25" font-size="11" font-family="sans-serif" font-weight="900">1</text>
+      <text x="70" y="40" fill="#e8e8f0" font-size="11" font-family="sans-serif" font-weight="700">Use AI to 10x your output speed</text>
+
+      <rect x="20" y="60" width="320" height="32" rx="8" fill="#0d3025" stroke="#6bffb8" stroke-width="1" opacity="0.7"/>
+      <circle cx="46" cy="76" r="12" fill="#6bffb8" opacity="0.7"/>
+      <text x="46" y="80" text-anchor="middle" fill="#0d2a25" font-size="11" font-family="sans-serif" font-weight="900">2</text>
+      <text x="70" y="80" fill="#e8e8f0" font-size="11" font-family="sans-serif" font-weight="700" opacity="0.7">Nobody talks about this tool</text>
+
+      <rect x="20" y="100" width="320" height="32" rx="8" fill="#0d2a25" stroke="#6bffb8" stroke-width="1" opacity="0.5"/>
+      <circle cx="46" cy="116" r="12" fill="#6bffb8" opacity="0.5"/>
+      <text x="46" y="120" text-anchor="middle" fill="#0d2a25" font-size="11" font-family="sans-serif" font-weight="900">3</text>
+      <text x="70" y="120" fill="#e8e8f0" font-size="10" font-family="sans-serif" opacity="0.5">The framework that changed everything</text>
+
+      <rect x="20" y="140" width="320" height="32" rx="8" fill="#0d2520" stroke="#6bffb8" stroke-width="1" opacity="0.3" stroke-dasharray="5,4"/>
+      <circle cx="46" cy="156" r="12" fill="#6bffb8" opacity="0.25"/>
+      <text x="46" y="160" text-anchor="middle" fill="#0d2a25" font-size="11" font-family="sans-serif" font-weight="900">4</text>
+      <text x="70" y="160" fill="#e8e8f0" font-size="10" font-family="sans-serif" opacity="0.3">Coming next...</text>
+    </svg>
+    <div class="preview-tag">Fast Cuts</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 12</div>
+    <div class="card-title">Listicle</div>
+    <div class="card-desc">Bullet-point content delivered rapidly. Each item is a micro-dopamine hit. Numbered overlays tell viewers exactly where they are.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Ask AI: "Give me 7 [niche] tips — each must be surprising and under 15 words." Film one talking-head clip per item. Cut fast.</div>
+      <div class="idea"><span class="idea-num">2</span>Use Claude to write the hooks for each list item first (the punchline), then build backward from those. Strongest list items = best retention.</div>
+      <div class="idea"><span class="idea-num">3</span>Generate the on-screen text cards with AI + Canva. Batch create all 7 cards in one Canva session. Film once, overlay the cards in post.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 13. OBJECT LESSON -->
+<div class="card">
+  <div class="preview grad-orange">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#1a100d"/>
+      <!-- table top view suggestion -->
+      <rect x="0" y="110" width="360" height="70" fill="#2a1a10" opacity="0.5"/>
+      <!-- main object (glass of water) -->
+      <rect x="150" y="50" width="60" height="90" rx="6" fill="none" stroke="#6bffb8" stroke-width="2"/>
+      <rect x="152" y="70" width="56" height="68" rx="4" fill="#0d2a35" opacity="0.7"/>
+      <!-- water level -->
+      <rect x="152" y="95" width="56" height="43" rx="0" fill="#1a4a60" opacity="0.8"/>
+      <!-- water ripple -->
+      <ellipse cx="180" cy="95" rx="28" ry="4" fill="#6bffb8" opacity="0.2"/>
+      <!-- concept label -->
+      <rect x="40" y="70" width="90" height="22" rx="6" fill="#2a1a10" stroke="#ffd166" stroke-width="1"/>
+      <text x="85" y="85" text-anchor="middle" fill="#ffd166" font-size="9" font-family="sans-serif" font-weight="700">Opportunity</text>
+      <!-- arrow -->
+      <path d="M130 81 L152 81" stroke="#ffd166" stroke-width="1.5" marker-end="url(#arr2)" opacity="0.8"/>
+      <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffd166"/></marker></defs>
+      <!-- concept label 2 -->
+      <rect x="230" y="70" width="100" height="22" rx="6" fill="#2a1a10" stroke="#ff6b9d" stroke-width="1"/>
+      <text x="280" y="85" text-anchor="middle" fill="#ff6b9d" font-size="9" font-family="sans-serif" font-weight="700">Your capacity</text>
+      <path d="M230 81 L210 81" stroke="#ff6b9d" stroke-width="1.5" marker-end="url(#arr3)" opacity="0.8"/>
+      <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff6b9d"/></marker></defs>
+      <!-- hands interacting -->
+      <path d="M140 140 Q150 120 160 115" stroke="#e8e8f0" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+      <circle cx="162" cy="113" r="6" fill="#e8e8f0" opacity="0.3"/>
+      <path d="M220 140 Q210 120 200 115" stroke="#e8e8f0" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+      <circle cx="198" cy="113" r="6" fill="#e8e8f0" opacity="0.3"/>
+      <text x="180" y="170" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">TOP-DOWN · DESK VIEW</text>
+    </svg>
+    <div class="preview-tag">Physical Prop</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 13</div>
+    <div class="card-title">Object Lesson</div>
+    <div class="card-desc">A physical object demonstrates an abstract concept. The tactile anchor makes complex ideas instantly memorable and shareable.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Prompt: "Give me 10 everyday objects that can teach a lesson about [niche concept]." AI often surfaces non-obvious metaphors that feel original.</div>
+      <div class="idea"><span class="idea-num">2</span>Use AI to script the reveal moment — the point where the object's metaphor clicks. That's the viral clip. Film just that 15-second moment separately.</div>
+      <div class="idea"><span class="idea-num">3</span>Use AI image generators to mock up "explainer overlays" of the object (arrows, labels) to add in post — makes the lesson even cleaner.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 14. PLAY/PAUSE REACTION -->
+<div class="card">
+  <div class="preview grad-pink">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#2a0d1a"/>
+      <!-- video playing -->
+      <rect x="10" y="15" width="340" height="120" rx="8" fill="#1a0510"/>
+      <rect x="18" y="23" width="324" height="104" rx="5" fill="#100010"/>
+      <!-- playing content -->
+      <text x="180" y="85" text-anchor="middle" fill="#ff6b9d" font-size="13" font-family="sans-serif" font-weight="700" opacity="0.6">"This strategy always works..."</text>
+      <!-- PAUSED overlay -->
+      <rect x="18" y="23" width="324" height="104" rx="5" fill="rgba(0,0,0,0.7)"/>
+      <circle cx="180" cy="75" r="28" fill="rgba(255,107,157,0.2)" stroke="#ff6b9d" stroke-width="2"/>
+      <!-- pause icon -->
+      <rect x="169" y="63" width="9" height="24" rx="2" fill="#ff6b9d"/>
+      <rect x="182" y="63" width="9" height="24" rx="2" fill="#ff6b9d"/>
+      <!-- creator popping in from bottom -->
+      <rect x="10" y="130" width="340" height="50" rx="8" fill="#3a0d25" stroke="#ff6b9d" stroke-width="1.5"/>
+      <circle cx="45" cy="155" r="20" fill="#2a0d1a"/>
+      <ellipse cx="38" cy="152" rx="3.5" ry="4" fill="#ff6b9d" opacity="0.9"/>
+      <ellipse cx="52" cy="152" rx="3.5" ry="4" fill="#ff6b9d" opacity="0.9"/>
+      <text x="160" y="152" text-anchor="middle" fill="#ffaacc" font-size="10" font-family="sans-serif" font-weight="700">Wait — let me stop you right there.</text>
+      <text x="160" y="167" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">That's NOT how it actually works...</text>
+    </svg>
+    <div class="preview-tag">Debunk Format</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 14</div>
+    <div class="card-title">Play / Pause Reaction</div>
+    <div class="card-desc">You actively pause a video mid-claim to debunk, elaborate, or fact-check before letting it continue. Creates interrupt-driven tension.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Find a popular video in your niche. Feed its transcript to AI: "Identify every factually wrong or misleading claim." Those become your pause points.</div>
+      <div class="idea"><span class="idea-num">2</span>Use AI to pre-write your "pause commentary" for each timestamp before filming. You'll be sharper and won't ramble on camera.</div>
+      <div class="idea"><span class="idea-num">3</span>Ask AI: "What is the most commonly repeated bad advice in [niche]?" Find a video that says it. Play/pause your way through debunking it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 15. TOP DOWN -->
+<div class="card">
+  <div class="preview grad-teal">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d2a20"/>
+      <!-- desk top-down view -->
+      <rect x="0" y="0" width="360" height="180" fill="#0d3525"/>
+      <!-- desk items -->
+      <rect x="30" y="20" width="200" height="140" rx="4" fill="#1a4a35" opacity="0.8"/>
+      <!-- notebook -->
+      <rect x="40" y="30" width="130" height="100" rx="4" fill="#0d3020" stroke="#6bffb8" stroke-width="1.5"/>
+      <!-- notebook lines -->
+      <line x1="55" y1="50" x2="155" y2="50" stroke="#6bffb8" stroke-width="0.8" opacity="0.4"/>
+      <line x1="55" y1="65" x2="155" y2="65" stroke="#6bffb8" stroke-width="0.8" opacity="0.4"/>
+      <line x1="55" y1="80" x2="155" y2="80" stroke="#6bffb8" stroke-width="0.8" opacity="0.4"/>
+      <line x1="55" y1="95" x2="155" y2="95" stroke="#6bffb8" stroke-width="0.8" opacity="0.4"/>
+      <line x1="55" y1="110" x2="155" y2="110" stroke="#6bffb8" stroke-width="0.8" opacity="0.4"/>
+      <!-- handwriting suggestion -->
+      <path d="M55 50 Q75 48 95 51 Q115 53 135 50" stroke="#6bffb8" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <path d="M55 65 Q80 63 105 66" stroke="#6bffb8" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <!-- pen -->
+      <rect x="155" y="90" width="8" height="60" rx="4" fill="#ffd166" transform="rotate(-30 155 90)"/>
+      <!-- coffee cup top-down -->
+      <circle cx="250" cy="60" r="30" fill="#2a1505" stroke="#ffd166" stroke-width="1.5"/>
+      <circle cx="250" cy="60" r="22" fill="#3a2010"/>
+      <circle cx="250" cy="60" r="15" fill="#5a3018"/>
+      <!-- steam -->
+      <path d="M240 28 Q244 20 240 12" stroke="#888" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M250 25 Q254 17 250 9" stroke="#888" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- phone -->
+      <rect x="250" y="110" width="45" height="60" rx="8" fill="#1a1030" stroke="#7c6bff" stroke-width="1.5"/>
+      <rect x="255" y="117" width="35" height="46" rx="5" fill="#2a1845"/>
+      <!-- camera indicator (overhead) -->
+      <circle cx="310" cy="20" r="15" fill="#0d2520" stroke="#6bffb8" stroke-width="1.5"/>
+      <circle cx="310" cy="20" r="8" fill="#1a4535"/>
+      <circle cx="310" cy="20" r="4" fill="#6bffb8" opacity="0.5"/>
+      <text x="310" y="45" text-anchor="middle" fill="#6bffb8" font-size="7" font-family="sans-serif">CAM ↓</text>
+    </svg>
+    <div class="preview-tag">Birds-Eye</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 15</div>
+    <div class="card-title">Top Down</div>
+    <div class="card-desc">Overhead camera pointing straight down at a desk. Perfect for sketching, journaling, food, handwriting, or product unboxing.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2htm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to design a simple "visual framework" (boxes, arrows, labels). Print it out, then draw over it by hand on camera for an organic, visual breakdown.</div>
+      <div class="idea"><span class="idea-num">2</span>AI generates a "daily planning template" for your niche audience. Film yourself filling it in from overhead — relatable morning routine content.</div>
+      <div class="idea"><span class="idea-num">3</span>Use Procreate + iPad overhead as your "canvas." Ask AI to outline a mind map structure, then illustrate it live from above in real-time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 16. CAROUSEL -->
+<div class="card">
+  <div class="preview grad-blue">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d1f35"/>
+      <!-- three slides in perspective -->
+      <!-- slide 3 (back) -->
+      <rect x="200" y="30" width="130" height="120" rx="8" fill="#0a1825" stroke="#334155" stroke-width="1" opacity="0.5"/>
+      <text x="265" y="95" text-anchor="middle" fill="#334155" font-size="18" font-family="sans-serif" font-weight="900">3</text>
+      <!-- slide 2 (mid) -->
+      <rect x="145" y="20" width="130" height="120" rx="8" fill="#0d2040" stroke="#1d4ed8" stroke-width="1.5" opacity="0.7"/>
+      <text x="210" y="92" text-anchor="middle" fill="#1d4ed8" font-size="22" font-family="sans-serif" font-weight="900">2</text>
+      <!-- slide 1 (front/active) -->
+      <rect x="30" y="10" width="150" height="130" rx="10" fill="#0d2d50" stroke="#6bffb8" stroke-width="2"/>
+      <!-- slide content -->
+      <rect x="42" y="25" width="80" height="8" rx="3" fill="#6bffb8" opacity="0.6"/>
+      <rect x="42" y="40" width="126" height="5" rx="2" fill="#334155" opacity="0.7"/>
+      <rect x="42" y="52" width="110" height="5" rx="2" fill="#334155" opacity="0.6"/>
+      <rect x="42" y="64" width="120" height="5" rx="2" fill="#334155" opacity="0.5"/>
+      <!-- image placeholder in slide -->
+      <rect x="42" y="80" width="126" height="45" rx="6" fill="#1a3a5c"/>
+      <circle cx="105" cy="102" r="15" fill="#0d2d50"/>
+      <path d="M95 102 L100 92 L115 112 L120 105 L130 118 L78 118 Z" fill="#1d4ed8" opacity="0.4"/>
+      <!-- dots pagination -->
+      <circle cx="75" cy="155" r="5" fill="#6bffb8"/>
+      <circle cx="92" cy="155" r="4" fill="#334155"/>
+      <circle cx="107" cy="155" r="4" fill="#334155"/>
+      <!-- swipe indicator -->
+      <path d="M290 90 L320 90" stroke="#6bffb8" stroke-width="2" marker-end="url(#arrc)" opacity="0.5"/>
+      <defs><marker id="arrc" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6bffb8"/></marker></defs>
+      <text x="295" y="108" text-anchor="middle" fill="#6bffb8" font-size="8" font-family="sans-serif" opacity="0.5">SWIPE</text>
+    </svg>
+    <div class="preview-tag">Slide Deck</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 16</div>
+    <div class="card-title">Carousel</div>
+    <div class="card-desc">Walk through a swipeable slide deck on video. Native to Instagram/LinkedIn carousels translated into a video walkthrough format.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to write a 7-slide carousel script. Feed each slide to Canva's AI presentation tool to auto-generate the visual design.</div>
+      <div class="idea"><span class="idea-num">2</span>Ask Claude: "Turn this blog post into a 6-slide carousel. Each slide needs a hook line and 2 bullet points." Record a voiceover walkthrough.</div>
+      <div class="idea"><span class="idea-num">3</span>Use Gamma.app (AI presentation builder) to generate the entire carousel in 60 seconds. Record your screen walking through it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 17. WHITEBOARD -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#1a1030"/>
+      <!-- whiteboard frame -->
+      <rect x="30" y="15" width="280" height="140" rx="6" fill="#f8f8ff" stroke="#7c6bff" stroke-width="2"/>
+      <!-- whiteboard content (drawn in marker style) -->
+      <!-- title -->
+      <text x="170" y="45" text-anchor="middle" fill="#1a1030" font-size="13" font-family="sans-serif" font-weight="900">THE FORMULA</text>
+      <!-- circle with label -->
+      <circle cx="100" cy="95" r="30" fill="none" stroke="#7c6bff" stroke-width="2.5"/>
+      <text x="100" y="92" text-anchor="middle" fill="#7c6bff" font-size="9" font-family="sans-serif" font-weight="700">YOUR</text>
+      <text x="100" y="104" text-anchor="middle" fill="#7c6bff" font-size="9" font-family="sans-serif" font-weight="700">IDEA</text>
+      <!-- plus -->
+      <text x="150" y="100" text-anchor="middle" fill="#333" font-size="18" font-family="sans-serif" font-weight="900">+</text>
+      <!-- circle 2 -->
+      <circle cx="200" cy="95" r="30" fill="none" stroke="#ff6b9d" stroke-width="2.5"/>
+      <text x="200" y="92" text-anchor="middle" fill="#ff6b9d" font-size="9" font-family="sans-serif" font-weight="700">AI</text>
+      <text x="200" y="104" text-anchor="middle" fill="#ff6b9d" font-size="9" font-family="sans-serif" font-weight="700">SPEED</text>
+      <!-- equals -->
+      <text x="248" y="100" text-anchor="middle" fill="#333" font-size="18" font-family="sans-serif" font-weight="900">=</text>
+      <!-- result box -->
+      <rect x="265" y="72" width="35" height="46" rx="6" fill="#ffd166" opacity="0.3" stroke="#ffd166" stroke-width="2"/>
+      <text x="282" y="98" text-anchor="middle" fill="#ffd166" font-size="9" font-family="sans-serif" font-weight="900">🚀</text>
+      <!-- marker arrow doodles -->
+      <path d="M55 58 Q60 48 70 55" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.3"/>
+      <!-- marker in hand suggestion -->
+      <rect x="255" y="148" width="6" height="18" rx="3" fill="#7c6bff" transform="rotate(-20 255 148)" opacity="0.7"/>
+      <!-- whiteboard rail -->
+      <rect x="30" y="148" width="280" height="7" rx="3" fill="#ccc"/>
+    </svg>
+    <div class="preview-tag">Draw Live</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 17</div>
+    <div class="card-title">Whiteboard</div>
+    <div class="card-desc">Real-time drawing on a physical or digital board. Watching something get built visually creates stronger comprehension than slides alone.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Ask AI: "Design a simple visual framework for [concept] using only circles, arrows, and boxes." Then draw it live on camera. AI = your art director.</div>
+      <div class="idea"><span class="idea-num">2</span>Use Excalidraw (free, hand-drawn look) + AI prompts to pre-build the diagram digitally. Record a screen-share walkthrough instead of physical board.</div>
+      <div class="idea"><span class="idea-num">3</span>Use AI to write a "whiteboard explainer script" timed to each drawing beat. Pre-practice with the script so the draw-and-talk feels effortless.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 18. AMA -->
+<div class="card">
+  <div class="preview grad-green">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d2a10"/>
+      <!-- comment card pinned -->
+      <rect x="20" y="15" width="320" height="55" rx="10" fill="#0d3a15" stroke="#6bffb8" stroke-width="2"/>
+      <!-- user avatar -->
+      <circle cx="48" cy="42" r="18" fill="#1a4a20"/>
+      <text x="48" y="47" text-anchor="middle" fill="#6bffb8" font-size="12" font-family="sans-serif">👤</text>
+      <!-- username + question -->
+      <text x="75" y="33" fill="#6bffb8" font-size="9" font-family="sans-serif" font-weight="700">@user_1234 · Pinned Comment</text>
+      <text x="75" y="50" fill="#e8e8f0" font-size="10" font-family="sans-serif">"What's the biggest mistake beginners make</text>
+      <text x="75" y="63" fill="#e8e8f0" font-size="10" font-family="sans-serif">in [niche]?"</text>
+      <!-- creator responding (talking head below) -->
+      <rect x="20" y="85" width="320" height="85" rx="10" fill="#0d3520"/>
+      <circle cx="65" cy="127" r="30" fill="#1a4a25"/>
+      <ellipse cx="56" cy="123" rx="4.5" ry="5" fill="#6bffb8" opacity="0.9"/>
+      <ellipse cx="74" cy="123" rx="4.5" ry="5" fill="#6bffb8" opacity="0.9"/>
+      <path d="M56 138 Q65 145 74 138" stroke="#ffd166" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- answer text lines -->
+      <rect x="105" y="98" width="220" height="8" rx="3" fill="#1a4535" opacity="0.7"/>
+      <rect x="105" y="113" width="190" height="8" rx="3" fill="#1a4535" opacity="0.6"/>
+      <rect x="105" y="128" width="210" height="8" rx="3" fill="#1a4535" opacity="0.5"/>
+      <rect x="105" y="143" width="140" height="8" rx="3" fill="#1a4535" opacity="0.4"/>
+      <!-- AMA badge -->
+      <rect x="255" y="90" width="70" height="20" rx="6" fill="#6bffb8" opacity="0.15"/>
+      <text x="290" y="104" text-anchor="middle" fill="#6bffb8" font-size="9" font-family="sans-serif" font-weight="700">AMA FORMAT</text>
+    </svg>
+    <div class="preview-tag">Community-Driven</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 18</div>
+    <div class="card-title">Ask Me Anything</div>
+    <div class="card-desc">Answer direct questions from your audience. The pinned comment on screen creates accountability and shows the community you listen.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Feed your comment section to AI: "Rank these questions by how interesting/viral the answer could be." Film your answers in that order.</div>
+      <div class="idea"><span class="idea-num">2</span>No comments yet? Ask AI to simulate "the 10 questions your ideal audience most wants answered." Film an AMA before you have one.</div>
+      <div class="idea"><span class="idea-num">3</span>Use AI to prep a crisp 45-second answer structure for each question: hook → answer → example → twist. Tight answers = better completion rate.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 19. HYPER-CINEMATIC -->
+<div class="card">
+  <div class="preview grad-purple">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d0d15"/>
+      <!-- letterbox bars (already cinematic) -->
+      <rect x="0" y="0" width="360" height="25" fill="#050508"/>
+      <rect x="0" y="155" width="360" height="25" fill="#050508"/>
+      <!-- main cinematic scene -->
+      <rect x="0" y="25" width="360" height="130" fill="#0d0d20"/>
+      <!-- bokeh / depth of field -->
+      <circle cx="60" cy="90" r="40" fill="#7c6bff" opacity="0.04"/>
+      <circle cx="300" cy="80" r="55" fill="#ff6b9d" opacity="0.04"/>
+      <circle cx="180" cy="130" r="50" fill="#ffd166" opacity="0.03"/>
+      <!-- sharp subject (silhouette) -->
+      <ellipse cx="180" cy="140" rx="30" ry="50" fill="#1a1830"/>
+      <circle cx="180" cy="60" r="22" fill="#1a1830"/>
+      <!-- rim light effect -->
+      <ellipse cx="180" cy="60" rx="24" ry="24" fill="none" stroke="#7c6bff" stroke-width="3" opacity="0.4"/>
+      <ellipse cx="180" cy="60" rx="22" ry="22" fill="none" stroke="white" stroke-width="1" opacity="0.15"/>
+      <!-- anamorphic lens flare -->
+      <line x1="0" y1="55" x2="360" y2="58" stroke="#7c6bff" stroke-width="0.8" opacity="0.3"/>
+      <ellipse cx="180" cy="57" rx="80" ry="4" fill="#7c6bff" opacity="0.12"/>
+      <ellipse cx="180" cy="57" rx="30" ry="2" fill="white" opacity="0.15"/>
+      <!-- shallow DOF blur suggestion -->
+      <ellipse cx="40" cy="90" rx="30" ry="20" fill="#3a2060" opacity="0.1"/>
+      <ellipse cx="320" cy="100" rx="30" ry="25" fill="#602040" opacity="0.1"/>
+      <!-- grain overlay dots -->
+      <circle cx="80" cy="40" r="1" fill="white" opacity="0.1"/>
+      <circle cx="150" cy="35" r="1" fill="white" opacity="0.08"/>
+      <circle cx="250" cy="45" r="1" fill="white" opacity="0.1"/>
+      <circle cx="310" cy="140" r="1" fill="white" opacity="0.08"/>
+      <!-- cinematic label -->
+      <text x="180" y="170" text-anchor="middle" fill="#555" font-size="7" font-family="sans-serif" letter-spacing="5">C I N E M A T I C</text>
+    </svg>
+    <div class="preview-tag">High Production</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 19</div>
+    <div class="card-title">Hyper-Cinematic</div>
+    <div class="card-desc">Mood over information. Shallow depth of field, deliberate camera moves, color grading, pro audio. The aesthetic IS the message.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to write a deeply poetic, short monologue (40-60 words) for your niche. Film it cinematic-style with dramatic pauses and lens flares.</div>
+      <div class="idea"><span class="idea-num">2</span>Use Sora/Runway to generate ultra-cinematic establishing shots that would cost thousands to film. Pair with your own voiceover for zero-budget high production.</div>
+      <div class="idea"><span class="idea-num">3</span>Feed your script to AI: "Rewrite this in a cinematic, Christopher Nolan narration style." The writing upgrade alone changes the feel of your footage.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 20. ASPECT RATIO CHANGE -->
+<div class="card">
+  <div class="preview grad-blue">
+    <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="360" height="180" fill="#0d1535"/>
+      <!-- full screen frame -->
+      <rect x="10" y="10" width="155" height="160" rx="8" fill="#0d2040" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="87" y="65" text-anchor="middle" fill="#1d4ed8" font-size="8" font-family="sans-serif">9:16 VERTICAL</text>
+      <rect x="15" y="75" width="145" height="82" rx="4" fill="#1a3060" opacity="0.5"/>
+      <circle cx="87" cy="116" r="20" fill="#0d2040"/>
+      <path d="M78 108 L78 124 L98 116 Z" fill="#1d4ed8" opacity="0.7"/>
+      <!-- arrow in middle -->
+      <path d="M173 90 L187 90" stroke="#7c6bff" stroke-width="2" marker-end="url(#arrAR)" opacity="0.8"/>
+      <text x="180" y="110" text-anchor="middle" fill="#7c6bff" font-size="7" font-family="sans-serif">SHIFT</text>
+      <defs><marker id="arrAR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7c6bff"/></marker></defs>
+      <!-- letterboxed frame (cinematic) -->
+      <rect x="195" y="10" width="155" height="160" rx="8" fill="#0d1535" stroke="#7c6bff" stroke-width="1.5"/>
+      <!-- letterbox bars -->
+      <rect x="195" y="10" width="155" height="35" rx="8" fill="#050510"/>
+      <rect x="195" y="135" width="155" height="35" rx="8" fill="#050510"/>
+      <!-- cinematic content area -->
+      <rect x="195" y="45" width="155" height="90" fill="#0d2040"/>
+      <text x="272" y="72" text-anchor="middle" fill="#7c6bff" font-size="7" font-family="sans-serif">2.39:1 CINEMATIC</text>
+      <!-- scene inside cinematic crop -->
+      <circle cx="272" cy="95" r="22" fill="#1a2050"/>
+      <ellipse cx="264" cy="92" rx="4" ry="4.5" fill="#7c6bff" opacity="0.9"/>
+      <ellipse cx="280" cy="92" rx="4" ry="4.5" fill="#7c6bff" opacity="0.9"/>
+      <!-- dramatic moment text -->
+      <text x="272" y="128" text-anchor="middle" fill="#7c6bff" font-size="7" font-family="sans-serif" font-weight="700">DRAMATIC MOMENT</text>
+      <!-- bars label -->
+      <text x="272" y="28" text-anchor="middle" fill="#334155" font-size="6" font-family="sans-serif">◼ LETTERBOX</text>
+      <text x="272" y="155" text-anchor="middle" fill="#334155" font-size="6" font-family="sans-serif">◼ LETTERBOX</text>
+    </svg>
+    <div class="preview-tag">Frame Shift</div>
+  </div>
+  <div class="card-body">
+    <div class="card-num">Format 20</div>
+    <div class="card-title">Change of Aspect Ratio</div>
+    <div class="card-desc">The frame literally changes mid-video — cinematic letterbox bars drop in for emphasis, then snap back. The format itself creates drama.</div>
+    <div class="ai-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>3 AI Ideas</div>
+    <div class="ideas">
+      <div class="idea"><span class="idea-num">1</span>Use AI to identify the "mic drop moment" in your script — the most impactful single sentence. That's when you trigger the letterbox shift.</div>
+      <div class="idea"><span class="idea-num">2</span>Ask AI: "Write 5 one-sentence statements about [niche] that feel like movie quotes." Film them. Add letterbox bars and a cinematic score clip for each.</div>
+      <div class="idea"><span class="idea-num">3</span>Use CapCut's "cinematic crop" keyframe animation to automate the aspect ratio shift in post. No complex editing needed — two keyframes is all it takes.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /grid -->
+
+<div class="footer">
+  20 Content Formats Visual Guide · Built for DRT-Steve · 2025
+</div>
+
+</body>
+</html>

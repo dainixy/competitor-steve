@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitor Changelogs & Feature Release Timeline — May 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f13; color: #e0e0e8; line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, #1a0a2e, #2d1b4e); padding: 40px 48px 32px; border-bottom: 1px solid #2a2a3e; }
+  .header h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .header p { color: #9090a8; font-size: 14px; }
+  .badge { display: inline-block; background: #3a1020; border: 1px solid #6a2040; color: #ff8aaa; font-size: 11px; padding: 2px 10px; border-radius: 20px; margin-left: 12px; vertical-align: middle; }
+  .incomplete { display: inline-block; background: #2a2000; border: 1px solid #6a5000; color: #facc15; font-size: 11px; padding: 2px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 48px; }
+
+  h2 { font-size: 17px; font-weight: 700; color: #fff; margin: 44px 0 16px; padding-bottom: 10px; border-bottom: 2px solid #2a2a3e; }
+  h3 { font-size: 13px; font-weight: 700; color: #c08aff; margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+  /* Platform tabs */
+  .platform-section { margin-bottom: 48px; }
+  .platform-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding: 16px 20px; background: #13131c; border: 1px solid #2a2a3e; border-radius: 12px; }
+  .platform-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-ggpt { background: #ff6b9d; }
+  .dot-candy { background: #ff4da6; }
+  .dot-secret { background: #9b4dca; }
+  .dot-ourdream { background: #4da6ff; }
+  .platform-title { font-size: 18px; font-weight: 800; color: #fff; }
+  .platform-sub { font-size: 13px; color: #5a5a7a; margin-left: auto; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #2a2a3e; }
+
+  .entry { position: relative; margin-bottom: 28px; }
+  .entry::before { content: ''; position: absolute; left: -21px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #3a3a5e; border: 2px solid #2a2a3e; }
+  .entry.announcement::before { background: #c08aff; border-color: #8040cc; }
+  .entry.new-feature::before { background: #4ade80; border-color: #22aa55; }
+  .entry.improvement::before { background: #60a5fa; border-color: #3070cc; }
+  .entry.alert::before { background: #ff6b6b; border-color: #cc3333; }
+  .entry.policy::before { background: #facc15; border-color: #aa8800; }
+
+  .entry-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .entry-date { font-size: 12px; color: #5a5a7a; font-weight: 600; min-width: 90px; }
+  .entry-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 8px; border-radius: 4px; }
+  .tag-announcement { background: #2a1040; color: #c08aff; }
+  .tag-new { background: #0a2010; color: #4ade80; }
+  .tag-improvement { background: #0a1828; color: #60a5fa; }
+  .tag-alert { background: #2a0a0a; color: #ff6b6b; }
+  .tag-policy { background: #2a2000; color: #facc15; }
+
+  .entry-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .entry-body { font-size: 13px; color: #8080a0; line-height: 1.7; }
+  .entry-body ul { padding-left: 16px; margin-top: 6px; }
+  .entry-body ul li { margin-bottom: 3px; color: #9090b8; }
+  .highlight { color: #c08aff; font-weight: 600; }
+  .drt-relevance { background: #1a1028; border: 1px solid #4a2a6e; border-radius: 6px; padding: 8px 12px; margin-top: 10px; font-size: 12px; color: #a070e0; }
+  .drt-relevance::before { content: '→ DRT.FM: '; font-weight: 700; }
+
+  /* Cross-platform timeline */
+  .master-timeline { margin-top: 16px; }
+  .month-group { margin-bottom: 32px; }
+  .month-label { font-size: 13px; font-weight: 700; color: #6060a0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #1e1e2a; }
+  .master-entry { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #14141e; }
+  .master-entry:last-child { border-bottom: none; }
+  .master-source { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; white-space: nowrap; align-self: flex-start; margin-top: 2px; }
+  .src-ggpt { background: #2a1020; color: #ff6b9d; }
+  .src-candy { background: #200a18; color: #ff4da6; }
+  .src-secret { background: #1a0a28; color: #9b4dca; }
+  .src-ourdream { background: #0a1828; color: #4da6ff; }
+  .master-title { font-size: 14px; color: #d0d0e8; font-weight: 600; margin-bottom: 2px; }
+  .master-note { font-size: 12px; color: #5a5a7a; }
+
+  /* Summary boxes */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .summary-card { background: #13131c; border: 1px solid #2a2a3e; border-radius: 10px; padding: 18px; }
+  .summary-card h4 { font-size: 13px; font-weight: 700; color: #c08aff; margin-bottom: 10px; }
+  .feature-bullet { font-size: 13px; color: #9090b8; padding: 4px 0; border-bottom: 1px solid #1a1a26; display: flex; gap: 8px; }
+  .feature-bullet:last-child { border-bottom: none; }
+  .feature-bullet::before { content: '✓'; color: #4ade80; flex-shrink: 0; }
+  .missing-bullet { font-size: 13px; color: #9090b8; padding: 4px 0; border-bottom: 1px solid #1a1a26; display: flex; gap: 8px; }
+  .missing-bullet:last-child { border-bottom: none; }
+  .missing-bullet::before { content: '○'; color: #5a5a7a; flex-shrink: 0; }
+
+  .note-box { background: #100c00; border: 1px solid #4a3800; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #a07830; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Competitor Feature Release Changelogs <span class="badge">PRIVATE</span></h1>
+  <p>What competitors actually shipped, in order — sourced from official Beamer changelogs, notification centers, and review timelines · May 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- ===================== GPTGIRLFRIEND — FULL BEAMER ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot dot-ggpt"></div>
+      <span class="platform-title">GirlfriendGPT (gptgirlfriend.online)</span>
+      <span class="platform-sub">Source: official Beamer changelog · Jan 2025 → Apr 2026 · COMPLETE</span>
+    </div>
+
+    <div class="timeline">
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 27 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Most Powerful Chat Engine Yet (Elite Only)</div>
+        <div class="entry-body">Rolled out new engine ~3x more powerful than previous. Key improvements: balanced/mature tone, strong character consistency, handles multi-character scenes, better multilingual. Powers both SFW and NSFW.<ul><li>Available to Elite subscribers only</li><li>More controlled natural build-up — less rushing into explicit moments</li></ul></div>
+        <div class="drt-relevance">LLM upgrade is a clear retention driver. DRT.FM has runtime-switchable LLM (DeepSeek, Qwen, Grok) — could market this as "always on the best model" advantage.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 5 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Videos with Audio</div>
+        <div class="entry-body">Animated video clips with voice — character speaks during the video. Select "Generate Video" → "Video with Audio" in chat. Also: improved character moderation/resubmission flow (self-service, no support ticket needed).</div>
+        <div class="drt-relevance">Video with audio = animated character speaking = essentially what DRT.FM's 3D mode already does. DRT.FM's 3D TTS + animation is the premium version of this.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Jan 28 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Memory Manager Overhaul + GIF Avatars</div>
+        <div class="entry-body">Memory Manager redesigned:<ul><li>Disable memories toggle — turn off memory generation completely</li><li>Pinned memories stay at top</li><li>Custom Memories tab — view only user-edited memories separately from AI-generated</li></ul>GIF avatars now supported — animated character cards.</div>
+        <div class="drt-relevance">Memory Manager UI is exactly what DRT.FM's semantic_memories needs. Users want to SEE and CONTROL their memory. This is table stakes now.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jan 29 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Local Payment Methods (Asia + Middle East)</div>
+        <div class="entry-body">Added: GCash, Maya (PH), KakaoPay, Samsung Pay (KR), VietQR (VN), PayNow, NETS (SG), STC Pay, Apple Pay (SA). All one-time non-recurring payments for these regions.</div>
+      </div>
+
+      <div class="entry alert">
+        <div class="entry-meta"><span class="entry-date">Dec 22 2025</span><span class="entry-tag tag-alert">COMPLIANCE</span></div>
+        <div class="entry-title">Age Verification Rollout (FR, UK, IT, 20 US States)</div>
+        <div class="entry-body">Mandatory age verification for regulated regions. Privacy-first: third-party provider, no ID stored, yes/no result only. Methods: video selfie or ID. Pre-verified via credit card in some regions. NSFW restricted until verified.</div>
+        <div class="drt-relevance">This is coming for everyone. DRT.FM should plan for age verification now — choosing the right third-party partner (same as GGPT uses?) before it's mandatory.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Nov 21 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Video Length Doubled to 10 Seconds (Deluxe + Elite)</div>
+        <div class="entry-body">In-chat video generation now supports up to 10-second clips. Two model options: Lite (fastest) and Pro (highest quality). Available for both anime and realistic styles.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Oct 7 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Image to Video (Text-Prompt Guided)</div>
+        <div class="entry-body">Turn any generated image into a video with a text prompt. Works for all characters (male + female), custom prompts guide the scene direction, gallery support for saved images. Deluxe + Elite only.</div>
+        <div class="drt-relevance">Image-to-video is now table stakes. DRT.FM has RunPod video gen — this needs a user-facing UI.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Oct 6 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Image Uploads Restored (with Stricter Guidelines)</div>
+        <div class="entry-body">Image uploads for character creation restored after temporary removal. New rules: own/original artwork only, no real people, no photo-realistic AI images, must depict 18+ characters clearly.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Aug 28 2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Chat Model Settings (User-Controlled)</div>
+        <div class="entry-body">Users can now customize: Response length (short vs long), Descriptiveness (dialogue-focused vs immersive), POV (first vs third person), Format (screenplay vs novel style), NSFW escalation speed. Deluxe + Elite.</div>
+        <div class="drt-relevance">POV and format controls are easy wins for DRT.FM — chat already exists, it's just exposed settings.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Aug 18 2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Elite: 16K Context Memory (doubled from 8K)</div>
+        <div class="entry-body">Elite context window doubled. AI can reference further back in long conversations. Fewer dropped details in extended roleplays. Also upgraded Elite SFW model with multilingual support (119 languages).</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Aug 11 2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Video Generation: 3 Models (Default / Lite / Pro)</div>
+        <div class="entry-body">Three-tier video model selection. Default (all subs), Lite (Deluxe/Elite — fastest + better quality), Pro (Elite — highest quality, most accurate). User selects from chat settings.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jul 8 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Video Generation for All Subscribers</div>
+        <div class="entry-body">Previously Deluxe/Elite only. Now available to all paid subscribers. Deluxe/Elite get priority rendering (20% faster). Female characters only at launch.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 21 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Video Generation Launched (Deluxe + Elite)</div>
+        <div class="entry-body">First video generation launch. Female characters, 5 preset NSFW scenes, looping videos. Access via "Ask Video" in chat. Deluxe + Elite only at launch.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 12 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Voice Restored (New Provider, Cloned Voices)</div>
+        <div class="entry-body">Voice feature restored after outage. Switched to new voice generation service. Previous voices cloned to maintain familiarity. Community can assign new voices to characters.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Mar 7 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Elite Tier Launched</div>
+        <div class="entry-body">New top tier: 10x more powerful model, unlimited messages, 2000 bonus coins. 20% increase in engagement time in tests. Better memory, coherence, and natural flow.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Jan 24 2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">SFW Model Upgrade + Improved Suggestions</div>
+        <div class="entry-body">AI stops "speaking for you" — major immersion fix. +20% positive feedback post-rollout. Suggestions now support regeneration, inline edits, and more original responses.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== CANDY.AI ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot dot-candy"></div>
+      <span class="platform-title">Candy.AI (candy.ai)</span>
+      <span class="platform-sub">Source: official Discord announcements + review timelines · Mar 2026 → Apr 2026 (Discord) + late 2025 (reviews)</span>
+    </div>
+    <div class="timeline">
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 10 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Community Made Characters — Beta Tool + Community Tab</div>
+        <div class="entry-body">12 community-created characters launched from a beta tool Discord members tested. New "Community" tab on the girlfriend page. Rollout: small group → 50% → all users based on reception. Full character creation tool being developed for public release.
+        <div class="drt-relevance">Candy is moving toward user-created characters — same direction as OurDream and Promptchan. DRT.FM's single-character model is a deliberate brand choice, but worth monitoring whether users want to create their own.</div></div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 9 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Phone Calls Upgraded — Live Transcript + Images/Video DURING Calls</div>
+        <div class="entry-body">Phone calls reworked significantly. New capabilities:<ul>
+          <li>Sticks to the scenario — feels like part of the chat, not a separate call</li>
+          <li>Upgraded emotions and sounds (including arousal sounds)</li>
+          <li><strong>Live transcript in chat</strong> — call content drops into the chat history</li>
+          <li><strong>Generate images and videos during the call</strong> — visual + audio simultaneously</li>
+        </ul>Rolling out to 50%+ of users initially.</div>
+        <div class="drt-relevance">Generating images AND video DURING a voice call — while the character is speaking — is the most advanced voice+visual integration in the category. DRT.FM's 3D mode + Hume TTS is structurally the same thing, just with a 3D character instead of a 2D image. This needs to be marketed that way.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 8 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Romance Mode + Gift-Giving Mechanic (Testing on Lara + Skye)</div>
+        <div class="entry-body">Testing on two characters: relationship progression from first encounter to deeper connection. Gift-giving: offer gifts to character, character reactions depend on picking the right gift at the right moment. Gift mechanic affects relationship state. Rolled out to 50% of users on these characters initially.</div>
+        <div class="drt-relevance">Gift-giving as a relationship mechanic creates investment and spending moments. Users buy tokens to give gifts. Strong monetization mechanic wrapped in emotional progression.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 10 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Clone Chats + Rename Chats</div>
+        <div class="entry-body">Clone any conversation: either as a fresh new chat OR with the full chat history and memory. Each user gets 2 cloned conversations. Remove a clone to make space for a new one. Rename chats to track different storylines. "Highly requested by power users."</div>
+        <div class="drt-relevance">Cloning a chat with full history = explore alternate scenarios without losing the main relationship. Users with deep investment in a chat will love this. Low complexity to build, very high perceived value.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Mar 6 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Candy Assistant — In-Platform AI Helper</div>
+        <div class="entry-body">AI assistant available in chat to help users navigate and use the platform. Not a roleplay character — purely for support. Feedback via "FEEDBACK:" prefix in messages. Rolled out to partial users first, then everyone. Users warned "she's just started the job and has to learn."</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 5 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Roleplay Mode Update — AutoMemory + Phone Calls (Testing)</div>
+        <div class="entry-body">Testing two major Roleplay Mode features:<ul>
+          <li><strong>Phone/Audio Calls in Roleplay Mode</strong> — call character, then seamlessly resume chatting. Character retains full awareness of what was said in the call.</li>
+          <li><strong>AutoMemory</strong> — as chat continues, key events auto-summarized into a list for continuity. Prevents long-chat consistency degradation.</li>
+        </ul>Also: testing rollout of Roleplay Mode to existing users via opt-in (per-chat basis).</div>
+        <div class="drt-relevance">AutoMemory = the solution to the #1 pain point (memory failures). DRT.FM's semantic_memories already exists — this is exactly the UI/UX wrapper it needs.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 16 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Roleplay Mode Opt-In + CMAIs Default to Roleplay Mode</div>
+        <div class="entry-body">CMAIs (Custom Made AIs) now default to Roleplay Mode. Existing premade characters: small opt-in popup to switch to Roleplay Mode per chat. Opt-in is permanent (can't opt back out). New premade characters: Roleplay Mode on by default. Very small initial rollout with data collection.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 19 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Roleplay Mode Roadmap Update — SMTS Button + Memory Fixes Planned</div>
+        <div class="entry-body">Rolled back opt-in test (characters won't auto-update to Roleplay Mode for users who haven't interacted). Confirmed: early data shows Roleplay Mode driving strong engagement. Active development areas:<ul>
+          <li><strong>AutoMemory</strong> — testing as solution for long-chat consistency degradation</li>
+          <li><strong>SMTS (Show Me The Scene)</strong> button — frictionless image gen in Roleplay Mode, already live</li>
+          <li><strong>Phone Calls</strong> — reviewing implementation into Roleplay Mode</li>
+          <li>Image/video consistency within Roleplay Mode</li>
+        </ul></div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 2026</span><span class="entry-tag tag-announcement">MAJOR RELEASE</span></div>
+        <div class="entry-title">v4.5 — Story Mode + Live Action + Prompt-Sync + Lumina-Realism</div>
+        <div class="entry-body">Four pillar technologies launched together:<ul>
+          <li><strong>Story Mode</strong> — AI auto-generates contextual images timed to roleplay narrative, no manual request needed. The SMTS button is part of this.</li>
+          <li><strong>Live Action Mode</strong> — 120-second animated video clips, character moves/gestures/reacts to messages</li>
+          <li><strong>Prompt-Sync</strong> — image prompts auto-synced to conversation context</li>
+          <li><strong>Lumina-Realism</strong> — upgraded image engine, photorealistic output</li>
+        </ul></div>
+        <div class="drt-relevance">Story Mode (images auto-appearing in chat tied to narrative) is the #1 most-cited Candy feature in reviews. DRT.FM needs this: when Alexis describes a scene, she should auto-send a matching image of herself in that scene.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Voice Calls — Roleplay Mode + Casual Mode</div>
+        <div class="entry-body">Real-time voice calls with two modes: Roleplay Mode (fully in-character) and Casual Mode (natural conversation). High-quality AI voices.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Feb 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Live Action Video — Major Upgrade</div>
+        <div class="entry-body">Live Action upgraded after December 2025 launch. More fluid motion, real-time reactions, improved lip sync.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Dec 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Live Action Video Launched — 120-Second Animated Clips</div>
+        <div class="entry-body">First video generation for Candy. Character moves, gestures, reacts to messages. Category-first launch. Immediately became top-cited feature in reviews.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Late 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Story Mode + V2 Image Engine</div>
+        <div class="entry-body">Story Mode: pick scenario, AI generates contextual images as story progresses. V2 image engine: photorealistic, "hard to tell if AI or real."</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 3 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Male CMAI Custom Fields</div>
+        <div class="entry-body">Male Custom Made AIs now support custom fields — same as female CMAIs already had.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== SECRET DESIRES ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot dot-secret"></div>
+      <span class="platform-title">Secret Desires AI (secretdesires.ai)</span>
+      <span class="platform-sub">Source: public API (api.secretdesires.ai/api/system_notifications) · Nov 2024 → Apr 2026 · COMPLETE</span>
+    </div>
+    <div class="timeline">
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 28 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">🔥 Inferno — New NSFW Video Engine</div>
+        <div class="entry-body">Brand new explicit video engine for uncensored animated video. Flat pricing: 5s = 24 hearts, 8s = 39 hearts. Standard Seraph engine stays at 8h/5s and 16h/10s. Also: Intoxicate graduated; Magnetism (free) + Juicy (2h) new experimental engines.</div>
+        <div class="drt-relevance">Named video engines with flat pricing = users know exactly what they pay. "Inferno" as a branded product builds identity. DRT.FM's RunPod video gen needs this same positioning.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 3 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">April Update: Vermeer Image Engine + Auto-Memory + Creator Vision</div>
+        <div class="entry-body"><ul>
+          <li><strong>Vermeer</strong> — new image engine, quality step-up, NSFW coming soon</li>
+          <li><strong>Auto-Memory</strong> — partners automatically build memory of the user in the background, separate from manual Memory Notes. Grows without user doing anything.</li>
+          <li>New mobile Image Generation Page — cleaner UX</li>
+          <li>Usernames, retry on failed images, gallery sync, mobile iOS/Android reliability</li>
+          <li><strong>Vision: "YouTube of AI companions"</strong> — creator profiles, partner leaderboards, community discovery, tattoos/body mods expansion</li>
+        </ul></div>
+        <div class="drt-relevance">Auto-Memory with zero user friction is the goal for DRT.FM's semantic_memories. Build invisibly, surface visibly.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 18 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Chat Engine Lineup — 7-Dimension Star Ratings per Engine</div>
+        <div class="entry-body">Each engine rated 1-5 stars across: <strong>Spice · EQ · Memory · Creativity · Speed · Texting · Roleplay</strong>. New: Bewitch (Ultra), Fascination (Max), Entwine (0.5h), Gravity (2h), Darling (4h). Flagship DesireXXX (4h) = ★★★★★ on EQ, Memory, Creativity, Roleplay.</div>
+        <div class="drt-relevance">DRT.FM has runtime-switchable LLMs. Adding per-model labels/descriptions = instant UX win with no development cost.</div>
+      </div>
+
+      <div class="entry alert">
+        <div class="entry-meta"><span class="entry-date">Mar 15 2026</span><span class="entry-tag tag-alert">TRUST</span></div>
+        <div class="entry-title">Security &amp; Trust Overhaul — SOC 2 + Pen Testing + Zero Data Retention</div>
+        <div class="entry-body">SOC 2 Type I &amp; II (via Delve), pen testing (BSK Security + Casco), zero-data-retention AI providers, conversations never leave infrastructure on self-hosted models, improved moderation, Transparency Report launching Jun 30. Pages: /trust, /security, /transparency.</div>
+        <div class="drt-relevance">SecretDesires had a 1.9M image cloud storage leak in 2025. This is their recovery. A /trust page is now standard for serious players in NSFW.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Feb 3 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">15+ Chat Engines with Full Ratings Matrix Launched</div>
+        <div class="entry-body">Free (Love/Adore) → Pro (Blossom/Velocity) → Ultra (Devotion/Reverie) → Max (Obsession/Phoenix) → Hearts-based (0.3h–4h). DesireXXX flagship at 4 hearts. Pre-announced 24h in advance with maintenance window.</div>
+      </div>
+
+      <div class="entry alert">
+        <div class="entry-meta"><span class="entry-date">Jan 25 2026</span><span class="entry-tag tag-alert">INCIDENT</span></div>
+        <div class="entry-title">Site Stability — Upstream Infrastructure Issue</div>
+        <div class="entry-body">Upstream provider problem causing slowdowns and intermittent failures. Engineering deployed mitigations real-time. Resolved.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Jan 13 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">January Mega Fix — 50+ Bugs (Biggest Release)</div>
+        <div class="entry-body">Voice: audio for Pro fixed, narration stops fixed, bold/italic text now read aloud. Images: black screen fixed, failed images don't deduct hearts, re-gen doesn't delete original. Live Images: instant-fail + hearts-on-fail both fixed. Chat: double-submit, engine reverting, gender in opening messages all fixed. Mobile: iOS/Android consistency, scroll bars, close buttons.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Sep 29 2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Devotion/Obsession Engines + Rating Tooltips + V3 Mobile</div>
+        <div class="entry-body">New top-tier: Devotion (Ultra), Obsession (Max). Per-engine tooltips with category ratings. V3 mobile chat page, shareable character links, duplication fixes.</div>
+      </div>
+
+      <div class="entry alert">
+        <div class="entry-meta"><span class="entry-date">Jul 9 2025</span><span class="entry-tag tag-alert">OPS</span></div>
+        <div class="entry-title">Payment Processor Switched + 100 Hearts Gift</div>
+        <div class="entry-body">Bank flagged the business; switched to new processor. 100 hearts gifted to all active subscribers during transition.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Jun 6 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Chat Engine Rework + DaVinci Major Update</div>
+        <div class="entry-body">New lineup: Love (free), Cupid (0.3h), Sage (0.5h). DaVinci: major quality + speed upgrade. Homepage filters fixed, faster responses, notification bell one-time trigger fixed, images no longer need page refresh.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 18 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">DaVinci Model + Manual Memory + Face Swap Removed</div>
+        <div class="entry-body">DaVinci (beta) blend of Picasso + Monet. Max-exclusive experimental engines. Manual Memory Notes for partner. <strong>Face swap removed</strong> — payment processor bank ultimatum: remove it or lose payment processing entirely.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 15 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Desire Chat Engine — "Best Ever" (1 Heart/Message)</div>
+        <div class="entry-body">Costs 4x to run vs standard. Priced at 1h/message. Plan: price drops as AI gets cheaper, eventually becomes free. All previous cutting-edge engines discontinued except Pinnacle (0.25h).</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 11 2025</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Picasso Engine + NSFW Live Photos Restored + Monet Improved</div>
+        <div class="entry-body">Picasso: new SFW image engine. Monet: original renamed, better lighting + prompt adherence. NSFW Live Photos back: 5-second videos, 1-3 min generation time.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Feb 28 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Image Overhaul + Free Tier Expansion + Video Pricing</div>
+        <div class="entry-body">Better unique faces, faster generation. Free: 30→90 daily messages, no character limits, Passion engine. Video pricing: 8h/5s, 16h/10s. 100 hearts gift to subscribers.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Dec 28 2024</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">12 Days of Christmas Summary (Dec 13-24)</div>
+        <div class="entry-body"><ul>
+          <li>Community Character Sharing</li>
+          <li>Character-specific settings (About Me, age, name, preferences)</li>
+          <li><strong>User sends images to partner</strong> — upload photos into conversation</li>
+          <li>Live Images on public characters</li>
+          <li>Voice narration toggle for actions/thoughts (asterisk text)</li>
+          <li>Record + send voice notes via mic icon</li>
+          <li>Multiple new chat engines; global texting/roleplay mode toggle</li>
+        </ul></div>
+        <div class="drt-relevance">User sending images to the character is heavily requested across all platforms. DRT.FM doesn't have this.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Dec 5 2024</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Spontaneous Notifications + Proactive Images + Message Validation</div>
+        <div class="entry-body">AI proactively messages user throughout the day (retention mechanic). AI spontaneously sends images during roleplay. Auto-retry on low-quality messages before delivering. Upgraded NSFW image model.</div>
+        <div class="drt-relevance">AI-initiated messages = strong daily re-engagement. The AI reaching out first drives daily active return. High retention impact for DRT.FM to consider.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== OURDREAM ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot dot-ourdream"></div>
+      <span class="platform-title">OurDream.AI (ourdream.ai)</span>
+      <span class="platform-sub">Source: official Discord announcements · Jan 2026 → May 2026 · COMPLETE for this period</span>
+    </div>
+    <div class="timeline">
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 9 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Spicy 2.0 — New High-Quality Video Model with NSFW Sound</div>
+        <div class="entry-body">Higher overall video quality, better long-form generations, NSFW sound support out of the box. Spicy 1.0 stays available. More video improvements coming.</div>
+        <div class="drt-relevance">Video with NSFW sound is now available on OurDream. DRT.FM's RunPod video + Hume AI voice is the premium version of this — needs to be user-accessible.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 7 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Voice Calls Rebuilt + Transcription + Character Voice Matching</div>
+        <div class="entry-body">Voice calls rebuilt from the ground up with a more stable backend. New: calls transcribed (user + character) and dropped into chat alongside text. Calls closely match selected character voice. Fixed: empty/ghosted calls. Bug discovered: billing glitch overcharged some users, auto-refund issued.</div>
+        <div class="drt-relevance">Transcribing voice calls into chat history is a smart UX move — conversation continuity. DRT.FM's WebSocket-based 3D engine could benefit from this.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 2 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Vivid Characters — Realistic Images in Chat</div>
+        <div class="entry-body">Create characters using the Vivid image model. Benefits: more realistic images, Vivid images in chat, better character + image prompt adherence. Works better with natural language prompts. Improved Ultra video compatibility.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Apr 30 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Video Autoplay Reworked + Interaction Counts Re-engineered</div>
+        <div class="entry-body">Desktop: videos stop autoplaying on homepage, play on hover. Mobile: only top row autoplays. Interaction counts re-engineered for accuracy and reliability after repeated issues.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 24 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Hidden Tags — Filter Content from Homepage</div>
+        <div class="entry-body">Users can hide specific character tags in Profile → Preferences. Hidden characters won't appear on homepage or search results. (Example: hide NTR/cheating content.)</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 20 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">$5,000 Character Contest Launched</div>
+        <div class="entry-body">Engagement-based competition — likes, chats, photos, videos all count. Grand prize: $5,000 real money. Designed to encourage sharing on Twitter/X, Reddit, TikTok. Community-building + marketing play.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 14 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Automod Character Approval + Smart Suggestions</div>
+        <div class="entry-body">Automod now gives suggestions for getting characters approved automatically. No more waiting in queue. Shows images eligible for auto-approval. Manual queue reserved for genuinely complex cases.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Apr 11 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Video Editing via Text Prompt (Live) + Ultra 1080p Upgrade</div>
+        <div class="entry-body">Video editing with text prompt: find on generate page or Edit button in fullscreen. Ultra videos upgraded to 1080p (from 720p) with finer detail.</div>
+        <div class="drt-relevance">Text-prompt video editing is a creative power tool. DRT.FM's RunPod video infrastructure should explore this as a next step after basic video gen.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 24 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Community Presets Live — Create &amp; Share Poses/Outfits/Backgrounds</div>
+        <div class="entry-body">Create custom pose/outfit/background presets from generate flow. Submit for public featuring. Browse community presets. Filter by "My Presets." New Profile Presets tab added. Social creative layer on top of image gen.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 20 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Search by Creator + Chat UX Improvements + Chat History Grouping</div>
+        <div class="entry-body">Search homepage by specific creator. Chat settings closeable with one hand. Chat history groups by date, shows custom chat titles. Cleaner layout.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 15 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Official Changelog Launched + Chat Settings Defaults + Group Chat Mute</div>
+        <div class="entry-body">Public changelog at ourdream.ai/feedback#changelog. Chat Settings can now set defaults for all future chats (model, persona, instructions). Persona moved to chat page. Mute characters in group chats (they stay in story but don't auto-respond).</div>
+        <div class="drt-relevance">OurDream launched a public changelog after user feedback — shows the community demands visibility into updates. Same mechanic Candy users love ("something new every login").</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 10 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Roleplay as a Character (Persona) + Rename Chats</div>
+        <div class="entry-body">Select any character as your persona — includes their description, personality, backstory. Soon: include persona in images. Rename chats to track your stories.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 2 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Immersive Voice Calls — Arousal Bar + 10,000+ Voices + Scene-Matched Videos</div>
+        <div class="entry-body">Voice calls completely rebuilt. Features: talk/type/interrupt mid-call, AI arousal bar, autonomous story mode (watch it unfold), 10,000+ voice options, AI might moan if "it really likes you", images come with pre-filled video prompts that match the scene/story.</div>
+        <div class="drt-relevance">10,000+ voices + arousal state + scene-matched video prompts = the most immersive voice call in the category. DRT.FM's Hume AI voice needs comparable expressiveness to compete.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Mar 4 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Vivid-2 — Better at Explicit Poses, 60 Pose Presets</div>
+        <div class="entry-body">Vivid-2: keeps realism + prompt adherence, much better at explicit poses. 60 pose presets (more coming). Natural language prompts work better. Coming to characters + chat images soon.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Feb 17 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Voice Calls Rebuilt from Ground Up + Vivid Model Pose Quality Upgrade</div>
+        <div class="entry-body">Voice calls completely rebuilt — new architecture. Vivid model: major improvement to pose quality across all vivid images.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Feb 15 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">In-App Feedback — Report Bugs, Suggest Features, Vote on Ideas</div>
+        <div class="entry-body">Feedback system built directly into the app at ourdream.ai/feedback. Report bugs, suggest features, vote on ideas — replaces Discord-only feedback. Opens to non-Discord users too.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Feb 2 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Multi-Language Chat — Auto Language Detection</div>
+        <div class="entry-body">Auto-detects language within first 5 messages and switches automatically. Language setting in chat to switch anytime. Character details + initial messages translated for most public characters.</div>
+        <div class="drt-relevance">Multi-language is a significant expansion for non-English markets. DRT.FM's runtime-switchable LLMs (Qwen supports Chinese) could enable this without new infra.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jan 16 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Group Chat Restyled + Image Editing in Chat + Design with AI Upgrade</div>
+        <div class="entry-body">New group chat: multi-character selector on creation. Image editing now available inside chat. Design with AI: faster, smarter, better prompt adherence. Edit First Reply: customize (or auto-generate) your character's opening message.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jan 13 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Fluidity (Anime Experimental) + Gallery v2 + Character Filter on Generate</div>
+        <div class="entry-body">Fluidity: new experimental anime image model (wider style range, more control). Gallery v2: cleaner layouts, smoother performance, hover-to-play on desktop. Character filter on generate page (search + followed filter).</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jan 9 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Full Screen Gallery — Infinite Scroll, Zoom, Autoplay Video</div>
+        <div class="entry-body">New fullscreen gallery: infinite scroll with thumbnails bar, no need to leave fullscreen to load media. Double-tap/pinch to zoom images. Generating new media doesn't shift current image. Autoplay videos. Landscape view on mobile + pull down to close.</div>
+      </div>
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">Jan 1 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Image Resizing + New Experimental Edit Model (Explicit Parts)</div>
+        <div class="entry-body">Image resizing live — edit any image and adjust orientation; scene auto-extrapolated. New experimental image editing model: performs better for explicit content. Available in Advanced Settings when editing.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Dec 31 2025</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Dreamer Program Level 2 (Lucid Dreamer) + Community Creator Page</div>
+        <div class="entry-body">Lucid Dreamer level unlocked: earn DreamCoins when users buy your character's community packs. New community page celebrating best creators. Level 3 (Dream Architect) = real money earnings — coming soon. Referral bonus: 10,000 DreamCoins per 10 referrals, unlimited.</div>
+        <div class="drt-relevance">Creator monetization is a long-term platform strategy. OurDream is building toward a creator economy. Not immediately relevant for DRT.FM's single-character model, but worth noting as a direction.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== PROMPTCHAN ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot" style="background:#ff9f43"></div>
+      <span class="platform-title">Promptchan (promptchan.com)</span>
+      <span class="platform-sub">Source: official Discord announcements (#announcements) · Feb 2026 → May 2026 · COMPLETE for this period</span>
+    </div>
+    <div class="timeline">
+
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 11 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Anime XL 2 — Better Quality, Anatomy, Multi-Character Scenes</div>
+        <div class="entry-body">New anime style: better prompt accuracy, anatomy, faces, outfits, scene consistency — especially for complex prompts, multi-character scenes, and expressions. Includes all Anime XL+ Poses/Filters, Detail Slider, new attribute sliders. <strong>Extend Videos</strong> announced as next top priority — nearly done.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 29 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Chat v2.5 (Biggest Chat Update) + Realism XL 2 + Video API</div>
+        <div class="entry-body"><ul>
+          <li><strong>Realism XL 2</strong> — most true-to-life style yet, natural straight-out-of-camera look</li>
+          <li><strong>Chat v2.5</strong> — smarter/deeper/spicier roleplay with Pro and Fast modes</li>
+          <li><strong>Create Image from Scene</strong> — turns chat moments into accurate images by understanding what's happening in the conversation (with Animate support)</li>
+          <li>Discover feed with curated + regularly updated characters</li>
+          <li>First Message — characters start the conversation (proactive AI)</li>
+          <li>"Delete All" characters option</li>
+          <li>Video generation now available in API</li>
+          <li>Smarter moderation (better context, fewer bans)</li>
+        </ul></div>
+        <div class="drt-relevance">"Create Image from Scene" is exactly Candy's Story Mode / Promptchan's Companion Loop — the #1 most-praised 2026 feature. DRT.FM needs this: images that appear in chat matching the current scene.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">May 5-6 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Chat Images: Publish, Cache, History + Realism XL 2 for Chat</div>
+        <div class="entry-body"><ul>
+          <li>Realism XL 2 now working for chat image generation</li>
+          <li>Can now publish chat images</li>
+          <li>Chat images cached — no longer disappear after changing pages</li>
+          <li>Chat is faster — no more page reloads for actions like clearing chat</li>
+          <li>Chat history limit extended for longer conversations</li>
+        </ul></div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Apr 2 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Easter Sale + Upcoming Feature Teaser</div>
+        <div class="entry-body">70% off Gems + first upgrades. Teased "much awaited upgrades and features" coming over next few weeks.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 7 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Moderation Fixes + Redo Button + Public Download Fixed</div>
+        <div class="entry-body">Reduced many unintended banned words — prompts less likely to be incorrectly filtered. Redo button restored. Fixed downloading public images/videos. Added AI Character for applicable videos.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 5 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Bug Fixes: Render XL, Download, Workflow UI, AI Character Presets</div>
+        <div class="entry-body">Fixed Render XL AI Character outputs. Fixed Download button. Improved Save File for instant downloading. New button to save from download history. Workflow UI: search + rename workflows. Fixed + added new AI Character presets. Faster loading for Explore and Profile feeds.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Mar 3 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Database Migration + Profile Data Fixes</div>
+        <div class="entry-body">Post-migration patch: images not loading for certain profiles fixed. Profile data inconsistencies addressed. Ongoing moderation filter refinement.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Feb 25 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Private Publish Restored + Audio Back + Unlimited Profile Sorting</div>
+        <div class="entry-body"><ul>
+          <li>Private Publish mode restored</li>
+          <li>Audio for video restored</li>
+          <li>Profile sorting restored: Newest, Oldest, Most Viewed, Most Liked</li>
+          <li>Profile now shows ALL content — previous 10,000 item cap removed</li>
+          <li>AI characters in chat now match original image style when generating</li>
+          <li>Ban system refined — fewer false positives</li>
+        </ul></div>
+      </div>
+
+      <div class="entry alert">
+        <div class="entry-meta"><span class="entry-date">Feb 19 2026</span><span class="entry-tag tag-alert">MAINTENANCE</span></div>
+        <div class="entry-title">Audio Temporarily Disabled — Backend Upgrades</div>
+        <div class="entry-body">Audio disabled while rolling out backend upgrades. Video publishing also affected. No Gems charged during downtime.</div>
+      </div>
+
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">Feb 17 2026</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Valentine's Issue Resolved + Cinematic HT Restored + Free User Improvements</div>
+        <div class="entry-body">Valentine's plan upgrade bug fixed, extra Gems given as compensation. Cinematic HT restored. Unlimited profile viewing and Export for free users restored. Ban system refined.</div>
+      </div>
+
+      <div class="entry announcement">
+        <div class="entry-meta"><span class="entry-date">Feb 12 2026</span><span class="entry-tag tag-announcement">ANNOUNCEMENT</span></div>
+        <div class="entry-title">Major Platform Update: Privacy Plus + Unlimited Profiles + Auto Save</div>
+        <div class="entry-body"><ul>
+          <li><strong>Privacy Plus</strong> — generated content now fully private and unpublished by default; Animate works without publishing first; hover to publish when ready</li>
+          <li><strong>Save All + Auto Save</strong> for easier content management</li>
+          <li>Improved AI safety system — better community protection, fewer false positives</li>
+          <li>Unlimited profile — 10,000 item cap removed</li>
+          <li>Export now correctly includes all videos with folders in CSV</li>
+          <li>Coming: Extend for Video, new high-realism image model</li>
+        </ul></div>
+        <div class="drt-relevance">Content private by default is a significant privacy-first move. For NSFW, users worry about generated content being visible. DRT.FM should consider whether generated images are private by default.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== JOI.AI ===================== -->
+  <div class="platform-section">
+    <div class="platform-header">
+      <div class="platform-dot" style="background:#f9ca24"></div>
+      <span class="platform-title">Joi.AI (joi.ai)</span>
+      <span class="platform-sub">⚠ No public changelog — in-app notifications require paid auth · Reconstructed from reviews · Subscribe to capture full history</span>
+    </div>
+    <div class="timeline">
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">May 2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Voice Calls — Roleplay Mode + Casual Mode</div>
+        <div class="entry-body">Real-time voice calls, two modes: fully in-character (Roleplay) or natural back-and-forth (Casual). High-quality AI voices. Gradual rollout.</div>
+      </div>
+      <div class="entry new-feature">
+        <div class="entry-meta"><span class="entry-date">2026</span><span class="entry-tag tag-new">NEW</span></div>
+        <div class="entry-title">Dream Clips (Video) + Privacy Shield (V4)</div>
+        <div class="entry-body">Video-style Dream Clips for premium. V4 introduced localized encryption for Dream Clips and private chat logs.</div>
+      </div>
+      <div class="entry improvement">
+        <div class="entry-meta"><span class="entry-date">2025</span><span class="entry-tag tag-improvement">IMPROVEMENT</span></div>
+        <div class="entry-title">Multi-LLM Engine + NSFW Intensity Levels + Boundary Memory</div>
+        <div class="entry-body">Three specialized LLMs: Romantic (emotional), Roleplay (fantasy), Adaptive (NSFW). Three NSFW intensity levels: soft/medium/explicit. Boundary memory — AI remembers preferences across sessions. 6 LLM models exposed to users.</div>
+      </div>
+      <div class="note-box" style="margin-top:12px;">To capture Joi.ai's full in-app notification history: subscribe to their cheapest plan ($17.77/mo), log in, and the same API-intercept technique used for SecretDesires will work on their /back/ notification endpoints.</div>
+    </div>
+  </div>
+
+
+  <!-- ===================== MASTER TIMELINE ===================== -->
+  <h2>Master Feature Release Timeline (All Competitors)</h2>
+  <div class="master-timeline">
+
+    <div class="month-group">
+      <div class="month-label">May 2026</div>
+      <div class="master-entry"><span class="master-source src-candy">Candy.AI</span><div><div class="master-title">Voice Calls — Roleplay Mode + Casual Mode</div><div class="master-note">Real-time voice, two conversation styles</div></div></div>
+      <div class="master-entry"><span class="master-source src-ourdream">OurDream</span><div><div class="master-title">Real-Time Voice Calls</div><div class="master-note">Roleplay + Casual modes, gradual rollout</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">April 2026</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">New Chat Engine — 3x More Powerful (Elite)</div><div class="master-note">Better character consistency, multi-character scenes, multilingual</div></div></div>
+      <div class="master-entry"><span class="master-source src-secret">SecretDesires</span><div><div class="master-title">New NSFW Video Engine</div><div class="master-note">Full details pending login</div></div></div>
+      <div class="master-entry"><span class="master-source src-secret">SecretDesires</span><div><div class="master-title">April Platform Update</div><div class="master-note">Full details pending login</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">March 2026</div>
+      <div class="master-entry"><span class="master-source src-candy">Candy.AI</span><div><div class="master-title">v4.5 — Story Mode + Live Action + Prompt-Sync + Lumina-Realism</div><div class="master-note">Biggest release of the year — auto narrative images, video, photorealism</div></div></div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Videos with Audio (animated clips + voice)</div><div class="master-note">Character speaks during video; self-service moderation resubmission</div></div></div>
+      <div class="master-entry"><span class="master-source src-secret">SecretDesires</span><div><div class="master-title">Security & Trust Overhaul + Chat Engine Update</div><div class="master-note">Two updates in one month — compliance push</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">February 2026</div>
+      <div class="master-entry"><span class="master-source src-candy">Candy.AI</span><div><div class="master-title">Live Action Video — Major Upgrade</div><div class="master-note">More fluid motion, real-time reactions, improved lip sync</div></div></div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Memory Manager Overhaul + GIF Avatars</div><div class="master-note">Disable/pin/filter memories; animated character cards</div></div></div>
+      <div class="master-entry"><span class="master-source src-secret">SecretDesires</span><div><div class="master-title">Chat Engine Update</div><div class="master-note">Details pending login</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">January 2026</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Local Payment Methods (Asia + Middle East)</div><div class="master-note">GCash, KakaoPay, VietQR, PayNow, STC Pay, Apple Pay</div></div></div>
+      <div class="master-entry"><span class="master-source src-secret">SecretDesires</span><div><div class="master-title">Site Stability Incident</div><div class="master-note">Details pending login</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">December 2025</div>
+      <div class="master-entry"><span class="master-source src-candy">Candy.AI</span><div><div class="master-title">Live Action Video — Initial Launch</div><div class="master-note">120-second animated clips — category first</div></div></div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Age Verification Rollout (FR, UK, IT, 20 US states)</div><div class="master-note">Third-party, privacy-first; NSFW blocked without verification</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">November 2025</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Video Length → 10 Seconds</div><div class="master-note">Doubled from 5 seconds; Lite + Pro model tiers</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">October 2025</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Image to Video (text-prompt guided)</div><div class="master-note">Turn any generated image into a video with text prompt</div></div></div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Image Uploads Restored (new guidelines)</div><div class="master-note">No real people; own/original artwork only</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">Late 2025</div>
+      <div class="master-entry"><span class="master-source src-candy">Candy.AI</span><div><div class="master-title">Story Mode + V2 Image Engine</div><div class="master-note">Contextual narrative images; photorealistic V2 engine</div></div></div>
+      <div class="master-entry"><span class="master-source src-ourdream">OurDream</span><div><div class="master-title">Community Presets + Video Editing via Text Prompt</div><div class="master-note">Social sharing of poses/outfits; text-guided video editing</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">August 2025</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Chat Model Settings (user-controlled)</div><div class="master-note">Length, POV, format, descriptiveness, NSFW speed — all configurable</div></div></div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Elite: 16K Context + Video Model Tiers (Default/Lite/Pro)</div><div class="master-note">Double context window; three video quality/speed options</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">May 2025</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Video Generation Launched</div><div class="master-note">First in category — female characters, 5 NSFW scenes, Deluxe+Elite</div></div></div>
+    </div>
+
+    <div class="month-group">
+      <div class="month-label">March 2025</div>
+      <div class="master-entry"><span class="master-source src-ggpt">GirlfrndGPT</span><div><div class="master-title">Elite Tier + Voice Restored</div><div class="master-note">10x model, unlimited messages; voice back with new provider</div></div></div>
+    </div>
+
+  </div>
+
+
+  <!-- ===================== WHAT TO TELL STEVE ===================== -->
+  <h2>What This Tells Steve to Build — Feature Priority from Changelog Data</h2>
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <h4>Features Every Competitor Shipped in 2025–2026</h4>
+      <div class="feature-bullet">Video generation (in-chat, user-triggered)</div>
+      <div class="feature-bullet">Voice calls with 2 modes (roleplay + casual)</div>
+      <div class="feature-bullet">Narrative/contextual images in chat (auto or manual)</div>
+      <div class="feature-bullet">Memory Manager with user controls (view, pin, disable)</div>
+      <div class="feature-bullet">Tiered video quality (multiple model options)</div>
+      <div class="feature-bullet">Age verification compliance (FR, UK, US states)</div>
+    </div>
+
+    <div class="summary-card">
+      <h4>DRT.FM — Has the Infra, Missing the UI</h4>
+      <div class="feature-bullet">Video gen (RunPod) — needs user-facing trigger in chat</div>
+      <div class="feature-bullet">Hume AI voice — needs Roleplay/Casual mode toggle</div>
+      <div class="feature-bullet">semantic_memories — needs visible Memory Manager UI</div>
+      <div class="feature-bullet">3D character — needs to be the homepage hero, not buried</div>
+      <div class="missing-bullet">Story Mode / Prompt-Sync (auto narrative images) — not built</div>
+      <div class="missing-bullet">Face consistency across image gens (LoRA/embeddings) — not built</div>
+      <div class="missing-bullet">Age verification — not built (plan now before mandated)</div>
+    </div>
+
+  </div>
+
+  <div class="note-box">
+    📋 SecretDesires notification center is partially captured (titles only from screenshot). Chromium browser open at secretdesires.ai — log in and open notifications to get full body text of each entry. I'll scrape and append the details once you confirm you're in.
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+---
+name: competitor-checks
+description: Capture Dainis's hands-on review of an AI girlfriend competitor (paid account browsing) into a structured per-competitor tab inside competitor-checks.html. Use when user types /competitor-checks <site>, says "starting <site>" (for an AI girlfriend competitor), or shares notes/screenshots from a competitor review session.
+---
+
+# Competitor Checks — Workflow
+
+This skill is for capturing Dainis's hands-on review notes while he browses paid accounts of AI girlfriend competitors (Kindroid, LoveScape, Swipey, Candy.AI, OurDream, SecretDesires, GirlfriendGPT, Promptchan, Joi.AI, SweetDream, Nomi, etc.). One tab per competitor inside `competitor-checks.html`, designed so each competitor can be reviewed in a fresh Claude tab without context bloat.
+
+## Trigger phrases
+
+- `/competitor-checks <site>` — explicit start
+- `starting <site>` / `let's do <site>` / `next is <site>` — implicit start
+
+## Behavior contract
+
+### 1. Starting a new competitor
+
+When user signals start of a new competitor (e.g. "starting Kindroid"):
+
+1. Check if a tab for that competitor already exists in `competitor-checks.html`. If yes, resume. If no, add a new tab.
+2. Create `assets/checks/<slug>/` folder (slug = lowercased competitor name, no spaces — e.g. `kindroid`, `lovescape`, `secretdesires`).
+3. Display the **Quick Reference Checklist** for that competitor in chat — see "Checklist composition" below.
+4. Tell user: "Browse freely. Share screenshots (save to ~/Downloads as macOS default `SCR-*.png/jpeg`) and notes in chat. I'll catalogue."
+
+### 2. Receiving notes
+
+User shares free-form notes in chat. For each batch of notes:
+
+1. Tag the note with one or more categories: `signup`, `memory`, `voice`, `video`, `image`, `chat`, `character-creator`, `billing`, `nsfw`, `ux`, `mobile`, `ick`, `standout`, `speed`.
+2. Append to the **Findings** zone of that competitor's tab (chronological, with timestamp).
+3. If the note describes a **standout** feature (the user explicitly flags it, or it's clearly novel vs. v2 matrix), **prompt for deep-dive**: ask Dainis to open Chrome DevTools and capture Network/Elements/Console for that feature. Suggest specific things to look for (e.g. WebSocket endpoints, API payloads, model names in response headers).
+4. If user mentions **speed** that feels extra fast or extra slow, record it as a speed note. Otherwise stay silent on speed.
+
+### 3. Receiving screenshots
+
+When user references a screenshot ("here's a screenshot of X", or just shares one):
+
+1. Find the newest matching file in `~/Downloads/` — typically `SCR-YYYYMMDD-xxxx.jpeg` or `.png`. Use: `ls -t ~/Downloads/SCR-*.{png,jpeg} 2>/dev/null | head -1`
+2. Move it to `assets/checks/<slug>/NN-short-description.<ext>` where:
+   - `NN` = next available 2-digit sequence number for this competitor (01, 02, ...)
+   - `short-description` = kebab-case description from the user's note (e.g. `memory-codex-ui`, `subscription-page`, `live-video-call-button`)
+3. Reference the image inline in the matching Findings entry: `<img src="assets/checks/<slug>/NN-short-description.png" class="check-shot">`
+
+### 4. Standout feature deep-dive prompts
+
+When a feature is flagged as standout, prompt Dainis to capture more. Match the prompt to the feature type:
+
+- **Real-time feature (video call, voice call, streaming chat)**: "Open DevTools → Network → WS (WebSocket) tab. Reload the feature. Screenshot any WebSocket connections, copy a few frames showing the protocol."
+- **AI generation (image, video, memory recall)**: "DevTools → Network → Fetch/XHR. Trigger the feature. Screenshot the request payload and response — we want model names, token counts, prompt structure."
+- **Novel UI pattern**: "Right-click the element → Inspect. Screenshot the HTML structure. If it uses a JS framework, check the Console for visible component names."
+- **Memory/state**: "DevTools → Application → Local Storage and IndexedDB. Screenshot what's stored client-side."
+
+### 5. End-of-session synthesis
+
+When user signals end of a competitor session ("done with X", "wrapping up Kindroid", or starts a new competitor), do three things:
+
+**A. Generate Standout & Actions for Steve content:**
+- One-paragraph verdict (companion vs. chatbot feel)
+- Bullet list: "Steal immediately for DRT.FM" (1-5 items, ranked by impact)
+- Bullet list: "DRT.FM already does better" (1-5 items)
+- Bullet list: "Avoid / counter-position" (dark patterns, bad UX, billing traps)
+- Final 1-10 scores for: memory, voice, image consistency, NSFW consistency, companion feel
+
+**B. Restructure the completed tab** — sessions are working tools; completed tabs are reference docs. When a session ends, restructure the tab HTML so:
+1. **Remove** the Quick Reference Checklist (was only useful during active browsing)
+2. **Move Standout & Actions for Steve to the TOP** of the tab — immediately after `div.check-header`
+3. **Relabel Findings** as "Session Findings" with an "Archive · YYYY-MM-DD" badge and move it below Actions
+4. **Update the zone-badge** on the h2 to "Session complete · YYYY-MM-DD"
+
+The correct completed-tab order is: `check-header` → `h2 + div.actions` → `h2 + div.findings`
+
+Use Python (not sed/awk) to do the block reordering — see the Kindroid session in git history for the exact reassembly pattern.
+
+**C. Fill in the Top-3 in the Summary tab** — find the `div.top3-card top3-pending` card for this competitor in the `#summary` section and replace it with a populated card:
+
+```html
+<div class="top3-card">
+  <div class="top3-name">CompetitorName &#10003;</div>
+  <ol class="top3-list">
+    <li><strong>Feature 1 name.</strong> One-sentence description of why it matters.</li>
+    <li><strong>Feature 2 name.</strong> One-sentence description.</li>
+    <li><strong>Feature 3 name.</strong> One-sentence description.</li>
+  </ol>
+</div>
+```
+
+Top 3 = the three highest-impact / most novel things from that session — what Steve most needs to know about this competitor at a glance.
+
+### 6. Recommending the next competitor
+
+After end-of-session synthesis, recommend the next competitor based on:
+
+1. **Not yet reviewed** in `competitor-checks.html`
+2. **Highest expected learning** — prioritize competitors with most "Net-new features" claims in `ai_girlfriend_competitor_discovery_v2.md`, then competitors flagged as incumbents but not yet hand-verified.
+
+State the recommendation as one sentence with reasoning, then ask Dainis to confirm or override.
+
+## Checklist composition
+
+The Quick Reference Checklist Dainis sees at start = **6-item always-on summary** + **~8-item competitor-specific list**.
+
+### Always-on (every competitor) — 6 items
+
+1. **Time it (seconds):** first chat response · first image · first video · first voice word · clicks from homepage → first message.
+2. **Screenshots to always grab:** chat input area · subscription/upgrade page · homepage (logged in) · mobile view.
+3. **Ick Test — flag any:** AI breaking character · unexpected NSFW blocks · mid-chat upsell prompts · UI bugs · moments that felt genuinely "human."
+4. **Score 1-10 at end:** memory · voice emotional quality · image face consistency · NSFW consistency · overall "companion vs chatbot" feel.
+5. **Steal:** one thing to copy into DRT.FM immediately.
+6. **Win:** one thing DRT.FM already does better.
+
+### Per-competitor 8-item list — how to source
+
+1. Read `ai_girlfriend_competitor_discovery_v2.md` (in this repo, or in `~/Downloads/`) — find the "Net-new features" section for this competitor.
+2. Read the existing per-competitor checklist in `competitor-analysis-v2.html` (line ~1981+, the "Dainis Checks" section) for any pre-existing items.
+3. Compose 8 items: cover all "Net-new" features + signup/paywall + billing/dark-patterns. **Skip** items where v2 matrix marks the feature as ✗ (don't waste time checking what they explicitly don't have).
+4. Show the 8 items to Dainis at start, with one ambient reminder: "I'll prompt for Chrome DevTools when you flag something standout."
+
+## File layout
+
+```
+competitor-checks.html                 — single tabbed page, all competitors
+assets/checks/<slug>/NN-*.png|jpeg     — screenshots, sequential, descriptive slug
+.agents/skills/competitor-checks/       — this skill
+```
+
+## Tab HTML structure (per competitor)
+
+Use the same dark-mode styling as `competitor-analysis-v2.html`. Tabs have two states:
+
+### Active session (in-progress)
+
+```html
+<div id="<slug>" class="section">
+  <div class="check-header">...</div>
+
+  <!-- Quick Reference Checklist (removed at session end) -->
+  <h2 class="zone">Quick Reference <span class="zone-badge">Checklist</span></h2>
+  <div class="quick-ref">...</div>
+
+  <h2 class="zone">Findings <span class="zone-badge">Chronological · tagged</span></h2>
+  <div class="findings">
+    <div class="finding" data-tags="memory,ui">
+      <div class="finding-meta">Session · memory · ui</div>
+      <div class="finding-body">Note text. <img src="assets/checks/<slug>/01-description.png" class="check-shot"></div>
+    </div>
+  </div>
+
+  <h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Filled at session end</span></h2>
+  <div class="actions">
+    <div class="actions-empty">Generated at session end.</div>
+  </div>
+</div>
+```
+
+### Completed (post-session cleanup)
+
+When a session ends, restructure the tab into this layout — Actions float to the top, Quick Reference is removed, Findings become an archive:
+
+```html
+<div id="<slug>" class="section">
+  <div class="check-header">...</div>
+
+  <!-- Actions NOW AT TOP — no Quick Reference -->
+  <h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · YYYY-MM-DD</span></h2>
+  <div class="actions">
+    <div class="verdict">...</div>
+    <h3>Steal immediately for DRT.FM</h3>
+    <ul class="steal"><li>...</li></ul>
+    <h3>DRT.FM already does better</h3>
+    <ul class="win"><li>...</li></ul>
+    <h3>Avoid / counter-position</h3>
+    <ul class="avoid"><li>...</li></ul>
+    <h3>Scores</h3>
+    <div class="scores">...</div>
+  </div>
+
+  <!-- Findings below, labeled as archive -->
+  <h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; YYYY-MM-DD</span></h2>
+  <div class="findings">
+    <div class="finding" data-tags="...">...</div>
+  </div>
+</div>
+```
+
+## Tone
+
+Dainis is the product partner; Steve is the developer who will read this report. Write findings in his voice when transcribing his notes verbatim. Write the Standout & Actions zone in clear actionable language for Steve — "Build X" / "Avoid Y" / "Match Z's latency target."
