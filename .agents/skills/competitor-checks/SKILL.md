@@ -119,10 +119,56 @@ The Quick Reference Checklist Dainis sees at start = **6-item always-on summary*
 ## File layout
 
 ```
-competitor-checks.html                 — single tabbed page, all competitors
+index.html                             — Summary tab (GitHub Pages root)
+<slug>.html                            — one file per competitor (e.g. candy.html, ourdream.html)
+competitor-checks.html                 — legacy single-file version (kept for reference)
 assets/checks/<slug>/NN-*.png|jpeg     — screenshots, sequential, descriptive slug
 .agents/skills/competitor-checks/       — this skill
 ```
+
+## Adding a new competitor page
+
+When starting a new competitor session, follow these steps to wire up the new page:
+
+### 1. Add the competitor entry to the nav in ALL existing pages
+
+In `index.html`, `kindroid.html`, `girlfriendgpt.html`, `ourdream.html`, `candy.html` (and any future pages), add a nav link before the `<span class="private-badge">` line:
+
+```html
+<a class="tab-btn tab-<slug>" href="<slug>.html"><CompetitorName></a>
+```
+
+Also add the tab colour rule to the `<style>` block in each file:
+
+```css
+.tab-<slug>{color:#<accent>}.tab-<slug>.active{background:#<dark-tint>}
+```
+
+### 2. Create the new competitor's HTML file
+
+Copy the structure from an existing completed page (e.g. `candy.html`) and:
+- Change the `id` on the section div to the new slug
+- Update the nav `active` class to the new tab's class
+- Replace the `check-header` h1, meta, and priority content
+- Clear the findings and actions sections
+
+**Always close `<div class="check-header">` before the first `<h2>`** — an unclosed check-header will silently eat all section content.
+
+### 3. Compress screenshots before committing
+
+After a session, compress all new screenshots with sips before git add:
+
+```bash
+cd assets/checks/<slug>
+for f in *.jpeg; do sips -Z 1200 --setProperty formatOptions 75 "$f" -o "$f" > /dev/null 2>&1; done
+for f in *.png;  do sips -Z 1200 "$f" -o "$f" > /dev/null 2>&1; done
+```
+
+Target: max 1200px on longest dimension, JPEG quality 75. Reduces ~55MB → ~29MB per session.
+
+### 4. Update competitor-checks.html too
+
+The legacy single-file version still needs the new section and nav button added so it stays in sync as a fallback.
 
 ## Tab HTML structure (per competitor)
 
