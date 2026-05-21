@@ -70,7 +70,6 @@ When user signals end of a competitor session ("done with X", "wrapping up Kindr
 **A. Generate Standout & Actions for Steve content:**
 - One-paragraph verdict (companion vs. chatbot feel)
 - Bullet list: "Steal immediately for DRT.FM" (1-5 items, ranked by impact)
-- Bullet list: "DRT.FM already does better" (1-5 items)
 - Bullet list: "Avoid / counter-position" (dark patterns, bad UX, billing traps)
 - Final 1-10 scores for: memory, voice, image consistency, NSFW consistency, companion feel
 
@@ -131,11 +130,25 @@ function toggleGroup(btn) {
 
 Group by product feature area (mirror the competitor's own nav/features). Typical groups: Homepage & Discovery · Onboarding & Signup · Character Creator · Chat & Progression · Voice & Calls · Video & Content · Image Generation · Group Chats · NSFW & Private Content · Billing & Monetization · Community · Distribution & Company. Adjust to what that competitor actually has.
 
-Also add inline color styles to the h3 action headings inside `.actions`:
-- "Steal immediately for DRT.FM" → `style="color:#4ade80;margin-top:4px"`
-- "DRT.FM already does better" → `style="color:#60a5fa"`
-- "Avoid / counter-position" → `style="color:#ff6b6b"`
-- "Scores" → `style="color:#a0a0c0"`
+**★ Star prefix on standout groups:** Prefix the `group-title` with `★ ` for any group that contains the session's top standout feature (e.g. `★ Live Cam`, `★ Video Call`). Dainis likes this visual marker — keep it in every session.
+
+**Actions section uses `div.action-group` not `<h3>` tags.** Match the girlfriendgpt.html pattern exactly:
+```html
+<div class="action-group steal">
+  <div class="action-group-title">Steal immediately for DRT.FM</div>
+  <ul>
+    <li>...</li>
+  </ul>
+</div>
+<div class="action-group avoid">
+  <div class="action-group-title">Avoid / counter-position</div>
+  <ul>...</ul>
+</div>
+<div class="scores">...</div>
+```
+Do NOT use `<h3>` tags with inline color styles for action headings — the `.action-group-title` CSS handles colors via the parent class (`.steal`, `.win`, `.avoid`).
+
+**Reference page for formatting:** `girlfriendgpt.html` is the canonical formatting reference. When in doubt, match its structure exactly — especially for the completed-page order: `check-header` → `h2 + div.actions` → `h2 + div#findings`.
 
 Add `.actions h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px}` to the main style block.
 
@@ -278,8 +291,6 @@ When a session ends, restructure the tab into this layout — Actions float to t
     <div class="verdict">...</div>
     <h3>Steal immediately for DRT.FM</h3>
     <ul class="steal"><li>...</li></ul>
-    <h3>DRT.FM already does better</h3>
-    <ul class="win"><li>...</li></ul>
     <h3>Avoid / counter-position</h3>
     <ul class="avoid"><li>...</li></ul>
     <h3>Scores</h3>

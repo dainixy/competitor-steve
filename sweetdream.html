@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM Competitor Checks — SweetDream</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
+.tab-btn:hover{background:#1e1e2e}
+.tab-btn.active{color:#fff}
+.tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
+.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
+.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
+.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
+.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
+.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
+.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
+.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* SECTIONS */
+.section{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
+
+/* COMPETITOR HEADER */
+.check-header{background:linear-gradient(135deg,#16102a,#0a0818);border:1px solid #2e2050;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.check-header h1{font-size:28px;font-weight:800;color:#a78bfa;margin-bottom:6px}
+.check-header .meta{font-size:13px;color:#7070a0;font-family:'SF Mono','Monaco',monospace}
+.check-header .priority{margin-top:12px;font-size:13px;color:#c8b8e8;background:#100a20;border:1px solid #2e2050;border-radius:8px;padding:10px 14px;line-height:1.5}
+
+/* ZONE HEADERS */
+h2.zone{font-size:13px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
+h2.zone .zone-badge{font-size:10px;background:#16102a;color:#a78bfa;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* QUICK REFERENCE */
+.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
+.quick-ref-group{margin-bottom:18px}
+.quick-ref-group:last-child{margin-bottom:0}
+.quick-ref-group-title{font-size:11px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.quick-ref ul{list-style:none}
+.quick-ref li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px;color:#c0c0d8;line-height:1.6}
+.quick-ref li input[type="checkbox"]{margin-top:5px;flex-shrink:0;accent-color:#a78bfa}
+.quick-ref li strong{color:#fff;font-weight:600}
+.quick-ref li em{color:#7070a0;font-style:italic;font-size:12px;display:block;margin-top:2px}
+.ambient{margin-top:18px;padding:12px 14px;background:#100a20;border:1px solid #2e2050;border-radius:8px;font-size:12px;color:#c8b8e8;line-height:1.5}
+.ambient strong{color:#a78bfa}
+
+/* FINDINGS */
+.findings{display:flex;flex-direction:column;gap:12px}
+.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
+.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.finding-meta .time{color:#5060a0}
+.tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.tag-standout{background:#16102a;color:#c8b8ff}
+.tag-ick{background:#2a0a14;color:#ff8aaa}
+.tag-speed{background:#1e1200;color:#ff9f43}
+.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
+.finding-body strong{color:#fff}
+.findings-empty{padding:40px 20px;text-align:center;color:#5060a0;font-size:13px;font-style:italic;background:#0a0a12;border:1px dashed #2a2a3e;border-radius:10px}
+.check-shot{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid #2a2a3e;margin:8px 0}
+
+/* ACTIONS / STANDOUT */
+.actions{background:linear-gradient(135deg,#16103a,#0a0818);border:1px solid #2e2050;border-radius:14px;padding:24px 28px}
+.actions-empty{color:#7070a0;font-style:italic;font-size:13px}
+.verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #2e2050}
+.actions h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px}
+ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
+.steal li,.win li,.avoid li{font-size:13px;color:#b0b0c8;padding:5px 0 5px 18px;position:relative;line-height:1.6}
+.steal li::before{content:'+';color:#4ade80;position:absolute;left:0;top:5px;font-weight:700}
+.win li::before{content:'✓';color:#60a5fa;position:absolute;left:0;top:5px;font-weight:700}
+.avoid li::before{content:'!';color:#ff6b6b;position:absolute;left:0;top:5px;font-weight:700}
+.scores{margin-top:16px;padding-top:16px;border-top:1px solid #2e2050;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.score{background:#0a0814;border:1px solid #2e2050;border-radius:8px;padding:10px 12px;text-align:center}
+.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.score-value{font-size:22px;font-weight:800;color:#a78bfa;line-height:1.2;margin-top:2px}
+
+/* FINDING GROUPS (toggles) */
+.finding-group{margin-bottom:6px}
+.group-toggle{display:flex;align-items:center;width:100%;background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;text-align:left;gap:10px;transition:background .15s}
+.group-toggle:hover{background:#13131e}
+.group-toggle.open{border-radius:10px 10px 0 0;border-bottom-color:#13131e}
+.group-title{font-size:13px;font-weight:700;color:#e0e0e8;flex:1}
+.group-count{font-size:11px;color:#5060a0;flex-shrink:0}
+.toggle-arrow{font-size:9px;color:#5060a0;transition:transform .2s;flex-shrink:0}
+.group-toggle.open .toggle-arrow{transform:rotate(90deg)}
+.group-body{display:none;background:#07070f;border:1px solid #2a2a3e;border-top:none;border-radius:0 0 10px 10px;padding:12px;flex-direction:column;gap:12px}
+.group-body.open{display:flex}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-label">Competitor Checks</span>
+  <a class="tab-btn tab-summary" href="index.html">📋 Summary</a>
+  <a class="tab-btn tab-kindroid" href="kindroid.html">Kindroid</a>
+  <a class="tab-btn tab-ggpt" href="girlfriendgpt.html">GirlfriendGPT</a>
+  <a class="tab-btn tab-od" href="ourdream.html">OurDream</a>
+  <a class="tab-btn tab-candy" href="candy.html">Candy.AI</a>
+  <a class="tab-btn tab-sd" href="secretdesires.html">SecretDesires</a>
+  <a class="tab-btn tab-sweetdream active" href="sweetdream.html">SweetDream</a>
+  <a class="tab-btn tab-nomi" href="nomi.html">Nomi</a>
+  <a class="tab-btn" href="competitor-analysis-v2.html" style="color:#a78bfa;margin-left:12px">📊 Analysis Matrix</a>
+  <span class="private-badge">DRT.FM · Private</span>
+</nav>
+
+<div id="sweetdream" class="section">
+<div class="check-header">
+  <h1>SweetDream</h1>
+  <div class="meta">sweetdream.ai &nbsp;·&nbsp; Session started 2026-05-21 &nbsp;·&nbsp; $5.83–12.99/mo · Browser-only (no native apps)</div>
+  <div class="priority"><strong>Priority this session:</strong> Live video calls vs Kindroid head-to-head (latency, lip-sync quality) · Cross-session memory reliability ("most honest in category" per reviews — verify) · Token burn rate on video calls · Browser-only weaknesses in practice · Monetize AI feature in nav (what is it?) · Leaderboard community feature</div>
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-21</span></h2>
+<div class="actions" id="sweetdream-actions">
+
+  <div class="verdict">
+    <p>SweetDream is a cam-girl platform with an AI companion wrapper — not the other way around. Its actual product is 6 hand-crafted Live Cam characters with a gamified progressive-undress mechanic borrowed directly from real cam sites. Everything else (create-your-own AI girlfriend, creator leaderboard, OnlyFans influencer program) is infrastructure that mostly doesn't work yet — user-created characters are unfindable, discovery is zero, the discord has 123 members. But the Live Cam mechanic is the most novel thing seen across all competitors reviewed. The video call (lip-sync, full-body, gym context) is well-executed as a second standout. Chat quality is decent, voice TTS loads fast, the "Ask → Popular" one-tap NSFW menu is frictionlessly aggressive. The billing stack is aggressively tokenised with deliberate friction at every management action. "No subscription" claim on the plans page is false — it auto-renews. Payment via SweetClarity.com bridge → Stripe, UK entity (68 English Ltd), merchant name "SWEET". Overall: mid-tier companion platform with one genuinely novel feature (Live Cam) and one smart growth strategy (OnlyFans creator flywheel) that no other competitor has shipped.</p>
+  </div>
+
+  <div class="action-group steal">
+    <div class="action-group-title">Steal immediately for DRT.FM</div>
+    <ul>
+    <li><strong>Live Cam progressive-undress mechanic.</strong> The core loop — chat earns XP, XP unlocks visual states, token tips unlock instant actions — is the best engagement + monetisation design seen across all competitors. The tip menu (Wave free → Masturbate 10 tokens) is a direct cam site model that works. Build a version for Alexis: idle video loop → chat to progress → token actions. Even a shallow version (3 levels, 5 actions) would be differentiated.</li>
+    <li><strong>Phone-filter voice effect on calls.</strong> Applying subtle telephone EQ to the call voice so it sounds different from the chat TTS is a 1-hour implementation that meaningfully improves call realism. Dainis noticed and praised it.</li>
+    <li><strong>Background generation with completion notification.</strong> Generate image/video, navigate away, get pinged when done. The notification itself is table stakes — the key is that generation doesn't block navigation. DRT.FM should never modal-lock during generation.</li>
+    <li><strong>Visual prompt builder (Outfit/Pose/Action/Accessories/Scene tabs).</strong> Thumbnail-driven suggestion tabs replace text prompting for image generation. Removes the #1 barrier for users who can't write prompts. The "Ask → Popular" NSFW shortcut in chat is the same idea applied to messages.</li>
+    <li><strong>OnlyFans creator flywheel.</strong> Give existing adult creators free generation tools to build a character, let them market it on their channels, pay 50% of what their fans spend. Creator does distribution + content, you do hosting + take 50%. The smartest zero-cost acquisition model in the category.</li>
+    <li><strong>"Rewind to here" message control.</strong> Lets users erase the conversation back to a specific point and redo a branch. Rare in the category and genuinely useful for users who want a second shot at a scene.</li>
+  </ul>
+
+  </div>
+<ul>
+    <li><strong>Single character with real identity.</strong> SweetDream's 98 characters are interchangeable presets. Alexis is one person with a brand, a voice, a history. Users can't build genuine attachment to a character library — they build it to a specific character they know.</li>
+    <li><strong>No fake "one time payment" claim.</strong> SweetDream explicitly says "no subscription" on the plans page while auto-renewing. DRT.FM should never do this — trust at billing is worth more than conversion lift from deceptive copy.</li>
+    <li><strong>Face consistency.</strong> SweetDream's generated images drift from the character's face. Any investment in consistent face-locked generation is a meaningful quality advantage.</li>
+  </ul>
+
+  </div>
+
+  <div class="action-group avoid">
+    <div class="action-group-title">Avoid / counter-position</div>
+    <ul>
+    <li><strong>Token micro-tax on basic actions.</strong> Charging 5 tokens to rename a character, 1 token to enhance an image, 3 tokens to replay voice — these create resentment at the exact moment users are trying to personalise. Token cost should track value delivered, not every interaction.</li>
+    <li><strong>Creator economy without discovery.</strong> User-created characters are "public" but unfindable. If DRT.FM ever ships a creator layer, ship the discovery surface first — otherwise it's just a promise that erodes trust.</li>
+    <li><strong>Mandatory selection at every creator step.</strong> No defaults = decision fatigue × 9 steps. Always pre-select the most common/safe option so users can flow through and customise only what they care about.</li>
+    <li><strong>Obscuring the public-by-default setting.</strong> Characters go public without explanation. Any UX that changes the user's privacy state silently is a trust problem. Always be explicit and opt-in.</li>
+  </ul>
+
+  </div>
+
+  <div class="scores">
+    <div class="score"><div class="score-label">Memory</div><div class="score-value">2</div></div>
+    <div class="score"><div class="score-label">Voice</div><div class="score-value">6</div></div>
+    <div class="score"><div class="score-label">Image consistency</div><div class="score-value">4</div></div>
+    <div class="score"><div class="score-label">NSFW consistency</div><div class="score-value">7</div></div>
+    <div class="score"><div class="score-label">Companion feel</div><div class="score-value">5</div></div>
+    <div class="score"><div class="score-label">Live Cam</div><div class="score-value">9</div></div>
+  </div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; 2026-05-21</span></h2>
+<div id="sweetdream-findings" style="display:flex;flex-direction:column;gap:6px">
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Signup & Onboarding</span>
+      <span class="group-count">4 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="signup,ux"><div class="finding-meta"><span class="time">Signup · registration</span><span class="tag">signup</span><span class="tag">ux</span></div><div class="finding-body">Registration uses Clerk auth — username entry on a split-screen layout with a character photo on the left. Clean, polished. "Secured by Clerk" badge visible — standard US auth provider, nothing grey-market.<img src="assets/checks/sweetdream/01-signup-registration.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="signup,ux"><div class="finding-meta"><span class="time">Onboarding · step 1</span><span class="tag">signup</span><span class="tag">ux</span></div><div class="finding-body">Nickname entry modal overlaid on blurred character background. Progress bar at top. Single field, hot-pink CTA. Very clean, low friction.<img src="assets/checks/sweetdream/02-onboarding-nickname.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="signup,ux"><div class="finding-meta"><span class="time">Onboarding · step 2</span><span class="tag">signup</span><span class="tag">ux</span></div><div class="finding-body">Gender selection (Male / Female, icon cards). "This helps us personalize your AI companions." Simple 2-tap completion — faster than Candy or OurDream onboarding.<img src="assets/checks/sweetdream/03-onboarding-gender.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="signup,ux"><div class="finding-meta"><span class="time">Homepage · first logged-in screen</span><span class="tag">ux</span></div><div class="finding-body">First logged-in screen: "Create your own AI Girlfriend" with style picker. Left sidebar nav has Explore · Create AI · Leaderboard · Generate Media · My Profile · Chat · My AIs · Gallery · Tokens · <strong>Monetize AI</strong> · Contact. Girls/Anime/Guys toggle. "Premium −70%" badge top-right. <strong>Monetize AI in main nav is notable.</strong><img src="assets/checks/sweetdream/04-homepage-dashboard.jpeg" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Character Creator</span>
+      <span class="group-count">9 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="character-creator,ux"><div class="finding-meta"><span class="time">Style picker</span><span class="tag">character-creator</span><span class="tag">ux</span></div><div class="finding-body">Exactly 2 style options — <strong>Realistic</strong> and <strong>Anime</strong> — as large image cards. "I'm feeling lucky" quick-create bypasses the full flow. 9-dot progress bar.<img src="assets/checks/sweetdream/05-style-picker-realistic-anime.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator,standout"><div class="finding-meta"><span class="time">"I'm feeling lucky" result</span><span class="tag">character-creator</span><span class="tag tag-standout">standout</span></div><div class="finding-body"><strong>"I'm feeling lucky" generates a full character summary instantly</strong> — pre-configured attribute bundle. Face is NOT generated — one of 2 presets. "Surprise Me" shuffles attributes only, not the face. Tiny "Previous" button bottom-left to step back.<img src="assets/checks/sweetdream/06-lucky-summary-anime.png" class="check-shot"><img src="assets/checks/sweetdream/07-lucky-summary-realistic.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator"><div class="finding-meta"><span class="time">Face customisation · ethnicity/age/eye</span><span class="tag">character-creator</span></div><div class="finding-body">Ethnicity step shows real face photo cards (Caucasian, Latina, Asian, Arabic, Black/Afro, Indian). Age slider 21–60+. Eye color cards. <strong>Face does vary based on ethnicity + age</strong> — not literally identical presets.<img src="assets/checks/sweetdream/49-creator-ethnicity-age-eye.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator,ick"><div class="finding-meta"><span class="time">Personality step · no default</span><span class="tag">character-creator</span><span class="tag tag-ick">ick</span></div><div class="finding-body">12 personality options — Custom, Caregiver, Sage, Innocent, Jester, Temptress, Dominant, Submissive, Lover, Nympho, Mean, Confidant. <strong>No default — cannot proceed without picking.</strong> Friction at every step of a 9-step flow.<img src="assets/checks/sweetdream/20-creator-personality-step.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="voice,character-creator"><div class="finding-meta"><span class="time">Voice step</span><span class="tag">voice</span><span class="tag">character-creator</span></div><div class="finding-body">8 playable voice pills: Sexy Villain · Cute · Sweet Teen · Natural · Soft · Deep/Dominant · Middle Aged · Old. Dainis: only a few are appealing, "Old" is off-putting. Weak variety.<img src="assets/checks/sweetdream/21-creator-voice-step.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator,nsfw"><div class="finding-meta"><span class="time">Relationship step</span><span class="tag">character-creator</span><span class="tag">nsfw</span></div><div class="finding-body">11 relationship cards: Stranger · School Mate · Colleague · Mentor · Girlfriend · <strong>Sex Friend · Wife · Mistress · Friend · Best Friend · Step Sister · Step Mom.</strong> All surfaced in free flow.<img src="assets/checks/sweetdream/23-creator-relationship-step.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator,nsfw"><div class="finding-meta"><span class="time">Body + clothing step (explicit imagery)</span><span class="tag">character-creator</span><span class="tag">nsfw</span></div><div class="finding-body">Body type and breast size shown as actual photo cards. Options include <strong>Gigantic</strong> and <strong>Silicone</strong>. Clothing + special features (Pubic Hair, Pregnant, Nipple Piercings) fully exposed in free flow.<img src="assets/checks/sweetdream/50-creator-body-breast-explicit.png" class="check-shot"><img src="assets/checks/sweetdream/08-clothing-special-features.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="character-creator,nsfw,ick"><div class="finding-meta"><span class="time">Summary · face never changes despite 9 steps</span><span class="tag">character-creator</span><span class="tag tag-ick">ick</span></div><div class="finding-body">After full 9-step manual flow, the face is still a preset (Realistic or Anime base). All attribute depth is metadata, not visual generation. "Bring my AI to Life" costs 50 tokens.<img src="assets/checks/sweetdream/25-creator-summary-same-face.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux,standout"><div class="finding-meta"><span class="time">Loading screen</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div><div class="finding-body"><strong>Good loading screen.</strong> "Someone special is being born just for you." Pink progress bar + percentage + countdown (~23 seconds) + rolling status messages. Blocks navigation (ICK) but the hold copy is strong.<img src="assets/checks/sweetdream/26-loading-8pct.png" class="check-shot"><img src="assets/checks/sweetdream/27-loading-30pct.png" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Billing & Monetisation</span>
+      <span class="group-count">8 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="billing,standout"><div class="finding-meta"><span class="time">Stripe checkout · SweetClarity bridge</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div><div class="finding-body"><strong>Payment processor: direct Stripe. Merchant name "SWEET."</strong> Bridge domain SweetClarity.com appeared before Stripe checkout. UK entity: 68 English Ltd, 71-75 Shelton Street, Covent Garden, London WC2H 9JQ.<img src="assets/checks/sweetdream/10-stripe-checkout.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing,ick"><div class="finding-meta"><span class="time">Plans page · "one time payment" claim is false</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Plans page claims: "No adult transaction in your bank statement" · <strong>"One time payment — no subscription"</strong> · "Privacy in bank statement." Settings confirms auto-renewal. Deliberately deceptive framing to reduce chargebacks. 12mo €3.33 · 3mo €7.66 · 1mo €10.99.<img src="assets/checks/sweetdream/15-plans-one-time-payment-claim.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing,ick"><div class="finding-meta"><span class="time">Payment failed false positive</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div><div class="finding-body">After completing Stripe checkout, site showed "Payment Failed" screen. 400 tokens appeared and account activated — payment succeeded. A less experienced user hits "Try Again" and gets charged twice.<img src="assets/checks/sweetdream/11-payment-failed-screen.png" class="check-shot"><img src="assets/checks/sweetdream/12-tokens-400-appeared.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing,ick"><div class="finding-meta"><span class="time">Micro-token costs on basic actions</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div><div class="finding-body"><strong>Rename character: 5 tokens. Regenerate profile photo: 10 tokens. Enhance image: 1 token. Voice message playback: 3 tokens.</strong> Tokenising basic management creates resentment exactly where users are personalising.<img src="assets/checks/sweetdream/38-rename-costs-5-tokens.png" class="check-shot"><img src="assets/checks/sweetdream/39-create-photo-costs-10-tokens.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing,ick"><div class="finding-meta"><span class="time">Gift shop · New Car 600 tokens</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Gift shop escalates from Rose (cheapest) to New Car (599 tokens — more than the full monthly 400 free tokens). VIDEO gifts trigger a video response. Bounce (2 tokens) → Masturbate (10 tokens) in Live Cam. Token economy engineered so the best actions are always just out of reach.<img src="assets/checks/sweetdream/54-gift-shop-new-car-600.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing"><div class="finding-meta"><span class="time">XP / Levels system · 20 levels</span><span class="tag">billing</span><span class="tag">ux</span></div><div class="finding-body">20 platform levels with token bonuses at each. XP earn table: Send message +3 · Request image +10 · Generate video +30 · Create character +30 (daily caps). <strong>Highest XP actions = highest token spend actions.</strong> Daily caps force daily returns.<img src="assets/checks/sweetdream/16-levels-rewards-grid.png" class="check-shot"><img src="assets/checks/sweetdream/17-how-to-earn-xp.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing,standout"><div class="finding-meta"><span class="time">AI Influencer program · OnlyFans creator flywheel</span><span class="tag">billing</span><span class="tag tag-standout">standout</span></div><div class="finding-body"><strong>★ 3rd standout — strategic, not a feature.</strong> Create AI character free → post SFW on Instagram, NSFW on OnlyFans using SweetDream's free tools → invite fans → earn 50% of all their spending forever. Creator does distribution + content + character. SweetDream hosts + takes 50%. Profile URL placeholder: <code>https://onlyfans.com/yourprofile</code>. Claims $8,200 avg first month, $20K+ top creators.<img src="assets/checks/sweetdream/84-monetize-hero-50pct-revenue.png" class="check-shot"><img src="assets/checks/sweetdream/85-monetize-how-it-works.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="billing"><div class="finding-meta"><span class="time">Affiliate program (separate)</span><span class="tag">billing</span></div><div class="finding-body">Standard affiliate: 50% commission, lifetime tracking, weekly payouts (PayPal/bank/crypto), $50 minimum. No traffic requirements, 24hr approval. Claims $2M+ paid to 1,000+ partners. Distinct from the Influencer program — affiliates send traffic to SweetDream's characters; influencers build and own a character.<img src="assets/checks/sweetdream/90-affiliate-program-50pct.jpeg" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Explore & Homepage</span>
+      <span class="group-count">3 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="ux,standout"><div class="finding-meta"><span class="time">Homepage layout · cam girls + live chats</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div><div class="finding-body">"Hot Cam Girls Live Now" (hover-to-play looping video, webcam site UX) stacked above "Explore AI Girlfriends — Live Chats." Hero: "no limits, no filters... Uncensored Chat, Sexy Voice, Hot Images &amp; Videos 🔥." Two-tier model: visual hook → relationship entry.<img src="assets/checks/sweetdream/18-explore-homepage-cam-girls.jpeg" class="check-shot"><img src="assets/checks/sweetdream/19-live-chats-character-grid.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux,ick"><div class="finding-meta"><span class="time">Discovery broken · user characters unfindable</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div><div class="finding-body">No search, no filter. Leaderboard creator characters cannot be found on the explore page. User-created characters are "Public" but have no discoverable surface. <strong>Full content: Girls ~62 live chat + 6 Live Cam + 1 video call · Guys: 12 live chat · Anime: 17 live chat · Total ~98 platform-wide.</strong> Premium features exclusive to Girls realistic section.<img src="assets/checks/sweetdream/91-anime-section-17-live-chats.jpeg" class="check-shot"><img src="assets/checks/sweetdream/92-guys-section-12-live-chats.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux"><div class="finding-meta"><span class="time">Language switcher · 11 UI languages</span><span class="tag">ux</span></div><div class="finding-body">Full interface localises: English · Türkçe · Deutsch · Polski · Français · Italiano · Português · Español · 한국어 · 日本語 · 中文. Turkish, Polish, Korean signal specific non-obvious markets being targeted.<img src="assets/checks/sweetdream/89-language-switcher-11-languages.png" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Chat & Voice</span>
+      <span class="group-count">5 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="chat,standout"><div class="finding-meta"><span class="time">Chat · proactive + suggested chats sidebar</span><span class="tag">chat</span><span class="tag tag-standout">standout</span></div><div class="finding-body">Character messaged first without prompting. Left sidebar shows Active Chats + Suggested Chats (8 platform characters always visible). "Try this:" suggestion updates after each message. Right sidebar: character profile + Call Me / Video Call / Generate Media CTAs.<img src="assets/checks/sweetdream/51-chat-screen-proactive-message.png" class="check-shot"><img src="assets/checks/sweetdream/58-chat-sidebar-suggested-chats.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="chat,voice,standout"><div class="finding-meta"><span class="time">Chat · message controls + fast TTS</span><span class="tag">chat</span><span class="tag">voice</span><span class="tag tag-standout">standout</span></div><div class="finding-body">Context menu on every message: Copy · Regenerate · <strong>Rewind to here</strong> · Delete. TTS on every message. <strong>Voice loads in ~1 second</strong> — costs 3 tokens. "Ask" button opens suggestions including "Popular": Show me boobs · Show me pussy · Show me ass · Show me blowjob · Show me anal — one-tap explicit requests.<img src="assets/checks/sweetdream/52-chat-voice-message-suggestion.png" class="check-shot"><img src="assets/checks/sweetdream/53-message-context-menu.png" class="check-shot"><img src="assets/checks/sweetdream/62-ask-suggestions-explicit-popular.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="chat,standout"><div class="finding-meta"><span class="time">Gifts · rose engagement loop</span><span class="tag">chat</span><span class="tag tag-standout">standout</span></div><div class="finding-body">Gift → emotional text response + auto-generated image → "Generate Video 80" upsell. Each step deepens engagement, final step converts to 80-token spend. Elegant monetisation chain.<img src="assets/checks/sweetdream/55-gift-rose-sent-taking-photo.png" class="check-shot"><img src="assets/checks/sweetdream/56-gift-rose-image-generate-video.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="voice,standout"><div class="finding-meta"><span class="time">Voice call · phone-filter effect</span><span class="tag">voice</span><span class="tag tag-standout">standout</span></div><div class="finding-body">Web call: 1 token to start + 0.5/15s. Phone call to real number: 10 tokens + 5/15s. <strong>Phone-filter EQ applied to call voice</strong> — sounds different from chat TTS, like a real phone call. Dainis: "cool touch." Static photo during call; audio quality OK.<img src="assets/checks/sweetdream/59-call-webcall-pricing.jpeg" class="check-shot"><img src="assets/checks/sweetdream/60-call-phone-pricing.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="memory,ick"><div class="finding-meta"><span class="time">Memory · none</span><span class="tag">memory</span><span class="tag tag-ick">ick</span></div><div class="finding-body"><strong>Zero memory field. Zero editable character fields.</strong> "What is she like?" panel is a static read-only attribute sheet. No record of what she knows about you, no user-contributed context. Feels like a product spec, not a relationship.<img src="assets/checks/sweetdream/65-what-is-she-like-no-memory.png" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Image & Video Generation</span>
+      <span class="group-count">5 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="image,standout"><div class="finding-meta"><span class="time">Generate Media · visual prompt builder</span><span class="tag">image</span><span class="tag tag-standout">standout</span></div><div class="finding-body">5 visual suggestion tabs: Outfit · Pose · Action · Accessories · Scene — each with thumbnail image cards. No writing required. Enhance costs 1 token. "Choose Character" swap modal lets you generate with any platform character, not just your own.<img src="assets/checks/sweetdream/28-generate-media-ui-overview.png" class="check-shot"><img src="assets/checks/sweetdream/40-choose-character-any-model.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="image,nsfw,standout"><div class="finding-meta"><span class="time">Prompts dropdown · built-in NSFW library</span><span class="tag">image</span><span class="tag">nsfw</span><span class="tag tag-standout">standout</span></div><div class="finding-body">Prompts dropdown: Sex · Naked Shower · Fuck Me Pose · Spreading Legs · Ready for Sex + others. One-click fills full explicit prompt. Undress prompt works on paid tier — top and bottom removed.<img src="assets/checks/sweetdream/29-generate-prompts-dropdown-nsfw.png" class="check-shot"><img src="assets/checks/sweetdream/35-image-viewer-no-edit.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="image,standout,ick"><div class="finding-meta"><span class="time">Background generation + bug</span><span class="tag">image</span><span class="tag tag-standout">standout</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Background generation with completion notification — navigate freely while generating. Speed: acceptable. <strong>Bug:</strong> Generate Video tab shows wrong token count (80) during image generation. Needed page refresh to see result. Site slows noticeably during video generation.<img src="assets/checks/sweetdream/42-image-gen-bg-taking-photo.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="image,ick"><div class="finding-meta"><span class="time">Image output quality</span><span class="tag">image</span><span class="tag tag-ick">ick</span></div><div class="finding-body">2 generated images from same explicit prompt looked nearly identical — low variation. Image viewer: zoom/next/fullscreen only, no edit/variation/download. Face consistency with character is approximate — drifts from profile photo.</div></div>
+      <div class="finding" data-tags="video,ick"><div class="finding-meta"><span class="time">Video output · underwhelming</span><span class="tag">video</span><span class="tag tag-ick">ick</span></div><div class="finding-body">80 tokens for ~5 seconds of hand movement. Enhanced prompt delivered minimal motion. No replay for free. <strong>Highest-cost feature, worst-performing one.</strong> Video suggestions (Action/Expression/Interaction tabs) have better vocabulary than image prompts.<img src="assets/checks/sweetdream/57-video-result-underwhelming.png" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">★ Live Cam</span>
+      <span class="group-count">6 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="standout,nsfw,ux"><div class="finding-meta"><span class="time">Live Cam · overview</span><span class="tag tag-standout">standout</span><span class="tag">nsfw</span><span class="tag">ux</span></div><div class="finding-body"><strong>★ Most novel feature across all competitors reviewed.</strong> sweetdream.ai/livecam/[character] — looping bedroom video, live chat overlay, background music that changes. "Live Action (Beta)" panel on right with level-gated and token-purchasable actions. Picks up phone quickly when user texts (small animation). Reminds of Candy AI but is a dedicated cam show format.<img src="assets/checks/sweetdream/66-livecam-gwenn-live-action-beta.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="standout,nsfw"><div class="finding-meta"><span class="time">Live Cam · progressive undress tied to XP</span><span class="tag tag-standout">standout</span><span class="tag">nsfw</span></div><div class="finding-body">Visual state changes at each level: clothed → cleavage → shirt off → underwear → fully naked (Level 5). Chat earns XP. Actions unlock: Get on All Fours (Lvl 2 free) → Ahegao Face (Lvl 3 free) → Dance/Touch Yourself (Lvl 4, 3 tokens each). XP requirement scales per level (50 → 80 → 150 → ...).<img src="assets/checks/sweetdream/68-livecam-level2-actions-unlocked.jpeg" class="check-shot"><img src="assets/checks/sweetdream/72-livecam-level5-fully-naked.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="standout,nsfw,billing"><div class="finding-meta"><span class="time">Live Cam · AI names the paywall in-character</span><span class="tag tag-standout">standout</span><span class="tag">nsfw</span><span class="tag">billing</span></div><div class="finding-body">Dainis asked "you dancing" → Gwenn: <strong>"Mmm, I'd love to dance for you… but that one's behind a paywall, babe."</strong> AI character explicitly references monetisation. Also: spontaneous strip from conversation alone ("ouh" → she removed her skirt unprompted). Push/pull between free surprises and paid actions keeps users engaged.<img src="assets/checks/sweetdream/71-livecam-level4-paywall-babe.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="standout,nsfw"><div class="finding-meta"><span class="time">Live Cam · full action menu at Level 5</span><span class="tag tag-standout">standout</span><span class="tag">nsfw</span></div><div class="finding-body">Complete tip menu: Bounce (2) · Tease Me (4) · Dance (3) · Touch Yourself (3) · Perform an Airjob (4) · Dildo (5) · Take off your Panties (5) · Squeeze Your Boobs (6) · Show Your Ass (7) · <strong>Masturbate (10 — fully explicit, no replay for free).</strong><img src="assets/checks/sweetdream/73-livecam-full-action-menu-masturbate.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="standout,billing"><div class="finding-meta"><span class="time">Live Cam · in-session token upsell</span><span class="tag tag-standout">standout</span><span class="tag">billing</span></div><div class="finding-body">Token top-up fires mid-session at peak engagement. "Watch Live Cam with your AI" listed as a premium benefit — confirms Live Cam may be premium-only.<img src="assets/checks/sweetdream/67-livecam-token-topup-prompt.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux,ick"><div class="finding-meta"><span class="time">Live Cam · only 6 characters, no discovery path</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Only 6 hand-crafted Live Cam characters exist, all SweetDream-created. No user-created characters have Live Cam capability. No browse/filter for Live Cam specifically — you access it from the homepage Hot Cam Girls section only.</div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">★ Video Call</span>
+      <span class="group-count">2 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="video,standout"><div class="finding-meta"><span class="time">Video Call · Chloe · full experience</span><span class="tag">video</span><span class="tag tag-standout">standout</span></div><div class="finding-body"><strong>★ 2nd standout.</strong> Full-body in contextualised environment (Chloe in a gym). Lip-sync talking head, no body movement. 8 tokens to start. 11 languages. Fullscreen mode available. Text input stays active during call. Dainis: "well done, but full-body creates higher expectations than Kindroid's portrait crop."<img src="assets/checks/sweetdream/77-video-call-active-modal.jpeg" class="check-shot"><img src="assets/checks/sweetdream/79-video-call-fullscreen.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="video"><div class="finding-meta"><span class="time">Video Call · language selector</span><span class="tag">video</span></div><div class="finding-body">11 language options with flags. "Calling in English / Change." BETA badge on video call modal.<img src="assets/checks/sweetdream/76-video-call-language-selector.jpeg" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Creator Economy & Community</span>
+      <span class="group-count">3 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="ux,ick"><div class="finding-meta"><span class="time">Creator leaderboard · public by default</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Leaderboard tabs: Most Engaging · Trending · Most Followers · Highest Level. Top creator @bunt has 109 characters, 38 followers, 309 engagement. Sophie shows "Public" badge by default — no opt-in, no explanation of where it appears. Privacy UX failure. @sweetdream official account shows "-2 characters" bug.<img src="assets/checks/sweetdream/80-leaderboard-podium-most-followers.png" class="check-shot"><img src="assets/checks/sweetdream/82-sophie-public-by-default.png" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux,ick"><div class="finding-meta"><span class="time">Content inventory · Anime + Guys · no premium features</span><span class="tag">ux</span></div><div class="finding-body">Anime: 17 live chat characters only. Guys: 12 live chat characters only. No Live Cam, no video call in either section. All premium interactive features exclusive to Girls realistic section.<img src="assets/checks/sweetdream/91-anime-section-17-live-chats.jpeg" class="check-shot"><img src="assets/checks/sweetdream/92-guys-section-12-live-chats.jpeg" class="check-shot"></div></div>
+      <div class="finding" data-tags="ux"><div class="finding-meta"><span class="time">Discord · essentially empty</span><span class="tag">ux</span></div><div class="finding-body">Discord: 123 members, 7 online. Community is not a real asset yet. Feedback board visible: same bugs Dainis hit ("unable to share newly created character," "problem with subscription"). Support: support@sweetdream.ai.<img src="assets/checks/sweetdream/88-discord-invite-feedback-board.png" class="check-shot"></div></div>
+    </div>
+  </div>
+
+  <div class="finding-group">
+    <button class="group-toggle" onclick="toggleGroup(this)">
+      <span class="group-title">Cancellation & Account</span>
+      <span class="group-count">3 findings</span>
+      <span class="toggle-arrow">▶</span>
+    </button>
+    <div class="group-body">
+      <div class="finding" data-tags="billing"><div class="finding-meta"><span class="time">Cancellation flow · clean</span><span class="tag">billing</span></div><div class="finding-body">Step 1: exit survey — 8 reasons (Too expensive · Not using enough · Found a better alternative · Missing features · Quality not meeting expectations · Technical issues · Temporary break · Other). Step 2: loss aversion list — Premium chats · Voice calls &amp; messages · AI image generation · Video generation · Priority customer support. End date shown: "Jun 21, 10:22 (31 days later)." Two buttons: <strong>Keep Subscription</strong> / Yes, Unsubscribe. <strong>No heart bribes, no countdown timer, no escalating offers</strong> — notably cleaner than SecretDesires, OurDream, or Candy. Post-cancel settings show "Renew subscription" pink CTA and access end date immediately. Dainis: "it was good."
+        <img src="assets/checks/sweetdream/93-cancel-exit-survey.png" class="check-shot">
+        <img src="assets/checks/sweetdream/94-cancel-loss-aversion.png" class="check-shot">
+        <img src="assets/checks/sweetdream/95-cancel-confirmed-renew-cta.png" class="check-shot">
+      </div></div>
+      <div class="finding" data-tags="ux"><div class="finding-meta"><span class="time">Account settings · Clerk auth</span><span class="tag">ux</span></div><div class="finding-body">Clicking "Open Account Settings" opens a Clerk-powered modal — not SweetDream's own UI. Shows: Profile (name, username, email, connected Google account), Security (set password, active devices with IP + location, delete account). "Secured by Clerk" badge at bottom. <strong>Why Clerk:</strong> SweetDream outsources their entire auth stack — Google SSO, device tracking, MFA, account management — to Clerk. Smart for a small team: avoids building and securing auth from scratch. The account management UI is entirely Clerk's, which is why it looks slightly different from the rest of the product. <strong>They are on the free Clerk plan</strong> — the "Secured by Clerk" branding is removed at $25/mo. A paying company at this scale would have removed it. Signals either cost-consciousness or that the product is younger/leaner than it appears.
+        <img src="assets/checks/sweetdream/96-clerk-account-profile.png" class="check-shot">
+        <img src="assets/checks/sweetdream/97-clerk-security-active-devices.png" class="check-shot">
+        <img src="assets/checks/sweetdream/98-clerk-pricing-remove-branding-25mo.png" class="check-shot">
+      </div></div>
+      <div class="finding" data-tags="billing,ick"><div class="finding-meta"><span class="time">Subscription wording contradiction</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div><div class="finding-body">Pre-purchase plans page says "One time payment — no subscription." Settings post-purchase says "Your subscription will automatically renew on Jun 21." Post-cancellation says "Your subscription will end on Jun 21." Three different moments, three different framings. The "one time payment" claim is false — it is a subscription with auto-renewal — but the later screens drop the pretence once the user has already paid.</div></div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+function toggleGroup(btn) {
+  var body = btn.nextElementSibling;
+  var open = !btn.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
+</script>
+
+</body>
+</html>
