@@ -54,6 +54,9 @@ h2.zone:first-of-type{margin-top:0}
 .status-done{border-color:#1a4a1a;background:#0a1a0a}
 .status-done .status-card-state{color:#4ade80}
 .status-done:hover{border-color:#2a6a2a;background:#0e240e}
+.status-active{border-color:#4a1a55;background:#1a0a20}
+.status-active .status-card-state{color:#f0abfc}
+.status-active:hover{border-color:#6a2a75;background:#240e30}
 
 /* TOP-3 SUMMARY */
 .top3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
@@ -92,6 +95,7 @@ h2.zone:first-of-type{margin-top:0}
   <a class="tab-btn tab-sd" href="secretdesires.html">SecretDesires</a>
   <a class="tab-btn tab-sweetdream" href="sweetdream.html">SweetDream</a>
   <a class="tab-btn tab-nomi" href="nomi.html">Nomi</a>
+  <a class="tab-btn tab-lovescape" href="lovescape.html">LoveScape</a>
   <a class="tab-btn" href="competitor-analysis-v2.html" style="color:#a78bfa;margin-left:12px">📊 Analysis Matrix</a>
   <span class="private-badge">DRT.FM · Private</span>
 </nav>
@@ -106,25 +110,33 @@ h2.zone:first-of-type{margin-top:0}
 
 <h2 class="zone">Progress <span class="zone-badge">6 of 11 done</span></h2>
 <div class="progress-summary">
-  <span class="done"><strong>6</strong> completed</span>
-  <span class="pending"><strong>5</strong> remaining</span>
+  <span class="done"><strong>8</strong> completed</span>
+  <span class="pending"><strong>3</strong> remaining</span>
 </div>
 <div class="status-grid">
+  <a class="status-card status-done" href="lovescape.html"><div class="status-card-name">LoveScape</div><div class="status-card-state">Done · 2026-05-21</div></a>
+  <a class="status-card status-done" href="sweetdream.html"><div class="status-card-name">SweetDream</div><div class="status-card-state">Done · 2026-05-21</div></a>
+  <a class="status-card status-done" href="nomi.html"><div class="status-card-name">Nomi</div><div class="status-card-state">Done · 2026-05-21</div></a>
   <a class="status-card status-done" href="secretdesires.html"><div class="status-card-name">SecretDesires</div><div class="status-card-state">Done · 2026-05-20</div></a>
   <a class="status-card status-done" href="candy.html"><div class="status-card-name">Candy.AI</div><div class="status-card-state">Done · 2026-05-20</div></a>
   <a class="status-card status-done" href="ourdream.html"><div class="status-card-name">OurDream</div><div class="status-card-state">Done · 2026-05-18</div></a>
   <a class="status-card status-done" href="girlfriendgpt.html"><div class="status-card-name">GirlfriendGPT</div><div class="status-card-state">Done · 2026-05-17</div></a>
   <a class="status-card status-done" href="kindroid.html"><div class="status-card-name">Kindroid</div><div class="status-card-state">Done · 2026-05-17</div></a>
-  <div class="status-card"><div class="status-card-name">LoveScape</div><div class="status-card-state">Pending</div></div>
   <div class="status-card"><div class="status-card-name">Swipey</div><div class="status-card-state">Pending</div></div>
-  <a class="status-card status-done" href="sweetdream.html"><div class="status-card-name">SweetDream</div><div class="status-card-state">Done · 2026-05-21</div></a>
-  <a class="status-card status-done" href="nomi.html"><div class="status-card-name">Nomi</div><div class="status-card-state">Done · 2026-05-21</div></a>
   <div class="status-card"><div class="status-card-name">Promptchan</div><div class="status-card-state">Pending</div></div>
   <div class="status-card"><div class="status-card-name">Joi.AI</div><div class="status-card-state">Pending</div></div>
 </div>
 
 <h2 class="zone">Top 3 Standout Features <span class="zone-badge">Completed sessions</span></h2>
 <div class="top3-grid">
+  <div class="top3-card">
+    <a class="top3-name" href="lovescape.html">LoveScape &rarr;</a>
+    <ol class="top3-list">
+      <li><strong>NSFW image + video generation suite — the moat.</strong> Photoreal SDXL stills → 9-chip image edits → image-to-video (their own Unbound / Unbound 2.0 + Alibaba Wan 2.2) → lip-synced "Talk" videos with audio preview before commit → multi-scene composition. Sitting on top: a 25+ NSFW action library per gender (Female / Male / Gay) with reference imagery for each preset — months of human curation no competitor can fork along with the open-source weights.</li>
+      <li><strong>Per-character ambient side-panel loop + per-image action ladder.</strong> Each character has a pre-rendered video loop in the chat side panel (Klara films herself on a phone, Mila walks her room) — cheap to serve, huge perceived value. Every generated image has a 4-button action ladder (Video · Edit · Talk · Share) routing successful artifacts into the next chip spend. Universal "Choose what to create" hub (Post / Image / Video / Voice / Character) unifies the creation surface.</li>
+      <li><strong>3-tier referral % + PWA distribution + 9-step cancellation gauntlet.</strong> Subscription tier gates the referral rate (Free 10% chips · Premium 15% cash · Creative Pro 30% cash) — subscription product as its own affiliate network. Distribution via PWA Add-to-Home-Screen (QR install) bypasses App Store NSFW bans entirely. Cancellation is 9 modals + chip-bonus retention pitch + red "Give up Premium" — effective dark pattern but probably FTC click-to-cancel non-compliant.</li>
+    </ol>
+  </div>
   <div class="top3-card">
     <a class="top3-name" href="nomi.html">Nomi ✓</a>
     <ol class="top3-list">

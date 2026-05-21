@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DRT.FM Competitor Checks — LoveScape</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
+.tab-btn:hover{background:#1e1e2e}
+.tab-btn.active{color:#fff}
+.tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
+.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
+.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
+.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
+.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
+.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
+.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
+.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
+.tab-lovescape{color:#f0abfc}.tab-lovescape.active{background:#260a30}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+.section{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
+.check-header{background:linear-gradient(135deg,#260a30,#160418);border:1px solid #4a1a55;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.check-header h1{font-size:28px;font-weight:800;color:#f0abfc;margin-bottom:6px}
+.check-header .meta{font-size:13px;color:#9070a0;font-family:'SF Mono','Monaco',monospace}
+.check-header .priority{margin-top:12px;font-size:13px;color:#e0c0e8;background:#1a0a20;border:1px solid #4a1a55;border-radius:8px;padding:10px 14px;line-height:1.5}
+h2.zone{font-size:13px;font-weight:700;color:#f0abfc;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
+h2.zone .zone-badge{font-size:10px;background:#260a30;color:#f0abfc;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:18px 22px}
+.quick-ref h3{font-size:11px;font-weight:700;color:#f0abfc;text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px}
+.quick-ref h3:first-child{margin-top:0}
+.quick-ref ol,.quick-ref ul{padding-left:20px}
+.quick-ref li{font-size:13px;color:#c0c0d8;padding:3px 0;line-height:1.55}
+.quick-ref strong{color:#f0abfc}
+.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
+.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.finding-meta .time{color:#5060a0}
+.tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.tag-standout{background:#260a30;color:#f0abfc}
+.tag-ick{background:#2a0a14;color:#ff8aaa}
+.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
+.finding-body strong{color:#fff}
+.check-shot{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid #2a2a3e;margin:8px 0}
+.findings{display:flex;flex-direction:column;gap:10px}
+.actions{background:linear-gradient(135deg,#1a0a20,#0a0612);border:1px solid #4a1a55;border-radius:14px;padding:24px 28px}
+.actions-empty{font-size:13px;color:#7070a0;font-style:italic;text-align:center;padding:20px 0}
+
+ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
+.action-group{margin-top:18px}
+.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.action-group.steal .action-group-title{color:#4ade80}
+.action-group.avoid .action-group-title{color:#ff6b6b}
+.action-group ul{list-style:none;padding-left:0}
+.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0 5px 18px;position:relative;line-height:1.6}
+.action-group.steal li::before{content:'+';color:#4ade80;position:absolute;left:0;top:5px;font-weight:700}
+.action-group.avoid li::before{content:'!';color:#ff6b6b;position:absolute;left:0;top:5px;font-weight:700}
+.verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #4a1a55}
+.scores{margin-top:16px;padding-top:16px;border-top:1px solid #4a1a55;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.score{background:#0a0814;border:1px solid #260a30;border-radius:8px;padding:10px 12px;text-align:center}
+.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.score-value{font-size:22px;font-weight:800;color:#f0abfc;line-height:1.2;margin-top:2px}
+.finding-group{margin-bottom:6px}
+.group-toggle{display:flex;align-items:center;width:100%;background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;text-align:left;gap:10px;transition:background .15s}
+.group-toggle:hover{background:#13131e}
+.group-toggle.open{border-radius:10px 10px 0 0;border-bottom-color:#13131e}
+.group-title{font-size:13px;font-weight:700;color:#e0e0e8;flex:1}
+.group-count{font-size:11px;color:#5060a0;flex-shrink:0}
+.toggle-arrow{font-size:9px;color:#5060a0;transition:transform .2s;flex-shrink:0}
+.group-toggle.open .toggle-arrow{transform:rotate(90deg)}
+.group-body{display:none;background:#07070f;border:1px solid #2a2a3e;border-top:none;border-radius:0 0 10px 10px;padding:12px;flex-direction:column;gap:12px}
+.group-body.open{display:flex}
+</style>
+</head>
+<body>
+<nav>
+<span class="nav-label">Competitor Checks</span>
+<a class="tab-btn tab-summary" href="index.html">📋 Summary</a>
+<a class="tab-btn tab-kindroid" href="kindroid.html">Kindroid</a>
+<a class="tab-btn tab-ggpt" href="girlfriendgpt.html">GirlfriendGPT</a>
+<a class="tab-btn tab-od" href="ourdream.html">OurDream</a>
+<a class="tab-btn tab-candy" href="candy.html">Candy.AI</a>
+<a class="tab-btn tab-sd" href="secretdesires.html">SecretDesires</a>
+<a class="tab-btn tab-sweetdream" href="sweetdream.html">SweetDream</a>
+<a class="tab-btn tab-nomi" href="nomi.html">Nomi</a>
+<a class="tab-btn tab-lovescape active" href="lovescape.html">LoveScape</a>
+<a class="tab-btn" href="competitor-analysis-v2.html" style="color:#a78bfa;margin-left:12px">📊 Analysis Matrix</a>
+<span class="private-badge">DRT.FM · Private</span>
+</nav>
+<div class="section" id="lovescape">
+<div class="check-header">
+<h1>LoveScape</h1>
+<div class="meta">lovescape.com  ·  Session 2026-05-21  ·  $9.99–19.99/mo  ·  ~4.5M monthly visits (Dainis check, May 2026)  ·  350K+ community characters  ·  Chat model: Grok (xAI)</div>
+<div class="priority"><strong>Session focus:</strong> Mood Sync emotional engine · Relationship progression stages · Video Actions (4-sec reactive clips) · Dynamic Memory 2.0 · 350K community character marketplace · Hardcore NSFW positioning ("AI Porn" branding) · Webcam livestream integration · Creator earning program</div>
+</div>
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-21</span></h2>
+<div class="actions" id="lovescape-actions">
+<div class="verdict"><strong>LoveScape is a high-quality porn experience dressed as a chat app.</strong> Per Dainis's close: <em>"There's nothing about memory here. All about image, sex, video, so just like a porn experience, but a high-quality one."</em> Their moat isn't chat (Grok 4 + their own Harbinger-24B fine-tune, decent but commoditized), isn't memory (paywalled and confusingly labelled — "Long" tier locked behind $64.99/mo Pro), isn't relationship (no companion onboarding, every chip pre-loads sexual intent). It's the <strong>NSFW image + video generation pipeline</strong>: SDXL stills → photoreal image-edit ladder (9 chips/regen) → image-to-video via their own Unbound / Unbound 2.0 + Alibaba's Wan 2.2 → lip-synced "Talk" videos with audio preview before commit → multi-scene composition timeline. On top of all of that, a curated <strong>~25+ NSFW action library</strong> per gender (Female/Male/Gay) with reference imagery for each preset — months of labor that competitors can't fork along with the open-source weights. The chat side panel runs a per-character ambient video loop (Klara holds a phone camgirl-style; Mila walks around her room) for ~$0 marginal cost. Their cancellation flow (9 modals + chip-bonus retention pitch + red "Give up Premium" button) likely violates FTC click-to-cancel rules. The competitive lane DRT.FM can own without rebuilding the porn stack: <strong>companion + relationship + memory as the moat</strong> — exactly what LoveScape has deliberately not built.</div>
+<div class="action-group steal">
+<div class="action-group-title">Steal immediately for DRT.FM</div>
+<ul>
+<li><strong>Per-image action ladder (Video · Edit · Talk · Share · gallery).</strong> Every successful AI artifact should map to a clear "what next." Edit at 9 chips, Talk (lip-sync video), Video (image-to-video), Gallery (saves to character library). Direct funnel from "I like this" → next chip spend.</li>
+<li><strong>Preview-before-spend on every chip-cost action.</strong> Audio preview button before committing 135-chip Talk-video generation. Trust-builder in a paid-per-action economy — users don't gamble chips on output they haven't heard.</li>
+<li><strong>Per-character ambient side-panel loop.</strong> Pre-rendered 5–15s video loop per character (one-time GPU cost at create, ~free serving) playing in the chat side panel. Klara's "filming-herself-on-phone" pose, Mila's "walking + flirty" loop. Cheap immersion at massive perceived value.</li>
+<li><strong>"Use prompt" remix button on every feed post.</strong> Tap any post → opens the original generation prompt in your own creation flow. TikTok "Use this sound" pattern, but for AI generations. Viral content propagation built into the discovery surface.</li>
+<li><strong>Tier-gated referral percentage.</strong> Free 10% in chips · Premium 15% in cash · Creative Pro 30% in cash. Make the subscription tier the affiliate-rate gate — turns the subscription product into its own affiliate network. Plus: ship the referral mechanic before cash payouts work ("available in a few weeks") to lock in growth flywheel early.</li>
+<li><strong>3-at-a-time photo generation in character creator.</strong> Generate 3 candidate portraits per step (different art directions, same trait input), user picks one, Regenerate rolls a new batch. Beats single-shot generation — gives users perceived control without forcing prompt iteration.</li>
+<li><strong>"Choose what to create" universal hub.</strong> Single + button → 5-tile modal: Post · Image · Video · Voice · Character. One mental model, one entry point, all creation flows routed through it.</li>
+<li><strong>PWA + QR install path.</strong> Native iOS/Android is impossible for hardcore NSFW (App Store blanket-bans). PWA + Add-to-Home-Screen feels native enough, bypasses 30% IAP cut, ship from day one. QR-code install replaces "tap share → Add to Home Screen" instructional friction.</li>
+<li><strong>6-emoji reaction bar for RLHF (❤️ 👍 😄 🔥 😟 😠 👎 + Report).</strong> Multi-class sentiment signal, not just thumbs-up/down. The 🔥 reaction is gold for training NSFW models — captures "arousing" without users typing.</li>
+<li><strong>No-watermark perk as the killer Pro-tier differentiator.</strong> Every Premium output has LOVESCAPE watermark baked in; Pro removes it. Watermarks are a constant reminder of tier ladder — removing them is identity-affirming for paying creators. Simple to ship, high-value perceived.</li>
+<li><strong>Personal Gallery with All media + By characters views.</strong> Every artifact a user has generated is saved and browsable forever. In a chip-economy product, "your library" is an emotional anchor — users who feel their AI content has accumulated value churn less. Dainis literally said "very cool."</li>
+<li><strong>Chip-bonus retention offer at cancel ("400 → 600 monthly chips").</strong> Show a crossed-out lower number alongside the real allowance as the save offer. Effective even when (especially when) the user knows the framing is a trick — they still want the chips. Use this WITHOUT the 9-step gauntlet (see Avoid).</li>
+</ul>
+</div>
+<div class="action-group avoid">
+<div class="action-group-title">Avoid / counter-position</div>
+<ul>
+<li><strong>The 9-step cancellation gauntlet.</strong> Forced-scroll, single-button "Stay" modals chained one-by-one, default-selected reason ("too expensive"), red "Give up Premium" final button. Almost certainly violates FTC click-to-cancel (2024), CA SB-313, and the EU Consumer Rights Directive Art. 11. Single retention screen with the chip-bonus offer captures most of the save-rate at 1/10 the legal risk.</li>
+<li><strong>"Step sister" / "Step mom" relationship presets and "Generate teen porn" / "Create AI teen slut" category CTAs.</strong> Even with formal "18+" labels, the brand voice crosses into territory that Visa/Mastercard, EU DSA, UK Online Safety Act, and US state laws (TX/LA/TN/UT) are increasingly hostile to. The keyword traffic isn't worth the existential exposure on processors + regulators. Hard "do not ship" line for DRT.FM regardless of competitor behavior.</li>
+<li><strong>Daily pricing as headline anchor ($0.65/day) with monthly billing in fine print ($19.99/mo).</strong> Effective but a tightening regulatory category — UK CMA + EU DSA flag this pattern explicitly. Show the actual recurring cost first.</li>
+<li><strong>Memory commodified as paywall tier (Short / Medium / Long-PRO).</strong> Counter-positions DRT.FM directly. If companion + memory is the moat, give memory generously — don't gate the headline value behind the top tier. (Nomi pattern: memory free across all paid tiers, treated as the product moat.) Plus the tier labels are confusingly worded ("Short" tier describes "Normal memory", "Medium" describes "Long memory", and "Long" is its own tier — three different uses of the word "long" across three tiers).</li>
+<li><strong>Hard 100% sex positioning with zero SFW path.</strong> The character creator uses fully nude pose references at every step. Discovery is "Choose Your AI Porn Character." Quick-reply chips are "Send me nudes" by default. <em>This is a deliberate choice and works for their funnel</em>, but it locks them out of: (a) App Store distribution, (b) mainstream payment processors at scale, (c) any companion / relationship user. DRT.FM should ship a real SFW path that lets users build relationship before content escalates — keeps every audience open.</li>
+<li><strong>800-style very short message limits in chat.</strong> If matched to LoveScape's chat behavior — every reply is short asterisk-actions, no long-form. DRT.FM should allow user-written messages of any length to support real journaling / relationship-building.</li>
+<li><strong>Network errors mid-session.</strong> Reliability is an underrated counter-position. Dainis hit recurring network errors during the chat session — likely Grok rate-limiting + chip-ledger sync issues. If DRT.FM ships rock-solid (Nomi-tier) reliability, it's a moat the porn-rushed players can't match.</li>
+<li><strong>Audio paywalled on free / Premium tier.</strong> Voice is the highest-engagement modality; gating it kills the magic before users get hooked. DRT.FM should make voice playback free across all paid tiers — voice <em>generation</em> can stay paid (TTS cost), but listening to what's already generated should be free.</li>
+</ul>
+</div>
+<div class="scores">
+<div class="score"><div class="score-label">Memory</div><div class="score-value">4</div></div>
+<div class="score"><div class="score-label">Voice Quality</div><div class="score-value">7</div></div>
+<div class="score"><div class="score-label">Image Consistency</div><div class="score-value">9</div></div>
+<div class="score"><div class="score-label">NSFW Consistency</div><div class="score-value">10</div></div>
+<div class="score"><div class="score-label">Companion Feel</div><div class="score-value">3</div></div>
+</div>
+</div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive · 2026-05-21</span></h2>
+<div id="lovescape-findings" style="display:flex;flex-direction:column;gap:6px">
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★★ Image &amp; Video Generation — the moat</span>
+<span class="group-count">9 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Chat, Memory &amp; Models</span>
+<span class="group-count">6 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Character Creator &amp; Characters</span>
+<span class="group-count">7 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Community, Discovery &amp; Feed</span>
+<span class="group-count">7 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Homepage, SEO &amp; Distribution</span>
+<span class="group-count">7 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Billing, Pricing &amp; Cancellation</span>
+<span class="group-count">9 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+&lt;&gt;
+  </div>
+</div>
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Reliability</span>
+<span class="group-count">1 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+&lt;&gt;
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+<script>function toggleGroup(btn){var body=btn.nextElementSibling;var open=!btn.classList.contains("open");btn.classList.toggle("open",open);body.classList.toggle("open",open);}</script></body>
+</html>
