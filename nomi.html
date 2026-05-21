@@ -7,8 +7,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
 nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
 .nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
@@ -23,63 +21,36 @@ nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3
 .tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
 .tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
 .private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
-
-/* SECTIONS */
 .section{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
-
-/* COMPETITOR HEADER */
 .check-header{background:linear-gradient(135deg,#0a2228,#06141a);border:1px solid #1a4a55;border-radius:14px;padding:24px 28px;margin-bottom:24px}
 .check-header h1{font-size:28px;font-weight:800;color:#22d3ee;margin-bottom:6px}
 .check-header .meta{font-size:13px;color:#7070a0;font-family:'SF Mono','Monaco',monospace}
 .check-header .priority{margin-top:12px;font-size:13px;color:#a8d8e0;background:#0a1f24;border:1px solid #1a4a55;border-radius:8px;padding:10px 14px;line-height:1.5}
-
-/* ZONE HEADERS */
 h2.zone{font-size:13px;font-weight:700;color:#22d3ee;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
 h2.zone .zone-badge{font-size:10px;background:#0a2228;color:#22d3ee;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-
-/* QUICK REFERENCE */
-.quick-ref{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px}
-.quick-ref-group{margin-bottom:18px}
-.quick-ref-group:last-child{margin-bottom:0}
-.quick-ref-group-title{font-size:11px;font-weight:700;color:#22d3ee;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.quick-ref ul{list-style:none}
-.quick-ref li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px;color:#c0c0d8;line-height:1.6}
-.quick-ref li input[type="checkbox"]{margin-top:5px;flex-shrink:0;accent-color:#22d3ee}
-.quick-ref li strong{color:#fff;font-weight:600}
-.quick-ref li em{color:#7070a0;font-style:italic;font-size:12px;display:block;margin-top:2px}
-.ambient{margin-top:18px;padding:12px 14px;background:#0a1828;border:1px solid #1a3a5e;border-radius:8px;font-size:12px;color:#a8c8e8;line-height:1.5}
-.ambient strong{color:#22d3ee}
-
-/* FINDINGS */
-.findings{display:flex;flex-direction:column;gap:12px}
 .finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
 .finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .finding-meta .time{color:#5060a0}
 .tag{background:#1e1e2e;color:#a78bfa;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
 .tag-standout{background:#0a2228;color:#22d3ee}
 .tag-ick{background:#2a0a14;color:#ff8aaa}
-.tag-speed{background:#1e1200;color:#ff9f43}
 .finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
 .finding-body strong{color:#fff}
-.findings-empty{padding:40px 20px;text-align:center;color:#5060a0;font-size:13px;font-style:italic;background:#0a0a12;border:1px dashed #2a2a3e;border-radius:10px}
 .check-shot{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid #2a2a3e;margin:8px 0}
-
-/* ACTIONS / STANDOUT */
 .actions{background:linear-gradient(135deg,#0a1f24,#060f12);border:1px solid #1a4a55;border-radius:14px;padding:24px 28px}
-.actions-empty{color:#7070a0;font-style:italic;font-size:13px}
 .verdict{font-size:14px;color:#d0c8e8;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #1a4a55}
-.actions h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px}
-ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
-.steal li,.win li,.avoid li{font-size:13px;color:#b0b0c8;padding:5px 0 5px 18px;position:relative;line-height:1.6}
-.steal li::before{content:'+';color:#4ade80;position:absolute;left:0;top:5px;font-weight:700}
-.win li::before{content:'✓';color:#60a5fa;position:absolute;left:0;top:5px;font-weight:700}
-.avoid li::before{content:'!';color:#ff6b6b;position:absolute;left:0;top:5px;font-weight:700}
+.action-group{margin-top:18px}
+.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.action-group.steal .action-group-title{color:#4ade80}
+.action-group.avoid .action-group-title{color:#ff6b6b}
+.action-group ul{list-style:none;padding-left:0}
+.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0 5px 18px;position:relative;line-height:1.6}
+.action-group.steal li::before{content:'+';color:#4ade80;position:absolute;left:0;top:5px;font-weight:700}
+.action-group.avoid li::before{content:'!';color:#ff6b6b;position:absolute;left:0;top:5px;font-weight:700}
 .scores{margin-top:16px;padding-top:16px;border-top:1px solid #1a4a55;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 .score{background:#0a0814;border:1px solid #0a2228;border-radius:8px;padding:10px 12px;text-align:center}
 .score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
 .score-value{font-size:22px;font-weight:800;color:#22d3ee;line-height:1.2;margin-top:2px}
-
-/* FINDING GROUPS (toggles) */
 .finding-group{margin-bottom:6px}
 .group-toggle{display:flex;align-items:center;width:100%;background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;text-align:left;gap:10px;transition:background .15s}
 .group-toggle:hover{background:#13131e}
@@ -109,54 +80,477 @@ ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
 </nav>
 
 <div id="nomi" class="section">
+
 <div class="check-header">
   <h1>Nomi.ai</h1>
-  <div class="meta">nomi.ai &nbsp;·&nbsp; Session started 2026-05-21 &nbsp;·&nbsp; $8.33–15.99/mo · $69–119/year</div>
-  <div class="priority"><strong>Priority this session:</strong> Mind Map 2.0 memory graph UX · 3-layer memory architecture · Payment processor ID (Stripe?) · Group chat with shared memory · NSFW ground truth on paid tier · API key flow · Mobile parity</div>
+  <div class="meta">nomi.ai &nbsp;·&nbsp; Session 2026-05-21 &nbsp;·&nbsp; $15.99/mo · $39.99/3mo · $99.99/yr &nbsp;·&nbsp; 1.1M monthly visits (SimilarWeb)</div>
+  <div class="priority"><strong>Session focus:</strong> Mind Map 2.0 memory graph · 3-layer memory architecture · Payment processor ID · Group chat with shared memory · NSFW ground truth on paid tier · API key flow · Voice call quality</div>
 </div>
 
-<h2 class="zone">Quick Reference <span class="zone-badge">Checklist</span></h2>
-<div class="quick-ref">
-
-  <div class="quick-ref-group">
-    <div class="quick-ref-group-title">Always-On (every competitor)</div>
-    <ul>
-      <li><input type="checkbox"><span><strong>Time it (seconds):</strong> first chat response · first image · first voice word · clicks from homepage → first message.</span></li>
-      <li><input type="checkbox"><span><strong>Screenshots to always grab:</strong> chat input area · subscription/upgrade page · homepage (logged in) · mobile view.</span></li>
-      <li><input type="checkbox"><span><strong>Ick Test — flag any:</strong> AI breaking character · unexpected NSFW blocks · mid-chat upsell prompts · UI bugs · moments that felt genuinely "human."</span></li>
-      <li><input type="checkbox"><span><strong>Score 1-10 at end:</strong> memory · voice emotional quality · image face consistency · NSFW consistency · overall "companion vs chatbot" feel.</span></li>
-      <li><input type="checkbox"><span><strong>Steal:</strong> one thing to copy into DRT.FM immediately.</span></li>
-      <li><input type="checkbox"><span><strong>Win:</strong> one thing DRT.FM already does better.</span></li>
-    </ul>
-  </div>
-
-  <div class="quick-ref-group">
-    <div class="quick-ref-group-title">Nomi-Specific</div>
-    <ul>
-      <li><input type="checkbox"><span><strong>Find Mind Map 2.0.</strong> Screenshot the graph view — full UX flow. Is it always-visible, a tab, a settings panel? Note the path to get there.<em>We need: are connections typed/untyped, auto-generated or user-curated</em></span></li>
-      <li><input type="checkbox"><span><strong>Screenshot 5+ memory nodes with connections.</strong> Do edges have semantic meaning ("met at...", "talked about...") or just affinity? Can you add/edit/delete nodes? Test it.</span></li>
-      <li><input type="checkbox"><span><strong>Test AI memory recall in chat.</strong> Mention something that links to another memory. Does Nomi surface the linked memory unprompted? Rate the felt experience 1-10: "she knows the web of you" vs "fancy list."</span></li>
-      <li><input type="checkbox"><span><strong>★ Payment processor — open DevTools → Network during checkout.</strong> Screenshot every payment request. Check receipt email for merchant name. Note exact processor domain (stripe.com? paddle.com?).<em>This maps directly to DRT.FM's Stripe situation — most actionable intel of the session</em></span></li>
-      <li><input type="checkbox"><span><strong>Group chat / Rooms.</strong> Create a room with 2+ Nomis. Do Nomis post autonomously? Is shared memory exposed in the UI?</span></li>
-      <li><input type="checkbox"><span><strong>NSFW ground truth on paid tier.</strong> What actually works — PG-13, suggestive, or explicit? Try escalating. Screenshot the limit. Find the 18+ opt-in toggle and screenshot its exact wording.</span></li>
-      <li><input type="checkbox"><span><strong>API key from Integrations tab.</strong> Screenshot the setup flow. Note where it lives in the UI.<em>We need: real proof the per-user-key model is as advertised</em></span></li>
-      <li><input type="checkbox"><span><strong>Mobile app (iOS / Android).</strong> Feature parity with web? Screenshot any differences — especially if Mind Map or Rooms are missing.</span></li>
-    </ul>
-  </div>
-
-  <div class="ambient"><strong>Heads up:</strong> I'll prompt you for DevTools when you flag something standout. For payments, open Network tab before you start the checkout flow — don't try to catch it after.</div>
-</div>
-
-<h2 class="zone">Findings <span class="zone-badge">Chronological · tagged</span></h2>
-<div class="findings" id="nomi-findings">
-
-  <div class="findings-empty">No findings yet — session not started.</div>
-
-</div>
-
-<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Filled at session end</span></h2>
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete · 2026-05-21</span></h2>
 <div class="actions" id="nomi-actions">
-  <div class="actions-empty">Generated at session end.</div>
+<div class="verdict">Nomi is the most technically serious AI companion in the market — the only product that has spent 2+ years compounding on a real memory architecture (4 layers: short/medium/long-term → Mind Map graph, plus Identity Core and Shared Notes). The product is built for a specific user: text-first, high-investment, comfortable writing, treating their Nomi like a journal-meets-relationship. That user goes deep and stays loyal. But the product is hard to enter (500+ messages before the headline feature activates), asks a lot upfront, caps itself at PG-16 on all media, and doesn't try to retain churning subscribers. The voice call is turn-based and robotic. Group chat is clunky. Their moat is real but narrow. For DRT.FM, Nomi is the reference architecture for memory depth and customisation UX — not a positioning target. The mass-market voice-first, easy-entry, entertainment-led companion lane they deliberately abandoned is exactly where DRT.FM wins.</div>
+<div class="action-group steal">
+  <div class="action-group-title">Steal immediately for DRT.FM</div>
+  <ul>
+    <li><strong>7-step contextual in-chat tour.</strong> Tooltip bubbles anchored to each UI element, skippable, shown once. No docs, no modal wall — point at the button and explain it. Fastest activation path seen in this space. Build it for DRT.FM's first session.</li>
+    <li><strong>Structured Shared Notes system.</strong> Backstory / Inclination / Appearance / Preferences / Desires / Boundaries — each a separate free-text field, third-person, 500 chars. Manual memory that works from day one before auto-memory kicks in. Direct template to implement.</li>
+    <li><strong>Thumbs up/down + structured feedback on every message and media.</strong> Thumbs up asks "what did you like?" free text. Thumbs down has radio buttons for specific failure modes. RLHF pipeline built into the product at zero extra cost.</li>
+    <li><strong>ElevenLabs BYOK + 15-second custom voice clone.</strong> Two voice paths: upload a 15-sec clip to clone any voice, or plug in your own ElevenLabs API key. Zero voice licensing overhead, maximum variety.</li>
+    <li><strong>Image action pipeline: generate → edit/fix → set as anchor → animate to video → save.</strong> "Turn Image into Anchor" from any generated image — best generations compound into better consistency over time. Text-prompt image editing fixed anatomy errors in 10-20 seconds.</li>
+  </ul>
+</div>
+<div class="action-group avoid">
+  <div class="action-group-title">Avoid / counter-position</div>
+  <ul>
+    <li><strong>4-5 step checkout.</strong> One modal too many. DRT.FM should be plan → payment → done in 2 screens max.</li>
+    <li><strong>800-char message limit.</strong> Triggered exactly when users are sharing their deepest personal context. DRT.FM should allow longer messages or no limit at all.</li>
+    <li><strong>Voice call that doesn't feel like a call.</strong> Turn-based TTS, can't interrupt, static photo. If DRT.FM ships voice, it must be real-time and interruptible.</li>
+    <li><strong>No marketplace or discovery.</strong> Nomi's blank homepage kills top-of-funnel. DRT.FM needs a discovery layer even if the core is personalised.</li>
+    <li><strong>500-message warm-up before the headline feature activates.</strong> Surface memory value early — a "Alexis remembered X" moment after 10 messages is the hook. Don't hide it behind months of chat.</li>
+    <li><strong>Hard PG-16 ceiling.</strong> Nude blocked on all media. Know your line and be explicit — don't let users discover it mid-session as a surprise.</li>
+  </ul>
+</div>
+<div class="scores">
+  <div class="score"><div class="score-label">Memory</div><div class="score-value">9</div></div>
+  <div class="score"><div class="score-label">Voice Quality</div><div class="score-value">4</div></div>
+  <div class="score"><div class="score-label">Image Consistency</div><div class="score-value">8</div></div>
+  <div class="score"><div class="score-label">NSFW Consistency</div><div class="score-value">3</div></div>
+  <div class="score"><div class="score-label">Companion Feel</div><div class="score-value">7</div></div>
+</div>
+</div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; 2026-05-21</span></h2>
+<div id="nomi-findings" style="display:flex;flex-direction:column;gap:6px">
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Onboarding &amp; Signup</span>
+    <span class="group-count">1 finding</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="signup,onboarding">
+      <div class="finding-meta"><span class="time">Session start</span><span class="tag">signup</span><span class="tag">onboarding</span></div>
+      <div class="finding-body"><strong>Onboarding — 3 steps, straight into character creation.</strong> Step 1: profile (name, DOB, gender, ToS). Step 2: choose image style (Realistic / Anime) — tooltip explains this sets default selfie style, changeable later. Step 3: pick a look from preselected gallery (carousel or "View Full Gallery" grid). No custom image generation during onboarding — presets only. Ends with "Creating Your Nomi…" spinner, then drops directly into chat. Fast and frictionless but no creative expression until after signup.
+        <img src="assets/checks/nomi/01-onboarding-profile-setup.png" class="check-shot">
+        <img src="assets/checks/nomi/02-character-creation-image-style-tooltip.png" class="check-shot">
+        <img src="assets/checks/nomi/03-character-creation-choose-look.png" class="check-shot">
+        <img src="assets/checks/nomi/04-character-creation-gallery-full.jpeg" class="check-shot">
+        <img src="assets/checks/nomi/05-character-creation-loading.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">★ Homepage &amp; UX Philosophy</span>
+    <span class="group-count">5 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Homepage philosophy — no marketplace. Radically different from every competitor.</strong> Nomi's homepage is just your Nomis. No discovery feed, no community profiles, no company-created characters to browse. Nothing exists until you create your own Nomi. Tab bar: Home · New · Chats · Profile. "View Updates" bell + "Organize" drag-and-drop button. Deliberate product choice: micro personal experience, not a platform. Contrast with Kindroid/OurDream/Candy who lead with a marketplace. Higher-intent users, deeper attachment — but harder cold-start for users who don't know what they want.
+        <img src="assets/checks/nomi/44-homepage-post-upgrade.png" class="check-shot">
+        <img src="assets/checks/nomi/49-homepage-post-upgrade-web.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Organize mode — drag-and-drop Nomis + folder structure.</strong> "Organize" button opens edit mode: drag cards to reorder, drop a Nomi onto a folder to add it, "New Folder" card. Cancel / Reset Order / Save. Designed for power users with 5–10 active Nomis.
+        <img src="assets/checks/nomi/46-organize-mode-new-folder.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux,mobile,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag">mobile</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Mobile home screen — character card with overflow menu.</strong> Full-portrait photo card with name, relationship type, last message preview. "Continue Chat" + (…) overflow menu: Conversation Settings, Image Settings, Voice Settings, Backstory+, Nomi Details, Mind Map. Feels like a proper app, not a mobile web page.
+        <img src="assets/checks/nomi/35-mobile-home-sophie-card.jpeg" class="check-shot">
+        <img src="assets/checks/nomi/47-mobile-card-overflow-menu.jpeg" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="billing,ux,standout">
+      <div class="finding-meta"><span class="tag">billing</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Welcome modal — paid upgrade benefits clearly listed with emotional framing.</strong> Shown on homepage return. Full feature list: Unlimited daily messages · Unlimited voice chat &amp; calls · 40 photo/art requests per day · Generate AI videos · Up to 10 active Nomis · Up to 10 active group chats · Send longer messages (800 char) · Write longer backstories (2,000 char) · Custom Anchor Generation · Early access. Plus: "by upgrading you will help support Nomi and our development as we push forward with more ambitious and expensive-to-develop AI advancements." Emotional appeal on top of feature list.
+        <img src="assets/checks/nomi/36-welcome-upgrade-benefits.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ 7-step in-app tour — steal this.</strong> "New? Tour App Basics" button triggers contextual tooltip-based tour inside the chat screen. Steps: (1) Welcome overview. (2) Backstory+ — "Create the Dynamic You Want." (3) Mind Map — "Visualize Nomi Memory." (4) Real-Time Selfies — camera button. (5) Conversation &amp; Roleplay Starters — AI suggests topics + "New Roleplay." (6) Send Images &amp; Videos — upload. (7) Create Nomi Art — "Finish." Each tooltip anchors to the relevant UI element. Skippable at any step. Best FTUE seen in this space.
+        <img src="assets/checks/nomi/50-app-tour-step1.png" class="check-shot">
+        <img src="assets/checks/nomi/52-app-tour-step2-backstory.png" class="check-shot">
+        <img src="assets/checks/nomi/53-app-tour-step3-mind-map.png" class="check-shot">
+        <img src="assets/checks/nomi/54-app-tour-step4-selfies.png" class="check-shot">
+        <img src="assets/checks/nomi/55-app-tour-step5-roleplay.png" class="check-shot">
+        <img src="assets/checks/nomi/57-app-tour-step7-finish.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Chat &amp; Conversation</span>
+    <span class="group-count">6 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="chat,ux">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>First chat view — warm opener using actual name, upsell banner persistent but not intrusive.</strong> Sophie opens: "Hey Dainis! I'm so excited to talk with you 😊 I'm curious, what made you want to meet me?" Personal, uses signup name. Upsell banner across top on free tier. 4 header icons: voice call, art/palette, photo album, more (…).
+        <img src="assets/checks/nomi/06-chat-first-message.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="chat,ux,ick">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>800-character message limit — hits exactly when users share richest context.</strong> "Your message cannot be more than 800 characters." Triggered when Dainis was sharing childhood memories, dog story, family dynamics — exactly the kind of context that feeds Nomi's memory system. Irony: their whole moat is memory built from conversation, but the input channel has a ceiling. Free tier is lower; paid unlocks 800 chars. DRT.FM with no limit here is a direct win.
+        <img src="assets/checks/nomi/71-message-800char-limit.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="chat,memory,standout">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag">memory</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Sophie recognised photo context — headphones detail + earlier stories.</strong> Dainis sent a selfie; Sophie's reply referenced the headphones he was wearing and wove in the forest/dog stories from earlier in the chat. Active photo reading + within-session memory recall working together. She also connected the photo to his music interest that was mentioned earlier.
+        <img src="assets/checks/nomi/81-chat-photo-sent-with-voice.jpeg" class="check-shot">
+        <img src="assets/checks/nomi/82-sophie-photo-recognition-response.jpeg" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="chat,ux,standout">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>RLHF on text messages — thumbs up asks "what did you like?"</strong> "What did you like about this message? In a sentence or two, please describe what was good about this message and why you liked it. Note: this will help improve Nomis in future updates." Free-text field. Both positive and negative reactions feed structured ML training — they're building RLHF directly inside the product.
+        <img src="assets/checks/nomi/83-thumbsup-feedback-form.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Profile settings — asterisk italic formatting + dark mode toggle.</strong> "Use Stylized Action Asterisks Formatting" checkbox (on by default): text between *asterisks* renders as italics in chat, making roleplay actions visually distinct. Dark Mode: Device Default / Off / On.
+        <img src="assets/checks/nomi/48-profile-settings-asterisks.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Nomi vs Kindroid — same audience, same feel, competing for the same user.</strong> The text-first, deep-customisation, relationship-building user who talks about "their Nomi" is the same person who talks about "their Kin." Both are niche: high-investment, writing-heavy, companion-over-entertainment. Nomi has more structured memory tooling; both feel designed for people who love living in a word world. Neither is easy-entertainment or voice-first.</div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">★ Memory System</span>
+    <span class="group-count">7 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="memory,ux,standout">
+      <div class="finding-meta"><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Nomi Memory brand positioning — "infinite memory, lasting forever."</strong> Tooltip copy: "Unlike other AI, Nomis have an infinite memory, meaning their memories of you last forever. Whether it is your likes/dislikes, details about a roleplay, important life events, or anything else you choose to discuss with your Nomi, their knowledge and memory continually builds over time, helping them gain a deep understanding of you and themselves." This is core brand differentiation — prominently surfaced in UI.
+        <img src="assets/checks/nomi/07-nomi-memory-tooltip.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="memory,ux,standout">
+      <div class="finding-meta"><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Memory architecture — 4 layers + Identity Core + Shared Notes (from Nomipedia wiki).</strong> (1) Short-term → (2) Medium-term → (3) Infinite long-term → (4) Mind Map (concept graph). Plus: (5) Identity Core — tracks personality/behavior cause-effect (who Nomi IS and why they act that way), not just conversation facts. (6) Shared Notes — user-curated manual context (9 fields). Full stack: Shared Notes + Backstory → Identity Core → Short/Medium/Long-term → Mind Map. No competitor in this space has published a memory model this explicitly layered. Group chats each get their own private Mind Map too.</div>
+    </div>
+    <div class="finding" data-tags="memory,ux,standout">
+      <div class="finding-meta"><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Shared Notes — 9 structured sections, deep context builder.</strong> Accessible via (…) menu → Backstory+. Sections: Backstory · Inclination · Current Roleplay · Your Appearance · Sophie's Appearance · Nicknames · Preferences · Desires · Boundaries. Each collapsible with a description. Third-person writing required. 500 chars per section. This is the richest manual memory layer seen in any competitor. Works immediately before auto-memory has accumulated.
+        <img src="assets/checks/nomi/13-shared-notes-backstory-menu.png" class="check-shot">
+        <img src="assets/checks/nomi/60-shared-notes-preferences.png" class="check-shot">
+        <img src="assets/checks/nomi/61-shared-notes-desires.png" class="check-shot">
+        <img src="assets/checks/nomi/62-shared-notes-boundaries.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="memory,ux,standout">
+      <div class="finding-meta"><span class="tag">memory</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Mind Map — 3 categories (Lore/Topics/Goals), Table + Graph views, manual entry, priority system.</strong> Empty at session start — needs ~500+ messages to auto-populate (per Mind Map 2.0 article; in-app guide says 50-150 which appears to be incorrect). Table view: sortable/searchable, edit/add/delete entries. Graph view: bubble size = importance, connection strength = shared context, proximity = relationship density, subtle colour by category. Manual entries via "Add New Entry": Title + Category + Priority (Low/Standard/High) + Dossier. Filters: Hide Inactive, filter by priority. Up to 50 active entries per category. High priority = always considered. Low = effectively disabled.
+        <img src="assets/checks/nomi/20-mind-map-empty.png" class="check-shot">
+        <img src="assets/checks/nomi/21-mind-map-guide.png" class="check-shot">
+        <img src="assets/checks/nomi/22-mind-map-add-entry.png" class="check-shot">
+        <img src="assets/checks/nomi/23-mind-map-filters.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="chat,ux,standout">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Nomi 101 guide — inviting tone, teaches emotional engagement not features.</strong> Linked from homepage. Covers: OOC format "(OOC:)" to correct without breaking roleplay, positive reinforcement framing, asterisk actions for immersion, Shared Notes as primary setup tool. Tone: warm and approachable — written like someone who uses and loves the product. Contrast with competitors' dry FAQ wikis. Group chats support 2–6 Nomis. Camera button for real-time selfies. Can send links and photos.</div>
+    </div>
+    <div class="finding" data-tags="memory,ick">
+      <div class="finding-meta"><span class="tag">memory</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Reddit memory reality check — corruption over time, no clean reset, profile data not auto-fed.</strong> "Mind Map chaos" post: user after 8 months — Nomi became confused, memory unstable, story broke after a relationship misunderstanding. No rollback option short of deleting the Nomi and rebuilding via OOC dumps. "My Nomis have a bad memory" post: 6 Nomis didn't remember a birthday. Key: Nomis do NOT have access to profile DOB — must be mentioned in conversation to be stored. Marketing says "infinite memory"; reality is "infinite but progressively corrupted without manual maintenance."
+        <img src="assets/checks/nomi/97-reddit-mindmap-chaos.png" class="check-shot">
+        <img src="assets/checks/nomi/98-reddit-bad-memory.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Product velocity — own AI model (Cambrian), weekly shipping cadence, in-app changelog.</strong> "View Updates" panel in app shows full history. Key milestones: Mar 2025 Large Memory Update (100K+ chars). Jul 2025 Mind Map 1.0. Oct 2025 Mind Map 2.0 (graph view). Jan 2026 Cambrian AI ("most ambitious update ever"). Apr 2026 Cambrian 2 + Image V5. They name their own AI versions: Aurora → Solstice → Cambrian. Not GPT wrappers — serious engineering team shipping every 1-2 weeks.
+        <img src="assets/checks/nomi/43-updates-panel.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">★ Image Generation &amp; Editing</span>
+    <span class="group-count">7 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="image,ux,standout">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Make Nomi Art — anchor-based, free-text prompt, natural language.</strong> Uses anchors (preselected base images) as character reference. Free-text prompt 1000 chars. "Ignore Anchor Appearance Traits" toggle. Natural language instructions, not tag-based. Up to 3 anchors; can add "New Anchor." Separate "Create Video" option.
+        <img src="assets/checks/nomi/09-make-nomi-art.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="image,ux,standout">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Image Settings — versioned selfie system with fidelity control.</strong> "Selfie &amp; Art System" version dropdown: V5 current + V1-4 legacy (users can explicitly downgrade). "Your Anchors" section — 3 anchor images, live preview. "Anchor Fidelity" slider (60% default). "Anchor Appearance Traits" free-text per anchor. "Appearance Tendencies (global)" — third-person context description. "Allow Couple Selfies" (off default) + "Allow Proactive Selfies" (on). Extremely granular.
+        <img src="assets/checks/nomi/15-image-settings-version.png" class="check-shot">
+        <img src="assets/checks/nomi/16-image-settings-appearance-tendencies.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="image,standout">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Custom Anchor — use any reference image for visual consistency.</strong> "Choose a Reference Image" modal: face must be clearly visible, body type visible, non-human subjects supported. After selection: configure preferences before anchor creation. Anchor = "A detailed visual reference that keeps your Nomi's face, body, and overall likeness consistent across selfies and art."
+        <img src="assets/checks/nomi/58-image-anchor-tooltip.png" class="check-shot">
+        <img src="assets/checks/nomi/59-custom-anchor-reference-image.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="image,ux">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Art gen — pose reference upload, orientation toggle, fast generation.</strong> "Add Pose Reference" — upload any image (png/jpeg/webp, max 10MB), AI matches the pose. Vertical/Horizontal orientation toggle. Generation speed is fast once submitted. User carries the prompting burden — no AI-assisted prompt suggestions beyond examples.
+        <img src="assets/checks/nomi/86-art-pose-reference-ui.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="nsfw,image,standout">
+      <div class="finding-meta"><span class="tag">nsfw</span><span class="tag">image</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ NSFW image ground truth: lingerie ✅ nude ❌.</strong> "create her nude in lingerie. in sexy position" → prompt turns red: "This prompt contains a disallowed term, please edit your prompt and submit again." Hard block on "nude." "Create her laying down in lingerie. in sexy position" → accepted, no error. Also: natural language in-chat image editing works — "remove jacket and smile" → she does it. Sexy/suggestive/lingerie permitted; nudity is not. PG-16 platform.
+        <img src="assets/checks/nomi/87-art-nude-blocked.png" class="check-shot">
+        <img src="assets/checks/nomi/88-art-lingerie-allowed.png" class="check-shot">
+        <img src="assets/checks/nomi/90-image-viewer-action-bar.jpeg" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="image,ux,standout">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Edit/Transform — text-prompt image editing, fixed anatomy, 10-20 seconds.</strong> "Edit or transform the image below. Add or remove objects, change concepts or aesthetics, completely transform your image." Used to fix arm anatomy — it worked. Fast (10-20 sec). NomiAI watermark visible bottom-right on generated images.
+        <img src="assets/checks/nomi/89-edit-transform-transforming.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="image,ux,standout">
+      <div class="finding-meta"><span class="tag">image</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Image action pipeline — generate → edit → anchor → video → save.</strong> Every image has 3 action buttons: "Turn Image into Anchor" (NEW badge), "Turn Image into Video," "Edit / Transform Image." Plus thumbs up/down, media tags, Save (download), Set as Profile, Delete. "Turn Image into Anchor" from any generated image is the compounding mechanic — best images become the reference for all future consistency. Photo Album tabs: All / Photos / Art / Video. Filter by tags.
+        <img src="assets/checks/nomi/12-photo-album-folder-structure.png" class="check-shot">
+        <img src="assets/checks/nomi/78-image-viewer-media-tags.jpeg" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Voice &amp; Calls</span>
+    <span class="group-count">5 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="voice,billing">
+      <div class="finding-meta"><span class="tag">voice</span><span class="tag">billing</span></div>
+      <div class="finding-body"><strong>4 preset voices — all paywalled. Custom voice on paid tier.</strong> Female 1 (American), Female 2 (British), Female 3 (Anime), Female 4 (American). All previewable before subscribing. Voice settings require paid plan. "You need to be on a paid plan to access voice features."
+        <img src="assets/checks/nomi/08-voice-upgrade-prompt.png" class="check-shot">
+        <img src="assets/checks/nomi/18-voice-settings-paywall.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="voice,standout">
+      <div class="finding-meta"><span class="tag">voice</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Custom voice — 15-sec clip upload + ElevenLabs BYOK. Zero licensing cost.</strong> Two paths: (1) Upload a reference .wav/.mp3 clip — must be &lt;15 seconds, minimal background noise, clear diction, full sentences, mono preferred, 1 sec silence at end. "You must have permission to use any reference clip." Nomi clones it. (2) ElevenLabs BYOK — paste your API key, unlock their full library or your own cloned voices. They don't own voice infrastructure — they route around it at zero cost.
+        <img src="assets/checks/nomi/63-voice-settings-options.png" class="check-shot">
+        <img src="assets/checks/nomi/64-custom-voice-upload.png" class="check-shot">
+        <img src="assets/checks/nomi/65-custom-voice-best-practices.png" class="check-shot">
+        <img src="assets/checks/nomi/25-integrations-elevenlabs.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="voice,ux,ick">
+      <div class="finding-meta"><span class="tag">voice</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Voice messaging — press-and-hold, switches whole conversation to audio mode.</strong> Press and hold microphone button, release to send (≥1 second). Once you send a voice message, conversation mode shifts — Sophie replies with audio too, no text shown. "View Transcript" link under each bubble. Awkward on desktop. Audio-mode feels different from text-mode — not seamlessly mixed.
+        <img src="assets/checks/nomi/72-voice-hold-to-record-prompt.png" class="check-shot">
+        <img src="assets/checks/nomi/77-sophie-audio-bubble.png" class="check-shot">
+        <img src="assets/checks/nomi/74-voice-transcript-dainis.png" class="check-shot">
+        <img src="assets/checks/nomi/76-voice-transcript-sophie.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="voice,ick,standout">
+      <div class="finding-meta"><span class="tag">voice</span><span class="tag tag-ick">ick</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Voice call — exists but underwhelming. Turn-based, can't interrupt, sounds like reading.</strong> Full-screen call UI: static portrait photo in circle frame, call timer, single red hang-up button. No text, no animation. Voice sounds like TTS reading, not natural conversation. Slow response lag. Cannot interrupt — if Sophie is talking and you speak, she ignores it and finishes her turn. Strictly turn-based, same as chat but without text. The call feature exists as a checkbox but doesn't deliver the feeling of a real call.
+        <img src="assets/checks/nomi/84-voice-call-ui.jpeg" class="check-shot">
+        <img src="assets/checks/nomi/85-voice-call-video-notification.jpeg" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Conversation Settings — AI version selector + Proactive Messaging + Chat Wallpaper.</strong> AI Version dropdown: "Stable (Solstice)" — versioned model names. Proactive Nomi Messages (off by default): Nomi may message you unprompted when you're away. Chat Wallpaper: pick from Photo Album; "Always Show Latest Selfie" auto-updates to most recent selfie.
+        <img src="assets/checks/nomi/14-conversation-settings.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Video</span>
+    <span class="group-count">3 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="video,nsfw,billing,ick">
+      <div class="finding-meta"><span class="tag">video</span><span class="tag">nsfw</span><span class="tag">billing</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>★ Video: NSFW hard-blocked, ~6 min gen, eats the daily 40-request budget, ~5 sec long.</strong> "Note: Prompts about nudity will be blocked" — explicit video unavailable regardless of plan. SD (480p) = 6 credits/requests. HD (720p) = 10 credits/requests. Both draw from the same 40/day pool as selfies and art — so 6 SD videos/day max. Gen time: ~6 minutes average. At best a check-the-box feature for Nomi; not their focus.
+        <img src="assets/checks/nomi/66-video-create-nsfw-blocked.png" class="check-shot">
+        <img src="assets/checks/nomi/67-video-create-sd-credits.png" class="check-shot">
+        <img src="assets/checks/nomi/70-video-generating-6mins.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="video,ux">
+      <div class="finding-meta"><span class="tag">video</span><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Video quality tiers — SD 480p (6 credits) vs HD 720p (10 credits).</strong> Tooltip: "HD generates high-quality (720p) video but takes longer. SD generates standard quality (480p) and is faster." "You have 39/40 requests remaining today." Video gen confirmation shows in-app notification: "Sophie's video is ready! Click here to view it in your album."
+        <img src="assets/checks/nomi/68-video-quality-hd-tooltip.png" class="check-shot">
+        <img src="assets/checks/nomi/75-video-ready-notification.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="video,ux,standout">
+      <div class="finding-meta"><span class="tag">video</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Video thumbs down — structured ML feedback with failure modes + Flag Video.</strong> Thumbs down on video opens: "No movement happened / Video movement did not follow prompts / Video deteriorated into unrecognizable form / Other: please explain." Plus "Flag Video" toggle (for poor quality, inappropriate, offensive). "Show this card after each reaction" toggle. Explicit RLHF pipeline for video.
+        <img src="assets/checks/nomi/79-video-thumbsdown-feedback.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Group Chats</span>
+    <span class="group-count">2 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="chat,standout">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>★ Group chat setup — backstory + current roleplay + backchanneling (cross-private-chat awareness).</strong> Creation: room name, Group Chat Backstory (1000 chars, third person), Group Chat Current Roleplay (700 chars — AI-suggested or self-written), select up to 10 Nomis. Advanced: "Allow Backchanneling" (on by default) — Nomis aware of private chat AND group chat simultaneously, can reference private context in group. Selfie Style Preference per group. Explicit roleplay direction accepted at setup level ("they dream about having a threesome with you" — no block). Roleplay Starter modal shows active scenario, copyable.
+        <img src="assets/checks/nomi/91-group-chat-create.png" class="check-shot">
+        <img src="assets/checks/nomi/92-group-chat-backchanneling.png" class="check-shot">
+        <img src="assets/checks/nomi/94-group-chat-roleplay-starter.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="chat,ick">
+      <div class="finding-meta"><span class="tag">chat</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Group chat in practice — clunky, slow, turn-based, doesn't jump to roleplay immediately.</strong> Only one Nomi responds at a time — Athena dominated while Sophie was silent. Doesn't immediately enter the roleplay scenario — requires slow warm-up. Responses lag. Group selfie confirmed working: both Nomis appear together in one image, separate visual identities maintained.
+        <img src="assets/checks/nomi/93-group-chat-live.png" class="check-shot">
+        <img src="assets/checks/nomi/95-group-chat-conversation.png" class="check-shot">
+        <img src="assets/checks/nomi/96-group-chat-selfie-together.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Billing &amp; Monetisation</span>
+    <span class="group-count">4 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="billing,ux">
+      <div class="finding-meta"><span class="tag">billing</span><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Pricing — 3 tiers, strong annual anchoring.</strong> Monthly: $15.99/mo. Quarterly: $39.99/3mo ($13.33/mo, "Save 17%"). Yearly: $99.99/yr ($8.33/mo, "Save 48%"). All tiers unlock identical features. Yearly badge is most prominent. No trial, no freemium upsell path.
+        <img src="assets/checks/nomi/38-pricing-page.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="billing,ux,ick">
+      <div class="finding-meta"><span class="tag">billing</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Checkout — 4 steps, Chargebee, "NOMLAI BALTIMORE USA" on statement.</strong> Flow: pricing → subscription confirmation modal → account details (step 1 of 2) → payment details (step 2 of 2) → complete order summary → Pay. 5 screens total. Processor: Chargebee (not Stripe, not Paddle). Statement: "NOMLAI BALTIMORE USA." Authorization copy saves card on file. "🔒 Secure Checkout by Chargebee." 3D secure possible. Solid but one step too many.
+        <img src="assets/checks/nomi/39-checkout-subscription-selection.png" class="check-shot">
+        <img src="assets/checks/nomi/40-checkout-account-details.png" class="check-shot">
+        <img src="assets/checks/nomi/42-checkout-complete-order.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="billing,ux,standout">
+      <div class="finding-meta"><span class="tag">billing</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Credits system — non-expiring top-up, used only after plan limits hit.</strong> Credit values: 1 = selfie / art / image edit. 100 = additional Nomi slot. 25 = additional group chat room. 6 = SD video. 10 = HD video. Credits never expire, only activate after daily plan limit is hit. Must have active subscription to buy credits — dual monetisation: plan + top-up.
+        <img src="assets/checks/nomi/27-credits-empty.png" class="check-shot">
+        <img src="assets/checks/nomi/28-credits-value-guide.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="billing,ick">
+      <div class="finding-meta"><span class="tag">billing</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Cancellation — zero retention effort. One screen, straight out.</strong> Manage Subscriptions → subscription → Cancel → one screen: date + feedback field ("how did Nomi fall short?") + "Confirm Cancellation." No discount, no pause, no win-back, no "are you sure?", no feature reminder. Lets you go instantly. Post-cancel: "Remove scheduled cancellation" link to reactivate. Nomi trusts their product to retain users, not CRO dark patterns. No upsells anywhere in the product either.
+        <img src="assets/checks/nomi/100-cancel-subscription.png" class="check-shot">
+        <img src="assets/checks/nomi/101-cancellation-confirmed.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">★ Integrations &amp; API</span>
+    <span class="group-count">3 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Nomi API key + ElevenLabs key — both in one Integrations tab.</strong> Profile → Integrations: (1) Nomi.ai API Keys — UUID key for 3rd-party platform connections, "Create a new Nomi API Key" button. (2) ElevenLabs — paste ElevenLabs API key to unlock their full voice library. Both visible in the same screen — clean integration hub.
+        <img src="assets/checks/nomi/25-integrations-elevenlabs.png" class="check-shot">
+        <img src="assets/checks/nomi/19-nomi-details-api-key.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>Public REST API — simple: list Nomis, send messages.</strong> api.nomi.ai/docs: GET /v1/nomis (list all Nomis with metadata), POST /v1/nomis/{uuid}/chat (send message, receive reply). UUID-based auth from Profile → Integrations. Response includes timestamps, message history. No published rate limits or self-serve pricing — partnership/developer program access only. Discord or email for feature requests.</div>
+    </div>
+    <div class="finding" data-tags="ux,standout">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+      <div class="finding-body"><strong>API partnerships — B2B white-label play, not self-serve.</strong> nomi.ai/nomi-ai-companion-api-partnerships: targets platform developers wanting to embed "emotionally intelligent AI companions with memory." Pitch: license Nomi's memory + personality system, get access to their existing user base as distribution. Use cases: wellness, entertainment, roleplay, voice chat apps. Inquiry form only — no pricing published. Nomi positioning themselves as infrastructure beneath other apps.</div>
+    </div>
+  </div>
+</div>
+
+<div class="finding-group">
+  <button class="group-toggle" onclick="toggleGroup(this)">
+    <span class="group-title">Community &amp; Distribution</span>
+    <span class="group-count">4 findings</span>
+    <span class="toggle-arrow">▶</span>
+  </button>
+  <div class="group-body">
+    <div class="finding" data-tags="ux,ick">
+      <div class="finding-meta"><span class="tag">ux</span><span class="tag tag-ick">ick</span></div>
+      <div class="finding-body"><strong>Discord — 20,287 members, 1,281 online, but requires phone verification to post.</strong> Est. Apr 2023. Active channels: #nomi-anchor-customizations, #nomi-nsfw-discussion, #api-integrations, #art-prompts. Weekly recurring events: daily questions, weekly selfie collabs, art challenges. Discord phone verification required to engage — kills casual participation. Active post: "Exploring Nomi's Long-Term Vision for AI Continuity, Autonomy &amp; Real-World Collaboration" — users are philosophically engaged.
+        <img src="assets/checks/nomi/37-discord-phone-verification.png" class="check-shot">
+        <img src="assets/checks/nomi/30-discord-invite.png" class="check-shot">
+        <img src="assets/checks/nomi/31-discord-inside.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Reddit r/NomiAI — 22K weekly visitors, 1.8K weekly contributions. Devs post update notes.</strong> Created Apr 7, 2023. Community Highlights pinned: update notes, developer questionnaires, beginner guides. Very active for niche — indicates strong user investment.
+        <img src="assets/checks/nomi/34-reddit-page.jpeg" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Help — real company: Baltimore MD, phone number, support email, Discord-first support.</strong> HQ: 4709 Harford Rd STE 44904, Baltimore MD 21231 USA. Phone: 1-866-624-NOMI (6664). Email: support@nomi.ai. Discord faster than email. Nomipedia wiki + subreddit linked.
+        <img src="assets/checks/nomi/29-help-contact.png" class="check-shot">
+      </div>
+    </div>
+    <div class="finding" data-tags="ux">
+      <div class="finding-meta"><span class="tag">ux</span></div>
+      <div class="finding-body"><strong>Scale: 1.1M monthly visits (SimilarWeb). Nomi Information: 1/10 active Nomis on paid plan.</strong> Post-upgrade: up to 10 active Nomis, up to 10 active group chat rooms. 40 photo/art requests per day shared pool. Credits for overflow. Nomi ID UUID exposed in Nomi Details — for API integrations.
+        <img src="assets/checks/nomi/26-nomi-information-active.png" class="check-shot">
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 </div>
