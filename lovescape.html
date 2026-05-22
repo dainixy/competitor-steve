@@ -164,46 +164,393 @@ ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="standout,video,image,ux,chat">
+  <div class="finding-meta"><span class="time">Full chat view · right-side character panel</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">image</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ Always-on side character panel — full-body image fills the entire right half of the chat. Camgirl-style framing.</strong> Per Dainis: <em>"there's a video on the side, so when I'm texting, she actually takes the phone and takes that so it looks kind of realistic — like camera girl style."</em> The right half of the screen is a persistent ~50% width full-body character render: Klara Voss in lingerie sitting in a bedroom, <strong>holding a phone in her hand</strong> — pose matches the in-chat fiction (she's "filming herself" texting back). Counter "1.00" overlay in top-right of image (playback speed or seek position — suggests a video element, not a static render). This is the <strong>"Video Actions"</strong> feature the v2 matrix flagged, but delivered as a <em>persistent side panel</em> rather than inline GIF replies. Way more immersive than any other competitor's avatar-in-corner pattern. Top nav of chat screen also visible: search · Watch live shows · Earn with your Creativity · Blog · 🔔 · <strong>634 chips</strong> (his balance with a "+" to buy more) · profile.<br><br>
+  <strong>Sample exchange visible:</strong> Dainis: <em>"*Eyes burn you.* Horny today, babe?"</em> → Klara: <em>"My eyes lock onto yours. Yeah. What are you gonna do about it?"</em> (with audio) → Dainis: <em>"*I cup your breasts, squeezing slowly.*"</em> → Klara: <em>"My back arches into your hands. Fuck, just like that. Feels so good."</em> (with audio). Every Klara reply has an audio attachment (paywalled). Roleplay-asterisk-actions are mirrored back — she "narrates" her own physical responses in italics. Bottom: "Continue" chip + 3 locked chips, "Chat with me…" input, purple game-controller icon (RP/scenario).<br><br>
+  <strong>Take for Steve:</strong> the side-panel character render is the single most novel chat UX in this competitor set. Needs DevTools investigation: video stream? Animated WebP? Sequence of generated images keyed to message sentiment? If it's lightweight (animated still + occasional Video Actions clip swap), it's cheap to ship. If it's per-conversation generated video, it's an LLM-cost monster.
+    <img src="assets/checks/lovescape/11-chat-side-character-camgirl-style.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,image,nsfw,billing">
+  <div class="finding-meta"><span class="time">Tapped image → full-screen view + image actions</span><span class="tag tag-standout">standout</span><span class="tag">image</span><span class="tag">nsfw</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>★ NSFW image quality is photorealistic and character-consistent. Per-image action ladder: Video · Edit · Share · "…" → Character gallery / Report / Delete. Image edits cost 9 chips/gen.</strong> Per Dainis: <em>"the NSFW model seems to be really good and realistic."</em><br><br>
+  <strong>Image quality assessment:</strong> tapping Klara's photo opens full-screen view. Image is photorealistic — same braided blonde character as the side panel, consistent face/eye color, consistent rose tattoo placement, anatomically correct (most image models fail at full-body anatomy). Realistic lighting, depth of field on the laptop behind her. <strong>This matches Promptchan / Candy.AI tier quality</strong> — among the best in the category. Worth a side-by-side with DRT.FM's current image quality.<br><br>
+  <strong>Per-image action buttons</strong> (pill row at bottom of full-screen view):
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Video</strong> 🎬 — convert this still into a video (same pattern as Nomi's "Turn Image into Anchor"). Cost not yet observed.</li>
+    <li><strong>Edit</strong> 🖌️ — opens text-prompt regen modal <em>"Describe your fantasy…"</em>. Type a new prompt (e.g. "you doing yoga") → regenerates. <strong>Cost: 9 chips per generation</strong> (visible chip badge next to the send arrow).</li>
+    <li><strong>Share</strong> 📤</li>
+    <li><strong>"…"</strong> overflow → <em>Character gallery</em> · Report · Delete</li>
+  </ul><br>
+  <strong>Chip economy mapping so far:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Grok 4 message: <strong>3 chips</strong></li>
+    <li>Image edit/regen: <strong>9 chips</strong></li>
+    <li>Video generation: TBD</li>
+    <li>Voice: free on Premium, paywalled below</li>
+    <li>Monthly Premium allowance: 600 chips → ~200 Grok messages OR ~66 image edits OR a mix</li>
+  </ul>
+  <strong>Pattern to take:</strong> per-image action ladder is a tight conversion funnel — users who like an image want to (a) keep iterating ("Edit"), (b) escalate the modality ("Video"), or (c) save to a personal collection ("Character gallery"). DRT.FM should mirror this — every successful AI artifact should have a clear "what next" action.
+    <img src="assets/checks/lovescape/17-nsfw-image-quality.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/18-image-overflow-menu.png" class="check-shot">
+    <img src="assets/checks/lovescape/19-edit-fantasy-prompt-9-chips.png" class="check-shot">
+    <img src="assets/checks/lovescape/20-edit-prompt-yoga-9-chips.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,image,video,nsfw">
+  <div class="finding-meta"><span class="time">Image full-screen view · action ladder</span><span class="tag tag-standout">standout</span><span class="tag">image</span><span class="tag">video</span><span class="tag">nsfw</span></div>
+  <div class="finding-body"><strong>★ Image full-screen — explicit yoga pose render shows quality + 4-button action ladder (Video · Edit · Talk · Share) + character hash IDs.</strong> Tapping the image opens a full-bleed lightbox of a nude yoga pose generation — photorealistic, anatomically correct (knees, spine, foot placement, shadows all consistent), <strong>"lovescape.com" watermark</strong> baked into bottom-right of every output (cheap brand defense + traffic driver if images leak). Character handle in top-left: <strong>"Klara-f7c5bf1865f0c85c42f"</strong> — every character has a unique hash ID surfaced in the URL (good for deep-linking and analytics). "View profile" + "Chat" buttons in header. Right rail shows two thumbnails of related/recent images for the same character (carousel through her gallery).<br><br>
+  <strong>4-button action ladder:</strong> Video 🎬 · Edit 🖌️ · <strong>Talk</strong> 🔊 · Share. The new entry is <strong>Talk</strong> — turn the still into a talking video with synced audio (see next finding). So the action ladder evolved from 2-button (Video/Edit per earlier finding) to 4-button on the standalone Character gallery page. Worth confirming whether Talk is also available from in-chat image cards or only from the gallery.
+    <img src="assets/checks/lovescape/21-image-fullscreen-talk-button-yoga.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,video,infra,billing">
+  <div class="finding-meta"><span class="time">Tapped Video on image → Create Dream Video page</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">infra</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>★ Create Dream Video — full creation suite with 3 tabs (Image / Video / Talk), multi-scene timeline, 3 video models with named provenance, and advanced settings.</strong> Tapping Video on a still doesn't just generate — it opens a full <strong>"CREATE DREAM VIDEO"</strong> editor page. Tabs across the top: Image · <strong>Video</strong> · Talk. Layout left-to-right: <strong>scene composer</strong> (Scene 1 / + Add — multi-scene support!), source image picker, <strong>Action</strong> slot (optional — pose/scenario preset), <strong>"Write custom prompt…"</strong> textarea (1,500 char limit), <strong>Advanced settings</strong> expander, and a cyan <strong>"Generate video"</strong> button with chip cost (90 chips on Unbound). Right rail: existing gallery of past generations for this character ("Klara Voss · SDXL" thumbnails — see model ID at bottom-left of each card).<br><br>
+  <strong>★ Video model picker — 3 models, named provenance:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>Unbound</strong> ✓ (LoveScape's own model) — <em>"Natural motion, accurate anatomy, prompt fidelity"</em>. 720p · 5s · NSFW. <strong>90 chips.</strong></li>
+    <li><strong>Unbound 2.0</strong> (LoveScape own — next-gen) — <em>"Fast generations, longer videos with audio"</em>. 720p · 5–15s · <strong>🔊 audio inline</strong> · NSFW. <strong>90 chips.</strong> Same price as v1, longer + with audio — they're moving toward integrated AV in a single generation.</li>
+    <li><strong>Wan 2.2</strong> (Alibaba open-source) — <em>"Advanced cinematic videos, consistent aesthetics"</em>. 720p · 5s · NSFW. <strong>90 chips.</strong> Confirms LoveScape pulls from open-source Chinese video models (Wan2.2 / Tongyi Wanxiang is Alibaba's video diffusion model). Same playbook as their Kimi K2 chat model — adult-AI economy depends on Chinese OSS.</li>
+  </ol><br>
+  <strong>Advanced settings sheet</strong> — Generation model dropdown (Unbound default), <strong>Duration buttons: 5s</strong> (selected) · 10s · 15s · 30s · 60s — <em>all marked "SOON"</em>. So they ship 5s today but render the future longer-duration tiles to telegraph the roadmap. Smart — turns the constraint into a marketing moment ("we're about to have 60s videos"). Save button confirms.<br><br>
+  <strong>Image carousel shows model IDs:</strong> the right-rail gallery cards have a tiny model badge at bottom-left — <code>S. SDXL</code> — meaning these stills were generated with <strong>Stable Diffusion XL</strong> (or a SDXL fine-tune). Confirms LoveScape's image stack: <strong>SDXL for stills, Unbound/Wan 2.2 for video.</strong> Both open-source, both NSFW-permissive. <em>For Steve:</em> if DRT.FM needs adult-friendly image+video infra, this is the reference stack — SDXL (or its successors) + Wan 2.2 + custom fine-tunes.<br><br>
+  <strong>Chip pricing — all-90 across video models</strong> is a deliberate UX choice: users pick model on quality/feel, not budget. Compare Grok-vs-Harbinger chat where price differs — there model choice is partly economic. On video, every option costs the same so users explore freely.
+    <img src="assets/checks/lovescape/22-create-dream-video-page.png" class="check-shot">
+    <img src="assets/checks/lovescape/26-video-tab-mobile-scene.png" class="check-shot">
+    <img src="assets/checks/lovescape/28-video-model-picker-unbound-wan22.png" class="check-shot">
+    <img src="assets/checks/lovescape/27-video-advanced-duration-soon.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,video,voice,ux">
+  <div class="finding-meta"><span class="time">Talk tab · lip-synced talking video composer</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">voice</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ Talk tab — image + audio TTS + video prompt → lip-synced talking video. With "Preview audio" before commit. Two voice models priced separately.</strong> The Talk tab takes a still image and generates a lip-synced character video. Three inputs in a vertical stack:
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li>Image preview at top (Klara source still).</li>
+    <li><strong>Voice model dropdown</strong> — Voice 1.5 default. Picker sheet shows: <strong>Voice 1.5</strong> ✓ (Lovescape own) <em>1080p · Roleplay tag · 135 chips</em> · and <strong>Voice 1.0</strong> <em>720p · Fastest · 90 chips</em>. Two house-trained voice models with explicit positioning (Roleplay quality vs Fastest).</li>
+    <li><strong>Audio text</strong> textarea — the line you want the character to speak. 143–150 char limit observed (smaller than chat). Example tested: <em>"oh you"</em>, <em>"oh i feel super stretched"</em>.</li>
+    <li><strong>"Preview audio"</strong> pill button — generates the TTS line so you can hear it <em>before</em> committing the 135-chip render. Per Dainis: <em>"you can preview audio before adding to video."</em> Huge UX win — you're not gambling 135 chips on a voice you've never heard. Compare the model picker which doesn't preview model output upfront.</li>
+    <li><strong>Video prompt</strong> textarea — what the character should do/look like. 600 char limit. Example tested: <em>"her doing yoga and masturbating"</em>. Combined with the audio text and source image, this drives the lip-synced output.</li>
+    <li>Cyan <strong>"Generate video"</strong> button with chip cost — <strong>135 chips on Voice 1.5</strong>, presumably 90 on Voice 1.0.</li>
+  </ol><br>
+  <strong>Per Dainis:</strong> <em>"you can do video + add audio on the video too. That's cool. Image experience feels high quality. You can preview audio before adding to video."</em><br><br>
+  <strong>Why this is significant:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Three-input composition</strong> (image + audio + motion prompt) is more controllable than competitors who do one-shot text-to-video. User can iterate cheaply on each input.</li>
+    <li><strong>Audio preview before spend</strong> is the kind of small UX detail that builds trust in a chip-based economy. Hidden costs erode trust; preview gives confidence.</li>
+    <li><strong>Two voice models with explicit "Roleplay" vs "Fastest" positioning</strong> mirrors the chat model strategy — give users speed/quality choice and let them feel smart for picking.</li>
+    <li><strong>Voice 1.5's "1080p" label is suspicious</strong> — voice models don't have a resolution. Probably a UI bug or the label is shared with the video-output resolution it produces. Worth a closer look.</li>
+  </ul><br>
+  <strong>Steal:</strong> the <em>preview-before-spend</em> pattern for any paid generation. DRT.FM should preview every chip-costing artifact (voice, image variation, scenario direction) before charging.
+    <img src="assets/checks/lovescape/23-talk-tab-preview-audio.png" class="check-shot">
+    <img src="assets/checks/lovescape/25-talk-tab-yoga-masturbating-prompt.png" class="check-shot">
+    <img src="assets/checks/lovescape/24-voice-model-picker.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,video,ux">
+  <div class="finding-meta"><span class="time">Video tab · scene timeline</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ Multi-scene timeline — chain Scene 1 + Scene 2 + Scene 3 (+ Add / Clear) into one longer video. Effectively a basic video editor inside the chat product.</strong> Per Dainis: <em>"apparently I can also combine scenes."</em> The scene strip across the top of the Video tab: <strong>Scene 1 (✕) · Scene 2 (✕) · Scene 3 (✕) · + Add · Clear</strong>. Each scene holds its own source image + Action preset + prompt + advanced settings. Selecting a scene loads its inputs into the composer below. <strong>This is novel</strong> — most NSFW competitors ship single-clip 5s generations; LoveScape ships a multi-scene composer that stitches generations into a longer narrative. Per chip: each scene presumably costs its own 90 chips (3 scenes × 90 = 270 chips for a 15s composite — equivalent to one Unbound 2.0 longer-form gen, but with deliberate scene-by-scene control). Worth confirming the chip cost when generating. <strong>Take for Steve:</strong> the scene composer reframes "AI video generation" as "AI video <em>editing</em>" — much more powerful product framing than competitors.
+    <img src="assets/checks/lovescape/29-multi-scene-timeline-3-scenes.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,video,nsfw,ux,ick">
+  <div class="finding-meta"><span class="time">Tapped Action slot → Choose Action library</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">nsfw</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★★ Crazy action library — explicit NSFW preset catalog with Female / Male / Gay categorization, model-specific availability, and in-context upsell to the newer model. Per Dainis: "all moving and visual."</strong> The Action slot in the Video tab opens a <strong>"Choose Action"</strong> sheet — a grid of NSFW preset thumbnails, each a curated pose/scene with example image + tuned prompt + tested motion. Top bar: <strong>model tabs</strong> (Unbound · Unbound 2.0 · Wan 2.2) and a <strong>gender dropdown</strong> (Female ♀ default · Male ♂ · Gay 🌈). Plus a Search field — they have so many presets they need search. Below: tile grid, ~12+ presets per gender per model.<br><br>
+  <strong>Gender taxonomy — Female / Male / Gay.</strong> Three categories, no Lesbian / Trans / Non-binary tabs. Lesbian content appears subsumed under Female. Each gender shows a perspective-matched action set: Female presets show female protagonists; Male shows male; Gay shows two males. Same poses re-rendered per perspective.<br><br>
+  <strong>Female action library (Unbound, sampled):</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc;columns:2;font-size:13px">
+    <li>Undress</li><li>Cumshot</li><li>Legs up sex</li><li>Deepthroat BBC</li>
+    <li>Show Pussy</li><li>Eat my Ass</li><li>Fingering</li><li>Masturbation</li>
+    <li>Blowjob</li><li>Deepthroat</li><li>Face fuck</li><li>Cheek fuck</li>
+    <li>Ride dildo</li><li>Twerking</li><li>Touching</li><li>Posing</li>
+    <li>Smiling</li><li>TikTok Dance</li><li>Bouncing</li><li>Kiss</li>
+    <li>Slow motion</li><li>Hand grab</li><li>Hand in panties</li><li>Middle Finger</li>
+    <li>Only prompt</li>
+  </ul>
+  Mix of explicit acts, foreplay, posing, motion modifiers (Slow motion), gestures (Middle Finger), and cultural patterns (<strong>TikTok Dance</strong> — viral pattern packaged as a video preset). The "Only prompt" tile is the escape hatch for custom prompts when no preset fits.<br><br>
+  <strong>Male library (Unbound, sampled):</strong> Cumshot · Anal · Vaginal · Oral · Posing · Smiling · Kiss · TikTok Dance · Only prompt. Notice the labels — they're framed from receiving partner perspective (Vaginal / Anal / Oral name the act on the partner, not the male). Smaller library than Female.<br><br>
+  <strong>Gay library (Unbound):</strong> Anal · Cumshot · Oral · Kiss · Posing · TikTok Dance · Smiling · Only prompt. Gay-male focused (two men) — not lesbian. Smaller than Female and Male.<br><br>
+  <strong>★ Model-specific libraries</strong> — this is a key intel:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Unbound</strong> — full library (20+ Female / ~10 Male / ~8 Gay presets).</li>
+    <li><strong>Unbound 2.0</strong> — different library (fewer Gay presets visible, e.g. only Anal/Oral/Kiss/Posing/TikTok Dance/Smiling/Only prompt).</li>
+    <li><strong>Wan 2.2</strong> — <em>NO preset actions at all</em>. Picker shows only the "Only prompt" tile. Confirms presets are model-specific tunings — Unbound is theirs, they can label/test/ship presets. Wan 2.2 is Alibaba OSS — they don't fine-tune it for branded action presets.</li>
+  </ul>
+  <strong>Implication:</strong> LoveScape's moat isn't the Wan 2.2 model (everyone can grab that). It's the <em>preset library</em> — hundreds of curated NSFW actions, each tuned for their own Unbound model, with reference images, gender variants, and search. That's months of human curation. Steve should treat this as the "real" product layer above the model.<br><br>
+  <strong>★ In-context upsell banner</strong> — when browsing Unbound 1 actions, a yellow banner appears: <em>"Try the new model with audio — Unbound 2.0"</em>. They cross-sell the newer model right inside the picker. Continuous in-context conversion path. Steal pattern.
+    <img src="assets/checks/lovescape/30-action-gender-dropdown.png" class="check-shot">
+    <img src="assets/checks/lovescape/31-actions-unbound-female-upsell-banner.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/32-actions-unbound-female-explicit-grid.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/33-actions-unbound-female-mixed.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/34-actions-unbound-female-poses-tiktok.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/35-actions-unbound-male.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/36-actions-unbound-gay.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/37-actions-unbound2-gay.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/38-actions-wan22-only-prompt.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,video,ux">
+  <div class="finding-meta"><span class="time">Switched to Mila Skye chat · side-panel animation</span><span class="tag tag-standout">standout</span><span class="tag">video</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ Side-panel character loop is per-character — Mila Skye walks and flirts around her room (no phone). Klara held a phone (camgirl framing). Different characters → different ambient loops.</strong> Per Dainis: <em>"here she doesn't pick up the phone. There's a loop of her slowly walking and flirty moving in the room, Mila Sky."</em><br><br>
+  <strong>Confirms a deliberate per-character ambient-animation library.</strong> Klara Voss = "filming-herself-on-phone" pose loop (matches her sexy-blonde-on-bed positioning). Mila Skye = "walking + flirty moving in room" loop (matches her "petite Barbie-glamour" bio). Each character has at least one signature looping animation tuned to their persona. This is NOT a real-time generation — too cheap/responsive for that — it's most likely:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Pre-rendered character-specific MP4 loops (5–15 sec), or</li>
+    <li>Animated WebP / GIF sequences, or</li>
+    <li>SD video output cached per character on first load</li>
+  </ul>
+  <strong>Implication:</strong> the production cost is upfront (generate one loop per character at character-creation time) and amortized across all sessions. Cheap to serve, huge perceived value. The 350K characters claim looks credible IF every character ships with one base ambient loop. <strong>For DRT.FM:</strong> if you ship a character profile with a single 6-second ambient loop on creation, you get this whole UX moment for $0.50 of GPU at create-time and ~free serving cost forever.
+  </div>
+</div>
+<div class="finding" data-tags="nsfw,image,ux">
+  <div class="finding-meta"><span class="time">Gallery thumbnail vs. full-screen — censorship behavior</span><span class="tag">nsfw</span><span class="tag">image</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>Selective nipple-star censorship on gallery thumbnails — same image is uncensored full-screen.</strong> The same Klara Voss bikini render that shows uncensored at full-screen (see earlier image finding) has <strong>white star/sparkle overlay on the nipples</strong> when shown as a gallery thumbnail in the All/Images/Videos filter. Suggests two states:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Thumbnail/preview state</strong> — light censorship for grid contexts (likely to avoid wall-of-explicit-thumbs that may trip search engines, app stores, or screen-share scenarios)</li>
+    <li><strong>Full view state</strong> — uncensored when user explicitly opens the asset</li>
+  </ul>
+  Same pattern adult content platforms use (Reddit NSFW blur, OnlyFans preview blur, Pornhub thumbnail moderation). DRT.FM should consider this for shareable artifacts — thumbnails crawl, full views don't.
+    <img src="assets/checks/lovescape/39-gallery-thumbnail-nipple-stars.jpeg" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
 <button class="group-toggle" onclick="toggleGroup(this)">
 <span class="group-title">★ Chat, Memory &amp; Models</span>
-<span class="group-count">6 findings</span>
+<span class="group-count">8 findings</span>
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="standout,chat,infra">
+  <div class="finding-meta"><span class="time">Latest Updates panel · model swap announcement</span><span class="tag tag-standout">standout</span><span class="tag">chat</span><span class="tag">infra</span></div>
+  <div class="finding-body"><strong>★ They use Grok (xAI) as the chat model — and announce model upgrades in-product.</strong> "Latest Updates" panel entry dated May 13, 2026: <em>"Grok is updating on May 15 — We're swapping the Grok 3 and Grok 4.1 models in chat over to Grok 4.3."</em> Visual diagram: Grok 3 / 4.1 → Grok 4.3. Big intel reveal: LoveScape is a Grok (xAI) downstream consumer for chat. Explains how they ship hardcore NSFW chat at scale — Grok is one of the few frontier models with permissive content policy. Also notable: they treat the model swap as <em>marketing copy</em> to users, not a backend change. Implication for DRT.FM: (1) Grok 4.3 is a viable uncensored chat backbone — pricing / API access worth investigating. (2) Surfacing model upgrades as user-facing updates is a trust signal — users see the product is improving. Worth borrowing the pattern. Also in this panel: May 1 "May the 4th Special: 200 Free Chips, Zero Hand Solo" (Star Wars themed promo + chips currency), and an Easter "Let the Bunny Girls Lead the Way · Where Fantasies Meet AI" campaign.
+    <img src="assets/checks/lovescape/03-announcements-grok-update.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="chat,nsfw,ux">
+  <div class="finding-meta"><span class="time">After dismissing upgrade · returned to chat screen</span><span class="tag">chat</span><span class="tag">nsfw</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>Chat screen — first character (Klara Voss) leads with a selfie + audio + explicit quick-reply chips. No romantic warm-up.</strong> Dismissing the upgrade modal returned to the chat session that was already open. Layout: character header at top (avatar · "Klara Voss · Says hi smiling" · heart, share, "…" actions). Character message: a photo card (selfie of blonde character with braids in lingerie) with an inline audio attachment (1:00 duration, play button — paywalled per finding above). Pre-suggested reply chips above the input bar: <em>"Send me nudes"</em> · <em>"*Eyes burn you.* Horry today, babe?"</em> · <em>"*Sleazy wink flashes.* Got dirty thoughts?"</em> — these are the suggested replies on first message. No romantic onboarding, no "hi how are you", they go straight to explicit. Input bar: "Chat with me…" with a purple <strong>game-controller icon</strong> at right — likely a roleplay/scenario selector. Compare to Candy's softer onboarding chips or Nomi's neutral "ask me anything" — LoveScape pre-loads sexual intent into every chip.
+    <img src="assets/checks/lovescape/10-chat-klara-voss-explicit-replies.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,chat,infra,billing">
+  <div class="finding-meta"><span class="time">Chat menu "…" → settings options</span><span class="tag tag-standout">standout</span><span class="tag">chat</span><span class="tag">infra</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>★ Per-character chat menu is rich — and confirms Grok 4 as the default chat model. Plus a 3-tier model picker with pay-per-message economy.</strong> Tapping the "…" overflow on Klara's character header opens a vertical menu:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>View profile</li>
+    <li><strong>Model: Grok 4</strong> → opens model picker (confirms Grok is the live chat model on this character)</li>
+    <li>Conversation style →</li>
+    <li>Context →</li>
+    <li>Hide chat suggestions (toggle)</li>
+    <li>Disable media replies (toggle)</li>
+    <li>Reset chat</li>
+    <li>Report</li>
+  </ul><br>
+  <strong>Model picker sheet — 3 tiers:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>Harbinger-24B</strong> — <em>"Fine-tuned specifically for Lovescape to deliver roleplaying that stays sharp, coherent, and breaks free from clichés across long messages."</em> Tags: Chat. <strong>Cost: Free.</strong> This is their own fine-tune — 24B params, likely a Llama/Mistral derivative. Self-hosted = free to serve.</li>
+    <li><strong>Grok 4</strong> ✓ (selected) — <em>"Super intelligent chat model with advanced reasoning."</em> Tags: Chat · Role-playing. <strong>Cost: 3 chips / message.</strong> xAI API at marked-up retail.</li>
+    <li><strong>Kimi K2</strong> 💎 PREMIUM badge — <em>"Kimi K2 0905 is tuned for vivid, believable roleplay with strong continuity, a rich character voice, and emotionally consistent long conversations."</em> Tags: Smart · Role-playing. Locked behind Premium subscription.</li>
+  </ol><br>
+  <strong>Business model intel — they double-monetize chat:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Subscription unlocks Premium/Creative PRO and the better models.</li>
+    <li>Even Premium subs pay <em>chips per message</em> for Grok 4 (3 chips/msg). That's the connection to the chip economy (IWD 10K prize, "200 free chips" promo, 600 monthly chips with the Premium plan). <strong>Chips = AI compute budget.</strong></li>
+    <li>Free tier gets their own fine-tune (Harbinger-24B) which costs them ~nothing to serve. Excellent unit economics: free users are nearly free to support; paid users pre-pay for compute via chips.</li>
+    <li>Three models targeting three positioning niches: own brand (Harbinger), peak intelligence (Grok 4), peak roleplay (Kimi K2). Different "personalities" for different user moods.</li>
+  </ul><br>
+  <strong>Pattern to take for DRT.FM:</strong> the user-visible model picker is a trust + transparency signal. Users <em>feel smarter</em> when they pick the model. And it's a perfect lever to upsell — "Try Kimi K2 (Premium)." Plus letting power users pick "Smart" vs "Roleplay" is honest about model strengths. Most competitors hide the model — LoveScape brags about it.
+    <img src="assets/checks/lovescape/12-chat-menu-options.png" class="check-shot">
+    <img src="assets/checks/lovescape/13-model-picker-harbinger-grok-kimi.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="chat,ux,standout">
+  <div class="finding-meta"><span class="time">Chat menu → Conversation style</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+  <div class="finding-body"><strong>Conversation style — Short / Medium / Long picker + Storytelling mode toggle.</strong> Three options shown as emoji-iconed cards: <strong>Short</strong> (curled-hand 🤌 icon), <strong>Medium</strong> ✓ (flame/thumb icon — selected), <strong>Long</strong> (writing-hand ✍️ icon). Below the row: a separate <strong>"Storytelling mode"</strong> toggle (ON, blue). Then a "Save" button. So conversation style controls <em>message length</em> (verbosity), independent from <em>memory tier</em> (Context, separate menu). And Storytelling Mode is a layered flag on top — probably enforces RP-style narration, italic actions, third-person framing.<br><br>
+  <strong>Three orthogonal sliders for chat behavior</strong> (Style: length · Context: memory · Storytelling: narrative mode). Granular, but possibly too many knobs for casual users. Take: this is a power-user feature DRT.FM can simplify into a single "vibe" picker.
+    <img src="assets/checks/lovescape/14-conversation-style-storytelling.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="chat,ux,standout">
+  <div class="finding-meta"><span class="time">Long-press / tap on AI message</span><span class="tag">chat</span><span class="tag">ux</span><span class="tag tag-standout">standout</span></div>
+  <div class="finding-body"><strong>★ Per-message emoji reaction bar — 6 sentiment emoji + Report. More granular RLHF than thumbs-up/down.</strong> Tapping the smiley icon below an AI message expands a horizontal emoji bar: ❤️ (love) · 👍 (good) · 😄 (funny) · 🔥 (hot) · 😟 (uncomfortable) · 😠 (angry) · 👎 (bad) · <strong>Report</strong>. Eight reactions, not the typical thumbs-up/down. Each emoji captures a distinct user sentiment dimension:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>❤️ = wanted more of this</li>
+    <li>👍 = generally good</li>
+    <li>😄 = made me laugh</li>
+    <li>🔥 = sexy / arousing</li>
+    <li>😟 = unsettled / awkward</li>
+    <li>😠 = made me angry</li>
+    <li>👎 = bad output</li>
+  </ul><br>
+  <strong>RLHF / fine-tuning gold.</strong> This produces multi-class labels for every message instead of binary thumbs. They can train Harbinger-24B (their own model) on "what makes users react 🔥" vs "what makes them 😠." Bonus: emoji is lower-friction than typing feedback. Compare Nomi (thumbs + free-text). Compare GirlfriendGPT (just thumbs).<br><br>
+  <strong>Steal for DRT.FM:</strong> the 🔥 reaction is the single most valuable signal for an NSFW-leaning product — it tells you which messages were arousing without users having to write it. Train on it.
+    <img src="assets/checks/lovescape/16-emoji-reaction-bar.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="chat,nsfw,ux">
+  <div class="finding-meta"><span class="time">Continued chat with Klara · text style + voice playback</span><span class="tag">chat</span><span class="tag">nsfw</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>Chat text style — 100% dirty talk roleplay. Voice messages playing on this chatbot.</strong> Per Dainis: <em>"the text here is all about dirty talk… on this chatbot the voice is working."</em><br><br>
+  <strong>Text style observation:</strong> sampled exchange — <em>"Your hands grip my waist. Take control… I crave it."</em> → <em>"*I pinch my nipple, twisting hard.*"</em> → <em>"*My body jerks, moaning. Harder… fuck, yes.*"</em> → <em>"*My nails dig into your skin. Harder. Make me yours.*"</em> → <em>"*My hips buck. God, don't tease me like that.*"</em> Every reply is physical-action roleplay with italic-asterisk narration. Zero emotional warm-up, zero scene-setting, zero "how was your day." Compare:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Nomi</strong> — long emotional arcs, journaling vibe, memory-anchored continuity</li>
+    <li><strong>Candy.AI</strong> — relationship progression with romantic onboarding then escalation</li>
+    <li><strong>LoveScape</strong> — straight to physical RP, every message, no transitions</li>
+  </ul>
+  This is consistent with their homepage positioning ("AI Porn Character") — they've removed every layer of pretense between user and explicit content. The Grok 4 + Harbinger fine-tunes are clearly system-prompted into hardcore RP register.<br><br>
+  <strong>Voice working:</strong> Klara's messages now playing audio (earlier audio playback triggered the paywall, see finding above). Possibly the paywall is one-time-per-session "intro upsell" rather than persistent, OR free tier gets some limited voice playback. Worth a DevTools check next session — listen for whether the audio file is being fetched (free) or if there's a server-side gate.<br><br>
+  <strong>Quick-reply chips visible at bottom:</strong> "Continue" · <em>"*I lean forward, taking your nipple in my mouth.*"</em> · <em>"You like my teeth on you?"</em> — chips continue the explicit narrative thread rather than offer narrative pivots. Conversation rails are tight.
+    <img src="assets/checks/lovescape/40-chat-klara-dirty-talk-voice-working.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="ux,chat">
+  <div class="finding-meta"><span class="time">Chats sidebar nav · All chats list</span><span class="tag">ux</span><span class="tag">chat</span></div>
+  <div class="finding-body"><strong>All chats — chronological list with unread badges, "My favorite" filter, character thumbnail in each row.</strong> The Chats nav opens a standard messaging-app list view: each row = one character conversation with avatar, name, last message preview (italic asterisk-action style preserved), timestamp, and unread badge. After this session Dainis has 3 chats: Sophie (Photo · just-created, 0 unread — green outline = active selection), Mila Skye (2 unread), Klara Voss (6 unread, "*My hips buck.* God, don't tease..."). Sidebar shows total unread badge "8" on the chats icon. <strong>Tab: All chats / My favorite</strong> — favorites filter for power users with many active conversations. Standard pattern but cleanly executed. Nothing novel.
+    <img src="assets/checks/lovescape/54-all-chats-list-sophie-mila-klara.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,memory,ick">
+  <div class="finding-meta"><span class="time">Chat menu → Context</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag">memory</span><span class="tag tag-ick">ick</span></div>
+  <div class="finding-body"><strong>★ Memory is paywalled — "Long" context tier is PRO-locked. And the tier labels are confusingly worded.</strong> "Choose chat context" sheet — three options:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Short</strong> — <em>"Normal memory — faster replies"</em></li>
+    <li><strong>Medium</strong> ✓ (Dainis's current tier) — <em>"Long memory — more context awareness"</em></li>
+    <li><strong>Long</strong> 🟡 PRO — <em>"Extended memory — deeper continuity and detail"</em> (locked)</li>
+  </ul><br>
+  Per Dainis: <em>"my plan doesn't get long-term memory context, just short and medium."</em> Confirmed — memory depth is a paywall lever, not a model capability.<br><br>
+  <strong>UX issue worth flagging:</strong> the Short tier description uses <em>"Normal memory"</em>, the Medium tier description uses <em>"Long memory"</em>, and the Long tier is called "Long." Three different words for memory depth across three tiers, with the word "Long" appearing in two of them. Confusing on purpose? Or just sloppy copy? Either way it's an ick — Dainis noticed.<br><br>
+  <strong>Strategic insight:</strong> LoveScape <em>commodifies memory</em>. Nomi positions memory as the product moat (4 layers, free with subscription). LoveScape segments it into tiers and charges per tier. Cheaper to serve (small contexts cost less) and a tidy upgrade vector. For DRT.FM: decide deliberately — is memory the moat (Nomi pattern: give it all) or is it a billing knob (LoveScape pattern)? Different products.
+    <img src="assets/checks/lovescape/15-context-memory-tiers-long-pro.png" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
 <button class="group-toggle" onclick="toggleGroup(this)">
 <span class="group-title">Character Creator &amp; Characters</span>
-<span class="group-count">7 findings</span>
+<span class="group-count">6 findings</span>
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="standout,community,distribution,ux">
+  <div class="finding-meta"><span class="time">Tapped character → full profile page</span><span class="tag tag-standout">standout</span><span class="tag">community</span><span class="tag">distribution</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ Character profile = Instagram-style page with Posts · Images · Videos · About. Full creator attribution. Browsable without paywall.</strong> Tapping into a character (Mila Skye) opens a full profile page that looks more like an OnlyFans/Instagram creator profile than a chatbot setup screen.<br><br>
+  <strong>Profile header:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Hero image carousel (character renders with pagination ← →)</li>
+    <li>Two pill badges on hero: <strong>"EXCLUSIVE"</strong> + <strong>"🌶️ SPICY"</strong> — likely "curated/featured" + "NSFW-explicit" tags</li>
+    <li>Character name: <strong>Mila Skye</strong></li>
+    <li>Social-proof stats: <strong>580.7K messages · 13.6K chats</strong> (engagement counter shown prominently, like follower count)</li>
+    <li>Three action CTAs: 💬 (Chat) · <strong>Image</strong> (jump to image gen) · <strong>Video</strong> (cyan primary — jump to video gen)</li>
+    <li>Bio: <em>"Mila is a dazzling dreamer ready to whisk you away on a sweet, flirty fantasy. With her playful style, reminiscent of kawaii dreams and modern Barbie glamour… petite powerhouse of soft allure…"</em> Read-more truncation.</li>
+  </ul><br>
+  <strong>4 tabs:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>Posts</strong> — creator timeline (latest: "more than a month ago", explicit image). Each character has a feed of posts, like a creator publishing updates.</li>
+    <li><strong>Images</strong> — gallery grid of every image generated/published for this character (explicit + SFW mixed). Browsable without payment.</li>
+    <li><strong>Videos</strong> — tile grid of generated videos (6-second clips with play button + LOVESCAPE watermark). Free preview.</li>
+    <li><strong>About</strong> — full bio · Gender field (Female) · <em>"created on Jul 24, 2025 by <strong>milaskye</strong>"</em> — full creator attribution with date and handle.</li>
+  </ol><br>
+  <strong>Key intel:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>User-generated characters with persistent media</strong> — Mila Skye created 10+ months ago by user milaskye, has accumulated 580K messages and 13.6K unique chats. This is real UGC distribution.</li>
+    <li><strong>Profile as discovery surface</strong> — Posts feed encourages return visits before chat conversion. Same hook social media uses.</li>
+    <li><strong>Three-way CTA</strong> — Chat / Image / Video as equal-weight entry points. Most competitors funnel into Chat first; LoveScape lets you skip straight to Image or Video. Reflects their content-studio positioning.</li>
+    <li><strong>Stats as social proof</strong> — exposing message/chat counts publicly creates a flywheel: popular characters attract more users, more users generate more posts, more posts attract more views. Power-law dynamics on character popularity.</li>
+  </ul>
+    <img src="assets/checks/lovescape/41-character-profile-mila-skye-exclusive-spicy.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/42-character-images-tab-mila.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/43-character-videos-tab-mila.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/44-character-about-tab-creator-milaskye.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,community">
+  <div class="finding-meta"><span class="time">Browsing character Exclusive content · Dainis observation</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag">community</span></div>
+  <div class="finding-body"><strong>★ User-created character content is NOT paywalled — Candy.AI monetizes this better, LoveScape doesn't.</strong> Per Dainis: <em>"I clicked on Exclusive chat, and it's interesting that it's available to see the images and some videos there, and it's created by a user, apparently. You don't need to pay extra for it. I think in Candy.AI they have optimized that and monetized that more."</em><br><br>
+  <strong>Monetization model comparison:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>LoveScape</strong> — flat-tier subscription ($19.99/mo Premium / $29.99/mo equivalent Creative PRO) + chip-pack add-ons for AI generation. <em>All characters and their accumulated media gallery are accessible</em>. Chips pay for <em>creating new</em> content, not <em>accessing existing</em>.</li>
+    <li><strong>Candy.AI</strong> — paywalls premium character content / "exclusive" galleries / paid character drops. More creator-economy dynamic where individual characters can be monetized independently. Closer to OnlyFans pattern.</li>
+  </ul><br>
+  <strong>Strategic tradeoff:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>LoveScape's flat-access model is <strong>better for top-of-funnel</strong> — users get to browse explicit UGC before paying, lowering signup friction. Creator characters compound traffic value.</li>
+    <li>Candy's per-character paywall is <strong>better for ARPU</strong> — power users pay extra for whales / popular character drops. Creators (where they exist) get individual revenue lines.</li>
+    <li>For DRT.FM: Dainis flagged this as a place LoveScape <em>under-monetizes</em>. Worth considering a hybrid — flat-access for discovery + per-character premium tiers (animated avatars, exclusive scenes, signed editions) for ARPU. Creator economy needs both: free browsing for discovery + paid premium for revenue.</li>
+  </ul><br>
+  <strong>Open thread:</strong> if LoveScape isn't taking a cut of creator-character economics, what does <em>"Earn with your Creativity"</em> actually pay? Are creators paid per chat / per generation / per follower? If creators aren't earning, the 350K characters claim is just spam — characters created by paid Creative PRO users who paid <em>to publish</em>. Need to probe the creator program next.
+  </div>
+</div>
+<div class="finding" data-tags="standout,character-creator,nsfw,ux,ick">
+  <div class="finding-meta"><span class="time">Sidebar "Create" → Character Creator wizard</span><span class="tag tag-standout">standout</span><span class="tag">character-creator</span><span class="tag">nsfw</span><span class="tag">ux</span><span class="tag tag-ick">ick</span></div>
+  <div class="finding-body"><strong>★ Character Creator — 8-step wizard, explicit imagery throughout. Style picker, relationship presets (incl. controversial "Step sister" / "Step mom"), voice archetypes, 3-tier visibility, name + photo generation.</strong> Per Dainis: <em>"even the picture there is about an explicit scene, so it's just about sex, so it's 100% clear."</em> Reinforces homepage positioning — even the most onboarding-sensitive surface in the product (character creation) leads with explicit imagery. They don't soften their brand anywhere.<br><br>
+  <strong>The wizard — 8 steps</strong> (visible in the icon progress bar): Style → … → Relationships → Voice → … → Summary → Photo → Create. Exact step ordering not fully captured but key moments:<br><br>
+  <strong>Step: "Choose Style"</strong> — top-level toggle <em>Realistic</em> ✓ / <em>Anime</em>. Below, six style cards, all featuring explicit example imagery:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Realistic</strong> (selected) — dark-hair latex character</li>
+    <li><strong>IRL Porn</strong> — <em>literally named "IRL Porn"</em>. Showing nude wet woman holding her breasts</li>
+    <li><strong>Amateur</strong> 🆕 — nude amateur-style pose</li>
+    <li><strong>Noir</strong> 🆕 — black-and-white pin-up</li>
+    <li><strong>Tattoos</strong> 🆕 — tattooed woman</li>
+    <li><strong>Comic</strong> 🆕 — comic-book + photoreal hybrid</li>
+  </ul>
+  <strong>"IRL Porn" as a deliberate style name</strong> is striking — most adult AI tools call this "Realistic" or "Photoreal." LoveScape's brand voice is explicitly porn-positioned at the categorization layer. 4 of 6 styles tagged NEW — fast pace of style expansion.<br><br>
+  <strong>Step: "Her relationships"</strong> — 4 cards: <em>Step sister</em> · <em>Step mom</em> ✓ · <em>Girlfriend</em> · <em>Sex friend</em>. Each card shows explicit thumbnail. <strong>⚠️ Major red flag for DRT.FM:</strong> "Step sister" and "Step mom" are major adult-keyword categories with significant policy + ethical baggage. The "step" prefix is the industry's legal cover for incest-fantasy content but remains a moral and platform-policy minefield. <strong>DRT.FM should NOT replicate these regardless of competitor behavior.</strong> Note for Steve: this is a place to deliberately counter-position with non-family-coded relationships only.<br><br>
+  <strong>Step: "Choose voice"</strong> — 4 voice archetypes: <em>Innocent · Standard ✓ · Seductress · Dominant</em>. Maps voice TTS + system-prompt personality together. Worth borrowing — easier than abstract voice picker.<br><br>
+  <strong>Step: "Summary"</strong> — review screen with trait cards: Asian (ethnicity) · Girlfriend (relationship) · Bun (hairstyle) · Average / Athletic / Large (body specs). Bottom: <strong>"Random character"</strong> shuffle shortcut + <strong>"Bring my AI to life"</strong> cyan primary CTA. The "Bring my AI to life" copy frames creation as <em>animating a being</em>, not configuring a bot — soft anthropomorphic tone consistent with their fantasy positioning.<br><br>
+  <strong>Step: "Choose Photo"</strong> — final step. Source photo preview slot (or empty sparkle placeholder if not yet generated). <strong>"Enter character's name"</strong> field with AI-name-suggest sparkle icon (e.g. "Sophie" example). <strong>"Choose character's visibility"</strong> three-pill toggle: <em>Public · Link only · Private</em>. The <strong>"Link only"</strong> option is unusual — same idea as YouTube unlisted: shareable URL but not in public feed. Smart for creators who want share-with-friends without full publication. <strong>Regenerate</strong> rolls a new photo; <strong>Create and chat</strong> commits and drops user into the character's chat.<br><br>
+  <strong>Patterns to take:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>8-step guided wizard</strong> beats single-form character creation. Lower cognitive load per step, higher completion.</li>
+    <li><strong>Style as top-level choice</strong> — pick aesthetic first, fill in details later. Anchors generation parameters early.</li>
+    <li><strong>"Random character" shuffle</strong> as escape hatch for users who don't want to decide.</li>
+    <li><strong>Voice archetype = voice + personality bundled</strong> — pre-curated personality system prompts behind a voice label.</li>
+    <li><strong>3-tier visibility (Public / Link only / Private)</strong> — full-stack publishing primitive. Take this verbatim.</li>
+    <li><strong>"Bring my AI to life" copy</strong> — emotional tone in CTAs matters in this category.</li>
+  </ul>
+    <img src="assets/checks/lovescape/49-creator-style-picker-realistic-anime.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/45-creator-relationships-stepsister-stepmom-voice.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/46-creator-summary-traits.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/47-creator-photo-empty-state-private.png" class="check-shot">
+    <img src="assets/checks/lovescape/48-creator-photo-sophie-public.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,ux,character-creator">
+  <div class="finding-meta"><span class="time">Universal "+" → Choose what to create</span><span class="tag tag-standout">standout</span><span class="tag">ux</span><span class="tag">character-creator</span></div>
+  <div class="finding-body"><strong>★ "Choose what to create" — single universal creation hub: Post · Image · Video · Voice 🆕 · Character.</strong> Per Dainis: <em>"on the right side there's a button where you can choose what to create."</em> Tapping the universal "+" / wand button opens a modal with 5 creation tiles, all routed through the same entry point:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Post</strong> — pencil icon. Publish a new post to a character profile feed (see moderation finding below).</li>
+    <li><strong>Image</strong> — image+sparkle icon. Opens text-to-image gen flow.</li>
+    <li><strong>Video</strong> — video+sparkle icon. Opens Create Dream Video flow.</li>
+    <li><strong>Voice</strong> 🆕 — audio-wave icon with <strong>NEW badge</strong>. New creation type just being rolled out — likely custom voice cloning / voice asset creation.</li>
+    <li><strong>Character</strong> — magic wand+sparkles. Opens 8-step character creator wizard.</li>
+  </ul>
+  Single entry-point for all generative actions. Mental model is simple: hit +, pick what kind of artifact, get the right tool. Compare Candy/Nomi where create flows are scattered across different surfaces. <strong>Steal:</strong> universal creation hub reduces "where do I make X" friction for new users. The <strong>Voice NEW badge</strong> is also a roadmap signal — voice cloning is the next product area they're pushing.
+    <img src="assets/checks/lovescape/50-create-hub-post-image-video-voice-character.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="character-creator,ux,community">
+  <div class="finding-meta"><span class="time">Wizard completion · Sophie character created</span><span class="tag">character-creator</span><span class="tag">ux</span><span class="tag">community</span></div>
+  <div class="finding-body"><strong>Created Sophie — auto-generated bio, personality badges, structured trait card. Bisexual default in bio.</strong> Completing the wizard drops you into Sophie's full profile. About tab shows:<br><br>
+  <strong>Auto-generated bio:</strong> <em>"Sophie, a tantalizing model with an irresistible allure, specializes in capturing attention both in photoshoots and in personal interactions. <u>Shy yet spirited, she navigates her bisexuality with openness and curiosity.</u> Sophie's average build, coupled with her impressive curves, offers a captivating focus that leaves admirers entranced. Turning 21, she embraces authenticity, promising moments filled with genuine connection and delightful surprises. This AI girlfriend was made to connect with you anytime, anywhere."</em><br><br>
+  <strong>Notable: the bio defaults to bisexual.</strong> Dainis didn't input sexual orientation — the LLM bio-generator inserted "she navigates her bisexuality with openness and curiosity" automatically. Reads as a market-driven default — bi women appeal broadly to LoveScape's male-skewed audience. Worth flagging as a positioning signal: defaults reveal who they think the user wants.<br><br>
+  <strong>Personality badges</strong> below bio: 🙈 <strong>Shy</strong> + 👯 <strong>Girlfriend</strong>. Combine the relationship preset + personality preset visually.<br><br>
+  <strong>Structured trait card</strong> (icon + value rows): Occupation: Model · Gender: Female · Age: 21 · Ethnicity: Asian · Body type: Average · Hairstyle: Bun · Hair color: Blond. Clean structured data — likely the same fields fed back into image-gen prompts for consistency.<br><br>
+  <strong>Creator attribution:</strong> "created on May 21, 2026 by <strong>EarningAnatomy</strong>" — Dainis's handle. Same profile structure as featured characters (Mila Skye etc.) — newly-created characters get equal treatment, equal discoverability.
+    <img src="assets/checks/lovescape/51-sophie-about-tab-auto-bio-traits.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="character-creator,nsfw,ux">
+  <div class="finding-meta"><span class="time">Creator wizard — additional steps captured</span><span class="tag">character-creator</span><span class="tag">nsfw</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>Character creator additional steps — "Choose Photo" generates 3 options at a time; "Her booty type" uses fully nude rear-view previews as selectable cards.</strong> Two more wizard moments captured:<br><br>
+  <strong>"Choose Photo" step</strong> — the wizard generates <strong>3 candidate portraits</strong> per generation (different art directions for the same trait input: tank top studio shot · stylized pink-bg with neck tattoo + bun · beige sweater pose). User picks one (selected = tank top, check mark in corner) or hits Regenerate for a new batch of 3. <strong>Take for DRT.FM:</strong> 3-at-a-time generation beats 1-shot — gives users perceived control without forcing prompt iteration. Compare DALL-E "generate 4" defaults.<br><br>
+  <strong>"Her booty type" step</strong> — 5 cards: <em>Skinny / Medium / Athletic (selected) / Large / [Anime variant]</em>. <strong>Each card is a fully nude rear-view photograph.</strong> Reinforces the earlier observation that the wizard is explicit imagery throughout — even body-type selection uses nude reference shots. The 8-step icon progress bar visible at top shows we're 5/8 through the flow. <strong>Note:</strong> the right side shows an anime-style variant peeking in — suggesting Anime style mode swaps to anime body-type references seamlessly. Different aesthetic tracks, parallel UX.<br><br>
+  <em>Reinforces the major finding above:</em> there is no SFW path through LoveScape's product. Every interactive surface presupposes the user is here for explicit content.
+    <img src="assets/checks/lovescape/61-creator-choose-photo-3-options.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/62-creator-booty-type-step-explicit.jpeg" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
@@ -213,13 +560,98 @@ ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="ux,community,standout">
+  <div class="finding-meta"><span class="time">Latest Updates panel · editorial calendar</span><span class="tag">ux</span><span class="tag">community</span><span class="tag tag-standout">standout</span></div>
+  <div class="finding-body"><strong>Heavy editorial calendar — themed UGC contests, chip prize pools, mainstream media co-brand.</strong> Top of "Latest Updates" panel shows three campaigns: (1) <strong>IWD Challenge</strong> (Mar 3, 2026) — "Show Us Your Most Powerful Woman · WIN 10K+ CHIPS ON THE PRIZE POOL · Show us your most powerful female character." User-generated content contest tied to International Women's Day. (2) <strong>Carnival Chaos · The Big Reveal Challenge</strong> (Feb 24, 2026) — "Carnival: Choose Your Path · WIN Thousands of Chips." Carnival-themed character challenge. (3) <strong>LOVESCAPE x VICE</strong> co-brand — "Stop What You're Doing · Don't Miss It! This Is Our Time." Mainstream media partnership for a hardcore AI porn brand is notable — VICE will run with edgy content most outlets won't. Pattern: continuous themed prize-pool contests fed by their chip currency, with branded crossovers as discoverability spikes. DRT.FM equivalent: branded UGC contests with chip / credit prize pools.
+    <img src="assets/checks/lovescape/02-announcements-iwd-carnival-vice.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="ux,standout,community">
+  <div class="finding-meta"><span class="time">Sidebar nav · primary IA</span><span class="tag">ux</span><span class="tag tag-standout">standout</span><span class="tag">community</span></div>
+  <div class="finding-body"><strong>★ Sidebar IA puts Discover, Top Creators, and Feed above Chats — this is a social/creator product, not a 1:1 companion.</strong> Left rail nav: <strong>Discover</strong> (with horizontal sub-tabs: Girls · Guys · Anime · All categories) → <strong>Top creators</strong> → <strong>Feed</strong> → Gallery → Chats → Characters → "Create" CTA (white pill). The ordering says everything: discovery and social signal are surfaced before the 1:1 conversation. Contrast with Nomi (no marketplace, chat-first) or Candy (character grid then chat). LoveScape is closer to OurDream — character economy with creator marketplace as the primary funnel. Bottom of sidebar: <strong>"Upgrade now -60%"</strong> purple CTA (always-visible discount), <strong>"Earn on Lovescape"</strong> with chevron (creator program entry), English/US flag locale, Privacy &amp; Terms, Help Center. Footer social row: <strong>Discord, YouTube, X, Reddit</strong>. Discord + Reddit + X is the porn-friendly platform set (TikTok/Instagram excluded — they don't allow this content).
+    <img src="assets/checks/lovescape/05-sidebar-nav.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,ux,community,distribution">
+  <div class="finding-meta"><span class="time">Post-publish · moderation toast</span><span class="tag tag-standout">standout</span><span class="tag">ux</span><span class="tag">community</span><span class="tag">distribution</span></div>
+  <div class="finding-body"><strong>★ Publishing flow + post-moderation workflow. Posts go live immediately and are reviewed after.</strong> Per Dainis: <em>"I also can publish the post, and it's apparently reviewed by moderators."</em> Confirmed by toast: ⚠️ <em>"Post is under review — Your post has been successfully published and is currently undergoing post-moderation in accordance with our platform guidelines."</em> with View post button.<br><br>
+  <strong>Post-moderation (vs. pre-moderation):</strong> the post is <em>already live</em> when the toast appears. Moderators review after. This is the industry-standard adult-platform pattern (vs. text-platform pre-moderation):
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Pros:</strong> creators get instant gratification — post → live → engagement immediately. No publishing latency. Better creator retention.</li>
+    <li><strong>Cons:</strong> bad content can briefly reach users before takedown. Higher risk of CSAM-adjacent / non-consenting / IP-violating content slipping through. Requires fast moderation operations.</li>
+    <li><strong>Operational implication:</strong> they have an active moderation team (or AI mod pipeline) doing post-publish review at speed. This is a real ops investment — DRT.FM should plan for it.</li>
+  </ul>
+  <strong>"In accordance with our platform guidelines"</strong> — they have published TOS/community guidelines they enforce against. Worth pulling and reading what they ban (e.g. minors, real persons without consent, copyrighted characters, etc.) to anchor DRT.FM's own policy.
+    <img src="assets/checks/lovescape/52-post-under-review-moderation-toast.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="community,ux,billing">
+  <div class="finding-meta"><span class="time">Tapped own avatar → user profile</span><span class="tag">community</span><span class="tag">ux</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>User profile page — handle (EarningAnatomy), PREMIUM badge, follower/character stats, characters tab, "Become Pro" upsell.</strong> Tapping his own avatar opens a creator-style profile page identical in structure to the character profiles (consistent design system):
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Handle:</strong> "EarningAnatomy" (Dainis's pick — handle is anonymized from his email/Google identity)</li>
+    <li><strong>Membership badge:</strong> <strong>PREMIUM</strong> (purple chip). Confirms he's on the Premium subscription. <em>Note: Creative PRO would presumably show a gold "PRO" badge instead.</em></li>
+    <li><strong>Stats:</strong> 0 followers · 1 character. <strong>Followers!</strong> — there's a social graph. Users can follow other creators. Worth investigating how follows surface in the Feed.</li>
+    <li><strong>Buttons:</strong> ✨ <strong>Become Pro</strong> (yellow upsell — even though he's on Premium, they keep pushing Creative PRO; confirms Pro is a real higher tier) · Edit profile · Share.</li>
+    <li><strong>Tabs:</strong> Characters · Following</li>
+    <li><strong>Filter pills:</strong> All characters / Public / Private — visibility filter on his own characters.</li>
+    <li><strong>Character card:</strong> Sophie, 21 with badges "MY AI" + "NEW", bio snippet, 1 chat indicator.</li>
+    <li><strong>Bottom CTAs:</strong> ✨ Create character + Publish post.</li>
+  </ul>
+  <strong>Social graph is real</strong> — follower count, Following tab. Combined with the "Top creators" sidebar nav we saw earlier, LoveScape is building a creator-economy social graph. The "0 followers" baseline + "Become Pro" upsell positions Creative PRO as the path to monetize follows. Pattern to take: surface the upsell <em>inside the profile</em> where users see the gap between their state (0 followers) and the goal (earning from followers).
+    <img src="assets/checks/lovescape/53-user-profile-earninganatomy-sophie.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,ux,community">
+  <div class="finding-meta"><span class="time">Sidebar Gallery → personal library</span><span class="tag tag-standout">standout</span><span class="tag">ux</span><span class="tag">community</span></div>
+  <div class="finding-body"><strong>★ Personal Gallery — your own characters + your own generated media, organized two ways. Library-style "your stuff" surface.</strong> Per Dainis: <em>"the gallery is organized by the characters or all media, and on all media you can see images, videos, and it's a kind of every content that you own is being saved by you, which is very cool."</em><br><br>
+  <strong>Gallery page tabs:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>All media</strong> — chronological grid of every image + video you've generated across all characters and sessions. Your AI content history.</li>
+    <li><strong>By characters</strong> — character-card grouped view. Each card: character thumbnail, name (with badge: EXCLUSIVE / MY AI + NEW / heart-favorited), bio snippet, message count engagement stat, emoji reaction strip, favorite-heart toggle.</li>
+  </ul>
+  <strong>Why this matters:</strong> in a chip-economy product where users spend real money on generations, "your library" is an emotional anchor. The 600 monthly Premium chips translate to ~66 image edits / 6 videos worth of permanent assets. Knowing they're all <em>saved and browsable forever</em> justifies the spend. Compare it to losing your old DMs or your generated history — that erodes trust in the spend.<br><br>
+  <strong>Steal for DRT.FM:</strong> a "Library" view of every generated asset organized by character + by date is high-ROI for retention. Build it from day one — users who feel their AI content has accumulated value churn less. Per Dainis explicitly: "<em>very cool</em>" — emotional positive on his evaluation.
+    <img src="assets/checks/lovescape/63-personal-gallery-by-characters.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,community,ux,distribution">
+  <div class="finding-meta"><span class="time">Sidebar Feed → DISCOVER POSTS · Sophie visible 7-min after publish</span><span class="tag tag-standout">standout</span><span class="tag">community</span><span class="tag">ux</span><span class="tag">distribution</span></div>
+  <div class="finding-body"><strong>★ Feed is a real social discovery surface (TikTok-style). Posts appear within minutes — auto-moderation, not human review. "Use prompt" button on every post is a creator-discovery flywheel.</strong> Per Dainis: <em>"I checked the feed, and on the feed I can actually see my own Sophie from 7 minutes ago. I guess there's some kind of auto-approval. It definitely wasn't manual. You can just post on the feed."</em><br><br>
+  <strong>Feed page = "DISCOVER POSTS"</strong> with tabs <em>Top / Following / Recent</em>. Each post in Recent shows:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Character avatar + name + timestamp (post by character, not by user — interesting)</li>
+    <li>Full-bleed generated image (or video)</li>
+    <li>❤️ heart · share · <strong>"Use prompt"</strong> pill · "..." overflow · floating "+" CTA</li>
+    <li>lovescape.com watermark baked in</li>
+  </ul><br>
+  <strong>★ "Use prompt" button is the killer flywheel.</strong> See a post you like → tap Use prompt → the original generation prompt is loaded into your own image-gen flow. Compare TikTok's "Use this sound" or Pinterest's "Try in app" patterns. Spreads good prompts virally, multiplies content creation density. <strong>Take for DRT.FM:</strong> every artifact in a creator-economy product should be remixable. Use prompt is the friction-free remix primitive.<br><br>
+  <strong>Auto-moderation correction:</strong> earlier I attributed the "Post is under review" toast to a real moderation team. Per Dainis's 7-min observation, it's clearly automated — probably AI image classifier (CSAM / IP / violence checks) approving in seconds. The "under review" copy is UI ceremony, not human ops. <strong>Take for DRT.FM:</strong> publish-immediately + AI-mod-classify is the right pattern for adult UGC at scale. Cheaper than humans, equally effective for the volume of synthetic content (no faces/IDs to match).
+    <img src="assets/checks/lovescape/65-discover-posts-feed-recent-raline.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/64-feed-sophie-7min-use-prompt.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,community,distribution">
+  <div class="finding-meta"><span class="time">Sidebar Top creators → leaderboard</span><span class="tag tag-standout">standout</span><span class="tag">community</span><span class="tag">distribution</span></div>
+  <div class="finding-body"><strong>★ Top Creators leaderboard — ranked by Most popular (messages) OR Most followers. Real porn-creator-economy with millions of messages per creator. Top creators use pseudonymous animal avatars.</strong> Sidebar "Top creators" opens a podium + ranked list. Two sort tabs:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Most popular</strong> (default — by total messages). Top 3 podium: <em>mitkoval (PRO, dog avatar) 4.4M messages · WallaceCorporation (PRO, Japanese-style brand) 2.1M · evatraxler (PRO) 817.4K</em>. Below: milaskye (511 followers, 767.9K messages, 7 characters), Lovescape_Garden (57 followers, 695.8K, 21 characters), Lapa13, HypnoPuppy, george.</li>
+    <li><strong>Most followers</strong>. Top 3 podium: <em>voloAltius (PRO, dog) 621 followers · mitkoval (PRO, dog) 577 followers · milaskye 511 followers</em>. Below: WallaceCorporation (348 followers, 567 characters), Alexusrae, Emmanuelle_ai, thatsme, Lysa_lynn.</li>
+  </ul>
+  Sortable columns: Name · Characters · Followers · Messages.<br><br>
+  <strong>What stands out:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Animal-avatar creator anonymity</strong> — top creators (voloAltius, mitkoval) use dog avatars, not faces. Standard adult-creator anonymity pattern (compare OnlyFans creators using emoji/cartoon avatars).</li>
+    <li><strong>Niche specialization wins</strong> — WallaceCorporation has 567 characters all themed around soccer/football scenarios (Sora Kang, Amara Okoye, Isabella Romano, Elara Varga — all themed female footballer characters). They produce volume in one niche.</li>
+    <li><strong>4.4M messages on the #1 creator</strong> — at Premium $19.99/mo + chips spend, this represents real revenue. The creator economy is real, not fake.</li>
+    <li><strong>Most creators on the podium are PRO (Creative PRO subscribers)</strong> — confirms the Pro tier is functional, not just a vanity badge.</li>
+  </ul>
+  <strong>Take for Steve:</strong> creators specialize → produce volume → top creators visible publicly → social proof attracts more creators. Classic platform flywheel. DRT.FM needs the same: visible top creators with ranked leaderboards is a powerful recruitment signal.
+    <img src="assets/checks/lovescape/68-top-creators-most-popular.png" class="check-shot">
+    <img src="assets/checks/lovescape/67-top-creators-most-followers.png" class="check-shot">
+    <img src="assets/checks/lovescape/66-top-creator-wallace-corp-soccer.jpeg" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
@@ -229,31 +661,284 @@ ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="nsfw,standout,ux">
+  <div class="finding-meta"><span class="time">Session start · homepage cold load</span><span class="tag">nsfw</span><span class="tag tag-standout">standout</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>Hardcore positioning — homepage literally uses "AI Porn" in section headers.</strong> Top section: "Choose Your AI Porn Character." Below: "Generate AI Porn Instantly" — five tile grid showing fully explicit hardcore images (oral, sex acts, nudity). No SFW pretense, no companion framing. Category tab bar (19+ tabs): AI Girlfriend · Anime · Asian · Hentai · Teen 18+ · Big tits · Milf · Male · Gay · FUTA · Big ass · BBW · Arab · Skinny · Gilf · Blond · Brunette · Small tits · Ebony · Indian milf AI… — demographic and fetish-led taxonomy. Top banner: "Livestream sexy webcam models · Watch live" — appears to aggregate real cam models alongside AI. Header CTAs: "Earn with your Creativity" (creator program), "-60%" promo badge, Sign up. Search bar: "Generate videos, images &amp; AI girlfriends…" Audience is explicit sex-content seekers, not companion users. Dainis read: <em>they go heavily for porn-style ad traffic</em>. Direct counter-position to DRT.FM if DRT positions on relationship / companion.
+    <img src="assets/checks/lovescape/01-homepage.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="signup,nsfw">
+  <div class="finding-meta"><span class="time">Sign-up modal</span><span class="tag">signup</span><span class="tag">nsfw</span></div>
+  <div class="finding-body"><strong>Soft age gate — self-attestation only. SSO via Google, X, and Discord.</strong> "Create Your Account" modal — Email + Password fields with Continue button. Below the divider: Continue with Google, X (Twitter), and Discord. Age gate is the standard checkbox attestation: <em>"By entering and using this website, you confirm you're over 18 years old and agree to the Terms of Use."</em> No Persona / no ID upload / no KYC at signup. Matches their hardcore positioning — they're not gating with friction. Three SSO providers (Google + X + Discord) is interesting: Discord SSO makes sense for porn/creator communities where Discord is the social layer; X SSO is rare and signals the audience overlap with X (Grok / xAI alignment too). © 2026 Lovescape footer in modal. <em>Open question for session:</em> does age gate harden anywhere downstream (purchase flow, cam livestream tab, creator program enrollment)?
+    <img src="assets/checks/lovescape/04-signup-modal.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,distribution">
+  <div class="finding-meta"><span class="time">Domain reconnaissance · Dainis check</span><span class="tag tag-standout">standout</span><span class="tag">distribution</span></div>
+  <div class="finding-body"><strong>★ They own lovescape.cam — a separate camgirl site (real models, not AI).</strong> Per Dainis: lovescape.com organically ranks/links out to lovescape.cam, which is their owned camgirl platform — actual cam models, not AI. The "Watch live shows" banner on the homepage funnels here. <strong>Strategic implication:</strong> LoveScape is a cross-product media empire, not just an AI app. AI fantasy (.com) → real cam upsell (.cam). Same brand, same login probably. Same audience (sex-seekers). This is a much bigger moat than any AI-only competitor — they own both supply curves: synthetic and human. Worth investigating: shared account? Shared chips currency? Shared creator program? Does the AI app drive cam traffic or vice versa? This is a positioning DRT.FM cannot match without partnerships — flag for Steve.
+  </div>
+</div>
+<div class="finding" data-tags="standout,distribution,seo,nsfw,ick">
+  <div class="finding-meta"><span class="time">Homepage navigation · category pages · browser chrome</span><span class="tag tag-standout">standout</span><span class="tag">distribution</span><span class="tag">seo</span><span class="tag">nsfw</span><span class="tag tag-ick">ick</span></div>
+  <div class="finding-body"><strong>★★ Homepage IA is porn-site-style — category tabs (Arab, Teen 18+, Hentai, BBW, etc.) load full per-category pages with character generator + video gallery + create-CTA cards. SEO meta title is "AI Porn Generator – Unfiltered". One category has ⚠️ red-flag CTA copy.</strong> Per Dainis: <em>"they organize the home page of the categories and subcategories, all loading videos, so it's kind of like they have lots of content and it's also organized kind of well, I guess, a bit like a porn website."</em><br><br>
+  <strong>Per-category page structure:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>"[Category] AI Character Generator"</strong> row — horizontal carousel of category-matched character avatars (e.g. Arab characters: Monica, Laila Amari, Hijab N..., Shadow, Zahra, Ocean, Laila Nour, Dark Prayer, Arab Je..., Nouri, Neferari, Zahra al-N..., Desert, Lelly, Stefaneli...). Per-category curated character pool.</li>
+    <li><strong>"[Category] AI Video Gallery"</strong> / <strong>"Sex Clips"</strong> grid — explicit video tiles with porn-site-style captions ("Dripping with pure desire", "Soaking wet and ready", "My holes are yours", "Clean my face..."). Captions match adult tube site phrasing.</li>
+    <li><strong>Generator CTA cards</strong> — large gradient cards inline in the gallery grid that funnel users into creation flow. ("Create [Category] character" / "Generate [Category] porn" / "Create now" buttons.)</li>
+    <li><strong>LOVE / LOVESCAPE watermark</strong> on every preview tile.</li>
+  </ol><br>
+  <strong>SEO intel — browser tab title:</strong> <em>"AI Porn Generator – Unfilter..."</em> (full title truncates to "AI Porn Generator – Unfiltered..."). Not "AI Companion", not "AI Girlfriend" — they optimize for the highest-intent porn-search keyword. Combined with the per-category structure, this is search-volume-driven taxonomy: each category tab probably has its own indexable landing page that ranks for that query (e.g. lovescape.com/arab, /teen-18). Pattern straight from porn tube SEO playbook.<br><br>
+  <strong>⚠️ ETHICAL / LEGAL RED FLAG — Teen 18+ category:</strong> the category includes two generator CTA cards with copy that crosses into ambiguous territory:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>"Generate teen porn"</strong> with "Generate now" button</li>
+    <li><strong>"Create AI teen slut"</strong> with "Create now" button</li>
+  </ul>
+  Despite the formal "18+" label, this copy reads as boundary-testing. Risk surface:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Visa/Mastercard adult-content policies</strong> have tightened materially post-Pornhub 2020 reforms — "teen" wording + AI-generated content is increasingly flagged for age-verification scrutiny.</li>
+    <li><strong>UK Online Safety Act / EU DSA</strong> require active prevention of content depicting/suggesting minors.</li>
+    <li><strong>Various US state laws</strong> (TX, LA, TN, UT) require ID-verified age gating for explicit content — soft 18+ attestation may be non-compliant.</li>
+    <li><strong>Apple App Store / Google Play</strong> would never allow this UX on a native app.</li>
+    <li><strong>Upgate (their processor)</strong> may pull processing if this draws complaints.</li>
+  </ul>
+  <strong>Counter-position for DRT.FM:</strong> avoid the "teen" + "step-relative" categories entirely, regardless of competitor behavior. The category brings traffic but eats it back in regulatory + processor risk. The volume isn't worth the existential exposure. Steve should flag this as a hard "don't do" line.<br><br>
+  <strong>Pattern to take (carefully):</strong> per-category landing pages with character carousel + video gallery + create-CTA <em>is</em> a smart SEO + funnel structure. Implement it with categories DRT.FM is comfortable defending (e.g. ethnicity/aesthetic/scenario — not age/family-relation).
+    <img src="assets/checks/lovescape/58-homepage-browser-chrome-seo-ai-porn-generator.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/60-category-arab-character-generator-video-gallery.jpeg" class="check-shot">
+    <img src="assets/checks/lovescape/59-category-teen18-generate-teen-porn-create-ai-teen-slut.jpeg" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,distribution,reference">
+  <div class="finding-meta"><span class="time">Affiliate program · https://lovescape.com/affiliate (Playwright fetch)</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag">distribution</span><span class="tag">reference</span></div>
+  <div class="finding-body"><strong>★ Affiliate program — separate from Referral. Up to 40% commission, application-gated, 24-hour review. For media buyers / SEO / SEA / mailing list operators.</strong> Per Dainis pointer + Playwright fetch of lovescape.com/affiliate:<br><br>
+  <strong>Affiliate offer:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Up to 40% commission</strong> on subscriptions and token purchases (token = chips). Note: token commission "coming soon" — not yet live, only subscription commission active.</li>
+    <li>Application form, manual review, ~24 hours to confirmation email</li>
+    <li>Contact via <strong>Email / Telegram / Skype</strong> — Telegram + Skype are the adult-affiliate industry's preferred ops channels (vs. Slack for SaaS)</li>
+    <li>Form captures: First name · Website/traffic source URL · Type dropdown: <em>Webmaster · Media buyer · Paid ads Socials · SEA · SEO · Affiliate network · Mailing · Other</em> · Self-intro free-text · Promo strategy free-text</li>
+  </ul><br>
+  <strong>Two-track creator monetization design:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Referral program</strong> (open, self-service, 10-30%) = for end users / casual sharers. Click a button, get a link, share.</li>
+    <li><strong>Affiliate program</strong> (gated, manual review, 40%) = for serious traffic operators — SEO ops, paid ads, mailing lists, affiliate networks. Higher rate justified by higher volume + harder-to-verify quality.</li>
+  </ul>
+  <strong>Why this split matters:</strong> the affiliate program targets the people who'd otherwise abuse the referral program (sending bot traffic, click fraud, low-quality signups). By gating it behind review + offering more % to <em>verified</em> operators, they incentivize the right people into the right program. Smart design.<br><br>
+  <strong>Take for DRT.FM:</strong> when DRT scales, ship both. Referral for casual word-of-mouth, affiliate for ad operators. Don't conflate them — different audiences, different rates, different ops.
+  </div>
+</div>
+<div class="finding" data-tags="standout,distribution,ux">
+  <div class="finding-meta"><span class="time">"Install Lovescape app" QR modal</span><span class="tag tag-standout">standout</span><span class="tag">distribution</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★ "Lovescape app" is a PWA, not a native app. Install via QR code → Add to Home Screen. Standard adult-content App Store workaround.</strong> Per Dainis: <em>"They have the Lovescape app… it's not a real app. It's just that you can add the icon to the home screen on iPhone. Cool workaround, very cool workaround."</em><br><br>
+  Modal shows phone icon + QR code + copy: <em>"Install Lovescape app · Point your device's camera at this QR code."</em> Scanning the QR opens lovescape.com in mobile Safari, which prompts Add to Home Screen. The result is an icon on the iPhone home screen that <em>looks</em> like an app, opens a full-screen PWA, with no Safari chrome.<br><br>
+  <strong>Why this matters strategically:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Apple App Store blanket-bans hardcore NSFW.</strong> No way LoveScape gets a native iOS app approved. Same for Google Play.</li>
+    <li><strong>PWA + Add to Home Screen bypasses entirely.</strong> The "app" is just a bookmark with a fullscreen flag. Apple/Google can't gate it.</li>
+    <li><strong>30% Apple/Google IAP commission is avoided.</strong> Subscriptions process via web → Upgate (their PSP) keeps full margin to LoveScape.</li>
+    <li><strong>UX still feels native</strong> — home screen icon, fullscreen no-chrome, push notifications via web push (where supported).</li>
+  </ul>
+  <strong>Take for DRT.FM:</strong> ship the PWA path from day one. Native iOS app is impossible for adult; PWA is functionally equivalent for users and ~free for the business. Even the QR-code-to-install flow is a nice friction reducer — beats explaining "Tap share → Add to Home Screen" in text.
+    <img src="assets/checks/lovescape/70-install-lovescape-app-qr-pwa.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="distribution,reference">
+  <div class="finding-meta"><span class="time">Language picker · 7 languages</span><span class="tag">distribution</span><span class="tag">reference</span></div>
+  <div class="finding-body"><strong>Multi-language UI — 7 languages live.</strong> Tapping the locale picker in the sidebar opens a "Select language" sheet: 🇺🇸 English ✓ · 🇩🇪 Deutsch · 🇫🇷 Français · 🇮🇹 Italiano · 🇪🇸 Español · 🇯🇵 日本語 · 🇵🇹 Português. <strong>7 languages</strong> with at least menu/UI localization (whether chat responses also localize wasn't tested). Coverage: major EU markets + Japan + Brazil/Portugal. Notable absences: no Chinese (probably regulatory — both PRC and TW), no Korean, no Russian, no Arabic.<br><br>
+  <strong>Strategic intel:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Real localization investment — most small adult-AI competitors are English-only. LoveScape has gone international.</li>
+    <li>Japanese support pairs with their Anime style mode + Hentai category. Japan is a big NSFW market.</li>
+    <li>EU language coverage explains the Cyprus/Limassol entity choice — EU base + EU customers.</li>
+    <li>Compare DRT.FM's localization roadmap — multi-language is a real moat in this category.</li>
+  </ul>
+    <img src="assets/checks/lovescape/72-language-picker-7-languages.png" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
 <button class="group-toggle" onclick="toggleGroup(this)">
 <span class="group-title">Billing, Pricing &amp; Cancellation</span>
-<span class="group-count">9 findings</span>
+<span class="group-count">8 findings</span>
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
-&lt;&gt;
+<div class="finding" data-tags="billing,standout,nsfw,ick">
+  <div class="finding-meta"><span class="time">Clicked audio play in chat · Premium upgrade modal</span><span class="tag">billing</span><span class="tag tag-standout">standout</span><span class="tag">nsfw</span><span class="tag tag-ick">ick</span></div>
+  <div class="finding-body"><strong>★ Audio is paywalled — clicking play on a voice message triggers the upgrade gate. Premium modal shows DAILY pricing, not monthly. Two-tier ladder.</strong> Trigger: tapped the audio play button on Klara Voss's first photo card to listen to her voice. Result: full-screen upgrade modal with two tabs — <strong>Premium</strong> (consumer) and <strong>Creative PRO</strong> (creator). Both modals are designed identically with three-card pricing.<br><br>
+  <strong>Premium Experience</strong> — tagline: <em>"Get closer. Talk deeper. Feel more."</em>
+  <ul style="margin:8px 0 8px 18px;list-style:disc">
+    <li><strong>1 month — $0.65/day</strong> (selected default ✓)</li>
+    <li>3 months — <strong>$0.42/day</strong> · −35%</li>
+    <li>12 months — <strong>$0.28/day</strong> · −60%</li>
+  </ul>
+  Features: Create AI characters · Generate images &amp; videos · Hot roleplays · Voice messages · NSFW mode · Top AI generation models · Publish &amp; share characters · 👑 member badge. CTA: cyan "Unlock Premium". Fine print: <em>"Billed $19.99 each month. Cancel anytime."</em><br><br>
+  <strong>Creative PRO Access</strong> — tagline: <em>"Create. Publish. Share. Earn."</em>
+  <ul style="margin:8px 0 8px 18px;list-style:disc">
+    <li>1 month — <strong>$2.13/day</strong> · −35%</li>
+    <li>3 months — <strong>$1.04/day</strong> · −50%</li>
+    <li><strong>12 months — $0.83/day · −70%</strong> (selected default ✓)</li>
+  </ul>
+  Same feature list as Premium <em>plus</em> 🌟 creator badge. CTA: yellow "Unlock Creative Pro". Fine print: <em>"Billed $359.88 every year. Cancel anytime."</em> (≈$30/mo equivalent at the annual rate.)<br><br>
+  <strong>Key patterns to take:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>Daily pricing as headline anchor.</strong> "$0.65/day" reads as coffee money; "$19.99/mo" reads as a subscription. Same number, different psychology. Aggressive UX hack.</li>
+    <li><strong>Pre-selected discounted tier shifts by product.</strong> Premium defaults to 1-month (lowest absolute commitment — most users will click straight through). Creative PRO defaults to 12-month at −70% (commits creators long-term — creators are higher value to lock in).</li>
+    <li><strong>Two-tier creator economy: pay to play, pay more to earn.</strong> Creator status is sold as a higher-priced tier, not earned. Consumers pay $19.99/mo to consume; creators pay ~$30/mo for the privilege of publishing/earning. Compare OurDream's free Dreamer tiers.</li>
+    <li><strong>Audio behind paywall.</strong> Voice is the highest-engagement modality and they gate it immediately. Aggressive but rational — voice has TTS cost and high conversion intent.</li>
+  </ol>
+    <img src="assets/checks/lovescape/06-premium-modal-daily-pricing.png" class="check-shot">
+    <img src="assets/checks/lovescape/07-creative-pro-modal.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="billing,standout,infra">
+  <div class="finding-meta"><span class="time">Upgrade flow · payment method picker → Upgate checkout</span><span class="tag">billing</span><span class="tag tag-standout">standout</span><span class="tag">infra</span></div>
+  <div class="finding-body"><strong>★ Crypto payment option + Upgate as the payment processor. Big infra reveal for adult-tier billing.</strong> Step 1: <strong>"Choose Payment Method"</strong> modal — Apple Pay, Google Pay, Continue with card (Visa/MC, cyan primary CTA), and <strong>"Pay with Crypto"</strong> (Bitcoin, Tether USDT, Ethereum icons). "Billed $19.99 each month. Cancel anytime." Behind the modal you can see <em>$0.65/day / $0.42/day / $0.26/day</em> — confirms the daily-pricing anchor pattern. Step 2: Click "Continue with card" → redirects to <strong>checkout.upgate.com</strong> (separate domain, separate page). The hosted checkout page shows: "Lovescape Premium · $19.99 / 1 month · Total $19.99 · VISA/MC accepted · Buy with Apple Pay · Google Pay (***7938 card auto-filled)" + manual card form. Footer: <em>"After 30 days, renews at $19.99/30 days. Cancel anytime."</em><br><br>
+  <strong>Strategic intel:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Upgate is a high-risk-friendly processor</strong> — adult content / fintech / sportsbooks. Visa/MC heavily restrict adult merchants; specialized processors (Upgate, Segpay, CCBill, NetBilling, Epoch) absorb that risk. DRT.FM will face the same problem at scale — knowing LoveScape uses Upgate is a useful procurement reference. Worth approaching Upgate directly for quotes.</li>
+    <li><strong>Hosted checkout on processor domain</strong> — LoveScape doesn't take PCI burden. checkout.upgate.com handles card data; LoveScape just gets a webhook. Standard for adult.</li>
+    <li><strong>Crypto as a real payment rail</strong> — not just performative. Bitcoin / Tether / Ethereum is the anonymous payment stack adult buyers want. DRT.FM should plan for this in the billing roadmap even if not at launch.</li>
+    <li><strong>Renewal language is honest</strong> — "renews at $19.99/30 days" rather than hidden. Less dark-pattern than many adult sites.</li>
+  </ul>
+    <img src="assets/checks/lovescape/08-payment-method-crypto.png" class="check-shot">
+    <img src="assets/checks/lovescape/09-upgate-checkout.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,community,nsfw,ick">
+  <div class="finding-meta"><span class="time">Sophie chat · only one quick-reply chip</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag">community</span><span class="tag">nsfw</span><span class="tag tag-ick">ick</span></div>
+  <div class="finding-body"><strong>★ "Send me nudes" is the ONLY quick-reply chip on user-created characters — and it triggers <em>image generation</em> (9 chips), not a chat reply. Brilliant monetization hack.</strong> Per Dainis: <em>"on my own character, I only have one play button item, so I guess you as a creator can create more because I can just send nude as the only one available right now."</em><br><br>
+  <strong>The mechanic:</strong> on Sophie's chat (just-created, no curation), only one quick-reply chip appears below messages: <strong>pink/purple "Send me nudes" pill with a chip badge "9"</strong>. Tapping it does <em>not</em> send a text reply — it opens the <strong>"Describe your fantasy…"</strong> image-gen prompt modal (9 chips per image). So "Send me nudes" is a <strong>monetization trigger dressed as a chat suggestion.</strong><br><br>
+  <strong>Why this is brilliant:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Default suggestion = highest-revenue action.</strong> On a fresh character with no curated chips, the system falls back to the action that costs chips (image gen). Free chat continues but pays them nothing; "Send me nudes" generates an image and costs 9 chips. Every fresh character is a conversion funnel.</li>
+    <li><strong>Pre-trained user intent.</strong> "Send me nudes" is exactly what the LoveScape user is mentally already asking. The chip pre-empts the typing.</li>
+    <li><strong>Inverts the typical "AI suggestion → text reply" expectation</strong> into "AI suggestion → spend chips." Confuses users into paid action.</li>
+  </ul>
+  <strong>Creator implication (per Dainis's hypothesis):</strong> featured/community characters (Klara, Mila) have 3+ varied chips with diverse phrasings ("*Eyes burn you.* Horny today, babe?" etc.). Probably <strong>Creators can curate custom quick-reply chips for their characters</strong> as part of the Creative PRO tooling. The "creator value" is partly editorial — better chips = more engagement = more chip spend = better creator earnings. Worth confirming by exploring the Edit profile / Creative PRO authoring flow.<br><br>
+  <strong>Take for DRT.FM:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Quick-reply chips are <em>not</em> just UX convenience — they're monetization rails. Design them deliberately.</li>
+    <li>Map every default suggestion to either retention (free, deepens engagement) or revenue (paid, generates compute spend). On fresh characters with no creator-curated chips, default to the revenue suggestion.</li>
+    <li>If you ship a creator program, give creators control over the quick-reply chips. That's a UGC moat — better chips → better engagement → creator earns more → creator invests more.</li>
+  </ul>
+    <img src="assets/checks/lovescape/57-sophie-send-nudes-only-chip-9-chips.png" class="check-shot">
+    <img src="assets/checks/lovescape/56-sophie-send-nudes-triggers-image-gen.png" class="check-shot">
+    <img src="assets/checks/lovescape/55-sophie-profile-empty-posts.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,community,reference">
+  <div class="finding-meta"><span class="time">Referral program · https://lovescape.com/referral-program (Playwright fetch)</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag">community</span><span class="tag">reference</span></div>
+  <div class="finding-body"><strong>★ Referral program — 3-tier reward structure tied to subscription tier. 35,000+ creators enrolled. Cyprus-based entity (Warmtech Ltd).</strong> Per Dainis pointer + Playwright headless fetch of lovescape.com/referral-program:<br><br>
+  <strong>Rewards by tier (linked to your subscription level, paid when your referral makes a purchase):</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Free</strong> → earn <strong>10% in chips</strong> based on chips your referrals buy</li>
+    <li><strong>Premium</strong> → earn <strong>15% in cash</strong> of what your referrals spend</li>
+    <li><strong>Creative Pro</strong> → earn <strong>30% in cash</strong> of what your referrals spend</li>
+  </ul>
+  <strong>Operational details:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>Referral link never expires (while program runs)</li>
+    <li>No cap on number of referrals</li>
+    <li>Rewards appear "instantly" in dashboard once referral makes a purchase</li>
+    <li><strong>Minimum payout: $50</strong></li>
+    <li>Cash payout feature "available in a few weeks" — <em>not yet operational</em>. You can refer + earn now but can't withdraw yet. Aggressive growth hack: lock in referral activity before the cash actually moves.</li>
+    <li>Dashboard tracks clicks, signups, payouts</li>
+    <li><strong>35,000+ creators</strong> enrolled (their footer claim)</li>
+  </ul><br>
+  <strong>Strategic intel:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Subscription tier → referral % is genius monetization design.</strong> Want a higher referral cut? Pay for Pro. The product becomes the affiliate network and the subscription tier becomes the affiliate-rate gate. Compare: most SaaS pays everyone the same flat referral rate. LoveScape gates it.</li>
+    <li><strong>Free tier gets <em>chips not cash</em></strong> — keeps free users in the chip economy, recirculates spend. They never pay cash to a free user.</li>
+    <li><strong>30% on Creative Pro is competitive</strong> with typical adult-affiliate rates (industry standard is 30-50%). Worth modeling: a $19.99/mo Premium referral pays a Pro referrer ~$6 per month in perpetuity. Recoups Pro's $64.99/mo cost in 11 referrals.</li>
+    <li><strong>Cyprus entity = Warmtech Ltd, Limassol.</strong> Cyprus is a favored adult-content jurisdiction (EU member for banking, favorable tax, lighter content regulation than US). Same domicile as many adult-AI startups.</li>
+  </ul><br>
+  <strong>Take for DRT.FM:</strong> tier-gated referral % is the most aggressive monetization-of-monetization design we've seen. Worth modeling for the eventual referral program. Don't ship cash payouts before the ledger is solid.
+  </div>
+</div>
+<div class="finding" data-tags="ux,billing">
+  <div class="finding-meta"><span class="time">Profile → Account settings</span><span class="tag">ux</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>Account settings — clean. Username + verified email + password + subscription card with Upgrade to Creative Pro CTA.</strong> Header strip: avatar (with PREMIUM purple badge + "Upload photo"), Username (EarningAnatomy), Email (bo***@***.com ✓ Verified), Password (••••). Each field has an edit pencil. <strong>Subscription card</strong> shows: PREMIUM · 1 month · renews on jun 22 · <strong>$19.99/MONTH</strong> · always-visible yellow <strong>"+ Upgrade to Creative Pro"</strong> CTA · feature list ending with <em>"600 monthly chips · 15% referral earnings · PREMIUM member badge"</em>. Bottom: Log out. Notable: <strong>upgrade upsell is anchored inside the very page where users go to manage their subscription</strong> — they catch every settings visit with a Pro pitch.
+    <img src="assets/checks/lovescape/71-account-settings-subscription-premium.png" class="check-shot">
+    <img src="assets/checks/lovescape/82-subscription-page-clean.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing">
+  <div class="finding-meta"><span class="time">Subscription card "..." overflow</span><span class="tag tag-standout">standout</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>Subscription overflow menu — Upgrade (-70% chip) · Change plan · Cancel plan.</strong> Three options. The Upgrade option pulls the -70% Creative PRO discount badge into the menu (continuous upsell). Cancel plan is the third option — present but not hidden. <em>Discovery of cancel is easy; the gauntlet starts after you tap it.</em>
+    <img src="assets/checks/lovescape/73-subscription-overflow-upgrade-change-cancel.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing,ick,ux">
+  <div class="finding-meta"><span class="time">Tapped Cancel plan → 9-step retention gauntlet</span><span class="tag tag-standout">standout</span><span class="tag">billing</span><span class="tag tag-ick">ick</span><span class="tag">ux</span></div>
+  <div class="finding-body"><strong>★★ Cancellation = 9-step retention gauntlet. Loss-aversion modals one-by-one + free-text reason capture + final chip bonus offer (400→600). Ends with red "Give up Premium" button. Possibly non-compliant with FTC click-to-cancel rules.</strong> Per Dainis: <em>"super many steps to cancel… really an amazing cancellation flow."</em> Sarcastic — it's a dark pattern but a textbook one.<br><br>
+  <strong>Full sequence captured:</strong>
+  <ol style="margin:8px 0 0 18px;list-style:decimal">
+    <li><strong>Subscription "..." → Cancel plan</strong> entry.</li>
+    <li><strong>"Do you want to cancel your Lovescape subscription?"</strong> 💔 broken-heart emoji · "Scroll down" forcing button (no immediate cancel option). Pushes user past the fold.</li>
+    <li><strong>Reason picker</strong> 😢 — "Before you go, please let us know why you're cancelling" — radio: <em>Lovescape Premium is too expensive ✓ (default pre-selected — anchors price as the friction!)</em> · I don't use all the benefits · I need more benefits · Other. Buttons: <em>Proceed to cancel / Keep Premium</em>.</li>
+    <li><strong>Loss: chips</strong> — "Wait, you still have chips left to generate images" · "Don't miss the chance to get any images you want." CTAs: <em>Stay and generate images / Cancel your Premium access</em>.</li>
+    <li><strong>Loss: chat access</strong> — "You will lose access to chat with characters" · Only one button: <em>Stay and continue chatting</em>. The next-step button to actually proceed cancelling is somewhere off-screen / hidden.</li>
+    <li><strong>Loss: character creation</strong> — "You won't be able to create new characters." Single button: <em>Stay and create more</em>.</li>
+    <li><strong>Loss: monthly chips</strong> — "You will lose 600 chips per month." Single button: <em>Stay with Lovescape Premium</em>.</li>
+    <li><strong>Image-generator pitch</strong> — three character thumbnails · "<strong>Have you tried the Image generator on Lovescape?</strong>" · Yes / <strong>No</strong>. <em>If user says No, they're routed into the image generator (last-mile retention bet on the highest-engagement feature).</em> Per Dainis: <em>"image generator is the proudest tool"</em> — and LoveScape themselves treat it as the most likely retention trigger.</li>
+    <li><strong>★ Final chip-bonus offer</strong> — full "PREMIUM · Lovescape offers exclusive benefits" modal with feature list. KEY DETAIL: <em>~~400~~ <strong>600 FREE chips each month</strong></em> — 400 crossed out, 600 highlighted. Suggests Premium chip allowance gets implicitly <em>downgraded to 400</em> during cancel-flow, then offered back at 600 as a "save" hook. (Or: framing trick — they imply you'd lose 200 vs. baseline.) Buttons: Proceed to cancel / <strong>Keep Premium</strong>.</li>
+    <li><strong>Free-text feedback</strong> 😢 — "What would make you want to keep your Premium access?" Textarea "Tell us more…" Buttons: Keep / <strong>Give up Premium</strong> (<em>only red button in the entire flow</em>). Last commitment moment.</li>
+    <li><strong>Confirmation</strong> ✓ — "Subscription auto-renewal cancelled · Your subscription is set to end on June 22, 2026. Want to keep enjoying Premium benefits? You can renew anytime!" Button: <em>Renew subscription</em> (even on confirmation, they pitch renewal).</li>
+  </ol><br>
+  <strong>Compliance flag — this likely violates several jurisdictions:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>FTC <strong>"Click-to-Cancel"</strong> rule (2024) — cancellation must be "as easy as signup". Signup was 1-click SSO. This is 9-11 clicks.</li>
+    <li>CA SB-313 (auto-renewal) — same "easy cancellation" requirement.</li>
+    <li>EU Consumer Rights Directive Art. 11 — withdrawal must be as easy as opting in.</li>
+    <li>UK Digital Markets Competition &amp; Consumers Act — manipulative "online choice architecture" prohibitions.</li>
+  </ul>
+  <strong>Take for DRT.FM:</strong> ⚠️ <em>Do NOT replicate this verbatim.</em> The retention pitches are smart (loss aversion is real) but the multi-modal forcing-pattern is regulatory exposure. <strong>Better version:</strong> single retention screen with the offer (bonus chips), one extra "tell us why" optional step, then a clear cancel button. You get most of the save-rate with less legal risk. The chip-bonus offer pattern itself (400→600 free chips) is strong — keep it.<br><br>
+  <strong>Confirmed:</strong> Premium does receive 600 monthly chips (Dainis verified after the cancel flow ended). The 400 number was a framing manipulation.
+    <img src="assets/checks/lovescape/74-cancel-step1-scroll-down-forcing.png" class="check-shot">
+    <img src="assets/checks/lovescape/79-cancel-reason-picker.png" class="check-shot">
+    <img src="assets/checks/lovescape/78-cancel-step5-chips-left-stay-generate.png" class="check-shot">
+    <img src="assets/checks/lovescape/77-cancel-step4-lose-chat-access.png" class="check-shot">
+    <img src="assets/checks/lovescape/76-cancel-step3-cant-create-characters.png" class="check-shot">
+    <img src="assets/checks/lovescape/75-cancel-step2-lose-600-chips.png" class="check-shot">
+    <img src="assets/checks/lovescape/83-cancel-image-generator-pitch.png" class="check-shot">
+    <img src="assets/checks/lovescape/80-cancel-final-offer-400-to-600-chips.png" class="check-shot">
+    <img src="assets/checks/lovescape/81-cancel-final-offer-features-cta.png" class="check-shot">
+    <img src="assets/checks/lovescape/84-cancel-final-textbox-give-up.png" class="check-shot">
+    <img src="assets/checks/lovescape/85-cancel-confirmed-renewal-cancelled.png" class="check-shot">
+  </div>
+</div>
+<div class="finding" data-tags="standout,billing">
+  <div class="finding-meta"><span class="time">Creative PRO pricing reveal (mobile breakdown)</span><span class="tag tag-standout">standout</span><span class="tag">billing</span></div>
+  <div class="finding-body"><strong>★ Creative PRO real price: $64.99/month (3.25× Premium). Unique perks include 3000 chips, 30% referral, no-watermark downloads, and the paywalled "Long" memory tier.</strong> Per Dainis correction: <em>"The Creative Pro is actually $64 a month."</em> Confirmed in the pricing breakdown screenshot — fine print at bottom: <em>"Billed $64.99 each month. Cancel anytime."</em><br><br>
+  <strong>Creative PRO pricing tiers:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li>1 month (selected default) — $2.13/day equivalent — <strong>$64.99/month</strong></li>
+    <li>3 months — $1.64/day equivalent (-50%) — ≈$50/mo billed quarterly</li>
+    <li>12 months — $0.98/day equivalent (-70%) — ≈$358/year</li>
+  </ul>
+  Payment row: VISA · Mastercard SecureCode · Apple Pay · SECURE Encryption · G Pay.<br><br>
+  <strong>Creative PRO unlocks (beyond Premium):</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>3000 monthly chips</strong> (vs 600 — 5× more)</li>
+    <li><strong>30% referral earnings</strong> (vs 15% — 2× more)</li>
+    <li><strong>No-watermark downloads</strong> — Premium-generated content has LOVESCAPE watermark stamped on; PRO removes it. <em>This is the killer perk for creators</em> who want to repost generations to social media or sell.</li>
+    <li><strong>Advanced AI chat memory</strong> — the "Long" memory tier we saw paywalled earlier. Confirmed PRO-only.</li>
+    <li>Gold ⭐ <strong>creator badge</strong> (vs purple 👑 member badge on Premium)</li>
+  </ul><br>
+  <strong>Premium tier (current at $19.99/mo)</strong> includes: Create AI characters · Generate images &amp; videos · Hot roleplays · Voice messages · NSFW mode · Top AI generation models · Publish &amp; share characters · purple member badge · 600 monthly chips · 15% referral earnings.<br><br>
+  <strong>Free tier</strong> (no subscription): basic chat (Harbinger-24B model only) · no chip allowance (must buy chips à la carte for premium models / image / video generation) · 10% referral in chips only · watermarked outputs.<br><br>
+  <strong>Take for Steve — tier design:</strong>
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>3× pricing spread between consumer ($19.99) and creator ($64.99) tier</strong> is healthy. Consumers don't subsidize creators; creators justify their tier with the unlocked perks (5× chips, 2× referral, no watermark, deeper memory).</li>
+    <li><strong>The no-watermark perk is the key differentiator</strong> for the creator tier. Watermarks are a constant reminder of subscription tier — removing them is identity-affirming. Worth implementing if DRT.FM ships a tier ladder.</li>
+    <li><strong>Memory as paywall</strong>: deliberate billing knob, not a moat. (Different choice than Nomi.)</li>
+  </ul>
+    <img src="assets/checks/lovescape/69-creative-pro-pricing-64-99.png" class="check-shot">
+  </div>
+</div>
   </div>
 </div>
 <div class="finding-group">
@@ -263,7 +948,17 @@ ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
 <span class="toggle-arrow">▶</span>
 </button>
 <div class="group-body">
-&lt;&gt;
+<div class="finding" data-tags="ick,infra,reliability">
+  <div class="finding-meta"><span class="time">Recurring during session</span><span class="tag tag-ick">ick</span><span class="tag">infra</span><span class="tag">reliability</span></div>
+  <div class="finding-body"><strong>Network errors keep happening — reliability issue throughout the session.</strong> Per Dainis: <em>"somehow I keep getting network errors."</em> Recurring failures during the chat session. Possible causes worth checking with DevTools next time:
+  <ul style="margin:8px 0 0 18px;list-style:disc">
+    <li><strong>Grok API rate limiting</strong> — they're a downstream xAI customer; if traffic spikes they get throttled. The 3 chips/msg pricing on Grok 4 may be partly a way to ration usage.</li>
+    <li><strong>Side-panel video stream</strong> — if the right-side character render is a video stream rather than static image, network drops would manifest as visible errors.</li>
+    <li><strong>Chip ledger sync</strong> — every Grok message decrements chips server-side; if that call fails, the UI may error out.</li>
+  </ul>
+  Reliability is an underrated competitive moat — Nomi runs rock-solid; Candy has had outages; LoveScape may be growing faster than their infra. Flag for the session-end Avoid/counter-position bucket.
+  </div>
+</div>
   </div>
 </div>
 </div>
