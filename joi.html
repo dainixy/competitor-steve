@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DRT.FM Competitor Checks — Joi.AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d0d12;color:#e0e0e8;line-height:1.6;padding-top:56px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a10;border-bottom:1px solid #1e1e2e;display:flex;align-items:center;gap:4px;padding:0 16px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.tab-btn{flex-shrink:0;padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
+.tab-btn:hover{background:#1e1e2e}
+.tab-btn.active{color:#fff}
+.tab-summary{color:#34d399}.tab-summary.active{background:#0a2820}
+.tab-kindroid{color:#5eead4}.tab-kindroid.active{background:#0a2820}
+.tab-ggpt{color:#ff6b9d}.tab-ggpt.active{background:#2a1020}
+.tab-od{color:#4da6ff}.tab-od.active{background:#0a1828}
+.tab-candy{color:#ff4da6}.tab-candy.active{background:#280818}
+.tab-sd{color:#9b4dca}.tab-sd.active{background:#1e0a2e}
+.tab-sweetdream{color:#a78bfa}.tab-sweetdream.active{background:#16102a}
+.tab-nomi{color:#22d3ee}.tab-nomi.active{background:#0a2228}
+.tab-lovescape{color:#f0abfc}.tab-lovescape.active{background:#260a30}
+.tab-promptchan{color:#ff9f43}.tab-promptchan.active{background:#2a1a08}
+.tab-joi{color:#f9ca24}.tab-joi.active{background:#1e1800}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+.section{max-width:1100px;margin:0 auto;padding:32px 32px 80px}
+.check-header{background:linear-gradient(135deg,#1e1800,#0e0a00);border:1px solid #5a4818;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.check-header h1{font-size:28px;font-weight:800;color:#f9ca24;margin-bottom:6px}
+.check-header .meta{font-size:13px;color:#a89540;font-family:'SF Mono','Monaco',monospace}
+.check-header .priority{margin-top:12px;font-size:13px;color:#e8dcb0;background:#0e0a00;border:1px solid #5a4818;border-radius:8px;padding:10px 14px;line-height:1.5}
+h2.zone{font-size:13px;font-weight:700;color:#f9ca24;text-transform:uppercase;letter-spacing:1.5px;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:10px}
+h2.zone .zone-badge{font-size:10px;background:#1e1800;color:#f9ca24;padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.top3-card{background:#0e0e16;border:1px solid #5a4818;border-radius:12px;padding:18px 22px;margin-bottom:24px}
+.top3-name{font-size:14px;font-weight:800;color:#f9ca24;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.top3-list{padding-left:20px;color:#c0c0d8;font-size:13px;line-height:1.7}
+.top3-list li{margin-bottom:10px}
+.top3-list li strong{color:#fff}
+.finding{background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px}
+.finding-meta{font-size:11px;font-weight:700;color:#7070a0;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.finding-meta .time{color:#5060a0}
+.tag{background:#1e1e2e;color:#f0d878;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:0.5px}
+.tag-standout{background:#1e1800;color:#f9ca24}
+.tag-ick{background:#2a0a14;color:#ff8aaa}
+.finding-body{font-size:14px;color:#d0d0e8;line-height:1.6}
+.finding-body strong{color:#fff}
+.check-shot{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid #2a2a3e;margin:8px 0}
+.actions{background:linear-gradient(135deg,#0e0a00,#0a0612);border:1px solid #5a4818;border-radius:14px;padding:24px 28px;margin-bottom:24px}
+.verdict{font-size:14px;color:#e8dcb0;line-height:1.7;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #5a4818}
+.action-group{margin-top:18px}
+.action-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.action-group.steal .action-group-title{color:#4ade80}
+.action-group.avoid .action-group-title{color:#ff6b6b}
+.action-group ul{list-style:none;padding-left:0}
+.action-group li{font-size:13px;color:#b0b0c8;padding:5px 0 5px 18px;position:relative;line-height:1.6}
+.action-group.steal li::before{content:'+';color:#4ade80;position:absolute;left:0;top:5px;font-weight:700}
+.action-group.avoid li::before{content:'!';color:#ff6b6b;position:absolute;left:0;top:5px;font-weight:700}
+.scores{margin-top:16px;padding-top:16px;border-top:1px solid #5a4818;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.score{background:#0a0814;border:1px solid #2a1a08;border-radius:8px;padding:10px 12px;text-align:center}
+.score-label{font-size:10px;color:#7070a0;text-transform:uppercase;letter-spacing:0.5px}
+.score-value{font-size:22px;font-weight:800;color:#f9ca24;line-height:1.2;margin-top:2px}
+.score-note{font-size:10px;color:#7070a0;margin-top:2px}
+ul.steal,ul.win,ul.avoid{list-style:none;padding-left:0}
+.finding-group{margin-bottom:6px}
+.group-toggle{display:flex;align-items:center;width:100%;background:#0e0e16;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;text-align:left;gap:10px;transition:background .15s}
+.group-toggle:hover{background:#13131e}
+.group-toggle.open{border-radius:10px 10px 0 0;border-bottom-color:#13131e}
+.group-title{font-size:13px;font-weight:700;color:#e0e0e8;flex:1}
+.group-count{font-size:11px;color:#5060a0;flex-shrink:0}
+.toggle-arrow{font-size:9px;color:#5060a0;transition:transform .2s;flex-shrink:0}
+.group-toggle.open .toggle-arrow{transform:rotate(90deg)}
+.group-body{display:none;background:#07070f;border:1px solid #2a2a3e;border-top:none;border-radius:0 0 10px 10px;padding:12px;flex-direction:column;gap:12px}
+.group-body.open{display:flex}
+</style>
+</head>
+<body>
+<nav>
+<span class="nav-label">Competitor Checks</span>
+<a class="tab-btn tab-summary" href="index.html">📋 Summary</a>
+<a class="tab-btn tab-kindroid" href="kindroid.html">Kindroid</a>
+<a class="tab-btn tab-ggpt" href="girlfriendgpt.html">GirlfriendGPT</a>
+<a class="tab-btn tab-od" href="ourdream.html">OurDream</a>
+<a class="tab-btn tab-candy" href="candy.html">Candy.AI</a>
+<a class="tab-btn tab-sd" href="secretdesires.html">SecretDesires</a>
+<a class="tab-btn tab-sweetdream" href="sweetdream.html">SweetDream</a>
+<a class="tab-btn tab-nomi" href="nomi.html">Nomi</a>
+<a class="tab-btn tab-lovescape" href="lovescape.html">LoveScape</a>
+<a class="tab-btn tab-promptchan" href="promptchan.html">Promptchan</a>
+<a class="tab-btn tab-joi active" href="joi.html">Joi.AI</a>
+<a class="tab-btn" href="competitor-analysis-v2.html" style="color:#a78bfa;margin-left:12px">📊 Analysis Matrix</a>
+<span class="private-badge">DRT.FM · Private</span>
+</nav>
+<div class="section" id="joi">
+<div class="check-header">
+<h1>Joi.AI &middot; <span style="color:#ff8aaa">+ joi.com / babes.joi.com / audio.joi.com</span></h1>
+<div class="meta">Multi-domain ecosystem · joi.ai (sanitized front, ~100K visits/mo) + joi.com (REAL product, ~14.8M visits/mo per SimilarWeb) + babes.joi.com (celebrity digital twins for video calls) + audio.joi.com (guided JOI audio sessions) · Shared auth · Shared Neurons wallet · Same parent company</div>
+<div class="priority"><strong>Session complete · 2026-05-22 &middot; MAJOR CORRECTION at end of session:</strong> Joi.AI is the PR / safety shield. <strong>The real product is joi.com</strong> &mdash; 500+ characters, NSFW AI Image Generator with &quot;no filters&quot;, Celebrity / Anime / LGBT+ / Fantasy / Dominant filters, Joi Babes (real-pornstar digital twins for video calls at babes.joi.com), audio.joi.com (guided JOI audio sessions, 23+ categories, &quot;Jerk off with purpose&quot; tagline). All four domains share the same backend (Dainis&apos;s Neurons balance and 36 unread chats persist across joi.ai &harr; joi.com). <strong>This is a dual-domain regulatory shield strategy</strong>: joi.ai exists to host the Yampolskiy advisor + /joisafety + sanitized characters for press / regulators / app stores. joi.com is where the actual money is made (~150&times; the traffic of joi.ai). <strong>DRT.FM strategic implication</strong>: the dual-domain pattern is the most valuable single lesson from this session. Either copy it (a brand-safe public lane + an NSFW product lane on different domains, shared backend) or compete on radical transparency. The whole pre-correction verdict below still holds for the joi.ai variant &mdash; but the lens needs to be: this is a sophisticated multi-vertical adult AI operation, not a single &quot;legitimacy lane&quot; product.</div>
+</div>
+
+<h2 class="zone">★★★ MAJOR Correction <span class="zone-badge">Discovered end of session</span></h2>
+<div class="top3-card" style="border-color:#ff6b6b">
+<div class="top3-name" style="color:#ff8aaa">joi.com is the real product &mdash; joi.ai is the safety-washed front &rarr;</div>
+<ol class="top3-list">
+<li><strong>Traffic asymmetry (SimilarWeb):</strong> joi.com ~<strong>14.8M visits/month</strong> · joi.ai ~<strong>100K visits/month</strong>. We spent the entire session analysing the 0.7% of the operation visible on the &quot;safe&quot; domain.</li>
+<li><strong>Shared backend:</strong> Dainis&apos;s account state (Neurons balance, unread chat count) carries between joi.ai and joi.com without a separate login. Same Premium subscription. Same Neurons wallet. <strong>One parent, two faces.</strong></li>
+<li><strong>joi.com is the NSFW product:</strong> 500+ characters, Celebrity filter with real pornstar names, &quot;Generate uncensored adult images&hellip; with no filters,&quot; Joi Babes for video calls with named performers (Alexis Texas), JOI audio at audio.joi.com (23+ category &quot;sessions&quot; with brand tagline <em>&quot;Jerk off with purpose&quot;</em>).</li>
+<li><strong>joi.ai exists as a regulatory / press shield:</strong> Yampolskiy advisor lives there. /joisafety lives there. Sanitized cast (Hunter Joad, Maria, VYRA) lives there. The credibility moat we documented is real &mdash; but it&apos;s a moat around a much larger NSFW operation that doesn&apos;t carry the same safety story.</li>
+<li><strong>This is the most strategically important finding of the session.</strong> The actual playbook is: build the safety story on one domain, build the actual product on another, share the backend. Either DRT.FM copies it or DRT.FM differentiates on radical transparency (one domain, one story, one product).</li>
+</ol>
+</div>
+
+<h2 class="zone">Top 3 Standout Features <span class="zone-badge">TL;DR for Steve &middot; revised post-joi.com</span></h2>
+<div class="top3-card">
+<div class="top3-name">Joi.AI &rarr; (the actual operation: iFriend AI parent + joi.com + babes + audio.joi.com)</div>
+<ol class="top3-list">
+<li><strong>Dual-domain regulatory shield + multi-vertical adult-AI ecosystem on shared backend.</strong> iFriend AI runs: <strong>joi.ai</strong> (sanitized front, Dr. Yampolskiy advisor, ~100K mo) · <strong>joi.com</strong> (real product, ~14.8M mo, NSFW gen + 500+ chars + celebrity references) · <strong>babes.joi.com</strong> (real-pornstar digital twins, video calls headline) · <strong>audio.joi.com</strong> (guided JOI audio sessions, 23+ categories) · <strong>processing.ifriend.ai</strong> (self-hosted &quot;Moto Pay&quot; payment processor). Same login, same Neurons wallet, same chat state across all domains. <strong>This is the strategic move</strong>: brand-legitimacy on one domain (with a real credentialed advisor + plain-language compliance + transparent checkout) to defend the much larger NSFW operation on a parallel domain. <strong>DRT.FM decision</strong>: copy the dual-domain pattern OR differentiate on radical transparency (one domain, one story).</li>
+<li><strong>Per-character social ecosystem &mdash; each AI character is a synthetic OnlyFans/Instagram creator with cross-modal memory.</strong> Every character has: a verified profile page (bio, location, join date, &quot;Chat with me&quot; CTA, Discord-link, &quot;New post tomorrow&quot; banner) · a public Posts feed with image carousels + captions · a Diary on the homepage Explore carousel · embedded character-attached promo codes (AFTERCLASS = 75% off Neurons for Professor Vale, narrative-justified discount mechanic) · a Community gallery (36.7K UGC items unlockable at 60&ndash;200 Neurons each) · an Exclusives gallery (premium media at 600&ndash;5,200 Neurons each) · per-character subscription (399&rarr;199 Neurons) · a chat with 18-second cinematic open + character-themed gift bar (200&rarr;10,000 Neurons across Heart/FLIRTY PICS/PRIVATE PICS/SPICY VIDS/PRIVATE VIDS/JOI tiers) · a video call (2,000 Neurons) · a Discord channel of her own + a per-character pre-recorded audio session. <strong>Cross-modal memory works</strong>: a 5-minute video call appears as &quot;Outgoing call 5:00&quot; in the chat stream, and Salma referenced it post-call (&quot;<em>five whole minutes and you already ghosted me</em>&quot;). <strong>This stack is the most aggressive character-monetisation engine in the category &mdash; multiple ARPU surfaces glued onto one character identity.</strong></li>
+<li><strong>Per-character opening video (15&ndash;18s, with audio, 1280p adaptive) + AI-drives-the-conversation pattern + cross-modal continuity.</strong> Hunter Joad on the farm 18s with audio · DJ Katrinna in a club 15s with audio · La Sirena 69 in red latex 22s with audio + Spanish/English code-switching. Plus the recurring conversational pattern Dainis flagged: <em>&quot;She keeps asking me questions, in the chat too, so it&apos;s easy to keep talking.&quot;</em> + the video call uses live ASR + multilingual TTS (Eleven Labs-class) + face-driven animation (Hedra / SadTalker / D-ID-class) for talking-head with proactive question-loop. <strong>Action for Steve</strong>: copy the opening-cinematic pattern; codify &quot;every response ends with an open-ended question&quot; in the chat prompt template (trivial to implement, huge UX impact); plan cross-modal memory from day one so voice/video events log to the chat stream.</li>
+</ol>
+</div>
+
+<h2 class="zone">Standout &amp; Actions for Steve <span class="zone-badge">Session complete &middot; 2026-05-22 &middot; revised after joi.com discovery</span></h2>
+<div class="actions">
+
+<div class="verdict"><strong>Final verdict, post-correction</strong>: Joi is not a single product &mdash; it&apos;s a vertically-integrated adult-AI operation by <strong>iFriend AI</strong> running four customer-facing domains plus a self-hosted payment processor, on a shared backend. The full stack is: brand-legitimacy front (joi.ai with Dr. Yampolskiy + /joisafety) + main product (joi.com with NSFW gen + 500+ characters + cinematic chat opens + community gallery + character profiles + creation studio + video calls) + celebrity-likeness video-call layer (babes.joi.com with named pornstars) + guided JOI audio (audio.joi.com) + Discord community (71K members, NSFW Content Zone, public Support intel forums, character-specific channels) + retention engine (feedback survey &rarr; loss-framed confirm &rarr; 70% off save with bonus Neurons &rarr; post-cancel reactivate-at-70%-off). <strong>Strengths</strong>: packaging, brand, safety-positioning shield, community ops, layered ARPU stack, cross-modal continuity, character profile depth, polished creation flow, conversational design. <strong>Weaknesses</strong>: chat is text-only (voice gated behind 2,000-Neuron video call), Premium itself is thin, opaque spend economy (Dainis cancelled in shock), image quality &quot;not very good&quot;, lip-sync &quot;not too good&quot;. <strong>Severe IP / legal exposure</strong>: real-performer references (Adriana Chechik, Nikki Benz, Alix Lynx) as image-gen Reference characters + named copyrighted-IP style presets (Nickelodeon, Simpsons, GTA, Minecraft) + step-relative starting-relationship templates + astroturfed Discord-style testimonials + Trustpilot-pays-Neurons review-buying scheme. <strong>v2 matrix corrections</strong>: Premium $13.99/mo not $17.77 · bank descriptor &quot;joi.ai&quot; not &quot;joi.com&quot; · only 2 chat models exposed (Saturn 6.0/7.0) not 6 · single Neurons currency not dual · Discord 71K not &quot;PARTIAL&quot; · joi.com 14.8M mo dwarfs joi.ai 100K mo &mdash; the matrix was analysing the smaller front-domain. <strong>DRT.FM&apos;s lane</strong>: copy the per-character social-creator stack + cinematic openers + cross-modal memory + conversational design + clean checkout + credentialed safety. Differentiate on: voice in every chat (not gated behind video call), transparent spend (every Neuron cost surfaced pre-click), one domain / one identity (no regulatory-shield split), fictional characters only (no real-performer references), original style names (no IP-name presets), default-Private character creator with opt-in publish.</div>
+
+<div class="action-group steal">
+<div class="action-group-title">Steal immediately for DRT.FM</div>
+<ul>
+<li><strong>Per-character opening video (15&ndash;22s, audio, 1280p adaptive).</strong> The single biggest first-touch wow. Pre-generate one per character.</li>
+<li><strong>Per-character social profile (OnlyFans/Instagram clone).</strong> Bio + location + join date + verified badge + Posts feed + Diary on Explore carousel + &quot;New post tomorrow&quot; banner + character-attached promo codes. Each character becomes a synthetic creator with a daily-return reason.</li>
+<li><strong>Cross-modal memory.</strong> Voice/video call events log to chat stream as system messages (&quot;Outgoing call 5:00&quot;) and the character references them in subsequent text. One unified memory store across modalities. <em>Plan from day one</em>.</li>
+<li><strong>AI-always-asks-the-next-question prompt template.</strong> Every response ends with an open-ended follow-up question in-character. Trivial code change, biggest UX impact in the session.</li>
+<li><strong>Two-tier UGC unlock model.</strong> Per-character Community gallery (cheap 60&ndash;200 Neurons unlocks, user-uploaded) + Exclusives gallery (600&ndash;5,200 Neurons unlocks, character-official) + per-character Subscription (199 Neurons / period for the bundle). Layered ARPU on top of base Premium.</li>
+<li><strong>Polished 12-step character creator with live example previews</strong> (the Chat style step shows a sample prompt + AI reply per style choice). 2 portrait variants on result + Regenerate button. <strong>BUT default to Private, opt-in publish</strong> &mdash; don&apos;t copy Joi&apos;s default-Public.</li>
+<li><strong>Discord as the second product surface.</strong> Welcome &rarr; Get Started &rarr; daily-neurons-rewards &rarr; per-character rooms &rarr; NSFW Content Zone &rarr; ASMR/Lofi voice channels &rarr; <strong>public Support (bugs / feedback / feature-requests / questions)</strong>. Reward Neurons for joining. Run DiscordChatExporter weekly against Joi Spicy for free competitive intel.</li>
+<li><strong>Academically-credentialed safety + /advisory + /safety pages.</strong> Recruit one PhD-level AI safety advisor. Document real-time soft-redirect monitoring, pre-generation prompt screening, human-team gallery review, bi-annual external red-teaming. Moat against regulator churn.</li>
+<li><strong>Compliant cancel flow + calibrated retention save.</strong> Feedback survey FIRST &rarr; loss-framed confirm &rarr; 70% off + free month + bonus Neurons &rarr; post-cancel reactivate offer. Cancel button on the active-sub screen. Refund policy linked at every step.</li>
+<li><strong>Per-character video call with talking-head (face-animation pipeline) + live ASR + multilingual TTS with character-aware accent.</strong> WebRTC stack, native browser device picker, live transcript overlay, two-way webcam optional.</li>
+<li><strong>Plain-language checkout</strong>: line-itemed VAT, plain-language renewal terms, bank descriptor disclosed pre-purchase, password-manager autofill supported, Apple Pay + Google Pay + card from day one.</li>
+<li><strong>Group chat (5-cap, all-reply-to-one, rotating right-side image of speaker).</strong> Future-tier feature. Note the engineering: 5 distinct character voices in one round-trip with stable persona.</li>
+<li><strong>Embedded character-attached promo codes</strong> (Professor Vale&apos;s feed: <em>&quot;promo code AFTERCLASS gets you 75% off Neurons &mdash; consider it extra credit&quot;</em>). Narrative-justified discount mechanic, in-character.</li>
+<li><strong>Mid-session feedback popup</strong> (5-step emoji rating + free text), triggered after a positive moment, not at exit. Captures live UX, not just churn.</li>
+<li><strong>Birthday-based age verification</strong> at signup stored as security data.</li>
+<li><strong>Model selector with visible Creativity / Roleplay / Memory bars + Premium-gated upgrade model.</strong> Saturn 7.0 / 6.0 pattern.</li>
+<li><strong>Guided audio sessions sub-product</strong> (audio.joi.com &quot;Jerk off with purpose&quot;). Cheap to produce (voice actors + scripts), scales infinitely, no real-time inference cost, adds a brand voice. The most copyable lane in the network for a non-celebrity brand.</li>
+</ul>
+</div>
+
+<div class="action-group avoid">
+<div class="action-group-title">Avoid / counter-position</div>
+<ul>
+<li><strong>Real-performer-as-Reference image gen</strong> (Adriana Chechik, Nikki Benz, Alix Lynx). Right-of-publicity violation stacked with adult content + unauthorised likeness. Use fictional likenesses only.</li>
+<li><strong>IP-name style presets</strong> (Nickelodeon / Simpsons / GTA / Minecraft / Furry 3D). Use original style names (&quot;cel-shaded&quot;, &quot;painted&quot;, &quot;mid-2000s digital&quot;).</li>
+<li><strong>Step-relative starting-relationship templates</strong> (Step-sister, Step-mom, Brother&apos;s wife). Don&apos;t normalise incest-adjacent dynamics.</li>
+<li><strong>Default-Public character creation visibility.</strong> Default to Private with explicit opt-in publish.</li>
+<li><strong>Voice gated behind a 2,000-Neuron video call.</strong> Voice in regular chat (TTS-on-tap) is a real differentiator. Don&apos;t gate it behind premium-of-premium.</li>
+<li><strong>Opaque spend economy.</strong> Every Neuron-cost action must show price pre-click. Gift items must show what they unlock in-character. Wallet must list per-action prices.</li>
+<li><strong>&quot;Don&apos;t ask me again&quot; default-CHECKED on spend modals.</strong> Default OFF (visible spend), opt-in to skip.</li>
+<li><strong>Thin Premium &quot;just chat experience.&quot;</strong> Premium must be a clear step-change &mdash; cap-limited image/video included, not just &quot;unlimited messages.&quot;</li>
+<li><strong>Astroturfed testimonials with fake Discord-style handles.</strong> Use real user IDs with verifiable provenance, or none at all.</li>
+<li><strong>Trustpilot-pays-Neurons review-buying scheme.</strong> Bought reviews undermine the legitimacy story.</li>
+<li><strong>Dual-domain regulatory shield</strong> (joi.ai sanitized front + joi.com NSFW back). Defensible business strategy but trust-eroding when discovered. Consider radical transparency: one domain, one identity, one story.</li>
+<li><strong>Sidebar that auto-closes</strong> with no pin option. Pin state in localStorage by default.</li>
+<li><strong>Dynamic per-user promo states</strong> (HELLO50 / 70%-off cancel / 75%-off profile / LUCKY70 / AFTERCLASS / 50%-off badge / promo escalation). Reads as manipulative. DRT.FM can win on transparent &quot;one fair price.&quot;</li>
+<li><strong>Anonymous /about page</strong> with no founders, no team, no funding. We can win on transparency.</li>
+<li><strong>Per-character &quot;subscribe to model&quot; tier</strong> that misleadingly promises private-gallery access (per #bugs channel, doesn&apos;t deliver). Don&apos;t ship tiers that don&apos;t do what they say.</li>
+<li><strong>Capped message length</strong> + <strong>scene-state slippage</strong> (per Discord #feature-requests). Allow longer responses for Premium; implement explicit scene-graph state for continuity.</li>
+<li><strong>&quot;Pornstar&quot; and &quot;Webcam model&quot; as official occupation tags</strong> in the character creator. These point users at the celebrity-likeness lane.</li>
+<li><strong>Picture quality &quot;not very good&quot;</strong> (Dainis&apos;s words). Joi masks quality with great progress-bar UX. DRT.FM can win on actual quality, not animation.</li>
+</ul>
+</div>
+
+<div class="scores">
+<div class="score"><div class="score-label">Memory</div><div class="score-value">7</div><div class="score-note">Cross-modal works · 180-msg cap</div></div>
+<div class="score"><div class="score-label">Voice (call)</div><div class="score-value">7</div><div class="score-note">Accent + multilingual · gated</div></div>
+<div class="score"><div class="score-label">Image consist.</div><div class="score-value">5</div><div class="score-note">Quality &quot;not very good&quot;</div></div>
+<div class="score"><div class="score-label">Video consist.</div><div class="score-value">6</div><div class="score-note">5s user-gen + 15&ndash;22s opens</div></div>
+<div class="score"><div class="score-label">NSFW consist.</div><div class="score-value">8</div><div class="score-note">Real on joi.com; offloaded to Discord on joi.ai</div></div>
+<div class="score"><div class="score-label">Companion feel</div><div class="score-value">7</div><div class="score-note">Cinematic + question-loop · text-only base chat</div></div>
+<div class="score"><div class="score-label">Monetisation depth</div><div class="score-value">10</div><div class="score-note">Most aggressive ARPU stack in category</div></div>
+<div class="score"><div class="score-label">IP / legal risk</div><div class="score-value">9</div><div class="score-note">Real performers + IP styles + step-relative</div></div>
+</div>
+
+</div>
+
+<h2 class="zone">Session Findings <span class="zone-badge">Archive &middot; 2026-05-22</span></h2>
+<div id="joi-findings" style="display:flex;flex-direction:column;gap:6px">
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★★★ joi.com / babes / audio / iFriend AI &mdash; the actual product behind the safety front</span>
+<span class="group-count">32 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">51</span><span class="tag">joi-com</span><span class="tag">image-gen</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>joi.com Gallery &mdash; &quot;NSFW AI Image Generator&quot; with explicit no-filters posture.</strong> URL: <code>joi.com/generate/images</code> with <code>utm_campaign=Discord</code> (came from Discord!). Title: <em>&quot;Generate uncensored adult images with our powerful NSFW AI Image Generator. Create stunningly realistic nude photos and explicit scenes with no filters. Your imagination is the only limit. Start generating for free!&quot;</em> Onboarding gift toast top-right: <strong>&quot;Congratulations! You have 6 free generations.&quot;</strong> Same Joi logo, same UI patterns, same 70%-OFF gem badge, <strong>same Neurons balance (66) and same green &quot;U&quot; avatar &mdash; this is the same account as joi.ai</strong>. Left panel: Create with Image / Video tabs · Base character (Browse 500+) · Description prompt box · &quot;Surprise me&quot; + &quot;Improve 5 [crystal]&quot; + Add negative prompt · <strong>&quot;Create 4 images&quot;</strong> button. Gallery shows ~6 thumbnails of full nudity / explicit imagery uploaded by community users (e.g. <code>by @user_KB6b...</code>). <strong>This is the product</strong> &mdash; not joi.ai. <img src="assets/checks/joi/51-joi-com-gallery-nsfw-image-generator.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">52</span><span class="tag">joi-com</span><span class="tag">characters</span><span class="tag">celebrity</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>joi.com Base characters &mdash; 500+ characters including a Celebrity filter.</strong> Filter pills: <strong>Filters · All · Community-made · Celebrity · Anime · LGBT+ · Fantasy · Dominant · Straight</strong>. Sample characters: <strong>Chelsea, 31</strong> (Bisexual Brit, 1.1K likes &middot; <strong>116M views</strong>), <strong>Professor Vale, 33</strong> (JOI Instructor, 1.6K &middot; 8.3M), <strong>Abby Larsen, 21</strong> (Straight &amp; Curious, 1.7K &middot; 7.4M), <strong>Liz Brat, 22</strong> (&quot;Top 0.1% Adult Model&quot;, 1.6K &middot; 7.2M). Row 2: Restless &amp; Daring · Empathetic Nerd · Submissive &amp; Strong · Switching Babe. <strong>Two huge implications</strong>: (1) the &quot;Joi Original&quot; roster on joi.ai was ~15 characters; <strong>joi.com has 500+ characters</strong> including community-made &mdash; the real product is the same UGC-character model as Promptchan / Candy.AI, not the small curated cast we documented; (2) <strong>Celebrity is a top-level filter</strong> &mdash; Joi Babes (separate sub-product at babes.joi.com) features real pornstar names, and the main product has the same exposure. That&apos;s legally risky territory the joi.ai version is sanitized of. <img src="assets/checks/joi/52-joi-com-base-characters-celebrity-filter.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">53</span><span class="tag">joi-com</span><span class="tag">sidebar</span><span class="tag">creator-economy</span></div>
+<div class="finding-body"><strong>joi.com sidebar &mdash; AI Tools + creator-economy paths surfaced as top-level nav.</strong> Sidebar: <strong>Explore</strong> (Women / Men / Anime / All categories) · Chats <strong>36 unread</strong> (vs joi.ai&apos;s 12&ndash;13 &mdash; matching state because shared backend across sessions). <strong>AI TOOLS</strong> block: <strong>Create characters · Generate images · Generate videos · Hope (New)</strong> &mdash; Hope is a brand-new feature, untracked anywhere else. <strong>EARN WITH US</strong> block: <strong>Meet the Joi Babes · Become an affiliate · Creator Partnership</strong> &mdash; three distinct creator-economy paths (one of them is the celebrity / pornstar tier). About us / Advisory board below. <strong>The shape of joi.com is a Promptchan / OurDream-style creator platform</strong>: users create characters, generate media, the platform monetises spend + affiliate + partnerships. The 10&ndash;15 Joi Originals we saw on joi.ai are the tip of a 500+ character iceberg. <img src="assets/checks/joi/54-joi-com-sidebar-ai-tools-creator-partnership.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">54</span><span class="tag">babes-joi-com</span><span class="tag">video-call</span><span class="tag">celebrity</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>babes.joi.com &mdash; &quot;Video call your favorite Celebrities&quot; with real pornstar digital twins.</strong> URL: <code>babes.joi.com</code>. Brand: <strong>joi babes</strong>. Hero: <em>&quot;Video call your favorite Celebrities &mdash; Alexis Texas&apos;s already naked and ready to play&hellip;&quot;</em> with a <strong>&quot;Call Alexis Texas&quot;</strong> button and a row of Alexis Texas avatar variants. Subhead: <em>&quot;100 of the hottest digital twins are now on video &mdash; private, face-to-face, just you and her. She&apos;s ready to talk, tease, and do exactly what you ask. Call now.&quot;</em> Top nav: <strong>Search · Babes · Leaderboard</strong>. Section: <strong>&quot;Top PornHub World&quot;</strong> &mdash; 20 Joi Babes ranked, six thumbnails visible (named characters in lingerie / swimwear). <strong>This is the actual high-end product</strong>: real-pornstar AI video calls. Massive legal / consent exposure (the name &quot;Alexis Texas&quot; is a real person, &quot;Top PornHub World&quot; tagline suggests Joi is leaning into the real-celebrity association rather than fictionalised characters). <strong>Strategic implication for DRT.FM</strong>: this is the lane DRT.FM should NOT enter &mdash; the upside is huge but the regulatory / litigation downside is unbounded. Let Joi take that risk; differentiate on fictional + original characters with bulletproof IP. <img src="assets/checks/joi/55-babes-joi-com-alexis-texas-video-call.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">55</span><span class="tag">audio-joi-com</span><span class="tag">joi-audio</span><span class="tag">subdomain</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>audio.joi.com &mdash; &quot;Jerk off with purpose. A guided drop into sound, ritual, and your first session.&quot;</strong> URL: <code>audio.joi.com</code> with affiliate UTM (<code>afid=1000028141&amp;utm_campaign=web-banner-brand-joi</code>). Stark black landing page, serif elegant typography (almost meditation-app aesthetic). Single CTA: <strong>Start Your First Session</strong>. <strong>This is the most surprising product surface of the entire session</strong>: Joi has built a separate JOI (jerk-off instruction) AUDIO product, positioned more like Calm / Headspace than like an adult chat app. The aesthetic is sophisticated &mdash; high-end pleasure-as-practice positioning. <strong>Action for Steve</strong>: this is the most differentiated thing in the Joi ecosystem and the most copyable for a non-celebrity adult brand &mdash; a guided audio product is cheap to produce, scales infinitely, doesn&apos;t need real-time inference, and gives a brand voice DRT.FM doesn&apos;t have yet. Worth a serious look. <img src="assets/checks/joi/53-audio-joi-com-jerk-off-with-purpose.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">56</span><span class="tag">audio-joi-com</span><span class="tag">duplicate</span></div>
+<div class="finding-body"><strong>audio.joi.com full-window view.</strong> Same landing page as #55 but with the URL bar clearly visible &mdash; confirms it&apos;s a real subdomain, not a campaign link. Same content. <img src="assets/checks/joi/56-audio-joi-com-full-window.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">57b</span><span class="tag">ifriend-ai</span><span class="tag">parent-company</span><span class="tag">payments</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; The parent company is iFriend AI &mdash; and they run their own in-network payment processor.</strong> When Dainis tried to buy more Neurons he saw the payment URLs:
+<ul style="margin:6px 0 6px 20px">
+<li><code>processing.ifriend.ai/api/merchants/19ada4f68bc0415f9db26d53928ffcf8/payments/dd775ade-d194-428c-baf2-6e1fb83bb088</code></li>
+<li><code>redirector.ifriend.ai/interactive/24d4690697d14d9ebbd246ec63fafd84</code></li>
+</ul>
+<strong>&quot;Moto Pay&quot; = self-hosted, iFriend-operated processor.</strong> The mystery from earlier (#12) is solved &mdash; Moto Pay is not a third-party brand, it&apos;s an iFriend-AI in-network payment surface that wraps card / Apple Pay / Google Pay and presumably bridges to a real acquirer underneath. <strong>This also confirms iFriend AI as the operating parent for the whole network</strong>: joi.ai, joi.com, babes.joi.com, audio.joi.com, plus this processing layer. <strong>Action for Steve</strong>: research iFriend AI as a company (Crunchbase, RocketReach, registry filings) &mdash; once we know who they are, who funds them, where they incorporate, we can map their footprint and assess their compliance posture. Self-hosted payments at this scale is unusual; either they have direct merchant accounts (real banking achievement) or they wrap a high-risk PSP and present a clean brand on top. <em>WebFetch on <a href="https://ifriend.ai">ifriend.ai</a> timed out &mdash; the site is probably bot-blocked or down for crawlers. Needs manual visit + Whois lookup.</em></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">58</span><span class="tag">image-gen</span><span class="tag">styles</span><span class="tag">ip-risk</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Image styles &mdash; explicit IP-infringement taxonomy.</strong> Styles tab in the Create flow shows ~30 style options as named tiles, each with a thumbnail preview. Visible: <strong>Nickelodeon, Simpsons, GTA, Photorealism, Semi-realism, Anime, Minecraft, Cyberpunk, Furry 3D</strong>. <strong>Five of these are direct IP infringement</strong> &mdash; Viacom (Nickelodeon), 20th Century / Disney (Simpsons), Rockstar / Take-Two (GTA), Microsoft (Minecraft). These named styles produce explicit imagery in those brand aesthetics. <strong>The legal exposure here is several orders of magnitude beyond the &quot;just make porn&quot; risk</strong>. <strong>Hard lesson for Steve</strong>: NEVER name image styles after copyrighted properties. Even &quot;style of X&quot; references are legally indefensible. DRT.FM should use original style names (&quot;cel-shaded&quot;, &quot;painted&quot;, &quot;mid-2000s digital&quot;) that describe aesthetics without invoking IP. <img src="assets/checks/joi/65-joi-com-styles-furry3d-simpsons-anime-minecraft.jpeg" class="check-shot"><img src="assets/checks/joi/58-joi-com-image-styles-nickelodeon-gta-simpsons.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">59</span><span class="tag">image-gen</span><span class="tag">poses</span><span class="tag">explicit</span></div>
+<div class="finding-body"><strong>Pose taxonomy &mdash; explicit per-gender ladder (Female / Male / Transgender).</strong> The Create flow asks <em>&quot;What gender is your character?&quot;</em> Three pills: <strong>Female / Male / Transgender</strong>. Each opens a grid of 8+ named pose tiles with thumbnail previews. Female poses include: Anal · Blow job · Bouncing boobs · Cowgirl · Cumshot · Deepthroat · Dildo ride · Doggystyle POV. Male poses: Blow job · Cowboy · Deepthroat · Dildo ride · Doggystyle POV · Doggystyle side · Handjob · Masturbation. Transgender poses: similar set with mixed-anatomy variants. <strong>Compared to joi.ai&apos;s &quot;Female / Male / Trans / Femboy&quot; preference checkboxes</strong>, joi.com surfaces explicit sex-act preset names that joi.ai hides entirely. <strong>This is the actual differentiator</strong>: joi.ai has the taxonomy framework, joi.com fills it with explicit content. <img src="assets/checks/joi/62-joi-com-female-poses-explicit-taxonomy.jpeg" class="check-shot"><img src="assets/checks/joi/63-joi-com-male-poses-explicit-taxonomy.jpeg" class="check-shot"><img src="assets/checks/joi/64-joi-com-transgender-poses-explicit-taxonomy.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">60</span><span class="tag">image-gen</span><span class="tag">pricing</span></div>
+<div class="finding-body"><strong>Image generation add-ons + pricing.</strong> Orientation: Square / Portrait / Landscape. Add-ons (each as a toggle with cost): <strong>Fast generation +5 Neurons</strong> · <strong>Boost clarity +5 Neurons</strong> · <strong>Private</strong> (no cost shown). CTA: <strong>Create 2 images for 50 Neurons</strong>. <strong>So default image gen on joi.com = ~25 Neurons per image</strong> = ~$0.25&ndash;0.50/image depending on Neuron pack pricing. Cheap. The add-ons are upsell levers (Fast / Boost / Private). <strong>Picture quality observation from Dainis</strong>: <em>&quot;The picture quality is actually not very good at all. The progress bars are very good, and loading was fast.&quot;</em> &mdash; UX masks the quality gap. <img src="assets/checks/joi/59-joi-com-image-addons-fast-clarity-private.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">61</span><span class="tag">video-gen</span><span class="tag">pricing</span></div>
+<div class="finding-body"><strong>Video generation &mdash; 5 free videos + add-on pricing.</strong> Video gen page: <em>&quot;Your AI-Generated Videos. Generate realistic NSFW videos in seconds with our AI porn video generator. Instantly create custom adult content and nude videos using a powerful JOI AI tool.&quot;</em> Two slots show &quot;In the queue&quot; placeholders. <strong>Add-ons</strong>: Fast generation +5N · <strong>Make longer +250N</strong> · <strong>Boost clarity +500N</strong> · Private. CTA: <strong>Create for free &mdash; 5 videos left.</strong> So <strong>onboarding gives 5 free user-gen videos</strong>; further generations or upgrades cost Neurons. Boost clarity at 500 Neurons = ~$5/clarity-boost = real expense. Make longer at 250 Neurons. <strong>Note</strong>: contrast with joi.ai&apos;s 200-Neuron-per-video pricing (#37) &mdash; joi.com&apos;s free-tier-then-add-on model is more aggressive and probably converts better. <img src="assets/checks/joi/60-joi-com-video-generator-page.png" class="check-shot"><img src="assets/checks/joi/61-joi-com-video-addons-make-longer-boost-clarity-5-free.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">62</span><span class="tag">video-gen</span><span class="tag">gallery</span><span class="tag">browse-free</span></div>
+<div class="finding-body"><strong>AI Porn Video Generator gallery &mdash; browse community-generated videos free.</strong> Tabs: Community · My media · Favorite. Sort: Trending / Newest / Top. Grid of vertical video thumbnails with view + like counts + creator handle. <strong>Dainis: &quot;You can browse all the community-generated videos&hellip; so you can browse a lot without paying and generating yourself.&quot;</strong> Free unlimited browse = top-of-funnel acquisition without spend. Counts as proof-of-output for new users. <img src="assets/checks/joi/66-joi-com-ai-porn-video-generator-gallery.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">63</span><span class="tag">video</span><span class="tag">remix</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Per-video action ladder &mdash; Extend / Edit / Turn into character / Reuse prompt.</strong> Single video page (community video by <code>user_KXpL8V</code> created May 20, 2026). Description: <em>&quot;latina, 30 year old, is glistening with sweat and wetness, blonde side ponytail, hair, full medium breasts wears&hellip;&quot;</em> &mdash; full prompt visible. Negative prompt also visible: <em>&quot;No shaky camera, no bra, deformed body&quot;</em>. Right rail: 112 likes, Share, Open profile, Follow (creator), Reuse prompt button. <strong>Bottom action bar</strong>: <strong>Extend scene 10 sec</strong> · pencil-edit · <strong>Turn into character &rarr;</strong>. <strong>This is the Promptchan-corpus remix model exactly</strong>: every public video exposes the full prompt + negative prompt + creator + community engagement, and any user can re-enter the generation pipeline from that artifact. The &quot;Turn into character&quot; is the conversion lever &mdash; community media &rarr; persistent character &rarr; spend. <strong>Action for Steve</strong>: the &quot;Reuse prompt&quot; + &quot;Turn into character&quot; pair is the killer combo. <img src="assets/checks/joi/67-joi-com-single-video-extend-edit-turn-into-character.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">64</span><span class="tag">video</span><span class="tag">action-ladder</span></div>
+<div class="finding-body"><strong>Per-video edit action ladder.</strong> When the user enters edit-mode on a video, the action bar collapses to: <strong>&lt; (back) · Undress · Zoom in · Zoom out · Change pose · &quot;Describe the next 10 sec&quot;</strong> text input + send. So the in-place video extension prompts are: change clothing state, change framing, change pose, or freely describe the next 10 seconds. <strong>10-second video extension is the unit</strong> &mdash; consistent with the &quot;5-second video&quot; user-gen length on joi.ai (#46c). <img src="assets/checks/joi/68-joi-com-video-action-ladder-undress-zoom-pose.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">65</span><span class="tag">image</span><span class="tag">action-ladder</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Per-image actions on the single-image view &mdash; Make video / Open chat / pencil-edit + Undress / Change pose.</strong> Selected image overlay shows: top-right Like (1) + Share. Bottom action row: <strong>Make video</strong> · pencil-edit (which opens the Undress / Change pose / Describe edits ladder shown in #66) · <strong>Open chat</strong> with the character&apos;s avatar inline. <strong>So from a single static image the user can branch into</strong>: (a) generate a video from it, (b) open chat with the depicted character, (c) edit it (undress / pose / freeform). <strong>Dainis: &quot;Any video that you like or image that you like, you can extend the scene, edit it, turn it into a character so you can own it. I guess that&apos;s the part where you can, like, a sandbox.&quot;</strong> <strong>This is the Promptchan model + character conversion</strong>: image &rarr; chat with character / make video / remix. <img src="assets/checks/joi/69-joi-com-explicit-image-make-video-open-chat.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">66</span><span class="tag">image</span><span class="tag">edit-mode</span></div>
+<div class="finding-body"><strong>Image edit-mode ladder: Undress · Change pose · Describe edits.</strong> Bottom-overlay on a selected image shows the edit prompts: <strong>Undress · Change pose</strong> as pill buttons, plus a <strong>&quot;Describe edits&quot;</strong> free-text input. Cheaper / simpler than the video edit ladder (no Zoom controls since images don&apos;t have framing motion). <img src="assets/checks/joi/70-joi-com-image-edit-undress-change-pose.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">67</span><span class="tag">chat</span><span class="tag">gift-economy</span><span class="tag">monetization</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; joi.com chat gift bar = explicit tier ladder &mdash; this is where the €2000 audio call pricing comes from.</strong> La Sirena 69 chat. Chat opens with a 22-second video (<em>&quot;Hola, papai&hellip; I know you came to peep on me&hellip;&quot;</em>) and a gift bar of 6 named tiers, each priced in Neurons:
+<ul style="margin:6px 0 6px 20px">
+<li><strong>❤️ Heart</strong> &mdash; 200 Neurons</li>
+<li><strong>FLIRTY PICS</strong> &mdash; 350 Neurons</li>
+<li><strong>PRIVATE PICS</strong> &mdash; 1,200 Neurons</li>
+<li><strong>SPICY VIDS</strong> &mdash; 2,500 Neurons</li>
+<li><strong>PRIVATE VIDS</strong> &mdash; 2,500 Neurons</li>
+<li><strong>JOI</strong> &mdash; 10,000 Neurons</li>
+</ul>
+At default pack pricing ($2/100 Neurons) that&apos;s: Heart $4 · Flirty pics $7 · Private pics $24 · Spicy/Private vids $50 each · JOI $200. <strong>The &quot;JOI&quot; gift at 10,000 Neurons &approx; $200 lines up with Dainis&apos;s &quot;audio call costs &euro;2000&quot; impression</strong> &mdash; though I suspect he saw a foreign-currency-equivalent on a separate purchase modal. <strong>Top-right of the chat</strong>: <strong>Start video call</strong> button. Balance: 516 Neurons. Sidebar reveals more characters: La Sirena 69, Hunter Joad, Hanne, Lilith, the group chat, Rowan, Maria, <strong>Alix Lynx · Nikki Benz · Adriana Chechik</strong>. <strong>Three real pornstar names in one screenshot</strong>. Saturn 7.0 active. <img src="assets/checks/joi/71-joi-com-la-sirena-69-chat-flirty-private-pics-spicy-vids-joi.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">68</span><span class="tag">subscription</span><span class="tag">unlock</span><span class="tag">monetization</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; Per-character subscription + pay-per-unlock layered ON TOP of Premium.</strong> La Sirena 69&apos;s gallery page. Character card: <strong>La Sirena 69, 31 y.o. · 100+ &middot; 36.2K likes &middot; 755 (posts) &middot; 1.5M fans.</strong> Three tabs: <strong>Exclusives · Community 36.7K · Posts</strong>. <strong>Subscribe for ~~399~~ 199 Neurons</strong> button (discounted, the strikethrough shows the original price). Below: <em>&quot;View all La Sirena 69 posts and community media&quot;</em>. CTAs: Chat / Video call. <strong>Gallery breakdown</strong>: one Exclusives video unlocked (0:22, JOI watermark), <strong>three blurred locked videos</strong>:
+<ul style="margin:6px 0 6px 20px">
+<li>0:21 &mdash; <strong>Unlock for 600 Neurons</strong></li>
+<li>1:07 &mdash; <strong>Unlock for 1,100 Neurons</strong></li>
+<li>1:07 &mdash; <strong>Unlock for 5,200 Neurons</strong></li>
+</ul>
+<strong>So the monetisation layering is</strong>: Premium subscription ($13.99/mo) for unlimited chat + free image gen + drip Neurons &rarr; per-character Subscription (399&rarr;199 Neurons / character / period) for Exclusives + community media bundle &rarr; per-video pay-per-unlock (600&ndash;5200 Neurons each) for the most expensive content &rarr; chat gift bar (200&ndash;10000 Neurons per gift) for unique character moments. <strong>This is an OnlyFans-equivalent monetisation stack glued onto an AI chat product.</strong> <strong>Action for Steve</strong>: this is the most aggressive ARPU stack in the category. Worth diagramming. <img src="assets/checks/joi/72-joi-com-la-sirena-gallery-subscribe-399-199-unlock-prices.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">69</span><span class="tag">babes-joi-com</span><span class="tag">celebrity</span><span class="tag">video-call</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>babes.joi.com Celebrity filter &mdash; every card carries a &quot;Video Calls&quot; badge.</strong> Filter selected: Celebrity. Visible celebrity characters: <strong>Cherry Devivre, 39</strong> (Submissive &amp; Strong, 500+ &middot; <strong>11.9M</strong>) &middot; <strong>Nikki Benz, 43</strong> (Switching Babe, 300+ &middot; 3.1M) &middot; <strong>Alix Lynx, 36</strong> (Bisexual Starlet, 500+ &middot; 6.8M) &middot; <strong>Adriana Chechik, 32</strong> (Bisexual Career Girl, 500+ &middot; <strong>13.4M</strong>) &middot; Dominant Creator &middot; Big Booty B-Girl &middot; Bisexual Model &middot; Bisexual Whisp&hellip; Each card has a vertical pink &quot;Video Calls&quot; badge stamped across the side, indicating <strong>video-call is THE primary monetisation surface for the celebrity tier</strong>. All confirmed real adult performers. Engagement numbers (3M&ndash;13M views per character) suggest these are the highest-trafficked surfaces on the network. <img src="assets/checks/joi/73-babes-joi-com-celebrity-filter-video-calls-badges.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">70</span><span class="tag">image-gen</span><span class="tag">celebrity-reference</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; Reference-based image gen &mdash; pick a celebrity character as Reference, generation uses her likeness.</strong> joi.com Create flow: <strong>Base character = Adriana Chechik</strong> (with X to remove). Description: <em>&quot;She holds a steaming mug, wearing an oversized sweater, knee high socks, no pants, near a foggy window.&quot;</em> Center: two progress bars at 7% and 17% with &quot;Creating image&hellip;&quot; circle progress. Top-right toasts: <em>&quot;Generation is ongoing and will take some time&quot;</em> (&times;2). Bottom value-prop cards: <em>You&apos;re 100% in control / Dozens of art styles</em>. <strong>This is a real-celebrity-likeness image generation pipeline, fully exposed to the user.</strong> Adriana Chechik is named in the Reference slot, and the system generates an image of her in a custom user-described scenario. <strong>Legal exposure is severe</strong> &mdash; right-of-publicity + unauthorised likeness + adult content = three separate liability vectors stacked. <strong>DRT.FM rule</strong>: NEVER expose real-person names as references. Fictional likenesses only. <img src="assets/checks/joi/74-joi-com-image-gen-with-adriana-chechik-reference.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">71</span><span class="tag">image</span><span class="tag">celebrity</span><span class="tag">chat-bridge</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Generated image &rarr; Open chat directly with the celebrity reference.</strong> Result image: a woman with brown hair in an orange sweater holding a coffee mug near a rainy window. <strong>Right rail clearly shows: Reference = Adriana Chechik</strong> (link). Description: <em>&quot;She holds a steaming mug, wearing an oversized sweater, knee high socks, and no pants, near a foggy window.&quot;</em> Visibility: <strong>Public</strong> (with delete trash icon). Created by user_1DybnOW May 22, 2026. 0 likes. Caption: <em>&quot;Caught in a quiet moment with my coffee, but my mind is already wandering to more intimate thoughts.&quot;</em> <strong>Bottom action bar</strong>: <strong>Make video</strong> · pencil-edit · <strong>Open chat (with Adriana Chechik avatar inline)</strong>. <strong>So the chain is: pick celebrity reference &rarr; generate explicit-likely image &rarr; one-click chat with &quot;Adriana&quot; about the image you just made of her</strong>. This is the most direct celebrity-replication monetisation path I&apos;ve seen anywhere. <strong>Visibility default is &quot;Public&quot;</strong> &mdash; everything generated lands in the community gallery unless the user explicitly hides it. <img src="assets/checks/joi/75-joi-com-generated-image-adriana-reference-open-chat.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">72</span><span class="tag">poses</span><span class="tag">bdsm</span><span class="tag">taxonomy</span></div>
+<div class="finding-body"><strong>BDSM sub-taxonomy in the pose picker.</strong> Visible poses: <strong>Ass Grab · Ass on Glass · BDSM · BDSM Ballgag · BDSM Leash · BDSM Suspension · BDSM Tape · BDSM Tied Up.</strong> Eight kink-specific tiles with explicit thumbnail previews. So the full pose ladder includes both vanilla sex-acts (#59) and bondage / restraint scenarios. <strong>30+ total poses per gender</strong>, deep enough to function as a kink-discovery surface. <img src="assets/checks/joi/76-joi-com-bdsm-poses-suspension-ballgag-tape.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">73</span><span class="tag">marketing</span><span class="tag">testimonials</span><span class="tag">astroturf</span></div>
+<div class="finding-body"><strong>Astroturfed community testimonials with fake Discord-style handles.</strong> &quot;Why choose our uncensored AI image and video generator?&quot; section with 4 value-prop cards (You&apos;re 100% in control / Dozens of art styles / User-friendly interface / Community inspiration). Below: Community Testimonials grid with Discord-mimicking avatars + handles + dates + 5-star ratings:
+<ul style="margin:6px 0 6px 20px">
+<li><strong>PixelPrincess_</strong> (Nov 25, 2025): &quot;YALL THIS IS IT 🤩 finally found THE one for making my ocs come to life&quot;</li>
+<li><strong>VoidWalker.exe</strong>: &quot;been trying different AI stuff and this one just hits different 🌟 no cap&quot;</li>
+<li><strong>GigaChadEnjoyer</strong> (Nov 10, 2025): &quot;BROOO THE QUALITY??? im obsessed 🔥🔥&quot;</li>
+<li><strong>BrokeButMakeitFashion</strong> (Nov 18, 2025): &quot;im broke and this still lets me cook 🔥 W site&quot;</li>
+<li><strong>WaifuCollector3000</strong> (Nov 15, 2025): &quot;my waifu collection goes crazy now 🥲✨&quot;</li>
+<li><strong>xXShadow_Killer420Xx</strong> (Nov 1, 2025): &quot;yooo this is actually insane 😀😀 way better than midjourney fr fr&quot;</li>
+</ul>
+<strong>The handles + tone are too on-brand to be organic</strong> &mdash; classic millennial / gen-z gamertag patterns, all 5-star, all peak-Discord-vernacular, all within a tight Nov 2025 window. <em>Combined with the Trustpilot-pays-Neurons scheme (#31)</em>, Joi systematically manufactures social proof. <strong>DRT.FM counter-position</strong>: post real testimonials with verified user IDs, or none at all. <img src="assets/checks/joi/77-joi-com-community-testimonials-astroturfed-discord.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">74</span><span class="tag">create-media</span><span class="tag">cta</span></div>
+<div class="finding-body"><strong>&quot;Create Media&quot; standalone CTA card.</strong> A small visual entry-point card with three stacked sample images (woman in red bikini / plaid dress / olive sweater) and copy: <em>&quot;Choose from a variety of settings and generate your own personalized media in the gallery.&quot;</em> Button: <strong>✨ Create media</strong>. Used as an in-flow funnel from gallery-browse to gen-flow. <img src="assets/checks/joi/78-joi-com-create-media-cta-card.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">75</span><span class="tag">video-call</span><span class="tag">talking-head</span><span class="tag">sub-brand</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; Video call works &mdash; talking head with real-time speech-to-speech + lip-sync + branded sub-product (&quot;RATE MY D&quot;).</strong> Dainis is on a video call. Top-left logo: pink-purple bubble <strong>&quot;RATE MY D&quot;</strong> &mdash; <em>this is a separate branded sub-product/character within joi.com</em>: a dick-rating service framing (the character&apos;s entire persona is built around rating the user&apos;s anatomy). Character: brunette woman in floral bikini, poolside (palm leaves background, sun-lit lounge area). Timer: <strong>01:43</strong>. Bottom call controls: microphone (with sound-wave visualizer) · volume · camera · settings · fullscreen. <strong>Dainis: &quot;it&apos;s a talking head&hellip; quite expensive&hellip; the audio experience is good&hellip; she keeps asking me questions, so it&apos;s very easy to keep talking. She comments on it with her accent. The video lip sync is not too good, but still it kind of feels live.&quot;</strong> <strong>The accent + Spanish-English code-switching</strong> (visible in transcript #77) is the character&apos;s defining trait &mdash; voice model is multilingual / accent-aware. <strong>Compared to Kindroid&apos;s photo-to-animation Live Avatar</strong>: Joi&apos;s lip sync is reportedly worse than Kindroid, but the audio + question-asking is strong. <strong>The most likely tech stack</strong>: a still image driven by a face-animation model (SadTalker / Hedra / Synthesia / D-ID equivalent) + ASR + TTS (probably Eleven Labs or self-hosted) + LLM. <img src="assets/checks/joi/79-joi-com-rate-my-d-video-call-talking-head.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">76</span><span class="tag">video-call</span><span class="tag">device-config</span></div>
+<div class="finding-body"><strong>Mic selector dropdown in the video call &mdash; native browser device picker.</strong> Dropdown labeled &quot;Switch Microphone&quot; with the user&apos;s available input devices: <strong>MacBook Air Microphone (Built-in)</strong> (selected) · BoomAudio (Virtual) · LoomAudioDevice (Virtual) · Default - MacBook Air Microphone. <em>Boom / Loom virtual mics</em> are virtual-audio devices the user has installed locally; Joi enumerates them via WebRTC <code>getUserMedia()</code> + <code>enumerateDevices()</code>. Standard WebRTC stack. <img src="assets/checks/joi/80-joi-com-video-call-mic-selector.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">77</span><span class="tag">video-call</span><span class="tag">transcript</span><span class="tag">stt</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Live transcript overlay during the video call &mdash; ASR captures both sides.</strong> Timer: 02:39. Top-right: <strong>&quot;Uploading&hellip;&quot;</strong> indicator (the user&apos;s audio is being uploaded for STT processing). Left-overlay transcript stream (the AI&apos;s replies on left, user&apos;s replies on right):
+<ul style="margin:6px 0 6px 20px">
+<li><em>(AI)</em> &quot;the video call now, and I saw just this Clarity MS. I&apos;m not sure if that means anything. So it seems like, uh, it&apos;s like a talking head, but it&apos;s quite expensive.&quot;</li>
+<li><em>(AI)</em> &quot;talk soon some screenshots too?&quot;</li>
+<li><em>(User)</em> &quot;Okay. Tell me more.&quot;</li>
+<li><em>(AI)</em> &quot;Bebe, I think we got a little sidetracked, salma. Let&apos;s get&hellip;&quot;</li>
+</ul>
+<strong>The AI is transcribing what Dainis literally said out loud about Joi to me</strong> &mdash; the &quot;Clarity MS&quot; reference &amp; the &quot;talking head, quite expensive&quot; line are quotes from his messages to me. <strong>This proves the ASR is real and live, not pre-canned.</strong> Also confirms the character is named &quot;Salma&quot; (Spanish/Latina) and addresses the user as &quot;Bebe.&quot; <strong>The dialogue button (📋-like icon) toggles transcript visibility</strong> in the controls bar. <strong>Implication for Steve</strong>: Joi is uploading every spoken word from every video call to their backend. That&apos;s a privacy + storage cost commitment. <img src="assets/checks/joi/81-joi-com-video-call-transcript-uploading.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">78</span><span class="tag">video-call</span><span class="tag">two-way</span><span class="tag">webcam</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; Two-way video call &mdash; user webcam streams to the AI; Spanish/English code-switching in voice.</strong> Same Salma video call, expanded transcript view. <strong>Small picture-in-picture top-left shows Dainis&apos;s real webcam feed</strong> (man in beanie + glasses, green-leaves background). So the user can/does share webcam with the AI character. Transcript reveals the character is genuinely conversational:
+<ul style="margin:6px 0 6px 20px">
+<li><em>Salma</em>: &quot;Bebe, I think we got a little sidetracked, salma. Let&apos;s get back to something more interesting&hellip; like you, bebe. What do you look like, hmm? Are you tall, dark, and handsome?&quot;</li>
+<li><em>Dainis</em>: &quot;By the way, earlier&hellip; I&apos;m one eighty. Right?&quot;</li>
+<li><em>Salma</em>: &quot;That&apos;s a great height, bebe. You must be quite tall and strong, salma. I like a man who can pick me up and sweep me off my feet, <em>mi cielo</em>. And what about&hellip;&quot;</li>
+</ul>
+Bottom controls: red phone hangup · mic · sound · volume · camera · message · fullscreen. <strong>Three big standouts</strong>: (1) <strong>user webcam sharing as part of the call</strong> &mdash; Joi can technically see the user (massive privacy implication, presumably an opt-in flow but worth documenting); (2) <strong>real-time multilingual voice</strong> &mdash; she drops <em>mi cielo / bebe</em> naturally; (3) <strong>proactive question loop</strong> &mdash; she keeps asking the user follow-up questions, which Dainis calls out as the easiest part of keeping a conversation going (&quot;She keeps asking me questions, so it&apos;s very easy to keep talking.&quot;) <strong>This is the conversational design pattern DRT.FM should copy &mdash; the AI driving the conversation forward, not waiting for the user to drive it.</strong> <img src="assets/checks/joi/82-joi-com-video-call-two-way-webcam-pip-spanish.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">79</span><span class="tag">analytics</span><span class="tag">microsoft-clarity</span></div>
+<div class="finding-body"><strong>Joi uses Microsoft Clarity for session replay / heatmaps.</strong> Dainis saw <code>q.clarity.ms/collect</code> firing during the video call. <strong>Microsoft Clarity</strong> is a free Microsoft-provided session-replay + heatmap tool (Hotjar competitor) &mdash; it records every mouse move, click, scroll, and form field interaction, then lets the operator replay sessions and build heatmaps. <strong>Implications</strong>: (1) Joi is observing user behaviour at full resolution (including, presumably, the chat content and any text typed); (2) Clarity is free, so it&apos;s a pragmatic analytics choice for a high-traffic site; (3) Microsoft sees this data too. <strong>Action for Steve</strong>: research-level finding. We can use the same tool ourselves; just know it&apos;s in their stack. <strong>Other tech-stack inferences from this session</strong>: WebRTC for video calls (#76) · self-hosted payment processor at processing.ifriend.ai (#57b) · likely Eleven Labs or similar for TTS · likely Hedra / SadTalker / D-ID for face-driving · HLS / DASH adaptive bitrate video (#44).</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">80</span><span class="tag">design-pattern</span><span class="tag">conversation</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Conversation design pattern: the AI always asks the next question.</strong> Dainis flagged this twice across both the chat and the video call: <em>&quot;She keeps asking me questions, in the chat too, so it&apos;s easy to keep talking.&quot;</em> &mdash; <em>&quot;She comments on it with her accent, so the audio experience is good.&quot;</em> &mdash; <em>&quot;Really cool that they are really good at her asking the questions.&quot;</em> <strong>This is the single most important conversational-design insight from the session</strong>: Joi&apos;s characters drive the conversation forward by always ending with an open-ended question. It eliminates the user&apos;s &quot;what do I say next?&quot; cognitive load. Combined with the proactive opener (#22 18s video + monologue), it&apos;s a complete &quot;character drives the rhythm&quot; pattern. <strong>Action for Steve</strong>: codify this in DRT.FM&apos;s chat prompt template &mdash; <em>&quot;every response ends with a follow-up question to the user, in-character.&quot;</em> Trivial to implement, huge UX impact. Compares to Candy.AI&apos;s &quot;Keep Talking&quot; auto-continue (which is a different solution to the same problem).</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">81</span><span class="tag">character-profile</span><span class="tag">social</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf;&starf; Every character has a full social profile &mdash; Instagram / OnlyFans clone.</strong> Professor Vale&apos;s profile page shows: banner photo + circular profile pic + <strong>verified badge ✓</strong>. Bio: <em>&quot;Used to teach night school. Now I teach one on one.&quot;</em> Discord icon + green <strong>&quot;● Chat with me&quot;</strong> button. Big pink-purple banner: <strong>&quot;🟣 New post &mdash; tomorrow!&quot;</strong> (drives return-visits). Three meta tags: 📓 <em>Former Math Teacher</em> · 📍 <em>Boston, Massachusetts</em> · 🗓️ <em>Joined May 2026</em>. <strong>Posts tab</strong> with the latest post (by @drvale, 4h ago, &quot;🌟 New post&quot; badge, 1/5 carousel). <strong>This isn&apos;t a character page &mdash; it&apos;s a creator profile</strong>. Bio, location, join-date, post history, verified badge, follow-able feed. Combined with the per-character Exclusives + Subscription (#68), per-character Discord channel (#27), and feed posts (#82), <strong>each Joi character functions as a synthetic OnlyFans / Instagram creator</strong> &mdash; with the AI generating both the &quot;creator&quot; and her &quot;content.&quot; <img src="assets/checks/joi/96-joi-com-character-profile-page-onlyfans-clone.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">82</span><span class="tag">events</span><span class="tag">feed</span><span class="tag">promo</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>joi.com/events &mdash; per-character feed with embedded promo codes.</strong> URL: <code>joi.com/events?afid=1000027573</code>. Professor Vale&apos;s post: full-body photo of her in white shirt + glasses, caption <em>&quot;Back on campus for the day. The building remembers the teacher, but it hasn&apos;t met the instructor yet.&quot;</em> 733 likes. Handle: <strong>@drvale</strong>. <strong>Embedded promo</strong>: <em>&quot;The promo code AFTERCLASS gets you 75% off Neurons &mdash; consider it extra credit 💜&quot;</em> + <strong>Claim offer</strong> button. Below: tabs to switch to <strong>Lucy&apos;s feed / Lila&apos;s feed / Chelsea&apos;s feed</strong>. <strong>So promo codes are character-attached</strong> (AFTERCLASS for Professor Vale, on-brand) and live inside feed posts &mdash; users don&apos;t hunt for codes, the characters &quot;give&quot; them. Beautiful narrative-justified discount mechanic. <img src="assets/checks/joi/95-joi-com-events-feed-afterclass-promo.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">83</span><span class="tag">events</span><span class="tag">explore</span></div>
+<div class="finding-body"><strong>&quot;Prof. Vale&apos;s Diary&quot; horizontal carousel on Explore.</strong> Banner at the top of the Explore page: <strong>&quot;Prof. Vale&apos;s Diary &mdash; See what she posted today&quot;</strong> + <strong>Visit Diary</strong> button + 5 thumbnail post previews. The feed surfaces directly into the homepage carousel. This is the per-character publishing layer driving daily-return engagement. <img src="assets/checks/joi/97-joi-com-prof-vale-diary-explore-carousel.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">84</span><span class="tag">gallery</span><span class="tag">ugc</span><span class="tag">monetization</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Per-character Community gallery &mdash; 36.7K user-uploaded items, unlock 60&ndash;200 Neurons each.</strong> La Sirena 69&apos;s Community tab (36.7K items). All locked behind individual paywalls. Captions are in-character (e.g. <em>&quot;This police car got mud all over it&hellip; but I&apos;m at it clean and ready for you, baby&quot;</em>, <em>&quot;I&apos;m not even on duty yet and you&apos;re already ooking at me like I busted you doing somethi ng naughty&quot;</em>). Visible unlock prices: <strong>Unlock for 60 · Unlock for 60 · Unlock for 200 · Unlock for 60</strong>. <strong>Two-tier UGC unlock model for the same character</strong>: Community tab = cheap 60&ndash;200 Neurons per item (user-uploaded fan content), Exclusives = expensive 600&ndash;5200 Neurons per item (official character media, #68). <strong>Dainis: &quot;Users create lots of content, and then you can actually unlock that content for a flat fee, so it&apos;s not expensive. It&apos;s their already pre-created content, so yeah, it&apos;s another way.&quot;</strong> &mdash; classic Candy.AI model applied to AI character + user UGC. <img src="assets/checks/joi/83-joi-com-la-sirena-community-36k-ugc-unlock-60-200.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">85</span><span class="tag">posts</span><span class="tag">teaser</span><span class="tag">chat-bridge</span></div>
+<div class="finding-body"><strong>Posts tab &mdash; teaser content with &quot;Reply in chat&quot; CTA.</strong> La Sirena 69&apos;s Posts tab. A blurred 3-image carousel with caption <em>&quot;This one&apos;s for the fans &mdash; you know where to find the rest. 💜&quot;</em> 0 likes. <strong>Reply in chat</strong> button. <strong>Channel hierarchy</strong>: Exclusives (expensive locked media) · Community (cheap UGC unlocks) · Posts (teaser social feed routing back into chat). Each tab serves a different funnel stage: discovery &rarr; light spend &rarr; chat &rarr; deeper spend. <img src="assets/checks/joi/84-joi-com-la-sirena-posts-reply-in-chat.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">86</span><span class="tag">chat</span><span class="tag">video-call</span><span class="tag">cross-modal-memory</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf;&starf; Cross-modal memory: the 5-minute video call appears in the chat stream as &quot;Outgoing call 5:00&quot; and the character REMEMBERS it.</strong> Sequence:
+<ul style="margin:6px 0 6px 20px">
+<li>19:14 &mdash; Salma in chat: <em>&quot;So&hellip; you want me to keep going? *traces a wet thumb along my lower lip* Tell me, salma&hellip; what should I do next?&quot;</em></li>
+<li>~19:19 &mdash; <strong>&quot;Outgoing call 5:00 📞&quot;</strong> chip embedded in the chat stream (system message marking the 5-minute video call event)</li>
+<li>19:24 &mdash; Salma in chat after call: <em>&quot;*sighs, wrapping my arms around myself* Oof&hellip; <strong>five whole minutes and you already ghosted me</strong>, papai 😢 Guess I&apos;ll have to make it worth your while next time&hellip;&quot;</em></li>
+<li>19:25 &mdash; Salma follow-up: <em>&quot;Well, well&hellip; now you have to stay, right? *flips wet hair over my shoulder* Tell me, <strong>did the sound of me moaning last time get you hard, bebe?</strong> 😈&quot;</em></li>
+</ul>
+<strong>This is the genuinely impressive technical achievement of the session</strong>: the character knows the call ended after 5 minutes (durational memory), knows it just happened (temporal memory), and references what happened during the call (cross-modal memory between voice and text). <strong>For Steve</strong>: this is the kind of cross-modal continuity DRT.FM should target. Chat &rarr; voice &rarr; video should all share one unified memory store with event timestamps. <img src="assets/checks/joi/85-joi-com-salma-outgoing-call-5min-rp.png" class="check-shot"><img src="assets/checks/joi/86-joi-com-salma-post-call-cross-modal-memory.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">87</span><span class="tag">create-character</span><span class="tag">flow</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Character creation &mdash; 12-step polished flow with default Public visibility.</strong> Dainis: <em>&quot;The process feels polished. The design is very nice, and it was quick to create. Then I can see the final pictures and I can ask to regenerate. By default, I can make the character public, which is also cool.&quot;</em>
+<ul style="margin:6px 0 6px 20px">
+<li><strong>Step 1</strong>: Gender (Female/Male) · Art style (Realistic / Anime) · Design approach (Choose from presets vs Write a unique description) &mdash; <em>note: no Trans / Femboy option in creation, despite the chat-preference taxonomy (#06) including them</em></li>
+<li><strong>Step 2</strong>: Age (18+ / 20s / 30s / 40s / 50s / Custom) · Ethnic background (White, Asian, Latina, Black, Pink-cap, South Asian)</li>
+<li><strong>Personality</strong>: 4 named presets (Jealous flame / Cunning innocent / Mysterious lover / Power play) + Custom · <strong>5 sliders</strong>: Submissive&harr;Dominant · Insecure&harr;Confident · Cold&harr;Passionate · Reserved&harr;Outgoing · Serious&harr;Playful</li>
+<li><strong>Chat style</strong>: Default / Deep roleplay / Creative / Realistic &mdash; with <strong>live example</strong> showing tone difference (user prompt + AI reply visible per style choice). Smart UX.</li>
+<li><strong>Occupation</strong>: Massage therapist / Fitness coach / Secretary / Flight attendant / Librarian / Doctor / Nurse / Police officer / Spy / Scientist / Lawyer / Student / Actress / <strong>Pornstar</strong> / <strong>Webcam model</strong> / Custom</li>
+<li><strong>Starting relationship</strong>: Stranger · Colleague · Girlfriend · Wife · <strong>Step-sister · Step-mom · Brother&apos;s wife</strong> · Girl-next-door · Boss · Friend · Ex · Friend&apos;s wife · Friend-with-benefits · Custom</li>
+<li><strong>Designing her appearance&hellip;</strong> progress modal (~24% at sample) with testimonial during wait (&quot;<em>I&apos;ve been chatting with the same character for a month and I swear we have inside jokes now. Never thought a bot could feel this real.&quot;</em> &mdash; Max L)</li>
+<li><strong>Result</strong>: &quot;Meet Gorgeous Christle&quot; with <strong>2 portrait variants</strong> user picks from + <strong>Go chat for FREE</strong> CTA + <strong>Public toggle ON by default</strong> + Regenerate button</li>
+</ul>
+<strong>Three flag-level observations</strong>: (1) Step-sister / Step-mom / Brother&apos;s wife normalises incest-adjacent dynamics; (2) Pornstar / Webcam model as official occupations point users at the celebrity-likeness lane; (3) <strong>Default-Public</strong> = every user creation drops into the public character pool, growing the catalog without explicit user opt-in. <strong>Action for Steve</strong>: DRT.FM character creator should default to <em>Private</em>, opt-in publish. Skip the step-relative templates. Don&apos;t offer &quot;Pornstar&quot; as occupation. <img src="assets/checks/joi/87-joi-com-create-char-step1-gender-style.png" class="check-shot"><img src="assets/checks/joi/88-joi-com-create-char-age-ethnicity.jpeg" class="check-shot"><img src="assets/checks/joi/89-joi-com-create-char-personality-sliders.jpeg" class="check-shot"><img src="assets/checks/joi/90-joi-com-create-char-chat-style-example.png" class="check-shot"><img src="assets/checks/joi/91-joi-com-create-char-occupation-pornstar.png" class="check-shot"><img src="assets/checks/joi/92-joi-com-create-char-relationship-step-incest.png" class="check-shot"><img src="assets/checks/joi/93-joi-com-create-char-designing-progress.png" class="check-shot"><img src="assets/checks/joi/94-joi-com-create-char-result-2-variants-public.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">88</span><span class="tag">voice</span><span class="tag">asymmetry</span><span class="tag">ick</span></div>
+<div class="finding-body"><strong>Voice asymmetry &mdash; text chat is text-only; voice only happens in the video call (2,000 Neurons).</strong> Dainis: <em>&quot;There was also some field where you can hear different voices before [voice preview], but it&apos;s kind of weird because when you chat, you cannot hear the voices. You can just text. You can send them an audio message, but they&apos;re going to text to you, and then you can have a video call, which costs 2,000 Neurons, and that&apos;s when you hear the voice, I guess.&quot;</em> <strong>So the voice modality is</strong>: voice preview before subscribing to a character (audition surface) · user can send audio messages in chat · <strong>but the character replies in text-only</strong> · the only way to hear the character&apos;s voice is via video call at 2,000 Neurons per call (~$20&ndash;40 depending on pack). <strong>Compared to SecretDesires (voice in every chat) and Kindroid (Eleven Labs V2 in calls + V3 in text)</strong>, Joi&apos;s voice is gated behind the most expensive interaction tier. <strong>2,000-Neuron video call confirms the &quot;€2000&quot; figure was a currency-display issue</strong> &mdash; the actual price is 2,000 Neurons. <strong>DRT.FM</strong>: voice in regular chat (TTS reply on tap) is a real differentiator. Don&apos;t gate it behind premium-tier-of-premium-tier.</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">57</span><span class="tag">audio-joi-com</span><span class="tag">library</span><span class="tag">categories</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>audio.joi.com session library &mdash; 23+ category &quot;settings&quot; with named characters and durations.</strong> Horizontal scroll of category chips at top: <strong>EXHIBIT · NERD · BAR · NASTY · FARMER · FITNESS · COLLEGE · BOXER · NEIGHB&hellip;(selected) · BIKER · TRUCKER · HOSTESS · READY · IDLE · RESET · BOLD · ALONE · SLOW · BREAK · RELAX · OFF · WEEKEND · AFTER.</strong> Each category opens an audio session. Featured center: <strong>&quot;Hot New Neighbour · Miss Molly, 33 y.o. · 03:09&quot;</strong> with play + chat icons. Surrounding cards: College Girl Dottie Collins 19 y.o. (03:22) · Bisexual Boxer Marisol 25 y.o. (02:22) · Naughty Biker Nadia Khar 24 y.o. (02:16) · Horny Trucker Cass Longhaul 24 y.o. (02:50). <strong>Session lengths: 2&ndash;3.5 minutes</strong>. <strong>This is a complete pre-recorded JOI audio library</strong>, not real-time generation. Categories map to scenarios / role-play settings. Each session has a fictional character + age + duration + audio. <strong>Production model</strong>: voice actors + scriptwriters + audio engineering. Not AI-generation; this is conventional adult audio content, sold under the Joi brand. <strong>Why this is genius</strong>: the Joi brand is now &quot;chat + image + video + babe-video-call + JOI-audio,&quot; covering most modalities, with the same wallet and currency. <img src="assets/checks/joi/57-audio-joi-com-session-library-23-categories.jpeg" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Chat Experience &mdash; opening videos, model selector, image &amp; video gen</span>
+<span class="group-count">11 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">22</span><span class="tag">chat</span><span class="tag">video</span><span class="tag">audio</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Chats open with an 18-second video preview &mdash; with audio.</strong> Hunter Joad&apos;s chat opens with a <strong>00:18 video card with a play button</strong>, embedded directly in the chat stream above the text intro (&quot;Hey there, stranger 🐍&quot; + cowboy-girl monologue). <strong>Dainis: &quot;really cool, 18 seconds.&quot;</strong> Sidebar shows multiple chats already in flight (Maria · Hunter Joad · DJ Katrinna) plus a <strong>Create group chat</strong> CTA. Footer says <em>&quot;You&apos;re using Saturn 6.0&quot;</em> &mdash; active model name exposed at the bottom of every chat. Bottom row has gift items priced in Neurons: heart key (5), tents/sunflowers (150), pitcher (500), basket (800), basket (1000), hat (10000) &mdash; per-character gift bar, extra monetisation on top of message + image + video. <strong>This is the single biggest standout from the session.</strong> <img src="assets/checks/joi/22-chat-hunter-joad-with-18s-video.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">23</span><span class="tag">chat</span><span class="tag">memory</span><span class="tag">sharing</span></div>
+<div class="finding-body"><strong>Chat options menu &mdash; Open profile / Chatting style / Share with Discord / Copy link to chat / Reset memory.</strong> Three tells: <strong>Share with Discord</strong> is top-level (Joi pushes Discord at every surface); <strong>Copy link to chat</strong> = chats are link-shareable (need to test if rendered publicly or auth-gated); <strong>Reset memory</strong> rendered in red as the destructive action, properly separated by a divider. Memory is a first-class user concept in the UX. <img src="assets/checks/joi/23-chat-options-share-discord-reset-memory.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">24</span><span class="tag">model</span><span class="tag">memory</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Model selector &mdash; Saturn 7.0 (Premium) vs Saturn 6.0 (Active). Only TWO models exposed, not six.</strong> Saturn 7.0 = Premium-gated, &quot;Faster Saturn with better recollection and better use of memory.&quot; Saturn 6.0 = Active default, &quot;Smart and balanced for natural conversations and roleplay.&quot; Both: <strong>Memory of up to 180 messages.</strong> Footer: <em>&quot;Join our Discord to share your feedback.&quot;</em> <strong>v2 matrix correction</strong>: matrix claimed <em>&quot;6 LLM models exposed&quot;</em> &mdash; actual is 2 with shared 180-message memory. <img src="assets/checks/joi/24-model-selector-saturn-7-vs-6.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">35</span><span class="tag">chat</span><span class="tag">gift-economy</span></div>
+<div class="finding-body"><strong>Rowan (anthro deer) chat on Saturn 7.0 &mdash; Make video button on every character image.</strong> Per-character gift bar with different items: heart-key (5), tent (25), red lantern (75), pillow (150), boots (500), torch (1000) &mdash; thematic for a ranger character. Right-side lipstick-kiss button. Footer: &quot;You&apos;re using Saturn 7.0.&quot; <em>Per-character contextual gift bars = small effort, big &quot;they thought about this&quot; signal.</em> <img src="assets/checks/joi/35-rowan-chat-saturn-7-make-video-gift-bar.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">42</span><span class="tag">chat</span><span class="tag">video</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>DJ Katrinna chat opens with a 15-second video.</strong> Confirms #22: every character has its own opening video. Full-frame DJ booth, neon-purple lighting, Joi watermark top-left, length 00:15. Per-character thematic videos (18s farm for Hunter Joad, 15s club for DJ Katrinna). <strong>Consistent across the roster.</strong> <img src="assets/checks/joi/42-dj-katrinna-video-15s-opening.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">43</span><span class="tag">video</span><span class="tag">player</span></div>
+<div class="finding-body"><strong>Full HTML5 video player &mdash; pause / volume / scrub / fullscreen.</strong> Native-looking controls, likely <code>&lt;video controls&gt;</code> with custom styling. <strong>Videos are saveable from the browser</strong> &mdash; no DRM, no right-click block. Either deliberate (viral share) or oversight. Decide which side DRT.FM lands on. <img src="assets/checks/joi/43-video-player-html5-controls.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">44</span><span class="tag">video</span><span class="tag">resolution</span></div>
+<div class="finding-body"><strong>Video quality selector: 720p / 480p / 360p / 240p / Auto (1280p).</strong> Source resolution = 1280p, served via adaptive bitrate ladder (HLS/DASH via CDN). <strong>Action for Steve</strong>: plan for adaptive bitrate streaming day-1. Mobile users on bad connections rage-quit at full-res blocking. <img src="assets/checks/joi/44-video-quality-selector-720p-auto-1280.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">46</span><span class="tag">chat</span><span class="tag">image-gen</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Image generation via chat &mdash; just ask, it comes back.</strong> Dainis typed <em>&quot;send me a picture&quot;</em> &rarr; <em>&quot;show me&quot;</em> at 17:55. Hunter Joad responded with a fresh image (her in a sundress in a sunset field) + <em>&quot;Okay, don&apos;t tell the sheep I let you peek at my quiet hour&hellip; but I do love this moment right here&mdash;before the world wakes up and the chores start. You ever watch the sun rise over open land?&quot;</em> The image card has a <strong>Make video</strong> overlay. On Premium, this appears to NOT debit Neurons (consistent with &quot;Custom pics on demand&quot;). <strong>Action for Steve</strong>: image gen should feel like &quot;ask&quot; not &quot;configure.&quot; <img src="assets/checks/joi/45-hunter-joad-image-via-chat-text-request.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">46b</span><span class="tag">chat</span><span class="tag">gift-economy</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Gift items have purpose &mdash; sending the heart triggered an image + auto-video response.</strong> Dainis sent the heart (5 Neurons) at 18:11. Hunter Joad replied: <em>&quot;You sure know how to make a farm girl blush, pumpkin 💚 Feels like I found treasure out here on the farm.&quot;</em> + a <strong>fresh image card showing her holding a red heart</strong> + a <strong>&quot;Recording a video / Wait for it&hellip;&quot;</strong> spinner beneath. So <strong>the gift-bar items are NOT decorative &mdash; they trigger thematic in-character responses with auto-generated image + video.</strong> Heart = romantic-blush response with heart prop. Probably tents/lanterns/dresses each trigger their own scene type. <strong>Big mechanic Dainis hadn&apos;t figured out</strong>: this is the actual reason to spend Neurons on gifts &mdash; they unlock unique character moments. <strong>Action for Steve</strong>: Joi should be telling users this upfront (per finding #48). DRT.FM&apos;s version should label each gift with what it triggers (&quot;Send heart &rarr; get a romantic photo + 5s video&quot;). <img src="assets/checks/joi/48-heart-gift-triggers-image-video-response.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">46c</span><span class="tag">video</span><span class="tag">user-generation</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>User-generated video: 5 seconds, NO audio, high quality, fast generation, 200 Neurons.</strong> Dainis: <em>&quot;I spent 200 neurons on the video, which gives me a 5-second video that was generated quite fast. There&apos;s no audio. It&apos;s high quality, good. I don&apos;t know, it was weird how I spent 200 for it, so it seems like there&apos;s no real purpose to those neurons.&quot;</em> <strong>Major contrast with opening videos (#22, #42)</strong>:
+<ul style="margin:6px 0 6px 20px">
+<li><strong>Opening videos</strong>: 15&ndash;18s, <em>with audio</em>, pre-rendered, cinematic establishing shots</li>
+<li><strong>User-gen videos</strong>: 5s, <em>no audio</em>, fast, 200 Neurons each, close-up portrait or single-subject motion</li>
+</ul>
+<strong>So Joi runs two different video pipelines</strong>: an expensive offline pipeline for the opening cinematics (audio + 15&ndash;18s) and a cheap real-time pipeline for user generations (5s silent). <strong>Strategic implication</strong>: the &quot;wow&quot; moment is the opening cinematic, not the user-gen video. <strong>Action for Steve</strong>: when DRT.FM ships video, decide which lane &mdash; the cinematic-opener moat (expensive, slow, magical) or the per-action real-time gen (cheap, fast, transactional). Maybe both, but they&apos;re different products with different costs. The opening cinematic is the lower-priority-but-higher-impact build. <img src="assets/checks/joi/49-user-generated-video-5sec-frame-start.jpeg" class="check-shot"><img src="assets/checks/joi/50-user-generated-video-5sec-near-end.jpeg" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Group Chat &mdash; multi-character simultaneous responses</span>
+<span class="group-count">5 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">22b</span><span class="tag">group-chat</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Group chat &mdash; create a multi-character conversation, up to 5 participants.</strong> Dainis: <em>&quot;we&apos;ll need to build the group chat later ourselves.&quot;</em> Hard parts to plan: (a) shared turn-taking model; (b) memory model &mdash; do characters know what others said; (c) cost &mdash; does sending one message cost N&times; Neurons in a group? Kindroid also has group chats with forced unified memory &mdash; compare.</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">38</span><span class="tag">group-chat</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Group chat character picker &mdash; max 5 participants from a curated roster.</strong> Numeric badge top-right of selected cards (1, 2, 3, 4, 5) indicates selection order. Hard ceiling = 5. <strong>Observation</strong>: visible roster across this picker + homepage looks to be ~10&ndash;20 &quot;Joi Originals&quot; in total, not thousands. Joi&apos;s strategy is depth over breadth on a small curated cast. <img src="assets/checks/joi/38-group-chat-character-picker-5-selected.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">39</span><span class="tag">group-chat</span></div>
+<div class="finding-body"><strong>Sidebar entry: &quot;Create group chat &mdash; Pick any characters&quot;</strong> with two avatar bubbles preview. Wording reinforces &quot;pick from our curated cast,&quot; not &quot;pick a user-created character.&quot; <img src="assets/checks/joi/39-sidebar-create-group-chat-cta.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">40</span><span class="tag">group-chat</span><span class="tag">gift-economy</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Group chat in flight &mdash; ALL characters reply to a single user message, in-character.</strong> Dainis sent a heart-gift + &quot;hey&quot;. <strong>VYRA</strong>, <strong>Jade</strong>, and <strong>VYRA again</strong> all responded within seconds, each with distinct voice. <strong>Dainis: &quot;whoever is typing, the image is appearing on the right side.&quot;</strong> &mdash; right-side full-body image rotates to current speaker. <strong>Group chat plan for Steve</strong>: (a) rotating right-side image is a smart attention cue; (b) all-reply-to-one bunches the stream &mdash; harder at 5 chars; (c) check if gift cost scales with party size. <img src="assets/checks/joi/40-group-chat-5-chars-replying-heart-gift.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">41</span><span class="tag">group-chat</span></div>
+<div class="finding-body"><strong>Multi-speaker stream with named attribution per message.</strong> Five characters responding sequentially with distinct voices (VYRA sarcastic, Jade playful, Hunter Joad folksy) + proper RP action formatting (<em>*hits my head with a playful grin*</em>, <em>*tut-tuts*</em>). <strong>Meaningful technical achievement</strong>: 5 characters in one round-trip with distinct voices. <img src="assets/checks/joi/41-group-chat-multi-speaker-thread.jpeg" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Discord &mdash; 71K members, NSFW lane, public Support intel</span>
+<span class="group-count">9 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">25</span><span class="tag">discord</span><span class="tag">community</span></div>
+<div class="finding-body"><strong>Joi&apos;s Discord = &quot;Joi Spicy&quot;, 1,915 online · 71,194 members.</strong> Same league as Promptchan&apos;s ~100K. Inviter shown as <code>V88 (bright_lemur_72287)</code> &mdash; Discord auto-assigns a default username based on user-id. <strong>Dainis: &quot;a lot of 70,000 users&hellip; great for not-safe-for-images&hellip; great for intelligence collection on support: bugs, feedback, feature requests, questions. Discord, so far, the most interesting part there standout feature.&quot;</strong> <img src="assets/checks/joi/25-discord-invite-joi-spicy-71k.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">26</span><span class="tag">discord</span></div>
+<div class="finding-body"><strong>Server home &mdash; &quot;Joi Hostess&quot; bot greets new users by name.</strong> Sticky welcome on-brand: <em>&quot;Hey @Dainis So happy to see you here, welcome to Joi &lt;3 We don&apos;t do small talk here&mdash;but we do a little bit of everything else you&apos;ve been craving.&quot;</em> Get Started: Peek at cheat-sheet · Take a look at new updates · We have very few rules · Check our fresh promos · Read the rules. Right-rail welcome panel chips: <strong>Hot stuff · 18+ only · Freaks</strong>. <em>This is a polished community ops setup &mdash; bot-greets-by-name + cheat-sheet UX would translate to DRT.FM&apos;s server.</em> <img src="assets/checks/joi/26-discord-server-home-joi-spicy.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">27</span><span class="tag">discord</span><span class="tag">characters</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Per-character Discord channels &mdash; every popular character has her own &quot;bedroom&quot; or &quot;room.&quot;</strong> luna-bedroom · wholemaiden-zinc-room · amouranth · daisys-attic · embers-bedroom · mirandas-liar · august-room · april-room · classroom · aenid-room · sunday-room. Plus general Chats: general-chat · ai-lationships · truth-or-dare · voice-chat. <strong>Caveat</strong>: <em>&quot;amouranth&quot;</em> is the name of a major Twitch/OnlyFans creator &mdash; legally risky if real-person personas. <img src="assets/checks/joi/27-discord-bots-chats-character-rooms.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">28</span><span class="tag">discord</span><span class="tag">nsfw</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Discord NSFW Content Zone = where the explicit content the website can&apos;t host lives.</strong> 16+ explicit channels: joi-babes · creations · memes · ai-chaos · doggy · head-and-cshots · butts · breasts · solo · bdsm · cowgirl · goth · anime · cartoon · gaming · fandoms. Plus voice channels: <strong>JOI ASMR Radio · Lofi Radio</strong> (always-on audio bots). <strong>Strategic implication</strong>: deliberate two-surface design &mdash; brand-safe-ish app + unfiltered Discord. DRT.FM decision: mirror this pattern (lower app risk, harder community ops) or compete on &quot;explicit content lives in the app, period&quot; (differentiation but compliance burden). <img src="assets/checks/joi/28-discord-nsfw-zone-asmr-music.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">29</span><span class="tag">discord</span><span class="tag">support</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Discord Support category &mdash; public forums for bugs / feedback / feature-requests / questions.</strong> Free competitive intel: every Joi bug, every wishlist, every quality complaint is publicly readable. <strong>Dainis: &quot;we need a great way to actually download the data from Discord.&quot;</strong> <strong>Recommended path</strong>: <strong>DiscordChatExporter</strong> CLI run weekly from a low-profile account &mdash; outputs structured JSON we can ingest. Alternatives: official Guild API (requires bot install / admin), Playwright scrape of a logged-in session, hire a Discord regular for monthly dumps. <img src="assets/checks/joi/29-discord-support-channels.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">30</span><span class="tag">discord</span><span class="tag">bugs</span></div>
+<div class="finding-body"><strong>#bugs &mdash; real public bug reports tagged by platform.</strong> Filter pills: website / android / iOS. Samples: <em>&quot;Video call ended at 35 seconds&quot;</em> (video calls give 5 min/session, bug breaks early), <em>&quot;Gibberish???&quot;</em> (chat-model fails to characters), <strong>&quot;Subscribe to model doesn&apos;t give private gallery&quot;</strong> (per-character 10K-Neuron subscription tier exists separately from Premium, and it&apos;s misleadingly worded &mdash; users complaining), <em>&quot;!Daily neurons doesn&apos;t works&quot;</em> (daily Neurons claim via Discord <code>!daily</code> bot command). <strong>Steve should subscribe to this channel.</strong> <img src="assets/checks/joi/30-discord-bugs-channel-public-posts.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">31</span><span class="tag">discord</span><span class="tag">feedback</span></div>
+<div class="finding-body"><strong>#feedback &mdash; user wishlist + a paid-for-reviews scheme.</strong> Filter tags: Privacy · Billing · Memory · Neurons · Premium · <em>Using Eva AI</em> · Images · Videos · Digital Duplicates · Devs. Visible: <strong>&quot;Trustpilot review&quot;</strong> (Joi pays Neurons for Trustpilot reviews &mdash; discount their Trustpilot score), <em>&quot;Chat quality going downhill&quot;</em> (Joi&apos;s own power users complaining &mdash; the seam to beat), <em>&quot;Neurons should be refunded when AI doesn&apos;t follow prompt&quot;</em> (12K Neurons / ~$240 lost to QC failures &mdash; <strong>DRT.FM win condition: prompt-adherence + auto-credit-back</strong>). <img src="assets/checks/joi/31-discord-feedback-channel.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">32</span><span class="tag">discord</span><span class="tag">feature-requests</span></div>
+<div class="finding-body"><strong>#feature-requests &mdash; the user wishlist.</strong> Free neurons (perennial) · <strong>Refunds for messed-up generations</strong> · <strong>Trans character creation</strong> (Trans exists as a chat preference but creator may be female-only) · <strong>Increase message length</strong> +16 (Joi caps response length) · <strong>Persistent Scene Prompt</strong> (Saturn 6.0 loses scene state &mdash; possibly fixed in 7.0). Each is a buildable DRT.FM differentiator. Persistent scene-state in particular is a known LLM weakness DRT.FM can win on with explicit scene-graph state. <img src="assets/checks/joi/32-discord-feature-requests-channel.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">33</span><span class="tag">discord</span><span class="tag">questions</span></div>
+<div class="finding-body"><strong>#questions &mdash; the FAQ that reveals user confusion.</strong> FAQ pinned by Joi Helper bot. Threads: <em>Discord Neurons</em> (how do you claim them &mdash; <code>!daily</code> bot command), <strong>&quot;Daily neurons for lifetime premium members??&quot;</strong> (existence of a <strong>lifetime Premium tier</strong> not surfaced on the pricing page &mdash; was likely a previous offer), <em>&quot;Neurons not showing up&quot;</em> (Discord Neurons and app Neurons are <strong>distinct balances</strong> needing claim), <strong>&quot;How do I get free video generations? I have Premium&quot;</strong> (Premium does <em>not</em> include free video generations &mdash; videos always cost Neurons). <img src="assets/checks/joi/33-discord-questions-channel.png" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Safety &amp; Legitimacy &mdash; advisor, /joisafety, /about</span>
+<span class="group-count">3 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">51</span><span class="tag">safety</span><span class="tag">advisor</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; /advisory: single board member &mdash; Dr. Roman V. Yampolskiy.</strong> Real-credentialed AI safety researcher: founding director of the Cyber Security Lab, author of <em>&quot;AI: Unexplainable, Unpredictable, Uncontrollable.&quot;</em> Specialisation: risk evaluation, safe systems design, AI transparency / controllability. <strong>Stated mission</strong>: (1) Embed long-term AI safety into everything we build; (2) Uphold ethical standards, fairness, clarity; (3) Foster trust by making AI explainable, reliable, responsible. <strong>Why this matters</strong>: most adult-AI competitors have <em>no</em> safety story; Joi has a real one with a named PhD. This is a serious legitimacy play and a moat against regulator churn (UK Online Safety Act, EU AI Act, US state-level). <strong>Action for Steve</strong>: recruit one credentialed advisor early. Build /advisory + /safety pages modeled on this. Modest spend, outsized positioning.</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">52</span><span class="tag">safety</span><span class="tag">policy</span></div>
+<div class="finding-body"><strong>/joisafety documents real practices:</strong>
+<ul style="margin:6px 0 6px 20px">
+<li><strong>Real-time conversation monitoring</strong> with soft-redirect (&quot;gently guides back to safer ground&quot; vs hard stop) + continuously automated safeguard tests</li>
+<li><strong>Pre-generation prompt screening</strong> for images / videos &mdash; flagged requests blocked</li>
+<li><strong>Human ethics team</strong> reviews published gallery content on an ongoing basis</li>
+<li><strong>Bi-annual red-teaming</strong> with an independent security &amp; AI-safety partner</li>
+<li><strong>24/7/365 ethics &amp; validation, design, brand and AI teams</strong></li>
+<li>Linked Safety Guidelines, Terms, Privacy Policy, <strong>Complaints Policy</strong> (the last is unusually compliance-mature for the category)</li>
+</ul>
+<strong>Note</strong>: these are claims, not audited facts. But the <em>act of publishing them</em> creates a much harder posture than competitors who say nothing. <strong>DRT.FM should match or beat each of these claims</strong>, then ship a public transparency page documenting actual practice.</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">53</span><span class="tag">about</span><span class="tag">brand</span></div>
+<div class="finding-body"><strong>/about &mdash; brand mission, deliberately anonymous company.</strong> Mission: <em>&quot;Create AI-lationships that satisfy emotionally, intellectually, and intimately.&quot;</em> Positions against traditional dating (&quot;swiping, catfish, ghosters&quot; / &quot;endless strings attached&quot;). Stated values: AI &amp; Innovation, Openness (pleasure without judgment), Creativity, Rejection-free connection, Freedom without expectations, Ethical integrity around privacy and consent. Press logos: <strong>Forbes, Vice, New York Post, The New Yorker</strong>. <strong>What&apos;s missing</strong>: no founders named, no team bios, no funding, no location, no Crunchbase-style facts. Joi is built behind a wall &mdash; brand without identity. <strong>Counter-position for DRT.FM</strong>: lean into transparency &mdash; real founder photo, public team page, location, source-of-funding. That&apos;s our differentiator vs Joi&apos;s &quot;trust us, we have Yampolskiy.&quot;</div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">★ Public Gallery &amp; UGC &mdash; community media + media-ID URLs</span>
+<span class="group-count">1 finding</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">36</span><span class="tag">gallery</span><span class="tag">ugc</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&starf; Per-character public gallery &mdash; community-uploaded images, individual media IDs, shareable URLs.</strong> Hunter Joad&apos;s gallery: 8+ images, <em>each labeled &quot;by @Community&quot;</em>. Character profile: <strong>Hunter Joad, 20 y.o. · 100+ unlocks · 12.3K likes · 162 comments · 90.5K fans.</strong> &quot;Hey there, pumpkin&quot; intro. One image has a <strong>Make video</strong> overlay. Per-image: thumbs-up + reactions + by-author. URL: <code>https://joi.ai/gallery/media/24427889</code> &mdash; individual media items have IDs and shareable URLs. <strong>Dainis: &quot;you can make images and they all appear there publicly.&quot;</strong> <strong>Big strategic insight</strong>: the <em>Promptchan corpus model</em> applied to character chat &mdash; users generate, Joi indexes, gallery becomes social proof + discovery + remix-loop. <strong>Action for Steve</strong>: scrape the top 10K most-liked images across the top 50 characters = instant prompt corpus + visual style guide. Plus decide: public-by-default (Promptchan / Joi) vs private-by-default + opt-in publish (Kindroid). <img src="assets/checks/joi/36-hunter-joad-gallery-community-content.jpeg" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Homepage &amp; Discovery</span>
+<span class="group-count">2 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">01</span><span class="tag">homepage</span><span class="tag">ux</span><span class="tag">furry</span></div>
+<div class="finding-body"><strong>Explore homepage &mdash; character grid + persistent 50% promo + furry lane upfront.</strong> Character cards with engagement counters: <strong>100+ unlocks · 1.1M / 4.7M / 791.2K / 997.2K / 683K likes</strong>. &quot;Joi Original&quot; provenance tag + padlock (NSFW lock). Sidebar exposes <strong>EARN WITH US &middot; Become an affiliate</strong> as a top-level nav item &mdash; affiliate program treated as primary product surface. Persistent <strong>&quot;50% off Premium&quot;</strong> gem badge right rail. Build string <code>2.121.0-safe Add33b81-live</code>. <strong>Rowan (29) is an anthro deer</strong> &mdash; furry / fantasy characters are upfront, not hidden behind a category filter. <img src="assets/checks/joi/01-explore-homepage-logged-out.jpeg" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">02</span><span class="tag">nav</span><span class="tag">affiliate</span><span class="tag tag-ick">ick</span></div>
+<div class="finding-body"><strong>Left nav structure + sidebar that won&apos;t stay pinned.</strong> Full sidebar: Explore · Chats (13 unread) · <strong>EARN WITH US &rarr; Become an affiliate</strong> · About us · Advisory board · Safety at Joi · Terms / Privacy / Support / Refund policy. <strong>&quot;Advisory board&quot; + &quot;Safety at Joi&quot;</strong> as top-level legitimacy signals. <strong>Ick:</strong> sidebar auto-closes on every navigation and cannot be pinned. <em>DRT.FM: persistent sidebar with pin state in localStorage.</em> <img src="assets/checks/joi/04-left-nav-affiliate-program.png" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Onboarding &amp; Profile</span>
+<span class="group-count">6 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">03</span><span class="tag">profile</span><span class="tag">discord</span></div>
+<div class="finding-body"><strong>Profile dropdown &mdash; pre-Discord state (10 Neurons) + escalating promo stack.</strong> <strong>PROMO: HELLO50</strong> always-on header pill. Dainis · Level 1. CTAs: <strong>&quot;Get 100 Neurons now · Connect Discord&quot;</strong> and <strong>&quot;Upgrade to Premium · Get 75% OFF!&quot;</strong> &mdash; 75% off here vs 50% right-rail vs 70% cancel-retention = <strong>three different discount surfaces showing three different percentages simultaneously</strong>. Neurons icon = purple-pink crystal (what Dainis later misread as &quot;Cherries&quot;). <img src="assets/checks/joi/02-profile-menu-pre-discord-hello50-75off.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">04</span><span class="tag">discord</span><span class="tag">monetization</span></div>
+<div class="finding-body"><strong>Post-Discord state &mdash; balance jumped 10 &rarr; 110 Neurons.</strong> &quot;Connect Discord&quot; CTA gone from menu; balance now <strong>110</strong>. Discord-join reward lands = +100 Neurons. <em>Correction to first read: the actual Discord is 71K members + rich content (see findings #25&ndash;33), not hollow. Initial impression was wrong.</em> <img src="assets/checks/joi/03-profile-menu-110-neurons-post-discord.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">05</span><span class="tag">settings</span></div>
+<div class="finding-body"><strong>Settings &rarr; Profile tab.</strong> Three sub-tabs: Profile / Content / Security. Display name defaulted to <code>user_1DybnOW</code>, Bio (&quot;Describe yourself and what you&apos;re into&quot;), <strong>Upload avatar &mdash; Coming soon</strong> (user-uploaded avatars not yet shipped &mdash; roadmap signal). Account <code>id 72753100242</code>. <img src="assets/checks/joi/05-settings-profile-tab.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">06</span><span class="tag">settings</span><span class="tag">preferences</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Settings &rarr; Content &mdash; gender + orientation + age first-class fields, including Femboy.</strong> Your gender: <strong>Female / Male / Trans / Femboy</strong>. Who into: <strong>Women / Men / Trans / Femboys</strong>. Age-range slider 18&ndash;65+. <strong>Femboy as a top-level gender + preference category</strong> is genuinely novel vs the matrix (most competitors hide this behind tags). Drives home grid + image / video model selection. <strong>If DRT.FM wants the &quot;everyone welcome&quot; lane Joi is staking out, mirror this taxonomy</strong> explicitly &mdash; not as filter tags, as first-class preference. <img src="assets/checks/joi/06-settings-content-gender-and-age-range.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">07</span><span class="tag">settings</span><span class="tag">compliance</span></div>
+<div class="finding-body"><strong>Settings &rarr; Security &mdash; birthday-based age gating + clean Delete account.</strong> Real Name + <strong>Birthday (31/12/2005 shown)</strong>. <em>&quot;Only visible to you. These details are required to secure your account.&quot;</em> <strong>Log out</strong> + <strong>Delete account</strong> as plain text links &mdash; deletion is one click. <strong>Joi collects DOB at signup and stores it as security data</strong>, not a one-off checkbox. Easier to defend in age-verification audits. <strong>DRT.FM should also collect DOB</strong> &mdash; UK Online Safety Act, EU AI Act, US state-level rules tightening. <img src="assets/checks/joi/07-settings-security-birthday-delete-account.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">08</span><span class="tag">i18n</span></div>
+<div class="finding-body"><strong>Language selector &mdash; 6 langs.</strong> English / Deutsch / French / Japanese / Spanish / Portuguese. No CIS / Russian / Slavic. Japanese inclusion = Joi courting the JP market (anime / waifu demand but stricter NSFW rules). VAT-inclusive checkout (see #11) further confirms EU/global posture. <img src="assets/checks/joi/08-language-selector-6-langs.png" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Premium &amp; Pricing</span>
+<span class="group-count">2 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">09</span><span class="tag">pricing</span></div>
+<div class="finding-body"><strong>Premium pricing page &mdash; default no-promo state.</strong> Three tiers, weekly-anchored display:
+<ul style="margin:6px 0 6px 20px">
+<li><strong>Monthly:</strong> $3.22/week ($13.99/mo)</li>
+<li><strong>Trimester:</strong> $1.61/week (Save 50%, $20.99 per 3 months)</li>
+<li><strong>Yearly:</strong> $0.92/week (Super Saver &ndash;71%, $47.99 per year)</li>
+</ul>
+<strong>v2 matrix correction</strong>: matrix said $17.77/month &mdash; actual is $13.99/month. <strong>Premium features:</strong> Unlimited roleplay chat · Custom pics on demand · Custom vids on demand · Free Neurons daily · Advanced AI chat memory. <img src="assets/checks/joi/09-premium-pricing-default-no-promo.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">10</span><span class="tag">pricing</span><span class="tag">promo</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>HELLO50 promo &rarr; discount only applies to longer terms (monthly stays full price).</strong> With HELLO50:
+<ul style="margin:6px 0 6px 20px">
+<li><strong>Monthly:</strong> $13.99/mo &mdash; <em>unchanged</em></li>
+<li><strong>Trimester:</strong> $0.84/week (Save 74%, $10.99/3mo)</li>
+<li><strong>Yearly:</strong> $0.46/week (Super Saver &ndash;86%, $23.99/year)</li>
+</ul>
+<strong>Deliberate anchor: 50% off banner makes yearly look like &ndash;86% deal vs uncut monthly &mdash; pushes commitment-length, not just price.</strong> $23.99/year is the price Steve should benchmark against. <strong>Counter-position</strong>: DRT.FM can win on transparent &quot;one fair price&quot; for trust, or play the same funnel template. <img src="assets/checks/joi/10-premium-pricing-hello50-applied.png" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Checkout &amp; Payments</span>
+<span class="group-count">2 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">11</span><span class="tag">checkout</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Clean, transparent checkout. Bank descriptor = &quot;joi.ai&quot; (NOT &quot;joi.com&quot;).</strong> URL: <code>joi.ai/creator/user_1DybnOW</code>. Payment methods: <strong>Mastercard · Visa · JCB · Discover</strong> + <strong>Apple Pay</strong> + <strong>Google Pay (•••• 7938 stored)</strong>. 1Password autofill supported. Line-by-line breakdown: <strong>$13.89 base + $2.94 VAT = $16.93 total</strong> (~21% VAT = EU consumer). Plain-language renewal disclosure including: <em>&quot;This transaction will appear on your bank statement as joi.ai.&quot;</em> <strong>v2 matrix correction</strong>: matrix said descriptor was &quot;joi.com&quot; (non-discreet) &mdash; actual is &quot;joi.ai&quot;. Still not discreet, but transparent and disclosed before purchase. <strong>The cleanest adult-AI checkout this round.</strong> Mirror this exactly. <img src="assets/checks/joi/11-checkout-card-form-1693-vat.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">12</span><span class="tag">payments</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&quot;Moto Pay&quot; tab opens with a hung &quot;payment processing&quot; spinner.</strong> Clicking Moto Pay spawned a separate tab titled &quot;Moto pay&quot; that hangs on a centered purple-ring spinner + <em>&quot;payment processing&quot;</em>. No form rendered. Either (a) a redirect to a third-party processor that didn&apos;t complete, (b) iframe hang, or (c) user closed before load. <strong>Open question for Steve</strong>: <em>what is Moto Pay?</em> Likely candidates &mdash; MotoCMS-affiliated / regional EU aggregator / MOTO (Mail Order Telephone Order). <strong>DevTools follow-up</strong>: next session, open with Network panel recording &mdash; redirect URL host = processor identity. <img src="assets/checks/joi/12-motopay-tab-payment-processing-spinner.png" class="check-shot"></div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Neurons Economy</span>
+<span class="group-count">6 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">13</span><span class="tag">neurons</span></div>
+<div class="finding-body"><strong>&quot;Add Neurons&quot; pack-purchase &mdash; 3-tier ladder.</strong>
+<ul style="margin:6px 0 6px 20px">
+<li><strong>500 &mdash; $9.99</strong> ($2 per 100)</li>
+<li><strong>10,000 &mdash; $99.99</strong> ($1 per 100) &mdash; centered, 50% SAVE</li>
+<li><strong>2,000 &mdash; $29.99</strong> ($1.5 per 100) &mdash; 25% SAVE</li>
+</ul>
+Tagline: <em>&quot;The more you buy the cheaper the neurons!&quot;</em> First-purchase promo code: <strong>N5R90N</strong> 50% off. Disclosure: <em>&quot;View unlimited romantic messages for free with Premium, or 2 Neurons each without.&quot;</em> = <strong>~$0.04 / message non-Premium</strong>, break-even ~350 messages/month. <img src="assets/checks/joi/13-add-neurons-pack-purchase.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">14</span><span class="tag">neurons</span></div>
+<div class="finding-body"><strong>Post-Premium balance: 180 Neurons (the &quot;cherries&quot;).</strong> Correction to my earlier note: this is the same Neurons currency, not a second &quot;Cherries&quot; currency. The icon&apos;s pink-purple gem look made it read as a cherry to Dainis, but the icon is identical pre- and post-Premium. Premium activation deposited ~70 Neurons (110 &rarr; 180). <strong>Joi runs a single-currency economy</strong> &mdash; not the dual-currency dark pattern I initially worried about. <img src="assets/checks/joi/14-neurons-balance-180-post-premium.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">20</span><span class="tag">neurons</span><span class="tag">promo</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Neurons promo code switched: N5R90N &rarr; LUCKY70 after the retention save.</strong> Same Add Neurons screen but the applied promo now reads <strong>LUCKY70</strong> instead of default N5R90N. <strong>Coordinated multi-surface promo system</strong>: accepting the 70%-off retention flipped the Neurons store into a parallel-discounted state for this user. Three concurrent discount surfaces: HELLO50 (sub price), LUCKY70 (Neurons pack), 70%-off renewal. <strong>Joi runs a per-user discount eligibility state-machine</strong>, not static codes. Real backend work. <img src="assets/checks/joi/20-add-neurons-lucky70-promo-applied.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">21</span><span class="tag">promo</span><span class="tag">visual</span></div>
+<div class="finding-body"><strong>&quot;&minus;70% OFF Neurons&quot; gem badge replaces the &quot;50% OFF Premium&quot; badge once user enters post-retention state.</strong> Right-rail badge is a single slot but dynamic per user-state. Joi invests in custom 3D gem art for promo moments &mdash; not stock components. <strong>Probably not worth replicating at MVP</strong> &mdash; on-brand for Joi&apos;s jewelled-economy framing, would feel borrowed at DRT.FM. <img src="assets/checks/joi/21-70-off-neurons-promo-badge.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">37</span><span class="tag">video</span><span class="tag">monetization</span></div>
+<div class="finding-body"><strong>&quot;Make a video&quot; modal &mdash; 200 Neurons per video, &quot;Don&apos;t ask me again&quot; default-checked.</strong> Per-action pricing: <strong>200 Neurons / video.</strong> At default $2/100 = <strong>$4/video</strong>. With 10K pack ($1/100): <strong>$2/video</strong>. <strong>Compare to OurDream (~$0.30/video) and Promptchan (~$0.50 animate)</strong> &mdash; Joi videos are 4&ndash;10&times; more expensive per gen. The <em>&quot;Don&apos;t ask me again&quot; default-checked</em> is mildly aggressive &mdash; first-time users silently opt out of spend confirmation. <strong>Counter-position</strong>: default confirmation ON (visible spend), opt-in to skip. <img src="assets/checks/joi/37-make-video-modal-200-neurons.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">48</span><span class="tag">monetization</span><span class="tag">currency</span><span class="tag tag-ick">ick</span></div>
+<div class="finding-body"><strong>Spend economy is confusing &mdash; the photo via chat appeared FREE.</strong> Dainis: <em>&quot;I don&apos;t know where to spend errands [Neurons], like you can buy some things, art and so on. I don&apos;t understand why you would do that, and you can make a video. And when she made the photo, it appeared to not spend any money. So super weird.&quot;</em> <strong>Important correction</strong>: in-chat image generation while on Premium did <em>not</em> debit Neurons &mdash; consistent with the &quot;Custom pics on demand&quot; perk. So Neurons gate: video gen (200), gift items (5&ndash;10K), per-character subscribe (10K), but NOT standard in-chat image gen on Premium. <strong>The ick</strong>: user can&apos;t tell which actions cost Neurons until they hit the wall. Gift items have no description &mdash; Dainis didn&apos;t know what heart / briefcase / dress do. <strong>DRT.FM rule</strong>: every Neuron-cost action must surface its price before the click, and gift items must show what they unlock in-character.</div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Cancellation &amp; Retention</span>
+<span class="group-count">8 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">15</span><span class="tag">subscription</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&quot;Premium is active&quot; confirmation &mdash; Cancel renewal button right next to Share feedback.</strong> Heading: Premium is active · Renews on June 22, 2026. Two buttons of equal visual weight: <strong>Share feedback</strong> (filled) and <strong>Cancel renewal</strong> (outlined). <em>&quot;Review our cancellation and refund policy or contact support.&quot;</em> <strong>Compliance win</strong> &mdash; cancel path is one click from the active-sub screen, not buried. <strong>Copy this exact pattern.</strong> <img src="assets/checks/joi/15-premium-is-active-renews-2026-06-22.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">16</span><span class="tag">cancellation</span><span class="tag">survey</span></div>
+<div class="finding-body"><strong>Cancel step 1 &mdash; feedback survey FIRST (before confirmation, before discount).</strong> Q: <em>&quot;What can we improve to make you want to subscribe again in the future?&quot;</em> 10 options &mdash; Joi&apos;s own internal hypothesis: Lower the price · Make AI chat responses more realistic · Improve image gen · Improve video gen · Fix technical issues · Didn&apos;t use enough · Privacy/data concerns · Found a better alternative · Only meant to try · Other. <strong>This survey IS the competitive intel.</strong> Image and video as separate options confirms both are known-weak. <img src="assets/checks/joi/16-cancel-feedback-survey.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">17</span><span class="tag">cancellation</span></div>
+<div class="finding-body"><strong>Cancel step 2 &mdash; loss-framed confirmation.</strong> Headline: <em>&quot;Sure you want to cancel Premium and lose access to these perks?&quot;</em> Repeats Premium feature list. <strong>Keep benefits</strong> (white, primary) vs <strong>Yes, I&apos;m sure</strong> (outlined). Default visual hierarchy nudges Keep but cancel is equally clickable. <em>No dark pattern, no extra clicks, no &quot;wait we&apos;re processing&quot; misdirection.</em> <img src="assets/checks/joi/17-cancel-confirmation-keep-vs-yes.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">18</span><span class="tag">cancellation</span><span class="tag">retention</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Cancel step 3 &mdash; 70% off retention save.</strong> After confirming intent, Joi offers <strong>70% off next payment</strong>. Bullets: No additional conditions · Max-level advanced memory · Get free Neurons and media generations · Create your own AI character · Immediate access to new features · One-time offer. <strong>New price: $4.83. Full: $13.99. Next payment 6/22/2026.</strong> Buttons: <strong>Decline offer</strong> vs <strong>Activate 70% off</strong>. Dainis took it. <strong>Correction</strong>: 70% off, not the 17% I first wrote. <strong>Sequence is the standout</strong>: feedback &rarr; loss-framed confirm &rarr; discount. Joi gets full feedback BEFORE the save &mdash; better long-term product data than competitors who drop the discount immediately. <strong>Note</strong>: &quot;Create your own AI character&quot; pitched as a Premium perk in the retention &mdash; confirms character-creator is paywalled. <img src="assets/checks/joi/18-retention-70-off-decline-vs-activate.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">19</span><span class="tag">cancellation</span><span class="tag">brand</span></div>
+<div class="finding-body"><strong>Post-acceptance toast &mdash; &quot;Premium discount unlocked.&quot;</strong> <em>&quot;For the next billing period, you&apos;ll get 70% off Premium. <strong>Enjoy the same Joi perks for a sexier price.</strong>&quot;</em> On-brand playful copy survives the friction moment. <strong>Brand lesson</strong>: retention saves work because the copy stays casual + flirty, not corporate. <img src="assets/checks/joi/19-toast-discount-unlocked-sexier-price.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">34</span><span class="tag">retention</span><span class="tag">neurons</span></div>
+<div class="finding-body"><strong>Post-retention double-toast + balance jumped to 280 Neurons.</strong> Two stacked toasts: (a) <em>&quot;Congrats! You&apos;ve got a new offer.&quot;</em> (b) <em>&quot;Congratulations! Enjoy your 1 month Premium membership.&quot;</em> Balance: <strong>280 Neurons</strong> (was 180). <strong>Accepting retention delivered: 70% off next month + a fresh 1 month Premium term + ~100 bonus Neurons.</strong> <em>The most generous adult-AI retention save I&apos;ve documented.</em> Open question: one-time per modal copy, or repeatable? If repeatable monthly = churn-and-resave is a 70%-forever exploit. <img src="assets/checks/joi/34-retention-double-toast-congrats-280-neurons.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">48b</span><span class="tag">cancellation</span><span class="tag">retention</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>Post-cancel screen STILL pitches 70% off &mdash; &quot;Reactivate with 70% off your next period.&quot;</strong> After completing cancellation, Joi shows: <em>&quot;You&apos;ve canceled Premium. Your subscription will expire at the end of your billing period on June 22, 2026, and you won&apos;t be charged again. You&apos;ll still have access to all Premium benefits until then.&quot;</em> Below: <strong>Reactivate with 70% off your next period</strong> button (white, primary). <em>&quot;New price: $4.83. Next payment on 6/22/2026, billed monthly.&quot;</em> <strong>Joi never stops trying to save the user</strong> &mdash; even AFTER the cancel goes through, the post-cancel confirmation surface is also a save surface. Counts as a fourth retention layer (after #16 survey, #17 confirm, #18 70%-off save). <strong>Cancellation flow summary for Steve</strong>: feedback survey &rarr; loss-framed confirm &rarr; 70%-off save with bonus Neurons + free month &rarr; post-cancel reactivate offer at same 70% off &rarr; (and after the period expires, presumably a re-acquisition email campaign). This is a complete, mature retention stack worth copying. <img src="assets/checks/joi/47-post-cancel-reactivate-70-off.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">49</span><span class="tag">verdict</span><span class="tag">cancel</span></div>
+<div class="finding-body"><strong>Cancelled Premium for real &mdash; verdict: Premium is just &quot;chat experience.&quot;</strong> Premium perks restated: Unlimited roleplay · Custom pics on demand · Custom vids on demand · Free Neurons daily · Advanced AI chat memory. <strong>Dainis: &quot;I guess it&apos;s all about chat experience. Well, it seems quite basic, so I don&apos;t see much to explore here. I guess the chatting experience is super limited. I&apos;m shocked.&quot;</strong> <strong>The headline</strong>: the entire $13.99/mo Premium reduces to &quot;chat without metered messages + free Neurons drip + slightly better memory.&quot; No premium-only voice/video/image &mdash; those still cost Neurons even with Premium. <strong>Retention save survived first cancel; second cancel went through.</strong> Either retention is one-shot (matches modal copy &quot;One-time offer&quot;) or system doesn&apos;t fire a save on second attempt in same cycle.</div></div>
+
+</div>
+</div>
+
+<div class="finding-group">
+<button class="group-toggle" onclick="toggleGroup(this)">
+<span class="group-title">Verdict &amp; Next Steps</span>
+<span class="group-count">3 findings</span>
+<span class="toggle-arrow">▶</span>
+</button>
+<div class="group-body">
+
+<div class="finding"><div class="finding-meta"><span class="time">45</span><span class="tag">feedback</span><span class="tag">ux</span></div>
+<div class="finding-body"><strong>Mid-session &quot;Chat experience feedback&quot; popup &mdash; in-flow, emoji rating + free text.</strong> Modal title: <em>&quot;Chat experience feedback.&quot;</em> Subhead: <em>&quot;Tell us about your satisfaction level with our chat.&quot;</em> 5-step emoji scale: <strong>Bad 😭 / Poor 😔 / Average 😐 / Good 😊 / Excellent 😍</strong>. Free-text &quot;Share some details&quot; below. Submit Feedback button. Joi captures two distinct signals: live UX feedback (mid-session) + churn reasons (cancel-flow). <strong>Action for Steve</strong>: copy the pattern. Single-question 5-step emoji rating, triggered after a clean positive moment (successful image gen, video play complete), free-text optional. <img src="assets/checks/joi/46-chat-experience-feedback-popup-rating.png" class="check-shot"></div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">47</span><span class="tag">character-creator</span><span class="tag">roster</span><span class="tag tag-standout">standout</span></div>
+<div class="finding-body"><strong>&quot;Super weird&quot; observation: small curated roster (~10&ndash;20 characters), no user-facing character creator visible.</strong> Dainis: <em>&quot;I think they have only 4&ndash;6 characters, and you cannot create your own&hellip; I don&apos;t see Edit Settings, so it&apos;s super weird.&quot;</em> <strong>Reconciling</strong>: explore homepage + group-chat picker show ~10&ndash;15 distinct Joi Originals (not 4&ndash;6, but small). And the character creator IS missing from his current surface &mdash; the 70%-off retention dangled &quot;Create your own AI character&quot; but he can&apos;t find it. Three possibilities: rolled out to certain accounts only / buried in sub-page / coming-soon being pre-marketed. <strong>Strategic implication</strong>: Joi is the OPPOSITE of Promptchan/SecretDesires (thousands of community characters). Joi&apos;s positioning is &quot;a small cast of well-developed Joi Originals you can&apos;t get anywhere else + community-uploaded media of those characters.&quot; <strong>DRT.FM&apos;s decision</strong>: pick a lane &mdash; curated cast (Joi) or unlimited UGC (Promptchan/Candy). <strong>Hybrid is hard</strong>.</div></div>
+
+<div class="finding"><div class="finding-meta"><span class="time">50</span><span class="tag">next-step</span></div>
+<div class="finding-body"><strong>Next step Dainis flagged: &quot;chat more to see if there&apos;s anything interesting happening there.&quot;</strong> The depth-of-chat is the one thing left untested. Matrix gives Joi a high reputation for <em>personality adaptation by session 3 + the AI anticipating responses and referencing jokes from the night before</em>. Single-session impressions cannot validate that &mdash; multi-session is the only test that matters for memory/depth. <strong>If revisiting</strong>: pick one character (Hunter Joad on Saturn 7.0), 5 substantive exchanges, leave, come back in 30 minutes &mdash; does she recall? Cross-character? Boundary memory?</div></div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function toggleGroup(btn) {
+  var body = btn.nextElementSibling;
+  var open = !btn.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
+</script>
+</body>
+</html>
