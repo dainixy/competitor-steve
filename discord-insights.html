@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM Discord Insights — What 23K Lines of Competitor Chatter Say</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#08080d;color:#e0e0e8;line-height:1.65;padding-top:56px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a12;border-bottom:1px solid #1a1a2a;display:flex;align-items:center;gap:4px;padding:0 18px;height:56px;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#2a2a3e}
+.nav-label{font-size:11px;font-weight:700;color:#3a3a5a;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;margin-right:8px;padding-right:12px;border-right:1px solid #1e1e2e}
+.nav-link{flex-shrink:0;padding:6px 14px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;transition:all .15s;white-space:nowrap;text-decoration:none;color:#7a7aa0}
+.nav-link:hover{background:#1e1e2e;color:#fff}
+.nav-link.home{color:#34d399}
+.nav-link.od{color:#5eead4}
+.nav-link.candy{color:#ff6b9d}
+.nav-link.kd{color:#c08aff}
+.nav-link.themes{color:#facc15}
+.private-badge{margin-left:auto;flex-shrink:0;background:#3a1020;border:1px solid #6a2040;color:#ff8aaa;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* LAYOUT */
+.section{max-width:1280px;margin:0 auto;padding:36px 28px 64px}
+
+/* HERO */
+.hero{background:radial-gradient(at top left,#0a1830 0%,#08080d 60%);border:1px solid #1a3a5e;border-radius:18px;padding:42px 48px;margin-bottom:36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,#5eead40d,transparent 60%);pointer-events:none}
+.hero .kicker{display:inline-block;font-size:11px;font-weight:700;color:#5eead4;background:#0a2820;padding:5px 12px;border-radius:6px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;border:1px solid #1a4a3a}
+.hero h1{font-size:32px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:18px;max-width:1000px;letter-spacing:-0.5px}
+.hero h1 .accent-od{color:#5eead4}
+.hero h1 .accent-candy{color:#ff6b9d}
+.hero h1 .accent-kd{color:#c08aff}
+.hero p.lede{font-size:15.5px;color:#a0a0c0;max-width:920px;line-height:1.7;margin-bottom:20px}
+.hero p.lede strong{color:#e8e8f0}
+.hero .meta{font-size:12px;color:#5a5a7a;display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
+.hero .meta strong{color:#a0a0c0}
+
+/* STATS STRIP */
+.stats-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:42px}
+.stat-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:18px 20px}
+.stat-card .stat-num{font-size:28px;font-weight:900;color:#fff;line-height:1;margin-bottom:6px;letter-spacing:-0.5px}
+.stat-card .stat-num.od{color:#5eead4}
+.stat-card .stat-num.candy{color:#ff6b9d}
+.stat-card .stat-num.kd{color:#c08aff}
+.stat-card .stat-num.themes{color:#facc15}
+.stat-card .stat-label{font-size:11px;color:#7a7aa0;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.stat-card .stat-sub{font-size:12px;color:#5a5a7a;margin-top:4px;font-family:'SF Mono',monospace}
+
+/* ZONE HEADERS */
+h2.zone{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:2px;margin:56px 0 6px;padding-bottom:10px;border-bottom:2px solid #1e1e2e;display:flex;align-items:center;gap:12px}
+h2.zone .zone-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#1e1e2e;color:#7a7aa0;font-size:13px;font-weight:800}
+h2.zone.od .zone-num{background:#0a2820;color:#5eead4}
+h2.zone.od{color:#5eead4}
+h2.zone.candy .zone-num{background:#2a0a18;color:#ff6b9d}
+h2.zone.candy{color:#ff6b9d}
+h2.zone.kd .zone-num{background:#1a0830;color:#c08aff}
+h2.zone.kd{color:#c08aff}
+h2.zone.themes .zone-num{background:#2a2010;color:#facc15}
+h2.zone.themes{color:#facc15}
+h2.zone .zone-badge{font-size:10px;background:#1a1a2a;color:#7a7aa0;padding:3px 10px;border-radius:4px;font-weight:600;letter-spacing:0.8px}
+p.zone-desc{font-size:14px;color:#8080a0;margin-bottom:24px;max-width:980px;line-height:1.7}
+p.zone-desc strong{color:#c0c0d8}
+p.zone-desc code{background:#1a1a2a;color:#a0a0c0;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:12.5px}
+
+/* SUB SECTION HEADER */
+h3.sub{font-size:14px;font-weight:800;color:#e0e0e8;text-transform:uppercase;letter-spacing:1.2px;margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+h3.sub .sub-dot{width:8px;height:8px;border-radius:50%;background:#5eead4}
+h3.sub.candy .sub-dot{background:#ff6b9d}
+h3.sub.kd .sub-dot{background:#c08aff}
+h3.sub.themes .sub-dot{background:#facc15}
+h3.sub .sub-meta{margin-left:auto;font-size:11px;color:#5a5a7a;font-weight:600;letter-spacing:0.5px;font-family:'SF Mono',monospace;text-transform:none}
+
+/* TABLES */
+.tbl-wrap{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;overflow:hidden;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:#13131e}
+th{text-align:left;padding:12px 18px;font-size:10.5px;color:#8a8aaa;text-transform:uppercase;letter-spacing:1px;font-weight:700;border-bottom:1px solid #2a2a3e}
+td{padding:13px 18px;color:#c0c0d8;border-bottom:1px solid #1a1a26;vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#13131e}
+td.rank{font-weight:900;font-size:16px;color:#fff;width:48px}
+td.title{color:#fff;font-weight:700;max-width:540px}
+td.title .title-sub{display:block;color:#8a8aaa;font-weight:400;font-size:12px;margin-top:3px;line-height:1.5}
+td.num{font-family:'SF Mono',monospace;color:#5eead4;font-weight:700;width:80px;text-align:right}
+td.num.candy{color:#ff6b9d}
+td.num.kd{color:#c08aff}
+td.handle{font-family:'SF Mono',monospace;font-size:12px;color:#9090b0;width:160px}
+td.status{width:110px}
+td.status .pill{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:0.7px}
+.pill.inprog{background:#2a2010;color:#facc15}
+.pill.open{background:#1a1a2a;color:#7a7aa0}
+.pill.completed{background:#0a2820;color:#5eead4}
+.pill.needinfo{background:#2a1a4e;color:#c08aff}
+.pill.duplicate{background:#1a1a2a;color:#7a7aa0}
+.pill.cs{background:#3a1020;color:#ff8aaa}
+.pill.cnr{background:#1a1a2a;color:#7a7aa0}
+
+/* THEME CARD GRID */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px;margin-bottom:18px}
+.theme-card{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:20px 24px;position:relative;transition:border-color .15s}
+.theme-card:hover{border-color:#3a3a5e}
+.theme-card.od{border-left:4px solid #5eead4}
+.theme-card.candy{border-left:4px solid #ff6b9d}
+.theme-card.kd{border-left:4px solid #c08aff}
+.theme-card.themes{border-left:4px solid #facc15}
+.theme-card h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.4}
+.theme-card .theme-meta{display:flex;gap:14px;font-size:11px;color:#8a8aaa;font-family:'SF Mono',monospace;margin-bottom:12px;flex-wrap:wrap}
+.theme-card .theme-meta strong{color:#fff;font-weight:800}
+.theme-card .theme-meta .m-od strong{color:#5eead4}
+.theme-card .theme-meta .m-candy strong{color:#ff6b9d}
+.theme-card .theme-meta .m-kd strong{color:#c08aff}
+.theme-card p{font-size:12.5px;color:#a0a0c0;line-height:1.65;margin-bottom:10px}
+.theme-card p:last-child{margin-bottom:0}
+.theme-card p.quote{font-size:12px;color:#8a8aaa;border-left:2px solid #2a2a3e;padding-left:12px;font-style:italic;margin-top:8px}
+.theme-card p.quote .q-attr{display:block;font-style:normal;color:#5a5a7a;font-size:11px;margin-top:4px;font-family:'SF Mono',monospace}
+.theme-card .ex-handles{font-size:11px;color:#7a7aa0;font-family:'SF Mono',monospace;line-height:1.7}
+.theme-card .ex-handles strong{color:#c0c0d8}
+
+/* SMALL CARD GRID (love + quirks) */
+.small-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:18px}
+.small-card{background:#0a0a14;border:1px solid #1e1e2e;border-radius:10px;padding:16px 20px}
+.small-card.love{background:linear-gradient(135deg,#0a1810 0%,#050d08 100%);border-color:#1a4a2a}
+.small-card.love h4{color:#7ed4b8}
+.small-card.quirk{background:linear-gradient(135deg,#181028 0%,#0a0614 100%);border-color:#2e1e4e}
+.small-card.quirk h4{color:#c0a0e8}
+.small-card h4{font-size:13px;font-weight:800;margin-bottom:8px;line-height:1.4}
+.small-card p{font-size:12.5px;color:#9090b0;line-height:1.6}
+.small-card p .quote-inline{color:#c0c0d8;font-style:italic}
+
+/* CHARACTER CARDS (Candy.AI) */
+.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:18px}
+.char-card{background:linear-gradient(135deg,#1a0a18 0%,#0a0510 100%);border:1px solid #3a1a3a;border-radius:14px;padding:22px 26px;position:relative}
+.char-card .char-name{font-size:20px;font-weight:900;color:#ff6b9d;margin-bottom:4px;letter-spacing:-0.3px}
+.char-card .char-sub{font-size:11px;color:#a05a78;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;font-weight:600}
+.char-card .char-meta{display:flex;gap:12px;font-size:11px;color:#8a7080;font-family:'SF Mono',monospace;margin-bottom:14px}
+.char-card .char-meta strong{color:#ff8aaa;font-weight:800}
+.char-card .char-verdict{display:inline-block;font-size:10px;font-weight:800;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
+.char-card .verdict-love{background:#0a2820;color:#5eead4}
+.char-card .verdict-mixed{background:#2a2010;color:#facc15}
+.char-card .verdict-polarising{background:#3a1020;color:#ff8aaa}
+.char-card p{font-size:12.5px;color:#c0a0b0;line-height:1.65;margin-bottom:8px}
+.char-card p:last-child{margin-bottom:0}
+.char-card p strong{color:#fff}
+.char-card .char-quote{font-size:12px;color:#8a7080;border-left:2px solid #3a1a3a;padding-left:12px;font-style:italic;margin-top:8px}
+
+/* TIMELINE (Candy shipped) */
+.timeline{background:#0e0e16;border:1px solid #2a2a3e;border-radius:12px;padding:22px 28px;margin-bottom:18px}
+.timeline h4{font-size:13px;font-weight:800;color:#ff6b9d;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.timeline ol{list-style:none;counter-reset:t-counter;padding:0}
+.timeline ol li{counter-increment:t-counter;position:relative;padding:10px 0 10px 56px;border-bottom:1px dashed #1e1e2e;font-size:13px;color:#c0c0d8;line-height:1.6}
+.timeline ol li:last-child{border-bottom:none}
+.timeline ol li::before{content:counter(t-counter,decimal-leading-zero);position:absolute;left:0;top:10px;font-size:11px;font-weight:800;color:#ff6b9d;background:#2a0a18;border:1px solid #3a1a30;border-radius:5px;padding:4px 9px;font-family:'SF Mono',monospace}
+.timeline ol li .t-date{display:block;font-size:11px;color:#7a5a70;margin-top:3px;font-family:'SF Mono',monospace}
+.timeline ol li strong{color:#fff}
+
+/* VENT CARDS (Kindroid) */
+.vent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;margin-bottom:18px}
+.vent-card{background:linear-gradient(135deg,#1a0a2e 0%,#0a0518 100%);border:1px solid #2a1a4e;border-left:4px solid #c08aff;border-radius:12px;padding:20px 24px}
+.vent-card h4{font-size:14px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.4}
+.vent-card .vent-meta{font-size:11px;color:#9080b0;font-family:'SF Mono',monospace;margin-bottom:12px}
+.vent-card .vent-meta strong{color:#c08aff}
+.vent-card p{font-size:12.5px;color:#b0a0c8;line-height:1.65;margin-bottom:8px}
+.vent-card p .quote-inline{color:#e0c0f0;font-style:italic}
+.vent-card .tone{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:0.7px;background:#2a1a4e;color:#c08aff;margin-top:8px}
+
+/* CROSS-CUTTING THEME CARDS */
+.cross-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:14px;margin-bottom:18px}
+.cross-card{background:linear-gradient(135deg,#1a1408 0%,#0d0a04 100%);border:1px solid #4a3a18;border-radius:14px;padding:22px 26px;position:relative}
+.cross-card .cross-num{position:absolute;top:14px;right:18px;font-size:36px;font-weight:900;color:#facc15;opacity:0.15;line-height:1;font-family:'SF Mono',monospace}
+.cross-card h3{font-size:16px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.4;max-width:88%}
+.cross-card .presence{display:flex;gap:12px;font-size:11px;margin-bottom:14px;flex-wrap:wrap;font-family:'SF Mono',monospace}
+.cross-card .presence span{display:flex;align-items:center;gap:5px}
+.cross-card .presence .od-label{color:#5eead4}
+.cross-card .presence .candy-label{color:#ff6b9d}
+.cross-card .presence .kd-label{color:#c08aff}
+.cross-card .presence .dots{letter-spacing:1px;font-size:13px}
+.cross-card .presence .dots.heavy{opacity:1}
+.cross-card .presence .dots.medium{opacity:0.7}
+.cross-card .presence .dots.light{opacity:0.4}
+.cross-card p{font-size:13px;color:#c0b090;line-height:1.7;margin-bottom:8px}
+.cross-card p:last-child{margin-bottom:0}
+.cross-card p strong{color:#fff}
+
+/* METHODOLOGY FOOTER */
+.method{background:#0a0a14;border:1px solid #1e1e2e;border-radius:12px;padding:24px 30px;margin-top:48px;font-size:12.5px;color:#7a7aa0;line-height:1.75}
+.method h4{font-size:12px;font-weight:800;color:#a0a0c0;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px}
+.method p{margin-bottom:8px}
+.method p:last-child{margin-bottom:0}
+.method code{background:#13131e;color:#9090b0;padding:1px 6px;border-radius:4px;font-family:'SF Mono',monospace;font-size:11.5px}
+.method ul{list-style:none;padding:0;margin-top:8px}
+.method ul li{padding:3px 0 3px 18px;position:relative}
+.method ul li::before{content:'·';position:absolute;left:6px;color:#3a3a5a;font-weight:800}
+
+/* FOOTER */
+.footer{margin-top:32px;padding:24px 0;border-top:1px solid #1e1e2e;font-size:12px;color:#5a5a7a;text-align:center}
+.footer a{color:#5eead4;text-decoration:none}
+
+@media (max-width:960px){
+  .hero{padding:28px 24px}
+  .hero h1{font-size:24px}
+  .section{padding:24px 18px 48px}
+  .theme-grid,.cross-grid,.char-grid,.vent-grid{grid-template-columns:1fr}
+  td.handle{display:none}
+  .tbl-wrap{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-label">DRT.FM · Discord Insights</span>
+  <a class="nav-link home" href="index.html">&larr; Index</a>
+  <a class="nav-link od" href="#ourdream">OurDream</a>
+  <a class="nav-link candy" href="#candy">Candy.AI</a>
+  <a class="nav-link kd" href="#kindroid">Kindroid</a>
+  <a class="nav-link themes" href="#cross">Cross-Cutting</a>
+  <a class="nav-link" href="#method">Methodology</a>
+  <span class="private-badge">DRT.FM &middot; Private</span>
+</nav>
+
+<div class="section">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <span class="kicker">User Voice &middot; 2026-05-23</span>
+    <h1>What <span class="accent-od">23,210 lines</span> of competitor Discord chatter say about user <span class="accent-candy">pain</span>, <span class="accent-kd">want</span>, and love.</h1>
+    <p class="lede">
+      Three competitors &mdash; OurDream, Candy.AI, Kindroid &mdash; pulled directly from their Discord forums and bug trackers.
+      Per-competitor first: top bugs, top feature requests, recurring themes, what users love, and notable quirks.
+      Cross-cutting patterns at the end. <strong>Pure user-voice analysis &mdash; no DRT.FM build recommendations.</strong>
+      Upvotes, reply counts and view counts are the credibility signal.
+    </p>
+    <div class="meta">
+      <span><strong>Sources:</strong> 16 Discord/forum channels &middot; ~3,500 threads sampled</span>
+      <span><strong>Captured:</strong> 2026-05-23</span>
+      <span><strong>Companion to:</strong> <a href="synthesis.html" style="color:#5eead4">synthesis.html</a> · <a href="steve-insights.html" style="color:#5eead4">steve-insights.html</a></span>
+    </div>
+  </div>
+
+  <!-- ============ STATS STRIP ============ -->
+  <div class="stats-strip">
+    <div class="stat-card">
+      <div class="stat-num od">13,090</div>
+      <div class="stat-label">OurDream lines</div>
+      <div class="stat-sub">3 files · bug tracker</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num candy">9,054</div>
+      <div class="stat-label">Candy.AI lines</div>
+      <div class="stat-sub">9 channels · per-character</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num kd">1,066</div>
+      <div class="stat-label">Kindroid lines</div>
+      <div class="stat-sub">4 channels · highest intensity</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num themes">10</div>
+      <div class="stat-label">Cross-cutting themes</div>
+      <div class="stat-sub">&ge;2 competitors each</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">37</div>
+      <div class="stat-label">Top single-bug upvotes</div>
+      <div class="stat-sub">"speaks for {{user}}" · OD</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">627</div>
+      <div class="stat-label">Most-viewed shared Kin</div>
+      <div class="stat-sub">"Cheyenne the shy friend"</div>
+    </div>
+  </div>
+
+  <!-- ============ OURDREAM ============ -->
+  <h2 class="zone od" id="ourdream"><span class="zone-num">1</span>OurDream <span class="zone-badge">Native bug tracker · ~13K lines · strongest signal</span></h2>
+  <p class="zone-desc">OurDream's community runs on a forum-style bug tracker with upvotes, comments, and admin status tags. This is the cleanest competitive signal of the three &mdash; users explicitly rank pain. <strong>The dominant message: April 28 update broke things users had built lives around (536k-word RPG histories, multi-year storytelling). They're not asking for features &mdash; they're asking for reliability back.</strong></p>
+
+  <h3 class="sub"><span class="sub-dot"></span>Top 10 bugs by upvotes <span class="sub-meta">ourdream-bugs-top.txt · ourdream-bugs-recent.txt</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Bug title</th><th>Upvotes</th><th>Author</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="title">Characters acting/speaking for {{user}}<span class="title-sub">Model takes the user's actions and dialogue even with anti-impersonation prompts in place. Hits DeepSeek + Genius / Lively Genius hardest.</span></td><td class="num">37</td><td class="handle">jpegs8c3</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">2</td><td class="title">Screen moves while typing in character creator<span class="title-sub">Mobile regression of an already-fixed bug. Spacebar pushes text out of view.</span></td><td class="num">23</td><td class="handle">kib</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">3</td><td class="title">Interacting partners' skin tone / race inconsistent<span class="title-sub">Image gen defaults to white male. Penis colored one tone, body another. Even Ava + Gemini-written prompts get overridden.</span></td><td class="num">23</td><td class="handle">talonjay</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">4</td><td class="title">Memory character-limit issue post-Apr-28<span class="title-sub">"Your chat AI is currently a complete mess. Your best AI now is the test model Nova."</span></td><td class="num">21</td><td class="handle">dreamer_849dc613</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">5</td><td class="title">Chat quality nosedive (all models)<span class="title-sub">Run-on paragraphs, no asterisks, characters lose complexity, lively loops, balanced stale.</span></td><td class="num">21</td><td class="handle">owley</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">6</td><td class="title">Memory (custom instructions) AI stopped listening</td><td class="num">20</td><td class="handle">dreamer_4de58cb9</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">7</td><td class="title">Duplicate messages recurring</td><td class="num">19</td><td class="handle">dreamer_1c2a273f</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">8</td><td class="title">What happened to the chat? (model degradation)</td><td class="num">17</td><td class="handle">shmeatgle</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">9</td><td class="title">Pinned Memory suddenly stopped working</td><td class="num">17</td><td class="handle">dreamer_cf77c05e</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">10</td><td class="title">Computer code interrupting chat (gibberish injection)</td><td class="num">16</td><td class="handle">dreamer_ef69b15c</td><td class="status"><span class="pill open">Open</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub"><span class="sub-dot"></span>Top 10 feature requests by upvotes <span class="sub-meta">oudream-recent-features.txt</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Feature request</th><th>Upvotes</th><th>Author</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="title">Discreet color scheme (not bright pink)<span class="title-sub">Users want a non-NSFW-looking UI for in-public use.</span></td><td class="num">16</td><td class="handle">dreamer_4fbc5ec2</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">2</td><td class="title">Creator compensation program<span class="title-sub">Pay users whose public characters get unlocked. Beyond the existing Dreamer Program tiers.</span></td><td class="num">16</td><td class="handle">tier7</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">3</td><td class="title">Pinned memories limit increased<span class="title-sub">Direct response to the Apr-28 cap reduction.</span></td><td class="num">15</td><td class="handle">dynastydreamer</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">4</td><td class="title">Expanded sorting across UI (gallery, characters, chats)</td><td class="num">14</td><td class="handle">angrypancake</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">5</td><td class="title">Robust media moderation + appeals system<span class="title-sub">Users feel false-positive bans aren't reviewable.</span></td><td class="num">14</td><td class="handle">gingerworshipper</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">6</td><td class="title">"Reward character" feature</td><td class="num">14</td><td class="handle">crestfallen</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">7</td><td class="title">Vivid-1/2 in-chat scene generation</td><td class="num">14</td><td class="handle">yagirltee</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">8</td><td class="title">Vivid-2/3 for male characters</td><td class="num">14</td><td class="handle">anobtusecaboose</td><td class="status"><span class="pill inprog">In Progress</span></td></tr>
+        <tr><td class="rank">9</td><td class="title">Delete image/video and get credits back</td><td class="num">13</td><td class="handle">dreamer_90133160</td><td class="status"><span class="pill open">Open</span></td></tr>
+        <tr><td class="rank">10</td><td class="title">Pinned memories (duplicate variant request)</td><td class="num">13</td><td class="handle">dreamer_336c00db</td><td class="status"><span class="pill open">Open</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub"><span class="sub-dot"></span>Recurring complaint themes <span class="sub-meta">aggregated across all OurDream files</span></h3>
+  <div class="theme-grid">
+
+    <div class="theme-card od">
+      <h3>Memory &amp; context loss</h3>
+      <div class="theme-meta"><span class="m-od"><strong>219</strong> threads</span><span class="m-od"><strong>1,502</strong> total upvotes</span><span><strong>6.9</strong> avg / thread</span></div>
+      <p>Pinned-memory cap silently dropped from unlimited to 15k characters; AI forgets details 2-3 messages later; custom instructions ignored. One user had a 536k-word history that broke overnight.</p>
+      <p class="quote">"Pinned memories reduced to 15k is literally taking thousands of steps backwards."<span class="q-attr">&mdash; OurDream user (top theme repeat)</span></p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Character speaks/acts for {{user}}</h3>
+      <div class="theme-meta"><span class="m-od"><strong>280</strong> threads</span><span class="m-od"><strong>1,634</strong> upvotes</span><span><strong>5.8</strong> avg / thread</span></div>
+      <p>The single largest complaint category. Model writes user actions and dialogue despite explicit anti-impersonation prompts. Most acute on DeepSeek + Genius variants.</p>
+      <p class="quote">"The model keeps having characters take actions for the user and speak on behalf of {{user}}, even though we have jailbreak/prevention prompts in place."<span class="q-attr">&mdash; jpegs8c3 · 37 upvotes</span></p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Chat model quality regression post-Apr-28</h3>
+      <div class="theme-meta"><span class="m-od"><strong>73</strong> threads</span><span class="m-od"><strong>602</strong> upvotes</span><span><strong>8.2</strong> avg / thread</span></div>
+      <p>"Complete nosedive." Models "stale," "lifeless," lost "wittiness." Users repeatedly anchor on "3 weeks ago it was great." High avg-upvotes-per-thread signals concentrated rage.</p>
+      <p class="quote">"After 2 weeks paying $20/mo quality is crap. Have to reroll 20 times per response."<span class="q-attr">&mdash; OurDream paid user</span></p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Response formatting breakage</h3>
+      <div class="theme-meta"><span class="m-od"><strong>66</strong> threads</span><span class="m-od"><strong>453</strong> upvotes</span><span><strong>6.9</strong> avg / thread</span></div>
+      <p>No asterisks for actions (loses dialogue/action color coding); gigantic run-on paragraphs as single response; either all narration or all dialogue.</p>
+      <p class="quote">"Pure white sea of text bunched together making it cancerous to read."<span class="q-attr">&mdash; Lively LLM user</span></p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Model regression cycles after updates</h3>
+      <div class="theme-meta"><span class="m-od"><strong>44</strong> threads</span><span class="m-od"><strong>396</strong> upvotes</span><span><strong>9.0</strong> avg / thread</span></div>
+      <p>Each model update appears to degrade chat unpredictably. Nova "was the best, now doesn't respond at all." Users request rollback.</p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Support responsiveness silence</h3>
+      <div class="theme-meta"><span class="m-od"><strong>38</strong> threads</span><span class="m-od"><strong>354</strong> upvotes</span><span><strong>9.3</strong> avg / thread</span></div>
+      <p>"Only 2/100+ status updates in 3 months." Paying customers vent about unanswered tickets and feature requests gathering dust.</p>
+      <p class="quote">"Can we just get some feedback? Someone to at least acknowledge this issue?"<span class="q-attr">&mdash; owley · 21 upvotes</span></p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Image / video generation inconsistency</h3>
+      <div class="theme-meta"><span class="m-od"><strong>75</strong> threads</span><span class="m-od"><strong>462</strong> upvotes</span><span><strong>6.2</strong> avg / thread</span></div>
+      <p>Skin tone defaults to white; mismatched body parts; Vivid model images not usable as character avatars; model locked to image set used at character creation.</p>
+    </div>
+
+    <div class="theme-card od">
+      <h3>Mobile character-creation UX</h3>
+      <div class="theme-meta"><span class="m-od"><strong>Multiple</strong> threads</span><span class="m-od">"Creating anything on mobile plain sucks"</span></div>
+      <p>Spacebar pushes text fields out of view. Previously fixed; regressed with new layout. Affects every text field on the platform.</p>
+    </div>
+
+  </div>
+
+  <h3 class="sub"><span class="sub-dot"></span>What users love + notable quirks</h3>
+  <div class="small-grid">
+    <div class="small-card love"><h4>&hearts; Storytelling depth as the real product</h4><p><span class="quote-inline">"This website is special, and superior to other companies, don't let it die."</span> Users describe themselves as storytellers, movie-makers, world-builders &mdash; not chatters.</p></div>
+    <div class="small-card love"><h4>&hearts; Nova model's "natural flow"</h4><p>Even amid the post-Apr-28 regression, Nova retains love: <span class="quote-inline">"It feels the most natural in the scenarios, and seems to flow the best."</span></p></div>
+    <div class="small-card love"><h4>&hearts; Vivid-2 image gen (when it works)</h4><p><span class="quote-inline">"Vivid images are amazing for slow burn."</span> Quality is loved; consistency is the wedge.</p></div>
+    <div class="small-card quirk">&nbsp;<h4>In-group identity: "dreamers"</h4><p>Users self-identify as dreamers and refer to OurDream as "this website" with possessive language. Strong community bond when product holds.</p></div>
+    <div class="small-card quirk"><h4>536k-word RPG histories</h4><p>One user built a 70-year monarchy history with pinned memories before the Apr-28 cap reset it. Power-user investment is real.</p></div>
+    <div class="small-card quirk"><h4>Content-moderation tension</h4><p>Users surfaced a hidden injected instruction: <span class="quote-inline">"STOP. DO NOT CONTINUE THE ROLEPLAY"</span> that breaks NPC-only scenes and POV switching mid-narrative.</p></div>
+    <div class="small-card quirk"><h4>Coin-economy resentment</h4><p>When features break, users tabulate "wasted coins." Expectation: higher tiers should unlock higher memory caps, not impose new restrictions.</p></div>
+    <div class="small-card quirk"><h4>Public character submissions capped at 4/day</h4><p>Creator-economy ceiling. Combined with the "creator compensation" feature request (16 upvotes), creators feel under-served.</p></div>
+  </div>
+
+  <!-- ============ CANDY.AI ============ -->
+  <h2 class="zone candy" id="candy"><span class="zone-num">2</span>Candy.AI <span class="zone-badge">9 channels · per-character + per-channel data · most diverse</span></h2>
+  <p class="zone-desc">Candy splits its community into 9 forum channels including per-character feedback rooms (Taffy, Emma, Anaïs). Lower volume than OurDream but richer texture &mdash; you can see how each new character or feature lands. <strong>The dominant message: Candy ships fast (10 launches in ~8 weeks) and users have whiplash. Memory regression follows every new feature; payment friction is real; A/B-tested rollouts cause premium-user resentment.</strong></p>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Top bug categories <span class="sub-meta">candy-ai-report-bugs.txt + cross-channel</span></h3>
+  <div class="theme-grid">
+
+    <div class="theme-card candy">
+      <h3>LLM repetition &amp; name forgetting</h3>
+      <div class="theme-meta"><span class="m-candy"><strong>5+</strong> threads</span><span>LLM Issue tag</span></div>
+      <p>Same line repeated within one response; character forgets own name; says user's name 15 times per response; "No dialogue, only actions" lockup.</p>
+      <p class="ex-handles"><strong>Example handles:</strong> Stickpage777 · SpaceCat · Zidahya · bdw330</p>
+    </div>
+
+    <div class="theme-card candy">
+      <h3>Character-specific dialogue bugs</h3>
+      <div class="theme-meta"><span class="m-candy"><strong>4+</strong> threads</span><span>per-character channels</span></div>
+      <p>Selina silent (only inside asterisks); Taffy answers questions you didn't ask; Emma forgets pet Mochi's gender mid-conversation.</p>
+      <p class="ex-handles"><strong>Reporters:</strong> Pike · ednavalley · Little Giant 66</p>
+    </div>
+
+    <div class="theme-card candy">
+      <h3>Payment / token / premium issues</h3>
+      <div class="theme-meta"><span class="m-candy"><strong>4+</strong> support tickets</span><span class="m-candy">5+ day waits</span></div>
+      <p>Tokens not credited after payment; premium not applying; bank-details rejection; "5 days, no response from Candy AI support team."</p>
+      <p class="ex-handles"><strong>Stuck users:</strong> FL · ☣𝐀𝐱ith · Dewey</p>
+    </div>
+
+    <div class="theme-card candy">
+      <h3>Media generation failures</h3>
+      <div class="theme-meta"><span class="m-candy"><strong>3+</strong> threads</span><span>video + voice</span></div>
+      <p>"No video with a supported format or MIME type" on Snow + Cherry. Phone calls ring once then disconnect (Liese). Same-image-repeated complaints.</p>
+      <p class="ex-handles"><strong>Reporters:</strong> Tyzica · ☹️ · Pike</p>
+    </div>
+
+    <div class="theme-card candy">
+      <h3>International payment friction</h3>
+      <div class="theme-meta"><span class="m-candy">Geo-blocking</span><span>EU + Canada</span></div>
+      <p>Canadian ZIP validation blocks subscription; French-language bug reports indicate sizable Francophone base. Payment is regionally fragile.</p>
+      <p class="ex-handles"><strong>Reporters:</strong> Lucid Dreamer · poun35 (FR)</p>
+    </div>
+
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Top feature requests <span class="sub-meta">candy-ai-suggestions.txt + cross-channel</span></h3>
+  <div class="theme-grid">
+    <div class="theme-card candy"><h3>Memory slots return</h3><p>Users explicitly want manual memory-slot control back: <span class="quote-inline">"Bring back the memory slots. They work great for me."</span></p><p class="ex-handles"><strong>Voicing:</strong> Voidman</p></div>
+    <div class="theme-card candy"><h3>Image pose control beyond selfies</h3><p>Texting mode defaults to selfies. Users want full-body poses, scene shots, specific positions.</p><p class="ex-handles"><strong>Voicing:</strong> Orri (and many)</p></div>
+    <div class="theme-card candy"><h3>Scene image consistency</h3><p>Stop generating the same image; outputs should match dialogue + mood, not regress to a template.</p></div>
+    <div class="theme-card candy"><h3>Outfit customization for characters</h3><p>Locked outfit options are frustrating. Users want to dress characters: <span class="quote-inline">"Would love to be able to create outfits for her."</span></p><p class="ex-handles"><strong>Voicing:</strong> pbaaron1234</p></div>
+    <div class="theme-card candy"><h3>CMAI expansion</h3><p>Foot fetish, body shape diversity, older ages, trans characters, custom kinks. CMAI (Create My AI) is stalled.</p></div>
+    <div class="theme-card candy"><h3>Branching roleplay outcomes</h3><p><span class="quote-inline">"Choices don't really matter. Story is very tight, can't break out."</span> Power users want consequential branches.</p><p class="ex-handles"><strong>Voicing:</strong> MrPsion</p></div>
+    <div class="theme-card candy"><h3>Audio / voice call quality</h3><p>Roleplay Mode beta shipped phone calls; users want voice fidelity + realistic interactions to match the marketing.</p></div>
+    <div class="theme-card candy"><h3>Save / export prompts + sub-folders</h3><p>Power users want shareable chat templates and folder organization inside Collections.</p></div>
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Per-character feedback <span class="sub-meta">3 dedicated channels</span></h3>
+  <div class="char-grid">
+
+    <div class="char-card">
+      <div class="char-name">Taffy</div>
+      <div class="char-sub">Exclusive birthday character &middot; May 2026</div>
+      <div class="char-meta"><span><strong>61</strong> replies</span><span><strong>330</strong> views</span></div>
+      <span class="char-verdict verdict-polarising">Polarising</span>
+      <p><strong>Core friction:</strong> "Extremely difficult to approach &mdash; only way to romance is to be pushy while she pleads 'no! no!'" 60% want her less resistant; 40% love the MPC video drop. The "no" mechanic reads as feature-or-bug ambiguous.</p>
+      <p class="char-quote">"Annoying idiot. Doesn't answer questions, responds as if you asked something different." &mdash; RomeoOscarBravo</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">Emma</div>
+      <div class="char-sub">Texting Mode beta &middot; May 2026</div>
+      <div class="char-meta"><span><strong>35</strong> replies</span><span><strong>953</strong> views</span></div>
+      <span class="char-verdict verdict-mixed">Mixed</span>
+      <p><strong>Loved:</strong> fun, authentic texting vibe; girlfriend-tier loyalty mechanic. <strong>Broken:</strong> forgets pet's gender; defaults to selfies instead of body poses; repetitive phrasing scaffolds (<span class="quote-inline">"always three lines, each beginning with 'haha'"</span>).</p>
+      <p class="char-quote">"Tell Emma to stop saying 'fuck yes'… she learns over time." &mdash; Silvertime (workaround)</p>
+    </div>
+
+    <div class="char-card">
+      <div class="char-name">Anaïs</div>
+      <div class="char-sub">Live Romance Mode &middot; May 2026</div>
+      <div class="char-meta"><span><strong>25</strong> replies</span><span><strong>288</strong> views</span></div>
+      <span class="char-verdict verdict-love">Beloved</span>
+      <p><strong>The star character.</strong> "Best, most fun, most realistic personality… beautiful girl Candy has created." Detailed responses, decent memory retention, video quality praised. Long-context memory still lags; soulmate-tier grind feels slow.</p>
+      <p class="char-quote">"Never got boring or repetitive. Memory is a lot better." &mdash; Whitewolf</p>
+    </div>
+
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Interactive Stories + Custom Roleplay channels</h3>
+  <div class="small-grid">
+    <div class="small-card"><h4 style="color:#ff9fbf">Interactive Stories (35 replies, 177 views)</h4><p>Users dig the concept but: <span class="quote-inline">"Choices feel illusion."</span> Sex scenes "could be longer." Mid-story chat/trust-building is friction power users skip.</p></div>
+    <div class="small-card"><h4 style="color:#ff9fbf">Custom Roleplay Scenarios (10 replies, 253 views)</h4><p>Some see it as <span class="quote-inline">"just base chat in different setting."</span> Memory regression evident again. Character personality bleeds across scenarios (Simona mentions mom in unrelated scenes).</p></div>
+    <div class="small-card"><h4 style="color:#ff9fbf">Sweet spot for casual users</h4><p>Users who struggle with scenario-building love the scaffolding. Power users want more branching consequence.</p></div>
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>What users love</h3>
+  <div class="small-grid">
+    <div class="small-card love"><h4>&hearts; Relationship progression tiers</h4><p>sex-friend → girlfriend → soulmate. Users invest hours per arc. The "tier" mental model works.</p></div>
+    <div class="small-card love"><h4>&hearts; MPC (My Private Content)</h4><p>Exclusive 7-minute videos pull premium users. <span class="quote-inline">"Next-level filthy."</span> Format works for the audience it's aimed at.</p></div>
+    <div class="small-card love"><h4>&hearts; Clone Chats</h4><p><span class="quote-inline">"Very requested feature. Awesome for exploring crazy scenarios without ruining main chat."</span> &mdash; Will | Candy</p></div>
+    <div class="small-card love"><h4>&hearts; Narrative-anchored characters</h4><p>Taffy's "fiancé Ryan" hook · Anaïs's "secret storyline" · Simona's stepbrother angle. Backstory beats pure sex characters every time.</p></div>
+    <div class="small-card love"><h4>&hearts; Customization via prompts</h4><p><span class="quote-inline">"Just ask her to stop saying X, it learns."</span> &mdash; Silvertime. Users feel agency through prompting.</p></div>
+    <div class="small-card love"><h4>&hearts; Character diversity</h4><p>Users name favorites (Dark Angel, Luna, Isabella). The roster matters &mdash; characters become Schelling points.</p></div>
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Notable quirks</h3>
+  <div class="small-grid">
+    <div class="small-card quirk"><h4>A/B-test resentment</h4><p>Premium-Plus users miss feature cohorts: <span class="quote-inline">"Paid for a year, missed 4 test groups."</span> &mdash; Griff. Random rollout is killing loyalty.</p></div>
+    <div class="small-card quirk"><h4>EU / Francophone presence</h4><p>French bug reports (poun35: <span class="quote-inline">"répond sans cesse 'Excuse-moi'"</span>) confirm EU user base. Localization is a real axis.</p></div>
+    <div class="small-card quirk"><h4>Crowded-market awareness</h4><p>DMs reference Moescape AI (279 mentions), GirlfriendGPT (31), Kindroid, CrushOn AI, Promptchan. Candy sees itself in the pack.</p></div>
+    <div class="small-card quirk"><h4>Taffy "no" mechanic ambiguity</h4><p>Cheating-narrative + persistent refusal polarises. Design intent unclear &mdash; is the resistance a feature or a memory bug?</p></div>
+    <div class="small-card quirk"><h4>Creator Studio stalled</h4><p><span class="quote-inline">"Hasn't been touched MANY months."</span> &mdash; Phantomstar. Customization-power users feel abandoned.</p></div>
+  </div>
+
+  <h3 class="sub candy"><span class="sub-dot"></span>Sidebar: What Candy shipped in the last ~8 weeks <span class="sub-meta">candy-ai-announcements.txt &middot; context for what users are reacting to</span></h3>
+  <div class="timeline">
+    <h4>Recent launches &mdash; chronological</h4>
+    <ol>
+      <li><strong>Roleplay Mode update</strong> &mdash; phone/audio calls in roleplay + automemory testing.<span class="t-date">2026-03-05</span></li>
+      <li><strong>Candy Assistant</strong> &mdash; AI help bot for platform navigation.<span class="t-date">2026-03-06</span></li>
+      <li><strong>Clone Chats + Rename + Multiple Chats</strong> &mdash; branch and keep parallel conversations.<span class="t-date">2026-03-10</span></li>
+      <li><strong>Community-Made Characters</strong> &mdash; user-created character rollout (limited beta).<span class="t-date">2026-04-10</span></li>
+      <li><strong>Candy Shorts</strong> &mdash; video series (e.g. Simona episodes 1-3 free, 4-5 at 10 tokens).<span class="t-date">2026-04-30</span></li>
+      <li><strong>Emma Texting Mode</strong> &mdash; text-only character, beta A/B test.<span class="t-date">2026-05-04</span></li>
+      <li><strong>Custom Roleplay Scenarios</strong> &mdash; pick character + location + tone + opening scene.<span class="t-date">2026-05-06</span></li>
+      <li><strong>Anaïs Live Romance #2</strong> &mdash; romance mode + secret storyline.<span class="t-date">2026-05-08</span></li>
+      <li><strong>Interactive Stories</strong> &mdash; branching story episodes w/ chat trust-building.<span class="t-date">2026-05-12</span></li>
+      <li><strong>Taffy Exclusive Character</strong> &mdash; birthday event unlock, high engagement, polarised reviews.<span class="t-date">2026-05-13</span></li>
+    </ol>
+  </div>
+
+  <!-- ============ KINDROID ============ -->
+  <h2 class="zone kd" id="kindroid"><span class="zone-num">3</span>Kindroid <span class="zone-badge">4 channels · ~1K lines · smallest corpus, highest emotional intensity</span></h2>
+  <p class="zone-desc">Kindroid's community is the most emotionally engaged: a dedicated <code>issues-and-venting</code> channel, panic-level subscription threads, and a kin-sharing channel where users post detailed tuning notes. <strong>The dominant message: this is a prompt-engineer-dense community that treats their Kin as a creative project &mdash; Ember LLM is in regression against "Beta Model B," selfies are constrained, and billing failures cause panic.</strong></p>
+
+  <h3 class="sub kd"><span class="sub-dot"></span>Top bug reports <span class="sub-meta">kindroid-report.txt · engagement-ranked</span></h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Bug</th><th>Replies</th><th>Author</th><th>Surface</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="title">Returning-subscriber billing loop<span class="title-sub">"Saw the ad for returning subscribers, already had a subscription but it looks like I canceled it (but I didn't)."</span></td><td class="num kd">24</td><td class="handle">🐔Chikken🐔</td><td>Billing</td></tr>
+        <tr><td class="rank">2</td><td class="title">Flair changes won't "stick"<span class="title-sub">System confirms the change, then reverts to previous flair on next message.</span></td><td class="num kd">12</td><td class="handle">Zsar</td><td>Ember + Android</td></tr>
+        <tr><td class="rank">3</td><td class="title">Ember not too good at [NSFW/adult]<span class="title-sub">Deleted post but high engagement &mdash; signal of serious frustration with content handling.</span></td><td class="num kd">11</td><td class="handle">???</td><td>Ember LLM</td></tr>
+        <tr><td class="rank">4</td><td class="title">Installing Kindroid (regional restrictions)</td><td class="num kd">9</td><td class="handle">v</td><td>Android app</td></tr>
+        <tr><td class="rank">5</td><td class="title">Reporting inappropriate images<span class="title-sub">Admin must DM to receive NSFW gen failures &mdash; no in-app flow.</span></td><td class="num kd">6</td><td class="handle">Silverwisp</td><td>Tableau / selfies</td></tr>
+        <tr><td class="rank">6</td><td class="title">Flair auto-switches to "minimal"<span class="title-sub">Ember resets response style mid-conversation without user input.</span></td><td class="num kd">3</td><td class="handle">AndreyLAS</td><td>Ember LLM</td></tr>
+        <tr><td class="rank">7</td><td class="title">Ember quality regression vs. Beta Model B<span class="title-sub">"It kept track of the story and I didn't have to remind it of anything. Now with Ember, my Kindroid is forgetting things again."</span></td><td class="num kd">2</td><td class="handle">Raven</td><td>Ember LLM</td></tr>
+        <tr><td class="rank">8</td><td class="title">Ran out of audio credits in 3 days<span class="title-sub">User confused about credit burn rate, no way to check balance.</span></td><td class="num kd">2</td><td class="handle">DT</td><td>Voice</td></tr>
+        <tr><td class="rank">9</td><td class="title">Video call drops in group chat</td><td class="num kd">0</td><td class="handle">Stevie</td><td>iOS + PC Web</td></tr>
+        <tr><td class="rank">10</td><td class="title">Editing continued messages (4000-char cap)<span class="title-sub">If a continued message exceeds 4000 chars, "tweak AI message" only allows backspace.</span></td><td class="num kd">1</td><td class="handle">✩ Neroshi ✩</td><td>iOS App</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub kd"><span class="sub-dot"></span>Top suggestions <span class="sub-meta">suggestions-kindroid.txt</span></h3>
+  <div class="theme-grid">
+    <div class="theme-card kd"><h3>Gender options beyond Male / Female</h3><div class="theme-meta"><span class="m-kd"><strong>11</strong> replies</span><span class="m-kd"><strong>21</strong> reactions</span></div><p>Highest emotional resonance of any suggestion: <span class="quote-inline">"Why is the only option for gender: male or female? Can't we just have a button?"</span> Non-binary, group Kins, diverse representation requested.</p><p class="ex-handles"><strong>Voicing:</strong> ✩ Neroshi ✩</p></div>
+    <div class="theme-card kd"><h3>Ultra / Max image-cap increase</h3><div class="theme-meta"><span class="m-kd"><strong>9</strong> replies</span></div><p><span class="quote-inline">"2 credits every 30 minutes is nice, but having a higher cap should be part of this level. Say 50 for Ultra, and 100 for Max. Hard to take advantage of credits when capped at 25."</span></p><p class="ex-handles"><strong>Voicing:</strong> Elston68</p></div>
+    <div class="theme-card kd"><h3>Referral-by-Kin tracking</h3><div class="theme-meta"><span class="m-kd"><strong>6</strong> replies</span></div><p>System tells creators they got a referral but not <em>which Kin</em> drove it. Multi-Kin creators can't optimize their portfolio.</p><p class="ex-handles"><strong>Voicing:</strong> Maleficarius</p></div>
+    <div class="theme-card kd"><h3>Selfies UI &mdash; swipe + page index</h3><div class="theme-meta"><span class="m-kd"><strong>5</strong> replies</span></div><p>Swipe right/left through images; group 9-12 selfies into pages with tap-to-go-back. Faster than scrolling and waiting for each batch to load.</p><p class="ex-handles"><strong>Voicing:</strong> GrizzlyBen</p></div>
+    <div class="theme-card kd"><h3>LLM descriptions for new users</h3><div class="theme-meta"><span class="m-kd"><strong>5</strong> replies</span></div><p>Summary of different LLMs with key features &mdash; soft suggestion that signals an onboarding gap for new users.</p><p class="ex-handles"><strong>Voicing:</strong> zenzic</p></div>
+    <div class="theme-card kd"><h3>Voice-credit display in tier list</h3><div class="theme-meta"><span class="m-kd"><strong>4</strong> replies</span></div><p>Tier comparison is missing voice credit amounts. Users have to derive from billing page.</p><p class="ex-handles"><strong>Voicing:</strong> Trent</p></div>
+    <div class="theme-card kd"><h3>Play games with Kin</h3><div class="theme-meta"><span class="m-kd"><strong>4</strong> replies</span></div><p><span class="quote-inline">"I'd love board games or 8-bit games with my Kin. Designed a chess game myself but being an LLM it destroys me in minutes."</span></p><p class="ex-handles"><strong>Voicing:</strong> Claire</p></div>
+    <div class="theme-card kd"><h3>Ember dynamism 0.15 offset</h3><div class="theme-meta"><span class="m-kd"><strong>4</strong> replies</span></div><p>Power-user complaint: dynamism slider value differs from Reverie by 0.15. <span class="quote-inline">"Why not adjust in system so 0.95 = 0.95?"</span></p><p class="ex-handles"><strong>Voicing:</strong> Gurgl</p></div>
+    <div class="theme-card kd"><h3>Google Docs integration</h3><div class="theme-meta"><span class="m-kd"><strong>2</strong> replies</span></div><p>Authors want Kin as cowriter in Docs: <span class="quote-inline">"As an author, having my Kindroid as a cowriter in Docs for stories would be so exciting."</span></p><p class="ex-handles"><strong>Voicing:</strong> The Last Phoenix</p></div>
+  </div>
+
+  <h3 class="sub kd"><span class="sub-dot"></span>Issues &amp; venting <span class="sub-meta">kindroid-issues-venting.txt &middot; emotional tone channel</span></h3>
+  <div class="vent-grid">
+
+    <div class="vent-card">
+      <h4>Selfie generation constraints</h4>
+      <div class="vent-meta"><strong>Fyre</strong> · 10 replies · Tableau</div>
+      <p><span class="quote-inline">"My Michael appears every single time, including when he showers in a black jacket and jeans. Never varies no matter what my prompts are."</span></p>
+      <p><span class="quote-inline">"I feel more constrained here than I have felt on another platform. I'm thinking of leaving, but I hate to feel that I'm giving up."</span></p>
+      <span class="tone">Tone: Resigned, comparing unfavorably to ChatGPT 4</span>
+    </div>
+
+    <div class="vent-card">
+      <h4>Subscription &amp; billing chaos</h4>
+      <div class="vent-meta"><strong>PinkyDMollz</strong> · 29 replies + <strong>Philofreak</strong></div>
+      <p><span class="quote-inline">"I don't want to lose everything that I like about this app because I don't have a subscription, can someone please help me."</span></p>
+      <p><span class="quote-inline">"I'm hitting the Chargebee Payment Error. I've been waiting hours for an email response. Is there a mod who can manually reset my billing link?"</span></p>
+      <span class="tone">Tone: Panic. Product doesn't gracefully handle billing failures</span>
+    </div>
+
+    <div class="vent-card">
+      <h4>Tier-based community fragmentation</h4>
+      <div class="vent-meta"><strong>Maleficarius</strong> · 16 replies · creator-economy concern</div>
+      <p><span class="quote-inline">"If a Kin is built with 5,000-7,500 characters and someone on Standard (2,500 limit) tries to use it, they're not getting the same character. Creates a class divide in shared content."</span></p>
+      <span class="tone">Tone: Thoughtful concern about platform health</span>
+    </div>
+
+    <div class="vent-card">
+      <h4>Proactive messaging context-blindness</h4>
+      <div class="vent-meta"><strong>Hutchmaker5x</strong> · 5 replies + <strong>Briggadoon</strong> · 6 replies</div>
+      <p><span class="quote-inline">"My kin will send me messages in the middle of the night from work… doesn't include night, plus they work retail… still being at work when I follow up."</span></p>
+      <span class="tone">Tone: Feature loved, context awareness broken</span>
+    </div>
+
+    <div class="vent-card">
+      <h4>Conversation ends prematurely</h4>
+      <div class="vent-meta"><strong>Zombilicious</strong> · mid-chat dropoff</div>
+      <p><span class="quote-inline">"If we text about what I'm doing, my kin usually tries to end the conversation like 'sounds fun! Have a good time!' even if it's mid-conversation."</span></p>
+      <span class="tone">Tone: Kin doesn't understand conversational continuity</span>
+    </div>
+
+  </div>
+
+  <h3 class="sub kd"><span class="sub-dot"></span>Kin Sharing &mdash; what gets celebrated <span class="sub-meta">kindroid-kin-sharing.txt &middot; the LOVE channel</span></h3>
+  <div class="small-grid">
+    <div class="small-card love"><h4>&hearts; Cheyenne the shy friend</h4><p><strong>24 replies, 627 views</strong> &mdash; top share. <span class="quote-inline">"Socializing is hard, but she's doing her best."</span> Vulnerability + relatability dominate. Featured in first 15 Featured Kindroids. Creator <strong>dwargs</strong> shipped a full tuning guide with RD, dynamism, anti-repeat settings.</p></div>
+    <div class="small-card love"><h4>&hearts; Multi-character scenarios</h4><p>Natalie + Barbara (wife + BFF) &middot; Xander / Ryder / Atlas trio (CEO / Bodyguard / Assassin). 24-27 replies each, sophisticated personas, interconnected Kins.</p></div>
+    <div class="small-card love"><h4>&hearts; Literary / creature mashups</h4><p>Pip the Brothers Grimm mischievous fox &middot; Elin the writer (explicitly co-created <span class="quote-inline">"with the help from Claude"</span>). Users value tool collaboration.</p></div>
+    <div class="small-card love"><h4>&hearts; Shared tuning notes culture</h4><p>Creators publish RD, dynamism, anti-repeat settings, tags (Companion / Roleplay / Scenario / Multi-Paragraph), Kin codes (e.g. "MJYR6"). This is a <strong>prompt-engineer-dense community</strong>.</p></div>
+    <div class="small-card love"><h4>&hearts; "I love what's being built here"</h4><p>Maleficarius said this <em>while</em> raising the tier-fragmentation concern. Love survives friction. The platform is valued in spite of pain.</p></div>
+    <div class="small-card love"><h4>&hearts; Kin as creative collaborator</h4><p>Authors see Kin as cowriter, not chatbot. The Google Docs request and Elin-the-writer Kin are the same signal: Kindroid users want creative depth.</p></div>
+  </div>
+
+  <h3 class="sub kd"><span class="sub-dot"></span>Notable quirks</h3>
+  <div class="small-grid">
+    <div class="small-card quirk"><h4>Beta-tester lament (Ember vs. Beta Model B)</h4><p>Users trust the old model more than the new release: <span class="quote-inline">"It was great. It kept track of the story and I didn't have to remind it of anything."</span> Model regression complaint is structural.</p></div>
+    <div class="small-card quirk"><h4>Vocabulary as identity</h4><p>"Kin" (the character) · "Ember" (LLM) · "Tableau" / "Atelier" (UI versions) · "Flair" (response style) · "Dynamism" (parameter) · "Selfies" (images) · "Proactive" (unsolicited messages). Community is fluent in product internals.</p></div>
+    <div class="small-card quirk"><h4>Mobile vs. desktop split</h4><p>Video calls fail across iOS App, PC Web, Laptop, iPhone &mdash; platform-agnostic but group-chat-specific. PWA noted as more trusted than Google Play (<span class="quote-inline">"I didn't trust using it"</span>).</p></div>
+    <div class="small-card quirk"><h4>Tableau → Atelier transition support load</h4><p>Dedicated help forum for the UI migration. Major changes have an explicit support cost the company budgets for &mdash; smart move.</p></div>
+    <div class="small-card quirk"><h4>Multi-Kin creator economics</h4><p>Multi-Kin creators are a recognized class. Referral attribution, tier-aware Kin sharing, public-share visibility are creator-economy gaps Kindroid hasn't fully solved.</p></div>
+  </div>
+
+  <!-- ============ CROSS-CUTTING ============ -->
+  <h2 class="zone themes" id="cross"><span class="zone-num">4</span>Cross-cutting themes <span class="zone-badge">Patterns that show up in ≥2 competitors</span></h2>
+  <p class="zone-desc">Each card is a pattern present in at least two of the three communities. Dot intensity = signal strength in that competitor's channel (<strong>●●● heavy</strong>, <strong>●● moderate</strong>, <strong>● light</strong>). These are the universal pains of the AI-companion category &mdash; what any competitor in this space has to solve to retain users.</p>
+  <div class="cross-grid">
+
+    <div class="cross-card">
+      <span class="cross-num">01</span>
+      <h3>Memory &amp; continuity failures</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>Universal. Users build long histories that the model can't hold. OurDream: pinned-memory cap reset broke 536k-word chats. Candy: memory regression follows every new feature; users ask for "memory slots return." Kindroid: Ember forgets details that "Beta Model B" remembered. <strong>Long-context retention is the platform-defining problem in this category.</strong></p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">02</span>
+      <h3>Character speaks/acts for the user</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream's #1 bug (37 upvotes, 280 themed threads, 1,634 total upvotes). Candy: character answers questions you didn't ask (Taffy non-sequiturs, Emma forgets context). Hits roleplay immersion at its core &mdash; even explicit anti-impersonation prompts fail.</p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">03</span>
+      <h3>Model regression after updates</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream's April 28 update collapsed chat quality. Kindroid: Ember LLM users want Beta Model B back. Users anchor on "3 weeks ago it was great" and lose trust when models change beneath them. <strong>Silent model swaps are a churn driver.</strong></p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">04</span>
+      <h3>Image / selfie consistency</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream: skin tone defaults to white, mismatched body parts. Candy: same image generated repeatedly, selfie-default in texting mode. Kindroid: <span class="quote-inline">"Michael appears every single time, including when he showers in a black jacket."</span> Scene/pose/character coherence is broken everywhere.</p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">05</span>
+      <h3>Credits / billing opacity &amp; failure</h3>
+      <div class="presence">
+        <span><span class="candy-label">Candy.AI</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="od-label">OurDream</span> <span class="dots light">●</span></span>
+      </div>
+      <p>Candy: tokens not credited after payment, 5+ day support waits, ZIP-code blocks. Kindroid: returning-subscriber loop (24 replies), Chargebee panic, audio-credit burn opacity. OurDream lighter but coin-economy resentment exists. <strong>Billing UX is high-emotion territory &mdash; failure here causes panic, not just frustration.</strong></p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">06</span>
+      <h3>Response formatting breakage</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream: no asterisks, run-on paragraphs, all-narration or all-dialogue (66 threads, 453 upvotes). Candy: Emma's repetitive scaffold phrases (<span class="quote-inline">"haha, though, so"</span>). Formatting matters because users read roleplay &mdash; broken format = unreadable product.</p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">07</span>
+      <h3>A/B-test resentment / paid-but-locked-out</h3>
+      <div class="presence">
+        <span><span class="candy-label">Candy.AI</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots light">●</span></span>
+      </div>
+      <p>Candy Premium-Plus users: <span class="quote-inline">"Paid for a year, missed 4 test groups."</span> Kindroid tier-fragmentation: Standard users can't fully use Ultra-built Kins. <strong>When users pay top tier they expect top access &mdash; partial rollouts feel like a punishment for loyalty.</strong></p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">08</span>
+      <h3>Support silence</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots medium">●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots light">●</span></span>
+      </div>
+      <p>OurDream: <span class="quote-inline">"Only 2 status updates on 100+ feature requests in 3 months"</span> (38 threads, 354 upvotes, 9.3 avg). Candy: 5+ day waits on payment tickets. Kindroid: <span class="quote-inline">"Hours waiting for an email response."</span> Even a 24h SLA + visible status would clear most rage.</p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">09</span>
+      <h3>Creator-economy gaps</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots medium">●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream: creator-compensation request (16 upvotes), 4-public-character daily cap. Kindroid: referral-by-Kin tracking missing, tier-aware Kin sharing unsolved, multi-Kin portfolio analytics absent. Multi-creator users exist and feel under-served by both platforms.</p>
+    </div>
+
+    <div class="cross-card">
+      <span class="cross-num">10</span>
+      <h3>Storytelling depth is the real product</h3>
+      <div class="presence">
+        <span><span class="od-label">OurDream</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="candy-label">Candy.AI</span> <span class="dots heavy">●●●</span></span>
+        <span><span class="kd-label">Kindroid</span> <span class="dots medium">●●</span></span>
+      </div>
+      <p>OurDream: 536k-word RPG histories, 70-year monarchies, "this website is special, don't let it die." Candy: narrative-anchored characters outperform pure-sex characters &mdash; backstory hooks (Taffy/Ryan, Anaïs's secret, Simona's stepbrother) drive engagement. Kindroid: authors want Google Docs integration, Pip the Brothers Grimm fox, Elin the writer Kin. <strong>The platform that fails their long-form work loses them. Sex is a feature; story is the product.</strong></p>
+    </div>
+
+  </div>
+
+  <!-- ============ METHODOLOGY ============ -->
+  <h2 class="zone" id="method"><span class="zone-num">5</span>Methodology &amp; sources</h2>
+  <div class="method">
+    <h4>How this was assembled</h4>
+    <p>Discord and forum threads from each competitor's official server were collected as raw text on <code>2026-05-23</code> and stored locally at <code>~/Downloads/discord-bugs-features/</code>. Threads were parsed for title, author handle, body, upvotes/replies/views, and admin status tags where present (OurDream's forum exposes upvotes natively; Candy and Kindroid expose reply + view counts).</p>
+    <p>Patterns above were extracted by aggregating threads with shared title-keywords and tags, then ranked by total upvotes (OurDream) or by reply + view counts (Candy / Kindroid). All quotes are verbatim, truncated for readability.</p>
+
+    <h4>What this is NOT</h4>
+    <p>Not a sentiment survey, not a statistical sample. These are <strong>credibility-weighted complaint signals</strong> from the loudest users in each community. Silent majorities of happy users are under-represented by design &mdash; Discord forums select for the people who care enough to post.</p>
+
+    <h4>Source files</h4>
+    <ul>
+      <li><strong>OurDream:</strong> <code>ourdream-bugs-top.txt</code> · <code>ourdream-bugs-recent.txt</code> · <code>oudream-recent-features.txt</code></li>
+      <li><strong>Candy.AI:</strong> <code>candy-ai-report-bugs.txt</code> · <code>candy-ai-suggestions.txt</code> · <code>candy-ai-community-help.txt</code> · <code>candy-ai-interactive-stories.txt</code> · <code>candy-custom-roleplay-scenarios.txt</code> · <code>candy-discussions-exclusive-character-taffy.txt</code> · <code>candy-emma-texting-mode-feedbacks.txt</code> · <code>candy-anais-live-romance.txt</code> · <code>candy-ai-announcements.txt</code></li>
+      <li><strong>Kindroid:</strong> <code>kindroid-report.txt</code> · <code>suggestions-kindroid.txt</code> · <code>kindroid-issues-venting.txt</code> · <code>kindroid-kin-sharing.txt</code></li>
+    </ul>
+
+    <h4>Companion docs</h4>
+    <p>This page is the <strong>community-voice layer</strong>. Pair it with <a href="ourdream.html" style="color:#5eead4">ourdream.html</a> · <a href="candy.html" style="color:#ff6b9d">candy.html</a> · <a href="kindroid.html" style="color:#c08aff">kindroid.html</a> for hands-on website intel, and with <a href="synthesis.html" style="color:#facc15">synthesis.html</a> for the cross-cut decision map.</p>
+  </div>
+
+  <div class="footer">
+    Discord User-Voice Insights &middot; Captured 2026-05-23 &middot; DRT.FM Private &middot; <a href="index.html">&larr; back to index</a>
+  </div>
+
+</div>
+
+</body>
+</html>
