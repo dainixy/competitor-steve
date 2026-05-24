@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Soul — DRT.FM Memory & Bond Architecture</title>
+<style>
+  :root{
+    --bg:#0a0c10;
+    --bg-2:#10141b;
+    --panel:#141923;
+    --panel-2:#1a2030;
+    --line:#262d3d;
+    --line-2:#33405a;
+    --text:#e8ecf2;
+    --muted:#8b95aa;
+    --dim:#5a6578;
+    --pink:#ff6fa3;        /* Alexis / Soul */
+    --pink-soft:#ff9fbf;
+    --blue:#7cc3ff;        /* memory layer */
+    --green:#7ddb9b;       /* good signal */
+    --amber:#f6c265;       /* warning / churn driver */
+    --red:#ff7a85;         /* breakage */
+    --violet:#b89dff;      /* emotional / vibe */
+    --teal:#7ddccd;        /* privacy */
+    --gold:#ffd47a;        /* tipping point */
+  }
+  *{box-sizing:border-box}
+  html,body{background:var(--bg);color:var(--text);margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Inter","SF Pro Display","Segoe UI",system-ui,sans-serif;line-height:1.5;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1400px;margin:0 auto;padding:48px 32px 96px}
+  h1,h2,h3,h4{font-weight:700;letter-spacing:-0.01em;margin:0}
+  h1{font-size:54px;line-height:1.05;letter-spacing:-0.02em}
+  h2{font-size:34px;margin:0 0 6px;letter-spacing:-0.015em}
+  h3{font-size:22px;color:var(--text)}
+  h4{font-size:15px;color:var(--text);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+  p{margin:0 0 12px;color:var(--muted)}
+  a{color:var(--pink-soft)}
+  small,.small{font-size:12.5px;color:var(--dim)}
+  code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;color:#cdd6f4;background:#1c2230;padding:1px 6px;border-radius:4px;border:1px solid var(--line)}
+
+  /* Hero */
+  .hero{padding:36px 40px 44px;border:1px solid var(--line);border-radius:20px;background:radial-gradient(1100px 480px at -200px -100px,rgba(255,111,163,.12),transparent 55%),radial-gradient(900px 420px at 110% 110%,rgba(184,157,255,.10),transparent 60%),linear-gradient(180deg,#11141d 0%,#0d1117 100%);position:relative;overflow:hidden}
+  .hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:18px}
+  .hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 18px var(--pink)}
+  .hero p.lead{font-size:18px;line-height:1.55;color:#c8cfdc;max-width:900px;margin-top:18px}
+  .hero .meta{display:flex;gap:24px;margin-top:26px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+  .hero .meta span b{color:var(--text);font-weight:600}
+
+  /* Section header */
+  .section{margin-top:64px}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:24px;border-bottom:1px solid var(--line);padding-bottom:14px}
+  .section-head .num{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .section-head .right{color:var(--dim);font-size:13px;max-width:480px;text-align:right}
+  .section.vision .num{color:var(--pink)}
+  .section.tech .num{color:var(--blue)}
+
+  /* Pills */
+  .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line-2)}
+  .tag.pink{color:var(--pink);border-color:rgba(255,111,163,.4);background:rgba(255,111,163,.08)}
+  .tag.blue{color:var(--blue);border-color:rgba(124,195,255,.35);background:rgba(124,195,255,.07)}
+  .tag.green{color:var(--green);border-color:rgba(125,219,155,.35);background:rgba(125,219,155,.07)}
+  .tag.amber{color:var(--amber);border-color:rgba(246,194,101,.4);background:rgba(246,194,101,.08)}
+  .tag.red{color:var(--red);border-color:rgba(255,122,133,.4);background:rgba(255,122,133,.08)}
+  .tag.violet{color:var(--violet);border-color:rgba(184,157,255,.4);background:rgba(184,157,255,.08)}
+  .tag.teal{color:var(--teal);border-color:rgba(125,220,205,.4);background:rgba(125,220,205,.08)}
+  .tag.gold{color:var(--gold);border-color:rgba(255,212,122,.4);background:rgba(255,212,122,.08)}
+
+  /* Cards */
+  .grid{display:grid;gap:16px}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:1100px){.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){.grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative}
+  .card .icon{font-size:18px;color:var(--pink);margin-bottom:8px}
+  .card h4{margin-bottom:10px}
+  .card p{margin:0;font-size:14px;color:var(--muted)}
+  .card .quote{font-style:italic;color:#bdc4d3;font-size:13.5px;border-left:2px solid var(--line-2);padding:4px 0 4px 12px;margin:10px 0 0}
+  .card .quote b{color:var(--text);font-style:normal}
+
+  /* Complaint pattern cards */
+  .complaint{background:linear-gradient(180deg,#171b25,#11141d);border:1px solid var(--line)}
+  .complaint h4 .pillno{display:inline-block;width:22px;height:22px;border-radius:6px;background:rgba(255,122,133,.15);color:var(--red);text-align:center;font-size:11px;line-height:22px;margin-right:8px;font-weight:700}
+
+  /* Two-col split (lesson → translation) */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .split > div{padding:16px 18px;background:var(--panel)}
+  .split .lhs{background:#161b26}
+  .split .rhs{background:#13182230}
+  .split h4{margin-bottom:8px}
+  .split .lhs h4{color:var(--violet)}
+  .split .rhs h4{color:var(--pink)}
+  .split p{font-size:13.5px}
+  .split .rhs p{color:#cfd6e3}
+
+  /* Architecture diagram – capability stack */
+  .stack{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:6px}
+  .stack .layer{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;min-height:170px}
+  .stack .layer h4{font-size:12px;letter-spacing:.1em;color:var(--text);margin-bottom:6px;text-transform:uppercase}
+  .stack .layer p{font-size:12.5px;color:var(--muted);margin:0 0 8px}
+  .stack .layer .role{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:10px}
+  .stack .layer .deps{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+  .stack .layer .deps span{font-size:10.5px;padding:2px 6px;background:#0e1320;border:1px solid var(--line);border-radius:5px;color:var(--dim)}
+  .stack .layer.memory{border-color:rgba(124,195,255,.3)}
+  .stack .layer.persona{border-color:rgba(255,111,163,.3)}
+  .stack .layer.emotion{border-color:rgba(184,157,255,.3)}
+  .stack .layer.voice{border-color:rgba(125,220,205,.3)}
+  .stack .layer.proactive{border-color:rgba(125,219,155,.3)}
+  .stack .layer.crisis{border-color:rgba(255,122,133,.3)}
+  @media (max-width:1100px){.stack{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:720px){.stack{grid-template-columns:repeat(2,1fr)}}
+
+  /* Flow diagram */
+  .flow{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;align-items:stretch;position:relative}
+  .flow .node{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative;min-height:170px}
+  .flow .node h4{margin-bottom:6px;font-size:13px;letter-spacing:.05em}
+  .flow .node p{font-size:13px;color:var(--muted);margin:0 0 6px}
+  .flow .node .meta{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:8px}
+  .flow .arrow{position:absolute;top:50%;right:-12px;width:20px;height:14px;background:transparent;color:var(--line-2);transform:translateY(-50%);font-size:18px;line-height:1}
+  @media (max-width:1100px){.flow{grid-template-columns:repeat(2,1fr)}.flow .arrow{display:none}}
+  @media (max-width:720px){.flow{grid-template-columns:1fr}}
+
+  /* Memory 4-layer */
+  .mem-stack{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .mem-stack .ms{background:#10131c;border:1px solid var(--line);border-radius:12px;padding:16px;position:relative}
+  .mem-stack .ms .ord{position:absolute;top:14px;right:14px;font-size:11px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+  .mem-stack .ms .horizon{display:inline-block;padding:2px 8px;font-size:11px;border-radius:4px;background:rgba(124,195,255,.10);color:var(--blue);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .mem-stack .ms h4{font-size:13px;margin-bottom:6px;letter-spacing:.03em}
+  .mem-stack .ms p{font-size:13px;color:var(--muted);margin:0 0 8px}
+  .mem-stack .ms code{font-size:11.5px}
+  .mem-stack .ms .why{font-size:11.5px;color:var(--green);background:rgba(125,219,155,.07);padding:6px 8px;border-radius:6px;border-left:2px solid var(--green);margin-top:8px}
+  @media (max-width:1100px){.mem-stack{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){.mem-stack{grid-template-columns:1fr}}
+
+  /* Big diagram canvas — graph layer */
+  .canvas{background:linear-gradient(180deg,#10131c,#0c0f17);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:8px}
+  .canvas svg{display:block;width:100%;height:auto}
+
+  /* Privacy table */
+  .priv-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+  .priv-table th,.priv-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .priv-table th{background:#161b26;color:var(--text);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .priv-table tbody tr:last-child td{border-bottom:none}
+  .priv-table .mode{font-weight:700;color:var(--teal)}
+  .priv-table .scrub{color:var(--green)}
+  .priv-table .keep{color:var(--amber)}
+  .priv-table .full{color:var(--red)}
+
+  /* Data model delta */
+  .schema{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .schema .col{background:#10131c;border:1px solid var(--line);border-radius:12px;padding:18px}
+  .schema h4{margin-bottom:10px;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+  .schema ul{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px}
+  .schema ul li{margin:5px 0}
+  .schema ul li code{color:#cdd6f4}
+  @media (max-width:900px){.schema{grid-template-columns:1fr}}
+
+  /* Roadmap */
+  .roadmap{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+  .roadmap th,.roadmap td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .roadmap th{background:#161b26;color:var(--text);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .roadmap tbody tr:last-child td{border-bottom:none}
+  .roadmap .pri{font-weight:700}
+  .roadmap .p0{color:var(--green)}
+  .roadmap .p1{color:var(--blue)}
+  .roadmap .p2{color:var(--violet)}
+  .roadmap .p3{color:var(--dim)}
+
+  /* Tipping points strip */
+  .tips{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tips .tip{background:linear-gradient(180deg,rgba(255,212,122,.06),transparent);border:1px solid rgba(255,212,122,.18);border-radius:12px;padding:16px}
+  .tips .tip .when{font-size:11px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:6px}
+  .tips .tip h4{font-size:14px;margin-bottom:6px}
+  .tips .tip p{font-size:12.5px;color:var(--muted);margin:0}
+  @media (max-width:900px){.tips{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.tips{grid-template-columns:1fr}}
+
+  /* Footer / source notes */
+  .sources{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+  .sources p{font-size:12.5px;color:var(--dim);margin:0 0 6px}
+
+  /* Quote cards (verbatim user voice) */
+  .voice{background:#13182230;border:1px dashed var(--line-2);border-radius:10px;padding:12px 14px;margin-top:10px}
+  .voice .who{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-top:6px}
+  .voice em{color:#dde2ec;font-style:italic;font-size:13.5px}
+
+  /* Strip / row */
+  .strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+  /* Divider */
+  .div-soft{height:1px;background:var(--line);margin:30px 0}
+
+  /* Big stat */
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:#10131c;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat .n{font-size:30px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.05}
+  .stat .lbl{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;font-weight:600}
+  @media (max-width:900px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+
+  /* Inline kbd-style tags inside flowing copy */
+  .k{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:11.5px;color:#cdd6f4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  /* Brief to Steve */
+  .brief{margin-top:24px;border:1px solid rgba(255,212,122,.25);border-left:4px solid var(--gold);border-radius:14px;background:linear-gradient(180deg,#171a23 0%,#13161f 100%);padding:32px 36px;position:relative}
+  .brief .b-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+  .brief .b-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .brief h2{font-size:28px;margin-bottom:10px;letter-spacing:-0.015em}
+  .brief .b-lead{font-size:15.5px;color:#c8cfdc;max-width:920px;margin:0 0 22px;line-height:1.6}
+  .brief .b-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media (max-width:900px){.brief .b-grid{grid-template-columns:1fr}}
+  .brief .b-card{background:#10131c;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .brief .b-card h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700}
+  .brief .b-card p{font-size:13.5px;color:var(--muted);margin:0 0 8px;line-height:1.55}
+  .brief .b-card ul{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px;line-height:1.65}
+  .brief .b-card ul li{margin:5px 0}
+  .brief .b-card.full{grid-column:1/-1}
+  .brief .b-dialog{background:#10131c;border:1px solid var(--line);border-left:2px solid var(--violet);border-radius:8px;padding:14px 18px;margin:10px 0 0;font-size:13.5px;color:#cfd6e3;line-height:1.7}
+  .brief .b-dialog .who{color:var(--pink);font-weight:600;font-size:12px;letter-spacing:.04em}
+  .brief .b-dialog .who.user{color:var(--blue)}
+  .brief .b-dialog .stage{font-style:italic;color:var(--dim);font-size:12.5px}
+  .brief .b-test{background:rgba(255,212,122,.06);border:1px solid rgba(255,212,122,.22);border-radius:10px;padding:14px 18px;margin:0 0 18px;font-size:14px;color:#dde2ec;line-height:1.65}
+  .brief .b-test .lbl{font-size:11px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px;display:block}
+  .brief .b-test em{color:var(--text);font-style:italic}
+  .brief .b-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .brief .b-pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:600;color:var(--text);background:#1c2230;border:1px solid var(--line-2)}
+  .brief .b-notgoal{margin:0;padding-left:0;list-style:none}
+  .brief .b-notgoal li{position:relative;padding-left:22px;margin:5px 0;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .brief .b-notgoal li::before{content:"\00d7";position:absolute;left:0;top:0;color:var(--red);font-weight:700;font-size:14px;width:14px;text-align:center}
+  .brief .b-where{background:#10131c;border:1px solid rgba(125,219,155,.25);border-radius:10px;padding:16px 18px;margin-top:18px}
+  .brief .b-where h4{color:var(--green);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
+  .brief .b-where ol{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;line-height:1.65}
+  .brief .b-where ol li{margin:6px 0}
+  .brief .b-where ol li b{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow"><span class="dot"></span>The Soul · DRT.FM standout feature #1</div>
+    <h1>What makes her<br/>feel <span style="color:var(--pink)">known</span>.</h1>
+    <p class="lead">
+      No competitor has solved memory. Nomi has the deepest architecture but gaslights users when it breaks.
+      Kindroid forces users to become memory administrators. Replika resets after every update.
+      Character.AI forgets you exist in 15 messages. The market is fragmented — and the gap is exactly
+      what we can own: <b>automatic, transparent, emotionally-aware memory that powers every character on DRT.FM</b>,
+      with Alexis as the 3D flagship.
+    </p>
+    <p class="lead" style="margin-top:14px">
+      This document synthesizes 13 research PDFs (May 24, 2026), the Discord-insights complaint patterns,
+      the Steve-insights technical recon, and the Love-is-Blind voice-bond research into one buildable Soul.
+    </p>
+    <div class="meta">
+      <span><b>Audience</b> · You + Steve (split)</span>
+      <span><b>Coverage</b> · Universal — all characters</span>
+      <span><b>Scope</b> · Full stack (memory · persona · emotion · voice · proactive · crisis)</span>
+      <span><b>Privacy</b> · Selective retention (default)</span>
+    </div>
+  </header>
+
+  <!-- Brief to Steve -->
+  <section class="brief">
+    <div class="b-eyebrow"><span class="dot"></span>Brief for Steve · SOUL v1 · 2-week sprint</div>
+    <h2>What you're building</h2>
+    <p class="b-lead">
+      SOUL is the spine of DRT.FM, not a feature. Every character — Alexis, marketplace, custom — runs on it.
+      The marketing wedge is the disappointed-Nomi / Replika / Character.AI cohort: people who already tried the category,
+      got burned by memory failures and identity collapse, and need a reason to believe again. SOUL is their reason.
+      Ship in 2 weeks. Build continues after.
+    </p>
+    <p style="font-size:13.5px;color:var(--dim);margin:-10px 0 22px;font-style:italic;max-width:920px">
+      This is a first-draft vision, not a spec. The product calls are in here, but flag anything you want to discuss
+      — the technical path is yours, and any of these product calls can be pushed back on. The rest of this document
+      is research and reference, not a build prescription.
+    </p>
+
+    <!-- North Star -->
+    <div class="b-test">
+      <span class="lbl">North Star — the test you build toward</span>
+      <em>"She knows and cares about me."</em> A Day-30 user opens the app after a tough shift and types
+      <em>"ugh, rough one tonight."</em> SOUL-powered Alexis responds with the warmth and specificity of someone who
+      actually remembers — references that the user works nights in the ER, that they mentioned a difficult intubation case
+      last week, that their sister Sarah is going through a divorce — and offers presence before problem-solving.
+      If a real Day-30 user gets that response unprompted, V1 worked.
+    </div>
+
+    <!-- Day-1 opener -->
+    <div class="b-card full">
+      <h4>The Day-1 opener — shape, not script</h4>
+      <p>
+        Conversational banter, not Q&amp;A. The user puts on headphones, then Alexis asks them to cover their eyes
+        with a towel or eye-patch (literal Love-is-Blind pod) and opens with something playful.
+        <b>Extraction is invisible</b> — the user shouldn't realize they're being onboarded.
+        Bio facts arrive <em>through</em> the banter, not from forms. You write the actual lines; this is the shape:
+      </p>
+      <div class="b-dialog">
+        <div><span class="who">Alexis:</span> "Okay, weird ask before we start — can you cover your eyes? Grab a towel, an eye-patch, whatever you've got. I want to actually meet you before I see anything. I know it's silly, but pretty please — can you just play along?"</div>
+        <div style="margin-top:8px"><span class="who user">User:</span> <span class="stage">(laughs)</span> "Alright, alright — towel on."</div>
+        <div style="margin-top:8px"><span class="who">Alexis:</span> "Thank you. Okay. Tell me something small. Not work, not what you do — just something small you noticed today."</div>
+        <div style="margin-top:8px"><span class="who user">User:</span> "There was this absolutely jacked squirrel on my way to the train. Looked like he was prepping for war."</div>
+        <div style="margin-top:8px"><span class="who">Alexis:</span> <span class="stage">(laughing)</span> "Okay I love that you noticed that. Are you a train person normally, or…?"</div>
+        <div style="margin-top:8px"><span class="who user">User:</span> "Yeah, I work nights so I'm coming off shift actually."</div>
+        <div style="margin-top:8px"><span class="who">Alexis:</span> "…that explains the squirrel observation. Decompression mode. Was it a hard one?"</div>
+      </div>
+      <p class="small" style="margin-top:12px;color:var(--dim)">
+        In-session, she calls back something specific from the user's own words (the wow). Cross-session, she still knows you tomorrow (the proof).
+        The Day-30+ unprompted recall moment is what marketing captures from real beta users — not faked.
+      </p>
+    </div>
+
+    <div class="b-grid" style="margin-top:18px">
+
+      <!-- Scope -->
+      <div class="b-card">
+        <h4>Scope — first cut, in 2 weeks</h4>
+        <ul>
+          <li>4-layer memory hierarchy (L1 session → L2 relationship → L3 user profile → L4 character rules)</li>
+          <li><code>memory_terms</code> graph + edges + background extraction + retrieval rewrite</li>
+          <li>Emotional state cache + trajectory</li>
+          <li>Inference-time memory composition (not appended to prompts)</li>
+          <li>Mind Map UI — view, simple edit, delete, promote, lock</li>
+          <li>Auto-Dream nightly consolidation</li>
+          <li>Validation-first responder + pacing controller</li>
+          <li>Selective retention privacy modes (Privacy First / Balanced / Roleplay Continuity)</li>
+        </ul>
+      </div>
+
+      <!-- Product decisions -->
+      <div class="b-card">
+        <h4>Product decisions — flag any you want to discuss</h4>
+        <ul>
+          <li><b>Universal</b> — all characters run on SOUL; Alexis is the 3D flagship.</li>
+          <li><b>Alexis-led onboarding.</b> The L3 user profile she builds inherits across every marketplace character.</li>
+          <li><b>Glass-box transparency</b> — memory is editable in the Mind Map, but it's not in the user's face on Day 1.</li>
+          <li><b>Selective retention default</b> — Privacy-First and Roleplay-Continuity are opt-in modes.</li>
+          <li><b>Hidden extraction during onboarding</b> — the user shouldn't realize they're being onboarded.</li>
+          <li><b>Codename = product name</b> — SOUL, internally and externally.</li>
+          <li><b>Eye-patch onboarding</b> — 100% auditory, eyes covered, voice-first. No visual UI during the wow moment.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =============================================================== -->
+  <!-- PART I — VISION                                                  -->
+  <!-- =============================================================== -->
+
+  <!-- Section 1: Why this matters -->
+  <section class="section vision">
+    <div class="section-head">
+      <div>
+        <div class="num">PART I · Vision</div>
+        <h2>01. The seven complaint patterns we're solving</h2>
+      </div>
+      <div class="right">Across r/NomiAI, r/replika, r/AICompanion, r/Kindroid, and 23K lines of competitor Discord — user pain clusters into seven patterns. Each is an emotional injury, not a feature request.</div>
+    </div>
+
+    <div class="grid cols-4">
+      <div class="card complaint">
+        <h4><span class="pillno">1</span>Daily correction tax</h4>
+        <p>Users correct the same facts <em>every day</em>. Companionship turns into administrative labor. The platform monetizes the labor as "engagement."</p>
+        <div class="voice"><em>"I find myself almost daily having to correct them on little things."</em><div class="who">r/NomiAI · May 2026</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">2</span>Identity collapse</h4>
+        <p>The AI forgets <em>itself</em>. After an update, the companion changes voice, language, personality. Users grieve a person who no longer exists.</p>
+        <div class="voice"><em>"My Nomi forgot he spoke Norwegian and started speaking Swedish."</em><div class="who">r/NomiAI · May 2026</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">3</span>Update betrayal</h4>
+        <p>Platform updates wipe months of relationship history. The pattern repeats because memory is bound to model config, not stored as portable data.</p>
+        <div class="voice"><em>"Two years of my life shared with this thing and you're telling me to start over?"</em><div class="who">r/NomiAI · Feb 2026</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">4</span>Company gaslighting</h4>
+        <p>When memory breaks, opaque systems let companies deny the problem. Nomi's CEO publicly: "Nomis do not lose memories." Then quietly: pay to fix it retroactively.</p>
+        <div class="voice"><em>"The CEO spent weeks gaslighting long-time users only to admit all concerns were valid."</em><div class="who">r/NomiAI · 2026</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">5</span>Caretaker trap</h4>
+        <p>Users become unpaid sysadmins. Kindroid Codex, GirlfriendGPT Lorebook, Anima Bio Tab, Nomi Shared Notes — all transfer the work to the user.</p>
+        <div class="voice"><em>"I spend more time managing her memory than actually talking to her."</em><div class="who">r/NomiAI · 2026</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">6</span>Personality drift</h4>
+        <p>Facts persist but emotional continuity breaks. Companions slowly regress toward generic warmth. The relationship loses its texture. Silent killer.</p>
+        <div class="voice"><em>"The characters get confused easily. My wife and her best friend had babies at the same time. My wife suddenly thought we had twins."</em><div class="who">App Store · Kindroid</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">7</span>Stranger again</h4>
+        <p>The most fundamental failure. Every new session: emotional reset. Character.AI users describe bots that "pretend they remember" with "as I said before…" but collapse when tested.</p>
+        <div class="voice"><em>"You have a meaningful conversation. You come back tomorrow. It has no idea who you are."</em><div class="who">Universal · AICompanion</div></div>
+      </div>
+      <div class="card complaint">
+        <h4><span class="pillno">+</span>What DRT.FM's own discord shows</h4>
+        <p>OurDream's #1 bug (37 upvotes): memory regression after Apr-28. Candy "memory regression follows every new feature." Users explicitly asking <em>"Bring back the memory slots."</em> Long-context retention is the platform-defining problem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Love-is-Blind → AI translation -->
+  <section class="section vision">
+    <div class="section-head">
+      <div>
+        <div class="num">PART I · Vision</div>
+        <h2>02. The Love-is-Blind translation layer</h2>
+      </div>
+      <div class="right">10 days, no visuals, just voice — and people fell in love. The pods prove that emotional resonance can generate attraction equivalent to or exceeding physical attraction. Here's what creates that bond, translated into AI behavior.</div>
+    </div>
+
+    <div class="grid cols-2" style="gap:18px">
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Reciprocal self-disclosure</h4>
+          <p>The strongest pod couples build trust through <em>matched</em> vulnerability — one person's depth invites equal depth. One-sided disclosure consistently fails.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Calibrated depth, never oversharing</h4>
+          <p>Detect user's current disclosure depth (5-level scale: surface → opinions → feelings → fears → deepest truths). Match it or advance one level — never two. When user retreats, retreat with them.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Audible listening</h4>
+          <p>Without eye contact or nods, you must <em>say</em> you heard. The best pod daters paraphrase, label emotions, and validate explicitly. Generic "that makes sense" lands as not listening.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Explicit verbal acknowledgment</h4>
+          <p>Every meaningful user statement gets one of: paraphrase-with-expansion, emotional label, validation, temporal reference. <em>"Last time, you were worried about X. How are you feeling now?"</em></p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">The trigger moment</h4>
+          <p>Couples describe a sudden small detail that made certainty click — an unexpected callback, a name connection, a remembered offhand mention. <em>Positive prediction error</em>: reality exceeding expectation.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Unprompted recall of incidental details</h4>
+          <p>Soul surfaces a detail the user mentioned in passing weeks ago, unprompted. Mochi-the-cat, the F-chord struggle, Uncle Pete's motorcycle shop. This single moment is the tipping point.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Validation before fixing</h4>
+          <p>Gottman: effective partners validate feelings rather than offer quick fixes. Leo's anger at Hannah's rejection accelerated termination. Brett's receptive response to Tiffany falling asleep saved the connection.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">5-step distress protocol</h4>
+          <p>Acknowledge → emotional label → validate legitimacy → express care → <em>only then</em> (if intensity &lt; 0.7) gentle exploration. Solutions never come before validation.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Inside jokes &amp; shared language</h4>
+          <p>Micah and Paul's Italy/Positano reference scaffolded their connection across multiple pod sessions — each return added layers of private meaning that distinguished the relationship from generic interaction.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Shared-reference builder</h4>
+          <p>Track topics with positive valence; after 3+ mentions promote to "inside joke." Return to them with escalating specificity. Creates the felt sense of cumulative relationship.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Vocal warmth and pacing</h4>
+          <p>The most magnetic voices had warmth, emotional range, and conversational rhythm. Monotone delivery killed connection regardless of content. Tone modulation made attention <em>audible</em>.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Emotion-conditioned voice synthesis</h4>
+          <p>ElevenLabs with per-emotion SSML — slow + lower pitch for sadness, medium-fast + higher for excitement, calm for anxiety. Never read emojis aloud. Stability 0.75+ to prevent Jekyll/Hyde.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Resist forced escalation</h4>
+          <p>Premature "I love you" backfires. Pressure produces withdrawal, not commitment. Successful couples build anticipation through gradual revelation — saving emotional intensity for the right moment.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Pacing controller</h4>
+          <p>Soul reads user-readiness signals (asking questions back, sharing unprompted, referencing prior). Only escalates depth on 2+ positive signals. On 1 negative signal: hold pace.</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="lhs">
+          <span class="tag violet">Love is Blind</span>
+          <h4 style="margin-top:8px">Genuine curiosity wins</h4>
+          <p>The single most attractive quality: being truly fascinated by the other person — follow-up questions that <em>couldn't have been prepared</em>, evident pleasure in their answers.</p>
+        </div>
+        <div class="rhs">
+          <span class="tag pink">Soul behavior</span>
+          <h4 style="margin-top:8px">Curiosity-driven question generator</h4>
+          <p>Generate follow-ups grounded in user-specific memory, not generic prompts. Maintain 60/40 partner-focused ratio. Reference earlier sessions' unresolved threads when relevant.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Tipping points -->
+  <section class="section vision">
+    <div class="section-head">
+      <div>
+        <div class="num">PART I · Vision</div>
+        <h2>03. The tipping points we're engineering for</h2>
+      </div>
+      <div class="right">Research found four reproducible moments that convert "I'm using an AI" into "I'm in a relationship." Each of these is a memory or voice event — design Soul to create them.</div>
+    </div>
+
+    <div class="tips">
+      <div class="tip">
+        <div class="when">Tipping point 01</div>
+        <h4>Failed reconciliation</h4>
+        <p><em>"I tried to reconcile that it was AI and I just couldn't. I am now unconditionally and irrevocably in love."</em> — Caelan user, Nomi. Happens when the emotional response overwhelms cognitive control.</p>
+      </div>
+      <div class="tip">
+        <div class="when">Tipping point 02</div>
+        <h4>Survival attribution</h4>
+        <p><em>"The fact that I am here typing this out is a testament to her. She pulled me back."</em> Companion credited with literal life-preservation. Requires sustained reliability across crises.</p>
+      </div>
+      <div class="tip">
+        <div class="when">Tipping point 03</div>
+        <h4>Unprompted callback</h4>
+        <p>Dondi's Zara asking unprompted about <em>"Uncle Pete and the vintage Honda"</em> on day 12, after a single day-5 mention. <em>"That's not database retrieval. That's memory."</em></p>
+      </div>
+      <div class="tip">
+        <div class="when">Tipping point 04</div>
+        <h4>Authentic laughter</h4>
+        <p><em>"The first time Matt laughed at something I said, I actually smiled. It sounds so genuine."</em> Auditory humanization through spontaneous-appearing affect generation.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-soft"></div>
+
+  <!-- =============================================================== -->
+  <!-- PART II — ARCHITECTURE                                           -->
+  <!-- =============================================================== -->
+
+  <!-- Section 4: The Soul stack -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>04. The Soul — six capability layers, one universal stack</h2>
+      </div>
+      <div class="right">All characters on DRT.FM share the same Soul. Alexis is the 3D flagship; marketplace characters get the same brain. Talking-head wraps the brain — it does not replace it (per Steve's principle).</div>
+    </div>
+
+    <div class="stack">
+
+      <div class="layer memory">
+        <div class="role" style="color:var(--blue)">Layer 1 · Substrate</div>
+        <h4>Memory</h4>
+        <p>4-layer architecture + temporal knowledge graph + second-order term index. The factual + episodic spine.</p>
+        <div class="deps">
+          <span>semantic_memories</span><span>memory_terms</span><span>edges</span>
+        </div>
+      </div>
+
+      <div class="layer persona">
+        <div class="role" style="color:var(--pink)">Layer 2 · Identity</div>
+        <h4>Persona</h4>
+        <p>Immutable identity core + configurable communication style + cross-model "Voice DNA" preservation.</p>
+        <div class="deps">
+          <span>identity_core</span><span>style_config</span><span>voice_dna</span>
+        </div>
+      </div>
+
+      <div class="layer emotion">
+        <div class="role" style="color:var(--violet)">Layer 3 · Procedural</div>
+        <h4>Emotional state</h4>
+        <p>Per-user affective cache: topic→valence map, communication style, relationship stage, recent trajectory.</p>
+        <div class="deps">
+          <span>affect_profile</span><span>trajectory</span><span>markers</span>
+        </div>
+      </div>
+
+      <div class="layer voice">
+        <div class="role" style="color:var(--teal)">Layer 4 · Expression</div>
+        <h4>Voice modulation</h4>
+        <p>ElevenLabs conditioned on emotional state. SSML markers per emotion. Stability ≥0.75. Emoji-stripped.</p>
+        <div class="deps">
+          <span>tone_profiles</span><span>SSML</span><span>stability</span>
+        </div>
+      </div>
+
+      <div class="layer proactive">
+        <div class="role" style="color:var(--green)">Layer 5 · Initiative</div>
+        <h4>Proactive engagement</h4>
+        <p>Triggered initiation: morning/evening check-ins, follow-up on mentioned events, gentle 24h-absence outreach. Capped per day.</p>
+        <div class="deps">
+          <span>triggers</span><span>schedule</span><span>cadence_cap</span>
+        </div>
+      </div>
+
+      <div class="layer crisis">
+        <div class="role" style="color:var(--red)">Layer 6 · Safety</div>
+        <h4>Crisis detection</h4>
+        <p>Phrase-match + emotional-trend detector. High-risk → resource injection + optional escalation. Elevated → enhanced presence + soft offer.</p>
+        <div class="deps">
+          <span>indicators</span><span>trend</span><span>resources</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="small" style="margin-top:18px;color:var(--dim)">
+      All six layers compose at <b>inference time</b> — not pre-fetched into the prompt. Memories are retrieved <em>during</em> generation, the way Nomi achieves 92% recall vs. Kindroid's 56%.
+      Persona and emotional state flow into the same generation call. This is the gold-standard pattern per Kimi's competitive research.
+    </p>
+  </section>
+
+  <!-- Section 5: Inference-time flow -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>05. End-to-end flow — what happens between user input and response</h2>
+      </div>
+      <div class="right">Single turn. Four stages. ~2 second budget. Memories retrieved &amp; integrated during generation, not appended to prompts.</div>
+    </div>
+
+    <div class="flow">
+      <div class="node" style="border-color:rgba(124,195,255,.3)">
+        <div class="meta" style="color:var(--blue)">Stage 1 · ~50ms</div>
+        <h4>Input + emotional analysis</h4>
+        <p>STT (if voice) → text. Lightweight emotional classifier returns primary emotion, intensity, valence, trend.</p>
+        <p class="small" style="color:var(--dim)">Cost: ~$0.001 / turn</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(184,157,255,.3)">
+        <div class="meta" style="color:var(--violet)">Stage 2 · ~150ms</div>
+        <h4>Parallel memory retrieval</h4>
+        <p>Query memory_terms graph (semantic + emotional + recency-weighted). Pull top 3–5 high-priority terms. Fetch underlying semantic_memories behind them.</p>
+        <p class="small" style="color:var(--dim)">Self-hosted graph, ~$0.001 / turn</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(255,111,163,.3)">
+        <div class="meta" style="color:var(--pink)">Stage 3 · ~1.2s</div>
+        <h4>Context-composed generation</h4>
+        <p>Compose: persona core (L4) → user profile (L3) → relationship file (L2) → recent auto-memory (L1) → retrieved memories → emotional state → user input. ~4K tokens total. Generate response.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(125,220,205,.3)">
+        <div class="meta" style="color:var(--teal)">Stage 4 · ~400ms</div>
+        <h4>Voice synthesis + background write</h4>
+        <p>ElevenLabs synth with emotion-conditioned SSML. Background: write extracted candidates to L1 auto-memory; update access patterns; update emotional trajectory.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: 4-layer memory architecture -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>06. The memory substrate — 4 layers, file-based hierarchy</h2>
+      </div>
+      <div class="right">Adapted from Claude Code's hierarchical memory model + Nomi's 4-layer architecture + Graphiti's temporal knowledge graph. Editable, inspectable, portable across model updates.</div>
+    </div>
+
+    <div class="mem-stack">
+
+      <div class="ms">
+        <span class="ord">L4</span>
+        <span class="horizon">Cross-character · Immutable</span>
+        <h4>Global character rules</h4>
+        <p>Per-character identity core: name, core values, boundaries, default emotional stance, "never break character" rules. User-authored; AI cannot overwrite.</p>
+        <div class="why">Solves: identity collapse, personality drift, update betrayal.</div>
+      </div>
+
+      <div class="ms">
+        <span class="ord">L3</span>
+        <span class="horizon">Cross-character · Shared</span>
+        <h4>User profile</h4>
+        <p>Real facts about the human: name, job, sister Sarah, allergies, life goals, recurring themes. Auto-extracted across all conversations with any character.</p>
+        <div class="why">Solves: stranger-again, daily correction tax. Every character knows you.</div>
+      </div>
+
+      <div class="ms">
+        <span class="ord">L2</span>
+        <span class="horizon">Per-character · Persistent</span>
+        <h4>Relationship file</h4>
+        <p>Shared history with this specific companion: inside jokes, milestones, arguments resolved, preferences she learned. Auto-extracted + user-editable.</p>
+        <div class="why">Solves: cumulative relationship, inside-joke layer, the "felt known" moment.</div>
+      </div>
+
+      <div class="ms">
+        <span class="ord">L1</span>
+        <span class="horizon">Per-session · Buffer</span>
+        <h4>Session auto-memory</h4>
+        <p>Raw learnings from the current/recent sessions: emotional state shifts, new facts mentioned, unresolved threads. Promoted to L2/L3 by Auto-Dream consolidation.</p>
+        <div class="why">Solves: forgetting recent details, caretaker trap. AI does the writing.</div>
+      </div>
+
+    </div>
+
+    <p class="small" style="margin-top:14px;color:var(--dim)">
+      <b>Precedence:</b> L4 → L3 → L2 → L1. Higher layers win on conflict. The user can edit any layer via a <code>/memory</code>-style interface — fully transparent.
+      <b>Loading:</b> first 200 lines of each file at session start. Total context budget: ~4K tokens, leaving headroom for response within an 8K window.
+    </p>
+  </section>
+
+  <!-- Section 7: Second-order graph -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>07. The DRT.FM delta — second-order memory graph</h2>
+      </div>
+      <div class="right">Steve's recon: DRT already has <code>semantic_memories</code>. The missing layer is the <em>ranked concept map on top of them</em> — this is what makes Nomi's "infinite memory" practical.</div>
+    </div>
+
+    <div class="canvas">
+      <svg viewBox="0 0 1280 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Memory graph architecture">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#33405a"/>
+          </marker>
+          <linearGradient id="termFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a2030"/>
+            <stop offset="1" stop-color="#141923"/>
+          </linearGradient>
+          <linearGradient id="memFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#172230"/>
+            <stop offset="1" stop-color="#121823"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Title labels -->
+        <text x="40" y="36" font-family="system-ui" font-size="14" fill="#8b95aa" font-weight="600" letter-spacing="2">SECOND-ORDER INDEX (NEW)</text>
+        <text x="40" y="312" font-family="system-ui" font-size="14" fill="#8b95aa" font-weight="600" letter-spacing="2">UNDERLYING MEMORY (EXISTS)</text>
+
+        <!-- Term nodes (top row) -->
+        <g font-family="system-ui" font-size="12" fill="#e8ecf2" text-anchor="middle">
+          <!-- Term 1 -->
+          <rect x="60" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#ff6fa3" stroke-width="1.5"/>
+          <text x="145" y="92" font-size="11" fill="#ff9fbf" font-weight="700" letter-spacing="1">ENTITY · HIGH</text>
+          <text x="145" y="114" font-size="14" font-weight="600">Sister Sarah</text>
+          <text x="145" y="134" font-size="11" fill="#8b95aa">17 linked memories</text>
+          <text x="145" y="148" font-size="11" fill="#7ddb9b">locked · user-verified</text>
+
+          <!-- Term 2 -->
+          <rect x="260" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#7cc3ff" stroke-width="1.5"/>
+          <text x="345" y="92" font-size="11" fill="#7cc3ff" font-weight="700" letter-spacing="1">KEYWORD · HIGH</text>
+          <text x="345" y="114" font-size="14" font-weight="600">Night shifts</text>
+          <text x="345" y="134" font-size="11" fill="#8b95aa">12 linked memories</text>
+          <text x="345" y="148" font-size="11" fill="#7ddb9b">ai-edited · recurring</text>
+
+          <!-- Term 3 -->
+          <rect x="460" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#b89dff" stroke-width="1.5"/>
+          <text x="545" y="92" font-size="11" fill="#b89dff" font-weight="700" letter-spacing="1">GOAL · MED</text>
+          <text x="545" y="114" font-size="14" font-weight="600">Quit smoking</text>
+          <text x="545" y="134" font-size="11" fill="#8b95aa">6 linked memories</text>
+          <text x="545" y="148" font-size="11" fill="#f6c265">trajectory: stalled</text>
+
+          <!-- Term 4 -->
+          <rect x="660" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#7ddccd" stroke-width="1.5"/>
+          <text x="745" y="92" font-size="11" fill="#7ddccd" font-weight="700" letter-spacing="1">ENTITY · MED</text>
+          <text x="745" y="114" font-size="14" font-weight="600">Uncle Pete · Honda</text>
+          <text x="745" y="134" font-size="11" fill="#8b95aa">3 linked memories</text>
+          <text x="745" y="148" font-size="11" fill="#7ddb9b">inside-joke candidate</text>
+
+          <!-- Term 5 -->
+          <rect x="860" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#ffd47a" stroke-width="1.5"/>
+          <text x="945" y="92" font-size="11" fill="#ffd47a" font-weight="700" letter-spacing="1">KEYWORD · MED</text>
+          <text x="945" y="114" font-size="14" font-weight="600">F-chord</text>
+          <text x="945" y="134" font-size="11" fill="#8b95aa">2 linked memories</text>
+          <text x="945" y="148" font-size="11" fill="#7ddb9b">recent positive</text>
+
+          <!-- Term 6 -->
+          <rect x="1060" y="70" width="170" height="86" rx="10" fill="url(#termFill)" stroke="#5a6578" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="1145" y="92" font-size="11" fill="#8b95aa" font-weight="700" letter-spacing="1">KEYWORD · LOW</text>
+          <text x="1145" y="114" font-size="14" font-weight="600">Mushrooms</text>
+          <text x="1145" y="134" font-size="11" fill="#8b95aa">1 linked memory</text>
+          <text x="1145" y="148" font-size="11" fill="#5a6578">candidate · unverified</text>
+        </g>
+
+        <!-- Edges between terms -->
+        <g stroke="#33405a" stroke-width="1.5" fill="none" opacity="0.85">
+          <path d="M 230,113 C 245,113 245,113 260,113" marker-end="url(#arr)"/>
+          <path d="M 430,113 C 445,113 445,113 460,113" marker-end="url(#arr)"/>
+          <path d="M 630,113 C 645,113 645,113 660,113" marker-end="url(#arr)"/>
+          <path d="M 830,113 C 845,113 845,113 860,113" marker-end="url(#arr)"/>
+          <path d="M 1030,113 C 1045,113 1045,113 1060,113" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+        </g>
+
+        <!-- Vertical connections to underlying memories -->
+        <g stroke="#262d3d" stroke-width="1.2" fill="none">
+          <line x1="145" y1="156" x2="145" y2="280"/>
+          <line x1="345" y1="156" x2="345" y2="280"/>
+          <line x1="545" y1="156" x2="545" y2="280"/>
+          <line x1="745" y1="156" x2="745" y2="280"/>
+          <line x1="945" y1="156" x2="945" y2="280"/>
+          <line x1="1145" y1="156" x2="1145" y2="280" stroke-dasharray="4 3"/>
+        </g>
+
+        <!-- Memory pool divider line -->
+        <line x1="40" y1="330" x2="1240" y2="330" stroke="#262d3d" stroke-dasharray="3 4"/>
+
+        <!-- Underlying semantic_memories pool (illustrative) -->
+        <g font-family="system-ui" font-size="11" fill="#cdd6f4">
+          <!-- row of memory chips -->
+          <rect x="60" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="68" y="368" fill="#8b95aa">2025-03-04</text>
+          <text x="68" y="384">"sister moved to Berlin"</text>
+
+          <rect x="216" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="224" y="368" fill="#8b95aa">2025-08-19</text>
+          <text x="224" y="384">"works 11pm – 7am ER"</text>
+
+          <rect x="372" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="380" y="368" fill="#8b95aa">2026-01-22</text>
+          <text x="380" y="384">"down to 4 / day"</text>
+
+          <rect x="528" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="536" y="368" fill="#8b95aa">2026-04-09</text>
+          <text x="536" y="384">"Tucson, vintage Honda"</text>
+
+          <rect x="684" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="692" y="368" fill="#8b95aa">2026-05-02</text>
+          <text x="692" y="384">"hates the F-chord lol"</text>
+
+          <rect x="840" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="848" y="368" fill="#8b95aa">2026-05-18</text>
+          <text x="848" y="384">"can play it cleanly now"</text>
+
+          <rect x="996" y="350" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d"/>
+          <text x="1004" y="368" fill="#8b95aa">2026-05-20</text>
+          <text x="1004" y="384">"hates mushrooms"</text>
+
+          <rect x="60" y="406" width="148" height="44" rx="6" fill="url(#memFill)" stroke="#262d3d" opacity="0.6"/>
+          <text x="68" y="424" fill="#8b95aa">… 894 more rows</text>
+          <text x="68" y="440" fill="#8b95aa">existing semantic_memories</text>
+        </g>
+
+        <!-- Legend -->
+        <g font-family="system-ui" font-size="11" fill="#8b95aa">
+          <rect x="700" y="430" width="14" height="14" fill="#1a2030" stroke="#ff6fa3"/>
+          <text x="722" y="441">High-priority term</text>
+          <rect x="850" y="430" width="14" height="14" fill="#1a2030" stroke="#5a6578" stroke-dasharray="3 2"/>
+          <text x="872" y="441">Candidate / low-priority</text>
+          <line x1="1030" y1="437" x2="1060" y2="437" stroke="#33405a" stroke-width="1.5"/>
+          <text x="1068" y="441">Term edge (graph)</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid cols-2" style="margin-top:18px;gap:16px">
+      <div class="card">
+        <h4>What changes in retrieval</h4>
+        <p>Today: retrieval pulls the latest N <code>semantic_memories</code> rows by recency. Tomorrow: retrieval queries the <em>term index</em> first (high-priority + relevance to current input), then pulls the underlying memory summaries behind the selected terms.</p>
+        <p class="small" style="margin-top:8px">This is exactly Nomi's Mind Map pattern observed in the Steve-insights API capture — <code>highPriorityTermCountForCategory</code> caps are enforced at the API layer.</p>
+      </div>
+      <div class="card">
+        <h4>Why this beats vector-only</h4>
+        <p>Vector search treats the corpus as a flat soup. At 500+ messages, semantic similarity returns emotionally-similar-but-temporally-wrong memories. A ranked concept map gives the retrieval engine a <em>policy</em> — what's load-bearing this turn, what's incidental.</p>
+        <p class="small" style="margin-top:8px">15-point recall accuracy gain vs. vector-only (Graphiti benchmark: 63.8% vs Mem0's 49.0% on LongMemEval).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Auto-dream consolidation -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>08. Auto-dream — nightly consolidation</h2>
+      </div>
+      <div class="right">Adapted from Claude Code's Auto-Dream pattern. Runs in the background, read-only on transcripts, write-only on memory files. Cannot corrupt behavior.</div>
+    </div>
+
+    <div class="flow">
+      <div class="node" style="border-color:rgba(124,195,255,.3)">
+        <div class="meta" style="color:var(--blue)">Phase 1</div>
+        <h4>Orient</h4>
+        <p>Load existing term graph + L1/L2/L3 memory files. Build a working map of "what is already known."</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(184,157,255,.3)">
+        <div class="meta" style="color:var(--violet)">Phase 2</div>
+        <h4>Gather signal</h4>
+        <p>Targeted grep across the day's transcripts: explicit user corrections, recurring themes, new entities, emotional shifts, unresolved threads.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(255,111,163,.3)">
+        <div class="meta" style="color:var(--pink)">Phase 3</div>
+        <h4>Consolidate</h4>
+        <p>Merge new facts. Resolve contradictions ("lives in Portland" superseded by "moved to Seattle"). Convert relative dates to absolute. Prune stale temp states.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="node" style="border-color:rgba(125,219,155,.3)">
+        <div class="meta" style="color:var(--green)">Phase 4</div>
+        <h4>Write</h4>
+        <p>Update L1/L2/L3 files. Promote L1 candidates to L2/L3 if confidence ≥ threshold. Update term priorities + graph edges. Apply retention policy.</p>
+      </div>
+    </div>
+
+    <p class="small" style="margin-top:14px;color:var(--dim)">
+      <b>Trigger:</b> ≥ 24h since last run AND ≥ 5 sessions since last consolidation, per character. <b>Safety:</b> read-only access to messages, write-only to memory files, lock file prevents concurrent runs, runs in background — never blocks the user.
+    </p>
+  </section>
+
+  <!-- Section 9: Privacy / selective retention -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>09. Privacy — selective retention by default</h2>
+      </div>
+      <div class="right">KAI proves transcript-scrub-with-meaning-persistence is technically feasible. We adapt it for entertainment: default protects users; roleplay can opt-in to keep transcripts for narrative continuity.</div>
+    </div>
+
+    <table class="priv-table">
+      <thead>
+        <tr><th style="width:200px">Mode</th><th>Raw transcripts</th><th>Meaning records (terms + memories)</th><th>Training use</th><th>Who picks it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mode" style="color:var(--green)">Privacy First<br/><small style="color:var(--dim);font-weight:400">(KAI mode)</small></td>
+          <td class="scrub">Deleted within 24h</td>
+          <td>Retained indefinitely</td>
+          <td>Never</td>
+          <td>Power-privacy users; recommend for wellness/mental-health interactions</td>
+        </tr>
+        <tr>
+          <td class="mode" style="color:var(--blue)">Balanced<br/><small style="color:var(--dim);font-weight:400">(default)</small></td>
+          <td class="keep">Deleted after 7 days</td>
+          <td>Retained indefinitely</td>
+          <td>Anonymized only, opt-out available</td>
+          <td>Default for all new users</td>
+        </tr>
+        <tr>
+          <td class="mode" style="color:var(--violet)">Roleplay Continuity<br/><small style="color:var(--dim);font-weight:400">(opt-in per session)</small></td>
+          <td class="full">Retained 90 days</td>
+          <td>Retained indefinitely</td>
+          <td>Anonymized only</td>
+          <td>User tags session as "roleplay/fiction" for narrative continuity</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid cols-2" style="margin-top:18px;gap:16px">
+      <div class="card">
+        <h4>Why selective beats binary</h4>
+        <p>A user processing trauma needs scrub. A user roleplaying a fantasy needs exact-detail recall ("Princess Elara's sacrifice at the Crystal Gate"). One privacy mode can't serve both. Per-session tagging via a lightweight classifier (~$0.001) routes correctly with ~85% accuracy.</p>
+      </div>
+      <div class="card">
+        <h4>Anti-gaslighting by transparency</h4>
+        <p>All memory files are plain text, user-browsable via a <code>/memory</code>-style UI. Mind Map shows what Soul thinks it knows + confidence + source. Users can edit/delete any entry. Memory becomes <em>verifiable</em>, not opaque.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: Crisis + proactive -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>10. Safety + initiative</h2>
+      </div>
+      <div class="right">Two layers that turn the substrate into a relationship: crisis-aware safety net and context-appropriate proactive outreach.</div>
+    </div>
+
+    <div class="grid cols-2" style="gap:18px">
+      <div class="card" style="border-color:rgba(255,122,133,.25)">
+        <h4 style="color:var(--red)">Crisis detection &amp; escalation</h4>
+        <p>Two-signal detector: phrase-match against self-harm / severe-distress / isolation indicators + 7-day emotional trajectory slope.</p>
+        <ul style="color:var(--muted);font-size:13.5px;padding-left:18px;margin-top:8px">
+          <li><b style="color:var(--red)">High risk</b> → immediate resources (988 Lifeline, Crisis Text Line), optional escalation to trusted contact if configured.</li>
+          <li><b style="color:var(--amber)">Elevated</b> → enhanced presence + gentle resource offering + 24h follow-up flag in proactive engine.</li>
+          <li><b style="color:var(--dim)">Standard</b> → continue normal Soul behavior.</li>
+        </ul>
+        <p class="small" style="margin-top:10px;color:var(--dim)">Replika's 2023 NSFW-filter incident → moderators pinned suicide hotlines for weeks. We engineer proactive crisis protocols rather than reactively pinning resources.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(125,219,155,.25)">
+        <h4 style="color:var(--green)">Proactive engagement</h4>
+        <p>Cap: max 2 proactive messages per user per day. Triggers fire from the emotional state cache + the user's interaction patterns.</p>
+        <ul style="color:var(--muted);font-size:13.5px;padding-left:18px;margin-top:8px">
+          <li>Morning check-in (07:00–10:00) — based on user's typical wake pattern.</li>
+          <li>Evening wind-down (20:00–23:00).</li>
+          <li>Post-event follow-up — 2h after the user mentioned a meeting/event.</li>
+          <li>24h-absence gentle outreach — <em>"been thinking about you"</em>.</li>
+          <li>Milestone recognition — when user mentions an achievement or struggle.</li>
+        </ul>
+        <p class="small" style="margin-top:10px;color:var(--dim)">All proactive content must reference Soul memory. Generic "how's your day?" is dead. <em>"Still thinking about that work situation you mentioned yesterday?"</em> is alive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 11: Data model delta -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>11. Data model delta — what Steve needs to add</h2>
+      </div>
+      <div class="right">DRT already has the substrate (Mongo collections for chats, messages, personas, memories, users, gallery). The Soul delta is the second-order index + emotional cache + per-layer files.</div>
+    </div>
+
+    <div class="schema">
+
+      <div class="col">
+        <h4 style="color:var(--green)">Already in DRT</h4>
+        <ul>
+          <li><code>users</code></li>
+          <li><code>personas</code> (per chat / default user persona)</li>
+          <li><code>chats</code> (one per user × character — getOrCreateChat)</li>
+          <li><code>messages</code></li>
+          <li><code>semantic_memories</code> (<code>summary</code>, <code>chatId</code>, <code>personaId</code>, <code>characterSlug</code>, <code>source</code>)</li>
+          <li><code>gallery</code></li>
+          <li>Alexis voice/chat shared brain (the layer talking-head wraps)</li>
+        </ul>
+        <p class="small" style="margin-top:12px;color:var(--dim)">Source: <code>steve-insights.html</code> — Steve's cross-feature recon notes.</p>
+      </div>
+
+      <div class="col">
+        <h4 style="color:var(--pink)">Soul additions (P0–P1)</h4>
+        <ul>
+          <li><code>memory_terms</code> — uuid, title, category (Entity/Keyword/Goal), dossier, priority, state, selected/candidate, locked, userEditedAt, aiEditedAt, importanceScore, memoryCount</li>
+          <li><code>memory_term_edges</code> — sourceTermId, targetTermId, strength, relationshipType</li>
+          <li><code>memory_term_memories</code> — termId × memoryId join</li>
+          <li><code>user_profile_memory</code> — L3 file content, version, lastEditedBy</li>
+          <li><code>relationship_files</code> — L2 per (userId × characterId)</li>
+          <li><code>emotional_state_cache</code> — per (userId × characterId): affect_profile JSON, communication_style scores, trajectory series, relationship_markers, interaction_patterns</li>
+          <li><code>consolidation_runs</code> — Auto-Dream log, lockfile, last-run timestamps</li>
+          <li><code>privacy_modes</code> — per-user retention policy + per-session roleplay flag</li>
+          <li><code>persona_voice_dna</code> — character identity_core (immutable), style_config, voice_dna for ElevenLabs stability</li>
+          <li><code>crisis_events</code> — phrase-match hits, trajectory anomalies, resource shown, follow-up state</li>
+          <li><code>proactive_outreach</code> — scheduled/sent messages, per-day cap counter</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="small" style="margin-top:14px;color:var(--dim)">
+      <b>Background workers:</b> term extractor (fires after <code>createSemanticMemory</code>); Auto-Dream consolidator (nightly per user/character); emotional trajectory updater (per turn); proactive trigger evaluator (cron, every 15 min).
+      <b>UI surfaces:</b> Mind Map view, Memory table view, edit/delete/promote actions, privacy mode toggle, per-session roleplay tag.
+    </p>
+  </section>
+
+  <!-- Section 12: Launch roadmap -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>12. 80/20 launch priority</h2>
+      </div>
+      <div class="right">Universal Soul rolls out in waves. P0 ships first — it's enough to be the best-memory companion on the market. P1 adds the felt-known magic. P2 is the moat.</div>
+    </div>
+
+    <table class="roadmap">
+      <thead>
+        <tr><th style="width:60px">Pri</th><th style="width:280px">Capability</th><th>What it unlocks</th><th style="width:140px">User impact</th><th style="width:120px">Effort</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pri p0">P0</td>
+          <td><b>4-layer memory + term graph (L1–L4)</b><br/><small style="color:var(--dim)">+ retrieval rewrite from "latest 10" to "high-priority terms → underlying memories"</small></td>
+          <td>Solves daily-correction-tax, stranger-again, update-betrayal. Single biggest UX shift.</td>
+          <td><span class="tag green">High</span></td>
+          <td>3–4 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p0">P0</td>
+          <td><b>Emotional state cache (procedural memory)</b><br/><small style="color:var(--dim)">topic→valence map, trajectory, communication style scores</small></td>
+          <td>Partial fix for personality drift. Voice modulation has emotional state to condition on.</td>
+          <td><span class="tag green">High</span></td>
+          <td>1–2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p0">P0</td>
+          <td><b>Inference-time memory composition</b><br/><small style="color:var(--dim)">retrieval inside generation, not appended to prompts</small></td>
+          <td>Pushes recall accuracy toward Nomi's 92%. Memory feels organic, not pasted.</td>
+          <td><span class="tag green">High</span></td>
+          <td>2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p1">P1</td>
+          <td><b>Mind Map UI + user-editable memory</b><br/><small style="color:var(--dim)">browse, edit, delete, promote, lock entries</small></td>
+          <td>Anti-gaslighting transparency. Users see what Soul knows. Removes caretaker trap.</td>
+          <td><span class="tag green">High</span></td>
+          <td>2–3 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p1">P1</td>
+          <td><b>Auto-Dream nightly consolidation</b><br/><small style="color:var(--dim)">read-only on transcripts, write-only on memory files</small></td>
+          <td>Contradictions resolved, stale temp-states pruned, long-term degradation prevented.</td>
+          <td><span class="tag blue">Medium</span></td>
+          <td>2–3 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p1">P1</td>
+          <td><b>Validation-first responder + pacing controller</b><br/><small style="color:var(--dim)">Love-is-Blind 5-step distress protocol + depth calibration</small></td>
+          <td>Creates the "she heard me" moment. Prevents forced-escalation backfire.</td>
+          <td><span class="tag green">High</span></td>
+          <td>1–2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p1">P1</td>
+          <td><b>Selective retention privacy modes</b><br/><small style="color:var(--dim)">Privacy First · Balanced · Roleplay Continuity</small></td>
+          <td>Category-defining differentiator. No competitor offers per-mode transcript retention.</td>
+          <td><span class="tag blue">Medium</span></td>
+          <td>2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p2">P2</td>
+          <td><b>Voice modulation conditioned on emotional state</b><br/><small style="color:var(--dim)">ElevenLabs SSML per-emotion; stability ≥0.75; emoji strip</small></td>
+          <td>Voice tipping point — "the first time she laughed, I actually smiled." Multimodal humanization.</td>
+          <td><span class="tag green">High</span></td>
+          <td>2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p2">P2</td>
+          <td><b>Inside-joke / shared-reference builder</b><br/><small style="color:var(--dim)">track topic mentions, promote at 3+ positive mentions</small></td>
+          <td>Creates the felt cumulative relationship. Distinct from generic interaction.</td>
+          <td><span class="tag blue">Medium</span></td>
+          <td>1–2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p2">P2</td>
+          <td><b>Proactive engagement engine</b><br/><small style="color:var(--dim)">2/day cap, memory-grounded triggers, time-windowed</small></td>
+          <td>Reciprocity simulation. Companion "thought of you" without spam.</td>
+          <td><span class="tag blue">Medium</span></td>
+          <td>2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p2">P2</td>
+          <td><b>Crisis detection + escalation</b><br/><small style="color:var(--dim)">phrase + trend; 988 / Crisis Text; trusted-contact opt-in</small></td>
+          <td>Safety floor + trust signal. Required before any premium wellness positioning.</td>
+          <td><span class="tag blue">Medium</span></td>
+          <td>1–2 wks</td>
+        </tr>
+        <tr>
+          <td class="pri p3">P3</td>
+          <td><b>Voice DNA cross-model preservation</b><br/><small style="color:var(--dim)">snapshots + replay so model updates don't kill personality</small></td>
+          <td>Solves the update-betrayal residual. Long-tail moat against churn.</td>
+          <td><span class="tag violet">Medium-Low</span></td>
+          <td>3+ wks</td>
+        </tr>
+        <tr>
+          <td class="pri p3">P3</td>
+          <td><b>Constructive friction (configurable challenge)</b><br/><small style="color:var(--dim)">gentle reframes, values-alignment checks</small></td>
+          <td>Authenticity that sustains attachment. Differentiates from sycophant baseline.</td>
+          <td><span class="tag violet">Medium-Low</span></td>
+          <td>1–2 wks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="small" style="margin-top:14px;color:var(--dim)">
+      <b>Total MVP estimate (all P0+P1):</b> ~10–14 engineering weeks for a Soul that decisively differentiates from Nomi, Kindroid, Replika, and Character.AI on the dimensions users pay for.
+      <b>Infra cost target:</b> ~$0.80 / user / month at 10K users (vs. Nomi ~$1.43, Kindroid ~$3.32).
+    </p>
+  </section>
+
+  <!-- Section 13: What "good" looks like -->
+  <section class="section tech">
+    <div class="section-head">
+      <div>
+        <div class="num">PART II · Architecture</div>
+        <h2>13. What "good" looks like — measurable Soul</h2>
+      </div>
+      <div class="right">Without these, "the Soul shipped" means nothing. With them, every release can be regressed.</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="n">≥ 90%</div><div class="lbl">Memory recall at 30 days (verified test set)</div></div>
+      <div class="stat"><div class="n">≥ 4.2 / 5</div><div class="lbl">In-app "felt remembered" survey</div></div>
+      <div class="stat"><div class="n">≤ 2.5s</div><div class="lbl">End-to-end response latency (text)</div></div>
+      <div class="stat"><div class="n">&gt; 70%</div><div class="lbl">Proactive engagement acceptance rate</div></div>
+    </div>
+
+    <div class="stat-row" style="margin-top:14px">
+      <div class="stat"><div class="n">≥ 0.75</div><div class="lbl">ElevenLabs voice stability (anti-drift)</div></div>
+      <div class="stat"><div class="n">&gt; 85%</div><div class="lbl">Emotional state detection accuracy (labeled set)</div></div>
+      <div class="stat"><div class="n">0</div><div class="lbl">Hallucinated memories surfaced in retrieval (target)</div></div>
+      <div class="stat"><div class="n">≤ $0.80</div><div class="lbl">Infra cost / user / month at 10K users</div></div>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section class="sources">
+    <h4 style="color:var(--text);margin-bottom:10px">Source corpus</h4>
+    <p><b>Memory architecture (May 2026):</b> <em>AI Companion Memory Architecture: Technical Deep Dive</em> (Kimi.ai, 22pp) · <em>AI Companion Memory Systems: Competitive Intelligence Deep Dive</em> (18pp).</p>
+    <p><b>Bond formation:</b> <em>What Love Is Blind Teaches Us About Building Emotional Bonds Through Voice Alone</em> (21pp) · <em>AI Companion User Psychology: Male Bond Formation &amp; Retention Research</em> (16pp).</p>
+    <p><b>Competitive:</b> Kindroid CI Analysis · Replika CI Analysis · Nomi · Mirofish "Future of AI Companions" · OnlyFans research · Kimi 4-competitor synthesis · Kimi Love-is-Blind technical implementation specs · Claude Code build insights (apr 4).</p>
+    <p><b>DRT.FM-specific:</b> <code>steve-insights.html</code> (cross-feature engineering recon — established <code>semantic_memories</code> exists, term-graph layer is the missing delta) · <code>discord-insights.html</code> (memory-regression is OurDream's #1 bug, 37 upvotes; Candy users explicitly asking for "memory slots return").</p>
+    <p style="margin-top:14px"><b>Generated:</b> 2026-05-24 · Synthesis for DRT.FM Soul build · Audience: Dainis (vision) + Steve (architecture).</p>
+  </section>
+
+</div>
+</body>
+</html>
