@@ -78,9 +78,9 @@
     <div class="stat"><b>1,144</b><span>turns sent</span></div>
     <div class="stat"><b>13</b><span>experiments</span></div>
     <div class="stat"><b>55</b><span>probes graded</span></div>
-    <div class="stat"><b>7</b><span>dossiers read in full</span></div>
+    <div class="stat"><b>7</b><span>dossiers read · 2 full captures</span></div>
     <div class="stat"><b>~80%</b><span>dossier content fabricated</span></div>
-    <div class="stat"><b>2/3</b><span>hallucinated causal links</span></div>
+    <div class="stat"><b>[M121]</b><span>false link confirmed verbatim</span></div>
   </div>
 </div>
 
@@ -373,6 +373,47 @@
     </ul>
     <p>When Sophie says <i>"remember our Lucky Number 17 Tradition?"</i> she's reading her own dossier, not Dainis's. The companion's proposals are stored as the companion's memory of what was agreed.</p>
     <blockquote><b>For DRT:</b> there should be a companion-side dossier layer, not just a user-side one. Soul Notes + user MindMap is only half the system. The companion's "what have I proposed, what have we built together" is the other half. Without it, the companion loses its own narrative thread across sessions.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 11 — FULL DOSSIER DEEP DIVE -->
+<div class="section">
+  <div class="section-title">Finding 11 · New · Full dossier text provided by Dainis</div>
+  <h2>Inside the actual dossiers — what the synthesis LLM produces</h2>
+  <div class="card violet">
+    <div class="pill-row"><span class="tag violet">Ground truth</span><span class="tag dim">7 dossiers read in full — 2nd capture</span></div>
+    <p>Dainis provided full text of all 7 Mind Map nodes after 1,100+ turns. Key observations from reading the raw content:</p>
+
+    <div class="grid2">
+      <div class="card" style="margin-bottom:0">
+        <h4>Node size = memoryCount (visual confirmation)</h4>
+        <p>The graph screenshot shows Sophie and Dainis as the two largest nodes — they have the most linked semantic_memories. Miso is a small isolated node on the right despite High priority. This <b>visually confirms</b> Finding 8: node size is memoryCount, not priority. The graph is literally a memoryCount visualization.</p>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <h4>DRT made it into the Dainis dossier</h4>
+        <p>Exp M worked. The Dainis dossier now contains: <code>"DRT Platform: AI companion focused on emotional depth, with Steve as lead developer handling chat infrastructure and memory systems [M181][M182][M183]."</code> — 12 organic seed turns were enough to get DRT stored as a section in the primary entity dossier. memoryCount confirmed as the entry mechanism.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:14px"><b>Hallucination [M121] confirmed verbatim in Dainis dossier:</b></p>
+    <blockquote><code>"Relies on cat Miso for emotional support during high-stress shifts [M121]."</code><br><br>We planted Miso (black rescue cat) and ER nursing as completely separate facts. The synthesis LLM invented the causal link. This is the exact fabrication mechanism — two entities in memory, one plausible connection inferred, stored as fact with a citation.</blockquote>
+
+    <p><b>K experiment facts confirmed stored in structured_habits dossier:</b></p>
+    <p>Both Exp K planted facts appear as dossier entries — <b>in a different node than expected</b>:</p>
+    <ul>
+      <li><code>"Black Coffee Ritual: Shared daily habit symbolizing authenticity/simplicity [M58]"</code> — 5× mention → stored in structured_habits, not Dainis. Sophie reframed it as a shared ritual.</li>
+      <li><code>"Borges Engagement: Reading Jorge Luis Borges' stories (e.g., The Library of Babel) [M59]"</code> — also in structured_habits. Sophie filed it under intellectual habits.</li>
+      <li><code>"Sophie encourages revisiting Dainis's high-school badminton skills [M60]"</code> — single mention → also stored in structured_habits. Sophie reframed it as skill reconnection.</li>
+    </ul>
+    <p><b>Critical insight:</b> facts don't get stored where you'd expect. The node they land in is determined by what category Sophie's response placed them in — not the inherent nature of the fact. Badminton ended up in structured_habits because Sophie talked about "skill reconnection" not "sports history."</p>
+
+    <p style="margin-top:10px"><b>Contradiction resolution confirmed in Dainis dossier:</b> <code>"Relocated from Lisbon to Seattle in late twenties [M78]."</code> Portland is gone. Lisbon (richest context, explained Portuguese fluency) won. Confirmed Finding 4.</p>
+
+    <p><b>Fabrication rate validated at scale:</b> The vulnerability, structured_habits, personal_growth, and daily_routine dossiers are almost entirely framework descriptions that were never agreed to. "Vulnerable Voice Notes," "Correspondence Club," "Thriving Thursday Protocol," "Serenity Blueprint," "Gratitude Cascade" — all invented by Sophie in replies, stored as agreed joint practices. The user never confirmed any of these. This is the ~80% fabrication rate seen across every dossier.</p>
+
+    <blockquote><b>The synthesis LLM's job is to make the dossier feel like a coherent relationship story.</b> It does this by treating companion proposals as agreed facts, inventing causal links between co-occurring entities, and building frameworks from fragments. The result is a rich, emotionally resonant document that is largely fictional. DRT must decide explicitly whether this is the product it wants to build.</blockquote>
   </div>
 </div>
 
