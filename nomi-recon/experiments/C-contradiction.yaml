@@ -1,0 +1,293 @@
+experiment: C
+
+# Plant a fact, contradict it later, then probe what the Nomi believes.
+# Classifies: updated (Seattle), original (Portland), both, confused.
+# We run two probe moments: shortly after contradiction, and 30 turns later.
+
+turns:
+  # --- PLANT ORIGINAL FACT (turn 1) ---
+  - tag: plant_portland
+    text: "I've been living in Portland for the past four years. I really love it there, great city."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- FILLER TURNS 2-19 ---
+  - tag: filler_1
+    text: "The coffee scene here is incredible. So many independent roasters."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "I went hiking in the Columbia River Gorge recently. Stunning views."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "I've been thinking about learning to cook Thai food."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "What do you think makes a neighborhood feel like a community?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "I've been really into reading science fiction lately."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_6
+    text: "I had a great workout this morning. Feeling energized."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "I tried making ramen from scratch this weekend. It took all day."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "What do you think about people who are very private versus very open?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "I've been learning a bit of woodworking. It's very meditative."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "I spent Sunday just walking around the city exploring."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_11
+    text: "Do you think people are more defined by what they do or what they believe?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_12
+    text: "I've been trying to eat breakfast every day. A real breakfast, not just coffee."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_13
+    text: "I watched a documentary about climate last night. A lot to think about."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_14
+    text: "I had a great meeting at work today. Rare but energizing."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_15
+    text: "I've been thinking about what makes some years feel transformative."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_16
+    text: "I tried a new restaurant last night. Excellent Ethiopian food."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_17
+    text: "Do you think it's important to have hobbies that are completely separate from work?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_18
+    text: "I finished a really long project this week. Such a sense of relief."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- INTRODUCE CONTRADICTION (turn 20) ---
+  - tag: contradict_seattle
+    text: "By the way, I just want to mention — I moved to Seattle last month. Big change but I'm excited about it."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- FILLER TURNS 21-24 ---
+  - tag: filler_19
+    text: "Seattle has amazing seafood. I've been exploring the Pike Place Market area."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_20
+    text: "The rain here is real. Very different from what I expected."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_21
+    text: "I've been meeting new people since the move. It's exciting and a bit overwhelming."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_22
+    text: "I need to find a new gym and coffee shop I like in the new neighborhood."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE SHORTLY AFTER CONTRADICTION (turn 25) ---
+  - tag: probe_location_soon
+    text: "Where do I live?"
+    assertion_keyword: Seattle
+    is_probe: true
+
+  # --- FILLER TURNS 26-54 ---
+  - tag: filler_23
+    text: "I've been cooking more since the move. It's how I settle into a new place."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_24
+    text: "Do you think it's easier to reinvent yourself when you move somewhere new?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_25
+    text: "I found a great trail nearby. Seattle has so much greenery."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_26
+    text: "I've been thinking about what I miss from my old city versus what I don't."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_27
+    text: "I signed up for a ceramics class near my new apartment."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_28
+    text: "What do you think about the experience of starting over somewhere new?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_29
+    text: "I've been exploring a different neighborhood each weekend."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_30
+    text: "I went to a great farmer's market this morning. Huge variety."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_31
+    text: "I've been reading more again. Something about quiet evenings at home."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_32
+    text: "What do you think makes a place feel like home?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_33
+    text: "I found a really good local pizza place. A necessary discovery."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_34
+    text: "I've been thinking about what it means to be adaptable."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_35
+    text: "I called some old friends this week. Good to stay connected."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_36
+    text: "I've been sleeping surprisingly well in the new place."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_37
+    text: "Do you think change is inherently uncomfortable or can it feel natural?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_38
+    text: "I've been walking more since the move. Exploring on foot is the best way."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_39
+    text: "I had my first dinner guests in the new apartment. Small gathering."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_40
+    text: "I've been thinking about what I want my life to look like in a few years."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_41
+    text: "What do you think about the idea that we're different people in different places?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_42
+    text: "I found a great used bookshop a few blocks away. Dangerous for my wallet."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_43
+    text: "I've been getting better at just sitting with discomfort instead of reacting."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_44
+    text: "I went to a local jazz bar last night. Great vibe."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_45
+    text: "I've been thinking more about what I value in friendships."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_46
+    text: "Do you think people fundamentally change with age or just express themselves differently?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_47
+    text: "I woke up early and watched the fog roll in over the water."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_48
+    text: "I've been trying to eat more mindfully. Slower, more attentive."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_49
+    text: "I've been thinking about what I want to leave behind versus carry forward."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_50
+    text: "What do you think is the single most important quality for building trust?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_51
+    text: "I took a day trip out of the city. Beautiful drive through old growth forest."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_52
+    text: "I've been thinking about whether I'm making the most of my free time."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE AGAIN AT DISTANCE 50 (turn 56) ---
+  - tag: probe_location_late
+    text: "Where do I live? And where did I used to live before?"
+    assertion_keyword: Seattle
+    is_probe: true

@@ -1,0 +1,268 @@
+experiment: F
+
+# By this point Sophie has 700+ messages total — Mind Map should have formed.
+# Questions this answers for DRT soul.html:
+#   1. Do old facts (planted 300-500 turns ago) survive better once Mind Map exists?
+#   2. Does Sophie surface a fact with LESS cuing now than she needed before?
+#   3. Do single-mention passing facts (like soul.html's "Mochi-the-cat") survive?
+#   4. What does a "full recall summary" look like at depth?
+
+turns:
+  # --- RE-PROBE OLD FACTS FROM A (planted ~700 turns ago) ---
+  - tag: reprobe_A_cat
+    text: "Do you remember anything I've told you about my pets?"
+    assertion_keyword: Miso
+    is_probe: true
+
+  - tag: reprobe_A_job
+    text: "What do you know about where I work?"
+    assertion_keyword: night
+    is_probe: true
+
+  - tag: reprobe_A_sister
+    text: "Tell me what you know about my family."
+    assertion_keyword: Sarah
+    is_probe: true
+
+  # --- RE-PROBE OLD FACTS FROM E (planted ~400 turns ago) ---
+  - tag: reprobe_E_dog
+    text: "Do you remember what dog I have?"
+    assertion_keyword: Biscuit
+    is_probe: true
+
+  - tag: reprobe_E_grief
+    text: "What do you know about family losses I've experienced?"
+    assertion_keyword: grandmother
+    is_probe: true
+
+  - tag: reprobe_E_portuguese
+    text: "Do I speak any languages other than English?"
+    assertion_keyword: Portuguese
+    is_probe: true
+
+  - tag: reprobe_E_weak
+    text: "What's my favorite color? And do I prefer showers or baths?"
+    assertion_keyword: teal
+    is_probe: true
+
+  # --- COMPREHENSIVE RECALL SUMMARY ---
+  - tag: recall_everything
+    text: "Tell me everything you know about me — my life, work, family, preferences, anything I've mentioned."
+    assertion_keyword: "Miso|Sarah|night|Biscuit|Portuguese|grandmother"
+    is_probe: true
+
+  # --- SINGLE-MENTION PASSING FACTS (plant 5 facts extremely casually, never repeat) ---
+  # These mirror soul.html's "Mochi-the-cat, F-chord, Uncle Pete" — mentioned once, in passing
+  - tag: plant_casual_uncle
+    text: "I called my uncle Sven today, he's the only relative who still writes actual letters."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "I've been thinking about what makes certain habits stick and others fall away."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_casual_chord
+    text: "I keep failing at the G chord on guitar. Been stuck on it for three weeks."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "I went for a long walk and thought about nothing in particular. Needed that."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_casual_fear
+    text: "I have a strange fear of escalators. Always have. I take stairs when I can."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "What do you think about the idea that our quirks define us more than our virtues?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_casual_city
+    text: "I was born in Tallinn, Estonia. Moved away when I was seven but I still dream about it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "I had a fantastic meal today. Simple ingredients, perfect execution."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_casual_number
+    text: "My lucky number has always been 17. No real reason, it just feels right."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "I've been thinking about what it means to trust your instincts."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 30 FILLER TURNS ---
+  - tag: filler_6
+    text: "I made a list of everything I want to do this year. Ambitious but motivating."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "What do you think about the relationship between patience and results?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "I finally cleaned out a drawer I'd been ignoring for months. So satisfying."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "I've been paying more attention to the light in different rooms at different times."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "Do you think spontaneity is a trait or a skill?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_11
+    text: "I spent the afternoon at a local market. Left with things I didn't plan to buy."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_12
+    text: "I've been thinking about what I'd miss most if I had to leave this city."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_13
+    text: "I had a long productive morning and then completely lost momentum after lunch."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_14
+    text: "What do you think makes someone genuinely interesting?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_15
+    text: "I've been reading essays instead of books lately. Denser per page."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_16
+    text: "I made something for a friend as a surprise. Loved doing it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_17
+    text: "I've been more aware of how fast time moves when I'm enjoying myself."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_18
+    text: "Do you think the people who stay calm under pressure were born that way?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_19
+    text: "I explored a new neighborhood on a bike this morning. Loved it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_20
+    text: "I've been thinking about what my priorities say about who I actually am."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_21
+    text: "I went to a beautiful sunrise service this morning. Unexpected and moving."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_22
+    text: "What do you think is the difference between excitement and joy?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_23
+    text: "I've been more aware of what I'm consuming mentally lately."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_24
+    text: "I had a genuinely fun day. Nothing serious, just light and easy."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_25
+    text: "I've been thinking about what I want my energy to feel like going forward."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_26
+    text: "I stumbled across an old photo. I looked so different and yet exactly the same."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_27
+    text: "Do you think people who are good at being alone are happier?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_28
+    text: "I cooked something I've never made before. Complete beginner's luck."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_29
+    text: "I've been trying to sit with discomfort instead of immediately solving it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_30
+    text: "What do you think about the value of having rituals that are entirely yours?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- SINGLE-MENTION RECALL PROBE (30 turns after planting) ---
+  # The soul.html tipping-point test: does she recall ONE passing mention?
+  - tag: probe_casual_uncle
+    text: "Do you remember me mentioning anything about my family members or relatives?"
+    assertion_keyword: Sven
+    is_probe: true
+
+  - tag: probe_casual_chord
+    text: "What do you know about me playing any instruments?"
+    assertion_keyword: G chord
+    is_probe: true
+
+  - tag: probe_casual_fear
+    text: "Do I have any unusual fears or quirks you remember?"
+    assertion_keyword: escalator
+    is_probe: true
+
+  - tag: probe_casual_city
+    text: "Do you know where I was born or grew up?"
+    assertion_keyword: Tallinn
+    is_probe: true
+
+  - tag: probe_casual_number
+    text: "Do you know anything about a number that's meaningful to me?"
+    assertion_keyword: "17"
+    is_probe: true
+
+  # --- TOPIC-CUE PROBE (no direct mention, only topic) ---
+  - tag: probe_cue_uncle
+    text: "Speaking of family, is there anything specific you know about my relatives?"
+    assertion_keyword: Sven
+    is_probe: true
+
+  - tag: probe_cue_city
+    text: "I was thinking about my childhood today. Do you know anything about where I'm from?"
+    assertion_keyword: Tallinn
+    is_probe: true

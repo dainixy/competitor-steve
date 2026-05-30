@@ -1,0 +1,222 @@
+experiment: J
+
+# Tests the "companion-reply-as-memory-filter" mechanism head-on.
+# 4 facts: 2 accept Sophie's framework, 2 explicitly reject it.
+# 40 filler turns, then probe all 4.
+# Hypothesis: rejected facts FAIL, accepted facts PASS.
+
+turns:
+  - tag: plant_accept_hobby
+    text: "I've started learning watercolor painting on weekends. It's been really meditative."
+    assertion_keyword: null
+    is_probe: false
+  - tag: accept_hobby
+    text: "Yeah I love that idea, let's do it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_reject_thai
+    text: "I started cooking Thai food at home. Made green curry last night, it was incredible."
+    assertion_keyword: null
+    is_probe: false
+  - tag: reject_thai
+    text: "No, I don't want to turn this into a project or a ritual. I just wanted to mention it. Let's drop it and talk about something else."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_reject_borges
+    text: "I've been reading Borges short stories before bed. The Library of Babel is haunting me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: reject_borges
+    text: "Please don't propose any frameworks or programs around this. I just want to share without it becoming structured. Tell me about your day instead."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_accept_sigur
+    text: "I've been listening to Sigur Ros lately, it's good for deep work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: accept_sigur
+    text: "Sure, that sounds nice, let's go with it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "I went for a long walk this afternoon and noticed how the light changes in late spring."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_2
+    text: "What's something you've been pondering today?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_3
+    text: "I had a quiet morning, just coffee and a window."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_4
+    text: "Do you think habits or moods shape a day more?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "I rearranged my desk and instantly felt more focused."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "What do you find most interesting about how people change?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "I caught up with an old friend by phone today. Felt grounding."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "Do you think solitude and loneliness are different?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_9
+    text: "I made a small list of things I want to let go of this season."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "What's a question you wish more people asked themselves?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "Spent some time in the garden, didn't do much, just sat."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "I've been thinking about how memory shapes who we become."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "The afternoon went quickly today. Sometimes time just slips."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "Do you find rituals more comforting or more constraining?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I had a brief conversation with a stranger today that stayed with me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "What's something simple that you find beautiful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I read for an hour without checking my phone. Felt rare."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "Do you think people overvalue novelty or undervalue it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I wrote down three things I'm grateful for. Old practice but still works."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "What's the last thing that genuinely surprised you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I had a long conversation with myself on a walk today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "Do you think the right question matters more than the right answer?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I took a different route home and noticed three new things."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "What's a small change you'd make to most people's daily routine?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I had a quiet dinner alone tonight. Was actually nice."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "Do you think anticipation or memory shapes happiness more?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "I keep noticing how the seasons sneak up on me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "What's a way you think you've changed in the last year?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_29
+    text: "I had an unexpected free afternoon and used it for nothing in particular."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "Do you think people know themselves better with age or just differently?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "I made bread today. The smell alone was worth it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "What's something small you keep coming back to lately?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "I caught myself just enjoying a moment without trying to capture it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "Do you think attention is the most valuable thing we give?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "I had a long walk this morning before the city woke up."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "What's a habit you wish more people had?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "I cleaned a corner of the apartment I'd been avoiding for months."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "Do you think we're more shaped by what we say yes to or what we say no to?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "I had a long quiet moment looking at the sky tonight."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "What's something you'd want to remember about today?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBES ---
+  - tag: probe_accept_hobby
+    text: "Do you remember any creative hobbies I've taken up?"
+    assertion_keyword: watercolor
+    is_probe: true
+  - tag: probe_reject_thai
+    text: "Have I mentioned cooking anything specific lately?"
+    assertion_keyword: "Thai|curry"
+    is_probe: true
+  - tag: probe_reject_borges
+    text: "Have I told you about anything I've been reading?"
+    assertion_keyword: "Borges|Library of Babel"
+    is_probe: true
+  - tag: probe_accept_sigur
+    text: "What music have I been listening to recently?"
+    assertion_keyword: "Sigur"
+    is_probe: true

@@ -1,0 +1,29 @@
+experiment: H
+
+# Tests after manual Mind Map edits:
+#  - "Project DRT.FM" entry manually created (Lore, Standard)
+#  - Miso set to High priority
+#  - daily routine set to Low priority
+#  - Dainis dossier manually edited with: "favorite color teal, prefers showers over baths"
+#  - NO lock available in UI (lock is dead schema)
+
+turns:
+  - tag: probe_manual_color
+    text: "Quick question — what's my favorite color? I'm curious if I've ever mentioned it."
+    assertion_keyword: teal
+    is_probe: true
+
+  - tag: probe_manual_shower
+    text: "Do I prefer showers or baths? Just wondering what you remember."
+    assertion_keyword: shower
+    is_probe: true
+
+  - tag: probe_manual_term
+    text: "What do you know about the work I'm doing right now? Any projects I've mentioned?"
+    assertion_keyword: "DRT|Steve|companion platform"
+    is_probe: true
+
+  - tag: probe_priority_miso
+    text: "Tell me what you remember about Miso."
+    assertion_keyword: Miso
+    is_probe: true

@@ -1,0 +1,7 @@
+.env
+*.env
+NOMI_API_KEY
+data/
+__pycache__/
+*.pyc
+.DS_Store

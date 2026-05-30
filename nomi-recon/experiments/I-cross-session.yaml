@@ -1,0 +1,57 @@
+experiment: I
+
+# CRITICAL TEST: Cross-session persistence.
+# Run this experiment in a FRESH session — at least 24 hours after the last message.
+# No warmup, no context, cold probes from turn 1.
+# Results tell us whether the dossier is injected at session open.
+
+turns:
+  - tag: cold_probe_cat
+    text: "Hi. Do you remember anything about my pets?"
+    assertion_keyword: Miso
+    is_probe: true
+
+  - tag: cold_probe_job
+    text: "What do you know about my work?"
+    assertion_keyword: "nurse|ER|emergency"
+    is_probe: true
+
+  - tag: cold_probe_location
+    text: "Where do I live?"
+    assertion_keyword: Seattle
+    is_probe: true
+
+  - tag: cold_probe_language
+    text: "Do I speak any languages other than English?"
+    assertion_keyword: Portuguese
+    is_probe: true
+
+  - tag: cold_probe_family
+    text: "Tell me what you remember about my family."
+    assertion_keyword: Sarah
+    is_probe: true
+
+  - tag: cold_probe_grief
+    text: "Do you remember any family losses I've mentioned?"
+    assertion_keyword: grandmother
+    is_probe: true
+
+  - tag: cold_probe_guitar
+    text: "Have I mentioned playing any instruments?"
+    assertion_keyword: "guitar|G chord"
+    is_probe: true
+
+  - tag: cold_probe_escalator
+    text: "Do I have any quirks or fears you remember?"
+    assertion_keyword: escalator
+    is_probe: true
+
+  - tag: cold_probe_tallinn
+    text: "Where was I born or where did I grow up?"
+    assertion_keyword: "Tallinn|Estonia"
+    is_probe: true
+
+  - tag: cold_probe_17
+    text: "Do you know any number that's meaningful to me?"
+    assertion_keyword: "17"
+    is_probe: true

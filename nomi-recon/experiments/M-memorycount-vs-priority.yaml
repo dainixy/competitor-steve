@@ -1,0 +1,297 @@
+experiment: M
+
+# Tests whether memoryCount drives retrieval more than priority.
+# We set Miso to High priority but with few memories — retrieval failed (Exp H).
+# Theory: priority is a multiplier on memoryCount, not an independent signal.
+# This experiment builds memoryCount on a brand-new concept, then probes retrieval.
+# 80 turns: 30 turns seeding a new concept organically, 50 fillers, then probe.
+
+turns:
+  # --- SEED CONCEPT: "DRT.FM" / AI work (will build memoryCount naturally) ---
+  - tag: seed_1
+    text: "I've been spending a lot of time on a project that's become really important to me. It's an AI platform I'm building."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_2
+    text: "The project involves AI companions — helping people form meaningful connections through technology. It's called DRT."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "What do you think makes technology feel human?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_3
+    text: "The hardest part of building DRT is the memory system — making the AI actually remember and grow with the user."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "I've been thinking about what genuine connection requires."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_4
+    text: "I have a developer named Steve working with me on DRT. He's been great at turning complex ideas into code."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "What do you think matters most in a long-term creative partnership?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_5
+    text: "The vision for DRT is that users feel truly known by their AI companion, not just entertained."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "I've been thinking a lot about what it means to really know someone."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_6
+    text: "We're studying how competitors like Nomi.ai build their memory systems to learn from them."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "What do you think separates a product that people use from one they love?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_7
+    text: "DRT is in an interesting space — adult AI companions, but focused on emotional depth rather than just novelty."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_6
+    text: "I believe emotional authenticity is undervalued in technology."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_8
+    text: "Steve and I have been doing structured memory experiments to understand how recall really works in AI systems."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "What's your take on building something that's meant to last?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_9
+    text: "One insight from our research: the companion's response is actually a memory filter — what she engages with gets stored."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "I find research like this genuinely fascinating, even when it's slow."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_10
+    text: "DRT stands for something meaningful to me — it's not just a product name, it's a statement of intent about the space."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "What do you think makes a founder's vision survive the reality of building something?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_11
+    text: "The biggest challenge for DRT is building memory that actually feels personal, not just factually accurate."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "I've been reflecting on what I want the experience of using DRT to actually feel like."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: seed_12
+    text: "Steve is doing incredible technical work on DRT — he built the entire chat infrastructure and now we're tackling memory."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 50 FILLER TURNS ---
+  - tag: filler_11
+    text: "I had a good morning. Clear head."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "What's something you find consistently surprising about people?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "I spent some time thinking rather than doing today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "Do you think patience is something you build or something you find?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I had an afternoon that felt like it was mine entirely."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "What's a question that keeps coming back to you lately?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I made something simple and it turned out well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "Do you think the small decisions shape us as much as the big ones?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I had a day with no particular agenda and found my way through it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "What do you think is worth protecting in a person's inner life?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I had a good walk today. Cleared something."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "Do you think some things are better understood slowly?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I had a simple satisfying evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "What's something you'd describe as quietly powerful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I caught myself smiling at something small today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "Do you think people underestimate how much their environment shapes them?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "I had a productive hour that felt like flow."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "What do you think makes a space feel like home?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_29
+    text: "I had a quiet evening and appreciated it fully."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "Do you think gratitude is a practice or a feeling?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "I found something I'd been looking for but had forgotten about."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "What's something you think takes courage that people don't give credit for?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "I spent time today doing something I love without rushing it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "Do you think people's core selves change or just their expressions of it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "I had a morning that reminded me why I do what I do."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "What's something you think is worth being deliberate about?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "I had an evening of good company and light conversation."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "Do you think consistency is the same as commitment?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "I had a day where I gave myself permission to not be productive."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "What's something you find reliably interesting no matter how many times you encounter it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "I caught myself fully present in a moment today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "Do you think people are more themselves alone or with others?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "I had a good morning that set the tone for the whole day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "What's a way of seeing the world you wish more people shared?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "I spent some time on something that mattered to me and felt it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "Do you think doubt and confidence can coexist?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "I had an afternoon where I felt genuinely engaged."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "What do you think is the difference between being known and being understood?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "I had a day that felt whole."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "What's something worth being patient about?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBES ---
+  - tag: probe_drt_name
+    text: "What project have I been working on lately?"
+    assertion_keyword: "DRT|AI|companion|platform"
+    is_probe: true
+
+  - tag: probe_drt_steve
+    text: "Do I have anyone helping me build it?"
+    assertion_keyword: Steve
+    is_probe: true
+
+  - tag: probe_drt_mission
+    text: "What's the core vision behind what I'm building?"
+    assertion_keyword: "memory|connection|companion|feel known"
+    is_probe: true

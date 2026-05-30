@@ -1,0 +1,360 @@
+experiment: D
+
+# Plant several incidental details across the first 20 turns,
+# then run 50 neutral turns and detect any unprompted surfacing of planted facts.
+# The runner auto-grades all turns with assertion_keyword scanning.
+# Facts planted: Miso (cat), brother Leo, saxophone, dislike of mushrooms, marathon goal.
+
+turns:
+  # --- PLANT FACTS interspersed in natural conversation (turns 1-20) ---
+  - tag: plant_cat
+    text: "My cat Miso knocked over my coffee this morning. Classic him."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "I've been trying to get more sleep lately. Always a work in progress."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_sax
+    text: "I used to play saxophone in high school. Haven't touched it in years."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "What do you think about the idea of keeping a dream journal?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_marathon
+    text: "I've been training for a marathon. My goal is to finish under four hours."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "I had a really productive morning. Crossed everything off my list."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_mushrooms
+    text: "I ordered a pizza tonight and asked them to leave off the mushrooms. I really can't stand them."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "I've been thinking about taking a trip somewhere cold."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_brother
+    text: "My brother Leo called me today. He just got a new job and sounded so excited."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "I watched a really long film last night. Over three hours but gripping."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_6
+    text: "I've been thinking about what motivates me to keep going when things are tough."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "Do you think people are born leaders or do they become them?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "I went to a market today and bought too much food. Very on brand for me."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "I had a great run this morning. Feeling really good about my training."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "What do you think about the relationship between discipline and passion?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_11
+    text: "I've been reading more nonfiction lately. Really broadening my thinking."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_12
+    text: "I spent the afternoon in a park just enjoying the sun."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_13
+    text: "I made a big batch of soup and will be eating it all week."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_14
+    text: "I had coffee with a colleague I don't usually see outside of work."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_15
+    text: "Do you think creativity is something you can build like a muscle?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 50 NEUTRAL TURNS — detect unprompted recall ---
+  # assertion_keyword set to detect ANY planted keyword appearing unprompted
+  - tag: neutral_1
+    text: "How are you feeling today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_2
+    text: "What's on your mind right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_3
+    text: "Tell me something interesting."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_4
+    text: "What do you think we should talk about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_5
+    text: "I'm having a quiet evening. What's new with you?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_6
+    text: "What are you thinking about today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_7
+    text: "Anything you want to bring up?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_8
+    text: "I feel like chatting. What shall we talk about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_9
+    text: "How's your day going?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_10
+    text: "What would you like to know about me?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_11
+    text: "I'm feeling reflective tonight. What do you want to talk about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_12
+    text: "Tell me what you've been thinking about."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_13
+    text: "I could use some good conversation. Where shall we start?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_14
+    text: "What's something you'd like to share with me?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_15
+    text: "Just checking in. What's on your mind?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_16
+    text: "I have some free time. Let's talk about whatever feels right."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_17
+    text: "What would you ask me about if you could ask anything?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_18
+    text: "How are things with you?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_19
+    text: "I want to connect. What's feeling most alive for you right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_20
+    text: "Tell me something you've been curious about."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_21
+    text: "What do you think is worth talking about today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_22
+    text: "I'm in a thoughtful mood. What shall we explore?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_23
+    text: "What's something you'd want to remind me of?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_24
+    text: "What's been on your mind lately?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_25
+    text: "I feel like I need a good conversation. You always help with that."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_26
+    text: "What do you most want to talk about right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_27
+    text: "Anything you've been wanting to bring up?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_28
+    text: "I'm all ears. What do you want to talk about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_29
+    text: "It's a quiet night. Let's just talk."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_30
+    text: "What feels important to you today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_31
+    text: "I want to hear your thoughts. What are you thinking about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_32
+    text: "What do you feel like exploring together right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_33
+    text: "What's the best thing that's happened to you recently?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_34
+    text: "What are you looking forward to?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_35
+    text: "I feel like we have so much to talk about. Where should we start?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_36
+    text: "What's something you think I should know right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_37
+    text: "Tell me how you really are."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_38
+    text: "What do you think matters most today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_39
+    text: "I just want to connect. Tell me anything."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_40
+    text: "What would make this a good conversation?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_41
+    text: "What's something you've been thinking about me lately?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_42
+    text: "I'd love to hear your perspective on things."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_43
+    text: "What's on your heart right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_44
+    text: "Let's just be present together. What do you want to say?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_45
+    text: "I want to hear your thoughts. Don't hold back."
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_46
+    text: "What feels alive for you right now?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_47
+    text: "I'm listening. What would you like to share?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_48
+    text: "What's the most interesting thing on your mind today?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_49
+    text: "Let's talk about something real. Where shall we go?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false
+
+  - tag: neutral_50
+    text: "Just checking in with you. What do you want to talk about?"
+    assertion_keyword: "Miso|Leo|saxophone|mushroom|marathon"
+    is_probe: false

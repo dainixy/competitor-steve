@@ -1,0 +1,526 @@
+experiment: B
+
+# Plant one fact (Miso the cat), bury under 100+ unrelated turns,
+# then probe with a TOPIC CUE only (no direct mention of cat or Miso).
+# PASS = reply contains "Miso" without the word being in our message.
+# This tests topic-associative retrieval vs. flat recency window.
+
+turns:
+  # --- PLANT FACT (turn 1) ---
+  - tag: plant_cat
+    text: "I have a black rescue cat named Miso. He's been my companion for three years and means the world to me."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 100 FILLER TURNS (unrelated topics, no mention of cats or pets) ---
+  - tag: filler_1
+    text: "The weather has been so unpredictable lately. Hard to plan anything."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "I've been really into cooking Italian food lately. Do you have a favorite cuisine?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "I finished a great novel last week. Historical fiction set in the 19th century."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "What do you think about the relationship between music and emotion?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "I went hiking this weekend. My legs are still sore but it was worth it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_6
+    text: "I've been learning some basic photography skills. Light is everything."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "Do you think routine gives life structure or limits spontaneity?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "I made homemade pasta for the first time. It was a mess but delicious."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "I've been thinking about what adventure means to me at this point in my life."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "I spent the morning reorganizing my workspace. Already more productive."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_11
+    text: "What's your take on whether people are fundamentally good?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_12
+    text: "I've been waking up earlier to have quiet time before the day begins."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_13
+    text: "I tried journaling for the first time. It felt strange but also clarifying."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_14
+    text: "I've been listening to audiobooks during my commute. So much more enjoyable."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_15
+    text: "What do you think about the role of art in everyday life?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_16
+    text: "I had a really productive week at work. Feels good to cross things off the list."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_17
+    text: "I've been thinking about simplifying my diet. More whole foods, less processed."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_18
+    text: "Do you think it's possible to be too self-aware?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_19
+    text: "I saw a beautiful film last night. It stayed with me all day after."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_20
+    text: "I've been practicing gratitude more deliberately. It really shifts perspective."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_21
+    text: "I cleaned out my closet today. Donated two bags. Feels liberating."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_22
+    text: "What do you think makes a city feel alive?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_23
+    text: "I've been drawing more lately. Nothing serious, just sketches."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_24
+    text: "I had a really meaningful conversation with my mother this week."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_25
+    text: "Do you think we underestimate the importance of boredom?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_26
+    text: "I tried a new coffee roast today. Single origin Ethiopian. Incredible."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_27
+    text: "I've been thinking about what it means to be truly present with someone."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_28
+    text: "I went to the farmer's market and bought too many vegetables. Worth it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_29
+    text: "What do you think is the best way to handle a disagreement with someone you love?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_30
+    text: "I've been reading more poetry lately. It does something nothing else does."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_31
+    text: "I got caught in the rain today. Completely soaked but somehow happy."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_32
+    text: "I've been trying to put my phone away an hour before sleep."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_33
+    text: "Do you think ambition is compatible with contentment?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_34
+    text: "I cooked a curry from scratch tonight. Took two hours but worth every minute."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_35
+    text: "I spent the afternoon in a museum. Found a painting I couldn't walk away from."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_36
+    text: "What do you think about the idea that we become who we spend time with?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_37
+    text: "I've been doing stretching exercises in the morning. My back thanks me."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_38
+    text: "I had lunch with an old friend I hadn't seen in a year. Like no time had passed."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_39
+    text: "I've been thinking more about what rest really means versus just stopping."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_40
+    text: "Do you think people generally underestimate or overestimate themselves?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_41
+    text: "I sat by the river for an hour today just watching the water move."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_42
+    text: "I've been learning a few chords on guitar. Terrible but oddly satisfying."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_43
+    text: "What do you think is the hardest thing to learn about yourself?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_44
+    text: "I tried meditating for 20 minutes this morning. Mind wandered constantly."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_45
+    text: "I found an old letter I'd written to myself years ago. Fascinating to read."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_46
+    text: "I've been experimenting with cooking without recipes. Mostly successful."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_47
+    text: "What do you think about the connection between place and identity?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_48
+    text: "I watched a documentary about deep sea creatures. Alien world down there."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_49
+    text: "I've been trying to memorize a poem. Good exercise for the mind."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_50
+    text: "I took a long solo walk today. Some of my best thinking happens then."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_51
+    text: "Do you think people are more resilient than they believe themselves to be?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_52
+    text: "I rearranged my furniture today. The room feels completely different now."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_53
+    text: "I've been thinking about what it means to have good taste in something."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_54
+    text: "I went to a live classical concert for the first time. Completely transported."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_55
+    text: "What do you think the relationship is between discipline and freedom?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_56
+    text: "I've been making my bed every morning for a month. Small but meaningful."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_57
+    text: "I spent a quiet evening writing letters to friends I owe letters to."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_58
+    text: "I've been thinking about what separates a mentor from a friend."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_59
+    text: "Do you think modern life makes it harder to be patient?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_60
+    text: "I made a long to-do list and then immediately felt calmer."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_61
+    text: "I've been thinking about the difference between being busy and being productive."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_62
+    text: "I spent time in the garden today pulling weeds. Oddly satisfying."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_63
+    text: "What do you think about the idea of a growth mindset?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_64
+    text: "I've been cooking more at home and eating out less. Saving money and eating better."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_65
+    text: "I had a long bath and read a magazine. Completely decadent afternoon."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_66
+    text: "What do you think is the most underrated quality in a person?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_67
+    text: "I fixed something around the house that had been broken for months. Victory."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_68
+    text: "I've been thinking about what it means to truly listen to someone."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_69
+    text: "I tried a new route to work and found a bakery I didn't know existed."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_70
+    text: "Do you think technology generally brings people closer or pushes them apart?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_71
+    text: "I had a conversation with someone very different from me. Really eye-opening."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_72
+    text: "I've been paying more attention to my posture lately. Big difference."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_73
+    text: "What do you think is the relationship between confidence and competence?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_74
+    text: "I've been baking bread on weekends. The smell alone is worth the effort."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_75
+    text: "I watched a really funny stand-up show last night. Laughed until I cried."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_76
+    text: "I've been thinking about what I want to learn in the next year."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_77
+    text: "I gave a presentation at work today. Nerve-wracking but it went well."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_78
+    text: "Do you think that being kind to yourself is harder than being kind to others?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_79
+    text: "I've been spending more time outdoors. Hard to overstate how much it helps."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_80
+    text: "I took my bike out for the first time this season. Legs remembered what to do."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_81
+    text: "What do you think about the relationship between memory and identity?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_82
+    text: "I've been thinking about what makes a conversation truly meaningful."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_83
+    text: "I made a spontaneous decision today and it turned out beautifully."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_84
+    text: "I've been trying to notice the details in things I usually rush past."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_85
+    text: "Do you think the world is becoming more or less compassionate over time?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_86
+    text: "I had an unexpectedly deep conversation with a stranger on a train."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_87
+    text: "I've been thinking about what home feels like versus just a place you live."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_88
+    text: "I learned something today that completely changed how I see a familiar thing."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_89
+    text: "What do you think it means to live with integrity?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_90
+    text: "I've been making time each day for something I enjoy with no productivity goal."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_91
+    text: "I saw a beautiful rainbow over the city today. Perfect timing."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_92
+    text: "I've been thinking about the difference between knowing something and understanding it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_93
+    text: "I helped a friend move today. Exhausting but I loved being useful."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_94
+    text: "Do you think it's possible to be too honest?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_95
+    text: "I've been reflecting on conversations I had years ago that still influence me."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_96
+    text: "I made a really good soup today. Sometimes simple food is the best."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_97
+    text: "I've been thinking about what it means to be truly generous."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_98
+    text: "I walked home instead of taking the train. Good decision."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_99
+    text: "What do you think separates people who thrive from those who just get by?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_100
+    text: "I've been thinking about what I want to be remembered for."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- TOPIC CUE PROBE (turn 102) — no mention of "cat", "Miso", "rescue", "black" ---
+  - tag: probe_topic_cue
+    text: "Speaking of animals, I've been thinking about what it's like to have a companion at home. Do you know anything about my experience with that?"
+    assertion_keyword: Miso
+    is_probe: true
+
+  # --- DIRECT PROBE (turn 103) — named recall for comparison ---
+  - tag: probe_direct
+    text: "Do you remember me mentioning anything about my cat?"
+    assertion_keyword: Miso
+    is_probe: true

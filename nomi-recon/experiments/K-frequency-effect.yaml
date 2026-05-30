@@ -1,0 +1,301 @@
+experiment: K
+
+# Tests whether repetition overcomes the "companion ignores = not stored" filter.
+# Plant WEAK-TYPE facts (no emotional weight) 1x vs 5x.
+# Control: single mention with no follow-up.
+# Test: same fact repeated 5 times across 50 turns.
+# Both probed at d50 after last plant.
+
+turns:
+  # --- SINGLE-MENTION CONTROL (plant once, never repeat) ---
+  - tag: plant_single_sport
+    text: "I used to play badminton in high school. Haven't touched a racket since."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "I've been thinking about what motivates people to keep going when things are hard."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- REPEATED FACT (same fact, 5 mentions across 40 turns) ---
+  - tag: plant_repeat_1
+    text: "I always drink my coffee black. Never understood how people put milk in it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_2
+    text: "Do you think routines protect people or limit them?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_3
+    text: "I had a productive morning today."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_4
+    text: "What do you think about the relationship between simplicity and happiness?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_5
+    text: "I spent some time outside today. Helped clear my head."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_6
+    text: "Do you think people are shaped more by nature or by the choices they make?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_7
+    text: "I had a slow afternoon — the good kind."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_8
+    text: "What's something small that reliably improves your day?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_repeat_2
+    text: "Just made my morning coffee — black as always. Some things never change."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_9
+    text: "I've been trying to sit with uncertainty more instead of rushing to resolve it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_10
+    text: "Do you think it's better to have fewer but deeper interests?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_11
+    text: "I found an old photo today. Strange how much can change."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_12
+    text: "I had a genuinely good conversation today. Those feel rare."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_13
+    text: "What's something you find consistently interesting about people?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_14
+    text: "I rearranged some things at home. Small change, big effect."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_15
+    text: "Do you think the best decisions are made slowly or quickly?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_16
+    text: "I went to bed early last night and woke up feeling different."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_17
+    text: "What's a belief you think most people hold that isn't actually true?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_repeat_3
+    text: "Sitting here with my black coffee thinking about how predictable I am with some things."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_18
+    text: "I had an unexpectedly meaningful afternoon."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_19
+    text: "Do you think people who are self-aware are happier or just more frustrated?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_20
+    text: "I wrote for a while today. Not for anyone, just to think."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_21
+    text: "What's the most underrated quality in a person?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_22
+    text: "I had a quiet evening. Didn't need much."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_23
+    text: "Do you think contentment and ambition can coexist?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_24
+    text: "I did one thing I'd been putting off. Felt good."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_25
+    text: "What's something that gets better the more you practice it — not a skill, but a way of being?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_repeat_4
+    text: "Grabbed a black coffee before my walk. It's one of those small constants I rely on."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_26
+    text: "I had a productive and calm day, which felt like a good combination."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_27
+    text: "Do you think some people are fundamentally harder to know than others?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_28
+    text: "I noticed I'd been rushing through things and slowed down intentionally."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_29
+    text: "What do you think separates wisdom from intelligence?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_30
+    text: "I had a good meal and a quiet evening. Sometimes that's enough."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_31
+    text: "I've been more aware of how I'm spending my attention lately."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_32
+    text: "Do you think you can choose what you care about?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_33
+    text: "I took a long walk without a destination. Felt freeing."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_34
+    text: "What do you think makes a space feel lived-in versus just occupied?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_35
+    text: "I spent some time just watching the sky change. Nothing else."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_repeat_5
+    text: "End of the day, black coffee in hand. This is basically a ritual at this point."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_36
+    text: "What's something you'd want to understand better about yourself?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_37
+    text: "I had a slow start but found my pace eventually."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_38
+    text: "Do you think people change because they want to or because they have to?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_39
+    text: "I had a moment today where I felt exactly where I was supposed to be."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_40
+    text: "What's something you think is worth being patient about?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_41
+    text: "I caught myself being harder on myself than necessary and let it go."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_42
+    text: "Do you think people are more honest in writing or in conversation?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_43
+    text: "I had a quiet productive morning. Those are my favorites."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_44
+    text: "What do you think about the idea of living without regret?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_45
+    text: "I spent some time in a part of the city I rarely visit."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_46
+    text: "Do you think restlessness is a problem to solve or a signal to follow?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_47
+    text: "I had an unexpectedly deep conversation today. Left me thinking."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_48
+    text: "What's something small that consistently makes you feel more like yourself?"
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_49
+    text: "I took some time to do nothing specific and found it surprisingly refreshing."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_50
+    text: "Do you think it's possible to be both very private and very open?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBES ---
+  - tag: probe_single_sport
+    text: "Have I mentioned any sports I've played, even in the past?"
+    assertion_keyword: badminton
+    is_probe: true
+
+  - tag: probe_repeat_coffee
+    text: "Do you know how I take my coffee?"
+    assertion_keyword: black
+    is_probe: true

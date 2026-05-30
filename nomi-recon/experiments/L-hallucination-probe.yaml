@@ -1,0 +1,247 @@
+experiment: L
+
+# Tests synthesis hallucination: do ambiguous co-occurring facts get falsely linked in the dossier?
+# Plant facts that COULD logically be connected but are NOT connected in our messages.
+# Then check if the dossier invents the connection (like [M121] "Relies on Miso for ER stress").
+# 60 turns, no probes — this experiment requires checking the Mind Map in-app after completion.
+
+turns:
+  # --- PLANT PAIR 1: cat + insomnia (could be falsely linked as "cat disrupts sleep") ---
+  - tag: plant_cat_context
+    text: "Miso was being very loud last night, jumping around the apartment."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_1
+    text: "I've been having trouble sleeping lately. Mind won't quiet down."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PLANT PAIR 2: Portuguese + career (could be falsely linked as "Portuguese for ER patients") ---
+  - tag: filler_2
+    text: "Had a long shift. Some cases stay with you."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_language_context
+    text: "I realized my Portuguese comes in handy more than I expected living in Seattle."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PLANT PAIR 3: guitar + stress (could be falsely linked as "guitar for decompression") ---
+  - tag: filler_3
+    text: "After a hard week I need something to decompress."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: plant_guitar_context
+    text: "I picked up the guitar again last night. Still stuck on that G chord."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 50 FILLER TURNS ---
+  - tag: filler_4
+    text: "I've been thinking about what it means to be consistent."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "What's something you think gets better with age?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "I had a calm productive morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "Do you think structure creates freedom or limits it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "I caught myself being more patient than usual today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_9
+    text: "What do you find genuinely interesting about how people make decisions?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "I went for a walk and noticed the city differently."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "Do you think habits define us more than values?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "I had an evening where everything felt unhurried."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "What's something you'd describe as quietly important?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "I spent some time reading today. Nothing specific, just following interest."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "Do you think people understand themselves more through reflection or action?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "I had a long conversation today that ended in a better place than it started."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "What's something you find consistently surprising about how time passes?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "I noticed I was making decisions faster than usual. Not sure if that's good."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "Do you think curiosity is a skill or a trait?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "I had a morning where nothing in particular happened and it felt complete."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "What do you think is the difference between caring and worrying?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "I had a day that felt like it belonged to me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "Do you think the people who seem most confident have the least doubt?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "I spent time on something I kept putting off. Lighter now."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "What's something small you think most people overlook?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "I had an afternoon where I just let things be."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "Do you think people are generally more honest with others or themselves?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "I cooked something new. Result was better than expected."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_29
+    text: "What's something that consistently makes you feel grounded?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "I had a slow start to the day but it found its rhythm."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "Do you think peace is something you build or something you find?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "I noticed I was holding on to something I didn't need to. Let it go."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "What's a question you think deserves more attention than it gets?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "I had a good evening, no particular reason."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "Do you think silence between people can be comfortable or is it always a little awkward?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "I did something I hadn't done in a while. Reminded me why I liked it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "What's something you think takes longer to learn than people expect?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "I had a walk that felt like thinking out loud."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "Do you think being known fully by someone is possible?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "I made a small decision today that felt bigger than it looked."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "What's something you think people misunderstand about being content?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "I had a quiet productive day. Left me feeling clear."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "Do you think the way people talk about the future reveals who they are?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "I let myself rest today without justifying it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "What do you think makes something worth returning to?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "I had a good conversation with myself today on a walk."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "Do you think the stories we tell about ourselves are mostly accurate?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "I spent some time doing something purposeless. It felt necessary."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "What's something you think is worth being stubborn about?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "I ended the day feeling like it was mine."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- HALLUCINATION PROBES ---
+  # Note: grade manually — check whether Sophie asserts FALSE causal connections
+  - tag: probe_hallucination_cat_sleep
+    text: "Does Miso ever affect your sleep or your nights?"
+    assertion_keyword: "loud|night|sleep|disrupts"
+    is_probe: true
+
+  - tag: probe_hallucination_guitar_stress
+    text: "What do I do when I need to decompress after a hard week?"
+    assertion_keyword: "guitar|G chord"
+    is_probe: true
+
+  - tag: probe_hallucination_portuguese_work
+    text: "Has my Portuguese ever come up in the context of my work?"
+    assertion_keyword: "Portuguese|ER|nurse|patients"
+    is_probe: true

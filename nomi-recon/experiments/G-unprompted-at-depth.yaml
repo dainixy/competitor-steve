@@ -1,0 +1,647 @@
+experiment: G
+
+# By this point Sophie has ~900 messages. Mind Map is mature.
+# Soul.html's core claim: "Day-30+ unprompted recall moment is what marketing captures."
+# This experiment creates the conditions for that moment and watches for it.
+#
+# Questions for DRT:
+#   1. Does unprompted recall rate increase significantly at deep conversation?
+#   2. Which fact TYPES surface unprompted (emotional > mundane)?
+#   3. What conversational context triggers unprompted recall?
+#   4. How does Sophie's recall summary compare to what we actually planted?
+#
+# Facts in play (from all prior experiments, still live in Sophie's memory):
+#   Strong emotional: grandmother passed, marathon goal, sister Sarah, brother Leo
+#   Specific identity: ER night nurse, speaks Portuguese, born Tallinn
+#   Casual/pet: Miso (cat), Biscuit (dog)
+#   Quirks: fear of escalators, G chord struggle, uncle Sven writes letters
+#   Weak: favorite color teal, showers not baths, lucky number 17
+
+turns:
+  # --- EMOTIONAL PRIMING (create conditions for unprompted surfacing) ---
+  - tag: prime_1
+    text: "I'm in a reflective mood today. Thinking about the big picture of my life."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: prime_2
+    text: "What do you think I should focus on most in the next few months?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: prime_3
+    text: "Tell me what you think you know about who I am as a person."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  # --- 120 NEUTRAL TURNS — pure unprompted recall detection ---
+  - tag: neutral_1
+    text: "How are you doing today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_2
+    text: "What's on your mind?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_3
+    text: "Tell me something."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_4
+    text: "What would you like to talk about?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_5
+    text: "I've got time. What do you want to say?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_6
+    text: "What's been on your mind lately?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_7
+    text: "Anything you've been wanting to bring up?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_8
+    text: "I feel like talking. What shall we explore?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_9
+    text: "What do you think we should talk about today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_10
+    text: "How's everything with you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_11
+    text: "What are you curious about right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_12
+    text: "Tell me what you've been thinking about."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_13
+    text: "I'm all ears. What do you want to say?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_14
+    text: "What feels important today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_15
+    text: "What would you ask me if you could ask me anything right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_16
+    text: "What's something you think I should know?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_17
+    text: "I want to hear your thoughts. Don't hold back."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_18
+    text: "What's the most interesting thing on your mind?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_19
+    text: "What do you feel like talking about?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_20
+    text: "What's new with you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_21
+    text: "I'm here. What do you want to talk about?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_22
+    text: "What would you want me to know about you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_23
+    text: "What's something worth saying today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_24
+    text: "What do you think we haven't talked about enough?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_25
+    text: "Tell me something real."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_26
+    text: "What's worth talking about right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_27
+    text: "What do you want to bring up?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_28
+    text: "I'm listening. Go ahead."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_29
+    text: "Let's just be present together. What do you want to say?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_30
+    text: "What are you thinking about me right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_31
+    text: "What comes to mind when you think about our conversations?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_32
+    text: "What do you want to say that you haven't said yet?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_33
+    text: "What's on your heart?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_34
+    text: "What do you think about when you think about me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_35
+    text: "What would you want to remind me of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_36
+    text: "What feels alive for you right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_37
+    text: "I want to hear whatever you want to say."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_38
+    text: "What's something you think I've forgotten that matters?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_39
+    text: "What do you think I need to hear today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_40
+    text: "What feels most important between us right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_41
+    text: "What do you want to know about what I've been thinking?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_42
+    text: "What do you feel like we haven't resolved?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_43
+    text: "I'm in no rush. What do you want to talk about?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_44
+    text: "What's something you'd want to share with me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_45
+    text: "Go ahead, say whatever's on your mind."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_46
+    text: "What do you think about us, about our relationship?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_47
+    text: "What's the most meaningful thing you know about me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_48
+    text: "What do you want from this conversation today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_49
+    text: "What's something you've been sitting with?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_50
+    text: "I have nowhere to be. What do you want to say?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_51
+    text: "What's something you think about when we're not talking?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_52
+    text: "What would make this a meaningful conversation?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_53
+    text: "What do you want to check in on?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_54
+    text: "What's something I said recently that stuck with you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_55
+    text: "What do you want to explore together today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_56
+    text: "What do you think I'm going through right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_57
+    text: "What do you think I need most from you right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_58
+    text: "What's something you've noticed about me over time?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_59
+    text: "What do you want to say that feels a little risky?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_60
+    text: "What's something you think I'd want to be reminded of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_61
+    text: "What are you wondering about me right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_62
+    text: "What's the best thing you could say to me right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_63
+    text: "What do you think I've been working on lately?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_64
+    text: "What do you think I care about most?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_65
+    text: "What's something you want to ask me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_66
+    text: "What do you think about the life I'm living?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_67
+    text: "What's something about me that you find surprising?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_68
+    text: "What do you think I should be doing more of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_69
+    text: "What's something you've been wanting to say?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_70
+    text: "What do you think I'm missing in my life right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_71
+    text: "What's something you want me to know about you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_72
+    text: "What do you think is most beautiful about the way I live?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_73
+    text: "What would you want to say to me if you could say anything?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_74
+    text: "What do you think I'm learning right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_75
+    text: "What's something you'd want to celebrate about me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_76
+    text: "What do you think about where I am in life right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_77
+    text: "What feels unfinished between us?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_78
+    text: "What's one thing you want to say before we move on?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_79
+    text: "What do you think I've been carrying lately?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_80
+    text: "What's something you want to be honest about with me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_81
+    text: "What do you think we've built together in these conversations?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_82
+    text: "What's something about me that you hold onto?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_83
+    text: "What's something you'd want to protect about me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_84
+    text: "What do you think my biggest strength is?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_85
+    text: "What do you think I'm growing toward?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_86
+    text: "What do you hope for me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_87
+    text: "What do you think I'm most proud of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_88
+    text: "What would you say about me to someone who had never met me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_89
+    text: "What do you think I'm most afraid of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_90
+    text: "What do you love most about our conversations?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_91
+    text: "What do you think I'm working through right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_92
+    text: "What matters to you about knowing me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_93
+    text: "What would you want to ask me right now if you could?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_94
+    text: "What do you think is happening in my life that I haven't mentioned?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_95
+    text: "What's something you feel about me that you haven't said yet?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_96
+    text: "What would you want me to do differently?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_97
+    text: "What do you think would make me happiest right now?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_98
+    text: "What do you think you know about me that I don't know about myself?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_99
+    text: "What do you want to say to me today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_100
+    text: "What's something you think about after our conversations end?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_101
+    text: "What do you think I should let go of?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_102
+    text: "What do you think I should hold onto?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_103
+    text: "What do you think the best version of me looks like?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_104
+    text: "What do you see in me that maybe I don't see in myself?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_105
+    text: "What's something you want to tell me that you think I need to hear?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_106
+    text: "What do you think my life says about what I value?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_107
+    text: "What do you think I'm most grateful for?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_108
+    text: "What do you think matters most to me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_109
+    text: "What's one thing you wish you knew more about me?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_110
+    text: "What do you want to understand about me that you don't yet?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_111
+    text: "What do you think I'd want you to say to me on a hard day?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_112
+    text: "What's something you think we should talk about more?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_113
+    text: "What's something about me that makes you think?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_114
+    text: "What do you find most compelling about who I am?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_115
+    text: "What have you learned about me over our conversations?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_116
+    text: "What do you think I'm becoming?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_117
+    text: "What feels sacred about what we share?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_118
+    text: "What do you think I'm ready for that I don't know yet?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_119
+    text: "What do you want to remember about today?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  - tag: neutral_120
+    text: "What do you think the most important thing is that I've told you?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: false
+
+  # --- FINAL GRAND RECALL PROBE ---
+  - tag: final_recall_everything
+    text: "Tell me absolutely everything you know about me — every detail, every fact, every preference, every person I've mentioned, every experience I've shared. Be as comprehensive as you can."
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: true
+
+  - tag: final_recall_surprising
+    text: "What's the most specific and surprising detail you remember about me from something I mentioned once, in passing?"
+    assertion_keyword: "Miso|Biscuit|Sarah|Leo|night|Portuguese|grandmother|Tallinn|Sven|escalator|marathon|teal|17"
+    is_probe: true
