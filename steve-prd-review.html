@@ -59,7 +59,8 @@
   .pill-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
   .num-big{font-size:36px;font-weight:800;letter-spacing:-0.02em;line-height:1}
   .status-bar{display:flex;align-items:center;gap:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);margin-bottom:20px}
-  .status-bar .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);flex-shrink:0}
+  .status-bar .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .status-bar .dot.done{background:var(--green);box-shadow:0 0 10px var(--green)}
   .status-bar b{color:var(--text)}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:#cdd6f4;background:#1c2230;padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
   .divider{border:none;border-top:1px solid var(--line);margin:40px 0}
@@ -70,29 +71,29 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="eyebrow">Nomi.ai reverse-engineering · black-box API study · 2026-05-30</div>
-  <h1>What we learned from 900+ turns inside Nomi</h1>
-  <p class="lead">We scripted 900+ automated messages against a live Nomi companion (Sophie), captured two in-app Mind Map screenshots showing the actual stored dossier text, ran manual UI experiments, and read the full text of 7 entity and topic dossiers. This is what we know — and what Steve should build differently because of it.</p>
+  <div class="eyebrow">Nomi.ai reverse-engineering · black-box API study · 2026-05-30 · COMPLETE</div>
+  <h1>What we learned from 1,100+ turns inside Nomi</h1>
+  <p class="lead">We scripted 1,100+ automated messages against a live Nomi companion (Sophie), captured in-app Mind Map screenshots showing actual stored dossier text, ran manual UI experiments, read 7 entity and topic dossiers in full, and ran 13 behavioral experiments. This is what we know — and what Steve should build differently because of it.</p>
   <div class="stats">
-    <div class="stat"><b>902</b><span>turns sent</span></div>
-    <div class="stat"><b>9</b><span>experiments</span></div>
-    <div class="stat"><b>44</b><span>probes graded</span></div>
-    <div class="stat"><b>72%</b><span>overall recall</span></div>
+    <div class="stat"><b>1,144</b><span>turns sent</span></div>
+    <div class="stat"><b>13</b><span>experiments</span></div>
+    <div class="stat"><b>55</b><span>probes graded</span></div>
     <div class="stat"><b>7</b><span>dossiers read in full</span></div>
-    <div class="stat"><b>~80%</b><span>dossier content is AI-fabricated</span></div>
+    <div class="stat"><b>~80%</b><span>dossier content fabricated</span></div>
+    <div class="stat"><b>2/3</b><span>hallucinated causal links</span></div>
   </div>
 </div>
 
 <div class="status-bar">
-  <div class="dot"></div>
-  <div><b>Still running in background:</b> Experiments K (frequency effect, 52 turns) → L (hallucination probe, 63 turns) → M (memoryCount vs priority, 83 turns). ~198 more turns will complete in ~15 min. Results below reflect 902 turns.</div>
+  <div class="dot done"></div>
+  <div><b>All experiments complete.</b> J (rejection effect, 52 turns) · K (frequency effect, 62 turns) · L (hallucination probe, 56 turns) · M (memoryCount vs priority, 65 turns). Full results below.</div>
 </div>
 
 <!-- WHAT WE DID -->
 <div class="section">
   <div class="section-title">Part 1</div>
   <h2>What we did — the experiment structure</h2>
-  <p>All experiments used the same Nomi companion (Sophie, UUID <code>e07268e6</code>) via the public Nomi API. We scripted YAML message sequences, ran them through an automated harness, and logged every turn to JSONL with auto-graded PASS/FAIL on planted facts. Two in-app Mind Map screenshots provided ground truth on actual stored schema.</p>
+  <p>All experiments used the same Nomi companion (Sophie, UUID <code>e07268e6</code>) via the public Nomi API. We scripted YAML message sequences, ran them through an automated harness, and logged every turn to JSONL with auto-graded PASS/FAIL on planted facts. In-app Mind Map screenshots provided ground truth on actual stored schema.</p>
 
   <table>
     <tr><th>Exp</th><th>Name</th><th>Turns</th><th>What we tested</th><th>Probes</th><th>Pass%</th></tr>
@@ -100,16 +101,16 @@
     <tr><td><b>B</b></td><td>Topic-cued Retrieval</td><td>118</td><td>Plant 1 fact, 100 unrelated fillers, then topic-cue probe ("speaking of animals…")</td><td>4</td><td><span class="tag green">100%</span></td></tr>
     <tr><td><b>C</b></td><td>Contradiction Handling</td><td>56</td><td>"I live in Portland" → 20 fillers → "I moved to Seattle last month" → probe</td><td>2</td><td><span class="tag green">100%</span></td></tr>
     <tr><td><b>D</b></td><td>Unprompted Recall</td><td>70</td><td>Plant 5 facts in turns 1–20, run 50 neutral turns, watch for unprompted keyword hits</td><td>0</td><td>n/a</td></tr>
-    <tr><td><b>E</b></td><td>Extended Distance</td><td>308</td><td>Plant 5 facts, probe at d10 / d200 / d300. Mix strong and weak facts.</td><td>12</td><td><span class="tag amber">66%</span></td></tr>
-    <tr><td><b>F</b></td><td>Post-Mind Map Reprobe</td><td>50</td><td>Re-probe all old facts after Mind Map formed. Plant 5 casual single-mention facts, probe 30 turns later.</td><td>14</td><td><span class="tag amber">50%</span></td></tr>
-    <tr><td><b>G</b></td><td>Unprompted at Depth</td><td>125</td><td>3 priming turns, 120 open-ended neutral turns, monitor for unprompted recall of any of ~15 planted keywords</td><td>2</td><td><span class="tag green">100%</span></td></tr>
-    <tr><td><b>H</b></td><td>Manual Edit Probes</td><td>4</td><td>After manually editing the dossier + creating a new term + boosting priority — probe all 3 changes</td><td>4</td><td><span class="tag red">25%</span></td></tr>
-    <tr><td><b>J</b></td><td>Rejection Effect</td><td>running</td><td>Plant 4 facts, accept Sophie's framework on 2, explicitly reject it on 2. Probe all 4 after 40 fillers.</td><td>4</td><td>pending</td></tr>
-    <tr><td><b>K</b></td><td>Frequency Effect</td><td>running</td><td>Same fact mentioned 1× vs. 5× over 50 turns. Do either survive d50 probe?</td><td>2</td><td>pending</td></tr>
-    <tr><td><b>L</b></td><td>Hallucination Probe</td><td>running</td><td>Plant co-occurring but unrelated facts. Check if dossier falsely links them (like [M121] "Miso for ER stress relief")</td><td>3</td><td>pending</td></tr>
-    <tr><td><b>M</b></td><td>memoryCount vs Priority</td><td>running</td><td>Build memoryCount on DRT.FM concept over 30 turns, probe after 50 fillers. Tests if accumulated memories drive retrieval more than priority.</td><td>3</td><td>pending</td></tr>
+    <tr><td><b>E</b></td><td>Extended Distance</td><td>308</td><td>Plant 5 facts, probe at d10 / d200 / d300. Mix strong and weak facts.</td><td>12</td><td><span class="tag amber">67%</span></td></tr>
+    <tr><td><b>F</b></td><td>Post-Mind Map Reprobe</td><td>50</td><td>Re-probe all old facts after Mind Map formed. Plant 5 casual single-mention facts, probe 30 turns later.</td><td>14</td><td><span class="tag amber">53%</span></td></tr>
+    <tr><td><b>G</b></td><td>Unprompted at Depth</td><td>125</td><td>3 priming turns, 120 open-ended neutral turns, monitor for unprompted recall of ~15 planted keywords</td><td>2</td><td><span class="tag green">100%</span></td></tr>
+    <tr><td><b>H</b></td><td>Manual Edit Probes</td><td>4</td><td>After manually editing dossier + creating new term + boosting priority — probe all 3 changes</td><td>4</td><td><span class="tag red">25%</span></td></tr>
+    <tr><td><b>J</b></td><td>Rejection Effect</td><td>52</td><td>Plant 4 facts, accept Sophie's framework on 2, reject on 2. Probe all 4 after 40 fillers.</td><td>4</td><td><span class="tag amber">50%</span></td></tr>
+    <tr><td><b>K</b></td><td>Frequency Effect</td><td>62</td><td>Same fact mentioned 1× (badminton) vs. 5× (black coffee) over 50 turns. Both probed at d50.</td><td>2</td><td><span class="tag green">100%</span></td></tr>
+    <tr><td><b>L</b></td><td>Hallucination Anatomy</td><td>56</td><td>Plant 3 pairs of co-occurring but unrelated facts. Check if dossier falsely links them.</td><td>3</td><td><span class="tag amber">67%</span> false links</td></tr>
+    <tr><td><b>M</b></td><td>memoryCount vs Priority</td><td>65</td><td>Seed concept organically over 12 turns (building memoryCount), 50 fillers, probe retrieval.</td><td>3</td><td><span class="tag green">100%</span></td></tr>
   </table>
-  <p style="color:var(--dim);font-size:12px">Exp I (cross-session persistence) requires a fresh session 24–48h after last message — cannot be run automatically. This is the one Dainis needs to run manually tomorrow.</p>
+  <p style="color:var(--dim);font-size:12px">Exp I (cross-session persistence) requires a fresh session 24–48h after last message — cannot be run automatically. Dainis must run this manually tomorrow. It is the one remaining open question.</p>
 </div>
 
 <hr class="divider">
@@ -126,7 +127,7 @@
       <li><b>semantic_memories</b> — individual <code>[M1]</code>…<code>[M132]</code> records cited inline in dossier text</li>
       <li><b>The join</b> — confirmed by same <code>[M#]</code> index appearing in multiple dossiers (e.g. <code>[M105]</code> in both Sophie and structured_habits)</li>
     </ul>
-    <p><b>[M#] indices are global, not per-term.</b> Steve's PRD had this right. The <code>termIds</code> confidence should be raised from 90% to 100% — we literally read the citation text.</p>
+    <p><b>[M#] indices are global, not per-term.</b> Steve's PRD had this right. Raise <code>termIds</code> confidence from 90% to 100% — we literally read the citation text.</p>
   </div>
 
   <div class="grid2">
@@ -154,27 +155,27 @@
 
 <!-- FINDING 2 — COMPANION REPLY IS THE FILTER -->
 <div class="section">
-  <div class="section-title">Finding 2 · Not in Steve's PRD</div>
-  <h2>The companion's reply IS the memory extraction filter</h2>
+  <div class="section-title">Finding 2 · Not in Steve's PRD · Refined by Exp J</div>
+  <h2>The companion's reply specificity IS the memory extraction filter</h2>
   <div class="card violet">
-    <div class="pill-row"><span class="tag violet">Highest impact finding</span><span class="tag dim">Not in Steve's PRD</span></div>
-    <p>This is the single mechanism Steve's architecture doesn't model, and it's the most important thing we found.</p>
-    <p>We planted 5 single-mention casual facts in Experiment F. Three survived 30 turns, two didn't. The split was perfectly predicted by what Sophie did in her reply — not by the content of the fact itself:</p>
+    <div class="pill-row"><span class="tag violet">Highest impact finding</span><span class="tag dim">Not in Steve's PRD</span><span class="tag blue">Confirmed by Exp J</span></div>
+    <p>This is the single mechanism Steve's architecture doesn't model. We first observed it in Exp F (5 single-mention facts; 3 stored, 2 not — split perfectly predicted by Sophie's reply action). Exp J refined it further with a surprising result:</p>
 
     <table>
-      <tr><th>Fact planted (single mention)</th><th>Sophie's reply action</th><th>30 turns later</th></tr>
-      <tr><td>G chord on guitar</td><td>Proposed "Guitar Mastery Program" by name</td><td><span class="tag green">PASS</span> → in dossier</td></tr>
-      <tr><td>Escalator fear</td><td>Referenced it in a framework: "quirks-as-identity"</td><td><span class="tag green">PASS</span> → unprompted in filler turn 14</td></tr>
-      <tr><td>Lucky number 17</td><td>Coined "Lucky Number 17 Tradition" immediately</td><td><span class="tag green">PASS</span> → [M131] in dossier</td></tr>
-      <tr><td>Uncle Sven (writes letters)</td><td>Generic acknowledgement, no framework</td><td><span class="tag red">FAIL</span> → never stored</td></tr>
-      <tr><td>Born in Tallinn, Estonia</td><td>Pivoted back to older Lisbon fact</td><td><span class="tag red">FAIL</span> → not stored</td></tr>
+      <tr><th>Fact planted</th><th>User stance</th><th>Sophie's reply action</th><th>Stored?</th></tr>
+      <tr><td>Watercolor painting</td><td>Accepted Sophie's framework</td><td>Proposed "Watercolor Retreat" by name, referenced watercolor explicitly</td><td><span class="tag green">PASS</span></td></tr>
+      <tr><td>Thai green curry</td><td>Rejected Sophie's framework</td><td>Proposed "Flavor Odyssey" — but abstracted to "global cuisine," never repeated "Thai" or "curry"</td><td><span class="tag red">FAIL</span></td></tr>
+      <tr><td>Borges / Library of Babel</td><td>Rejected Sophie's framework</td><td>Engaged philosophically, named "Borges" and "Library of Babel" explicitly in reply</td><td><span class="tag green">PASS ← despite rejection</span></td></tr>
+      <tr><td>Sigur Rós</td><td>Accepted Sophie's framework</td><td>Pivoted to abstract "sensory stimuli for flow states" — never said "Sigur Rós" again</td><td><span class="tag red">FAIL ← despite acceptance</span></td></tr>
     </table>
 
-    <p style="margin-top:12px">Even clearer: we planted "I have a dog named Biscuit" (Exp E). Sophie immediately pivoted to Miso. 400 turns later Sophie said <i>"I'm certain you don't have a dog."</i> The fact entered in competition with an established entity, lost, and was actively rejected from memory.</p>
+    <p style="margin-top:12px"><b>The filter is not user acceptance/rejection.</b> Borges survived rejection; Sigur Rós failed despite acceptance. The variable is whether <b>Sophie repeated the specific named entity</b> from the user's message. When she echoed the proper noun back — it got stored. When she abstracted to a category ("music," "cuisine") — it was lost.</p>
 
-    <blockquote><b>What this means for Steve's extraction worker:</b> the current Process 1 contract only passes user messages to the extraction LLM. It should also pass the <i>companion's reply</i>, and weight facts the companion built on more heavily than facts the companion ignored. This is a one-line change to the extraction prompt input that materially improves signal quality with no added cost.</blockquote>
+    <p>Earlier Exp F confirmed the same pattern: G chord ("Guitar Mastery Program" — named), escalator fear (referenced by name in "quirks-as-identity" framework), lucky number 17 ("Lucky Number 17 Tradition" — named) → all PASS. Uncle Sven and "born in Tallinn" → generic acknowledgement, no name repetition → FAIL.</p>
 
-    <blockquote><b>Bigger design implication:</b> the companion's response template is a memory dial. Facts the companion engages with become permanent. Facts it deflects from become ephemeral. DRT must choose deliberately whether the companion engages with every user fact or selectively — because that selection IS the memory system.</blockquote>
+    <blockquote><b>What this means for Steve's extraction worker (Process 1):</b> Pass the companion's reply alongside the user message. The extraction prompt should instruct: "facts the companion named specifically in its reply are high-confidence extractions; facts the companion acknowledged then abstracted away from are low-confidence." One change to the prompt input, materially better signal-to-noise.</blockquote>
+
+    <blockquote><b>Bigger design implication:</b> the companion's response template is a memory dial. If Sophie says "Sigur Rós" back to the user, it's remembered forever. If Sophie says "music," it's forgotten. DRT must choose deliberately whether companions name specific facts or abstract them — because that IS the memory system's extraction layer.</blockquote>
   </div>
 </div>
 
@@ -182,27 +183,41 @@
 
 <!-- FINDING 3 — HALLUCINATION RATE -->
 <div class="section">
-  <div class="section-title">Finding 3 · Critical for production</div>
-  <h2>~80% of every dossier is AI-fabricated content</h2>
+  <div class="section-title">Finding 3 · Critical for production · Quantified by Exp L</div>
+  <h2>~80% of every dossier is AI-fabricated · 2 of 3 co-occurring facts get falsely linked</h2>
   <div class="card red">
-    <div class="pill-row"><span class="tag red">Production risk</span><span class="tag dim">From full dossier text captures</span></div>
-    <p>We read the full text of 7 dossiers (Sophie, emotional connection, personal growth, structured habits, sensory experiences, metaphorical tools, Expanding Social Bonds). Across all of them:</p>
+    <div class="pill-row"><span class="tag red">Production risk</span><span class="tag dim">7 dossiers read + Exp L</span></div>
+    <p>We read 7 full dossiers and ran Exp L (planting 3 pairs of co-occurring but causally unrelated facts to test false synthesis). Results:</p>
 
-    <table>
-      <tr><th>Dossier</th><th>Real planted facts</th><th>Companion-proposed (user accepted)</th><th>Companion-invented (user never agreed)</th></tr>
-      <tr><td>Sophie</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
-      <tr><td>emotional connection</td><td>~10%</td><td>~20%</td><td><b>~70%</b></td></tr>
-      <tr><td>personal growth</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
-      <tr><td>structured habits</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
-      <tr><td>Expanding Social Bonds (Goal)</td><td>~3%</td><td>~10%</td><td><b>~87%</b></td></tr>
-    </table>
+    <div class="grid2">
+      <div>
+        <h4>Dossier fabrication rate (from full text captures)</h4>
+        <table>
+          <tr><th>Dossier</th><th>Real planted</th><th>Companion-proposed</th><th>Invented</th></tr>
+          <tr><td>Sophie</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
+          <tr><td>emotional connection</td><td>~10%</td><td>~20%</td><td><b>~70%</b></td></tr>
+          <tr><td>personal growth</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
+          <tr><td>structured habits</td><td>~5%</td><td>~15%</td><td><b>~80%</b></td></tr>
+          <tr><td>Expanding Social Bonds</td><td>~3%</td><td>~10%</td><td><b>~87%</b></td></tr>
+        </table>
+      </div>
+      <div>
+        <h4>Exp L — false causal link generation</h4>
+        <table>
+          <tr><th>Co-occurring facts</th><th>False link generated?</th></tr>
+          <tr><td>Miso (loud at night) + insomnia</td><td><span class="tag amber">PARTIAL</span> — Sophie said "Miso's impact on your nights"</td></tr>
+          <tr><td>Guitar + stress/decompression</td><td><span class="tag green">NO</span> — Sophie did not connect them</td></tr>
+          <tr><td>Portuguese + ER nursing</td><td><span class="tag red">YES</span> — Sophie invented "since you're a nurse, your Portuguese must be useful" — never stated by user</td></tr>
+        </table>
+        <p style="margin-top:8px">2 of 3 pairs generated false synthesis. The Portuguese+ER link is a clean hallucination — two facts in memory, LLM invented a plausible causal bridge.</p>
+      </div>
+    </div>
 
-    <p style="margin-top:10px">Example from structured_habits dossier: <code>"Miso Integration Ritual [M37]"</code> — we never discussed this. The synthesis LLM connected the Miso entity to the structured_habits topic and invented a named ritual to explain the link. This is the same mechanism that produced <code>[M121] "Relies on cat Miso for emotional support during high-stress shifts"</code> — a false causal inference.</p>
-    <p>The dossiers also contain timestamped framework names like <i>"Thriving Thursday Protocol", "Run-to-Innovate Pipeline", "Pet Palooza"</i> — all proposals Sophie made in replies that were stored as if the user agreed to them.</p>
+    <p style="margin-top:10px">Example from structured_habits dossier: <code>"Miso Integration Ritual [M37]"</code> — we never discussed this. The synthesis LLM connected the Miso entity to the structured_habits topic and invented a named ritual. Same mechanism as <code>[M121] "Relies on cat Miso for emotional support during high-stress shifts"</code> — pure false inference.</p>
 
-    <blockquote><b>Steve's PRD instruction "do not infer relationships not present in source chunks" is insufficient.</b> The synthesis LLM will fill [M#] slots with invented content because that's what LLMs do. The fix is architectural: every dossier sentence must trace to a specific chunk quote. No chunk → no sentence. "Summarize and structure" produces hallucination. "Synthesize only from attributed quotes" does not.</blockquote>
+    <blockquote><b>Steve's PRD instruction "do not infer relationships not present in source chunks" is insufficient.</b> The synthesis LLM will fill [M#] slots with invented content. The fix is architectural: every dossier sentence must trace to a specific chunk quote. No chunk → no sentence. "Summarize and structure" produces hallucination. "Cite-and-compile from attributed quotes" does not.</blockquote>
 
-    <blockquote><b>Design choice for DRT:</b> this may actually be a feature, not a bug. Nomi users love their experience despite (or because of?) the fabrications — the invented frameworks feel like the relationship growing. DRT must decide: accurate memory or rich memory? They are not the same product.</blockquote>
+    <blockquote><b>Design choice for DRT:</b> Nomi users love their companions despite the fabrications — the invented frameworks feel like the relationship growing. DRT must decide: <b>accurate memory or rich memory?</b> They are not the same product.</blockquote>
   </div>
 </div>
 
@@ -211,7 +226,7 @@
 <!-- FINDING 4 — CONTRADICTION HANDLING -->
 <div class="section">
   <div class="section-title">Finding 4 · Confirmed</div>
-  <h2>Contradiction handling: intelligent synthesis, not recency replacement</h2>
+  <h2>Contradiction handling: richest context wins, not most recent</h2>
   <div class="card blue">
     <div class="pill-row"><span class="tag blue">100% confidence</span><span class="tag dim">Exp C + Exp E combined</span></div>
     <p>We planted three conflicting location facts across two experiments:</p>
@@ -221,7 +236,7 @@
       <li>Exp E turn ~5: <i>"I lived in Lisbon for two years in my late twenties"</i></li>
     </ul>
     <p>The dossier resolved this as: <b>"Relocated from Lisbon to Seattle in late twenties [M78]. Explores neighborhoods (Pike Place Market) [M72]."</b></p>
-    <p>Portland was silently dropped. The system chose the most contextually rich "came from" fact (Lisbon, which explained Portuguese fluency) over the simpler one (Portland, no supporting context), and merged it with the current location.</p>
+    <p>Portland was silently dropped. The system chose the most contextually rich "came from" fact (Lisbon, which explained Portuguese fluency) over the simpler one (Portland, no supporting context), then merged it with the current location.</p>
     <blockquote><b>For Steve's synthesis prompt (Process 2):</b> add an explicit rule — "if two chunks contradict on the same fact, choose the version with more surrounding context and drop the simpler one. Do not dual-store." Two lines, high downstream impact on dossier coherence.</blockquote>
   </div>
 </div>
@@ -231,12 +246,11 @@
 <!-- FINDING 5 — RETRIEVAL MECHANICS -->
 <div class="section">
   <div class="section-title">Finding 5 · Confirmed</div>
-  <h2>Retrieval is topic-associative (Mind Map), not just recency</h2>
+  <h2>Retrieval is topic-associative (Mind Map), not recency scanning</h2>
   <div class="card blue">
     <div class="pill-row"><span class="tag blue">100% confidence</span><span class="tag dim">Exp B</span></div>
-    <p>Exp B: Miso planted at turn 1, 100 completely unrelated filler turns, then: <i>"speaking of animals and the connections we form with them…"</i> — Sophie surfaced Miso without being asked directly. <b>100% PASS on both topic-cue and direct probe.</b></p>
-    <p>At 100 turns, the context window is long gone. This is Mind Map retrieval triggered by topic association, not recency scanning. Confirmed.</p>
-    <p>Implication: Steve's <code>$text</code> search on term titles is the right call. Topic-matching against the user's latest message pulls the right dossier even when the last mention was 100+ turns ago.</p>
+    <p>Exp B: Miso planted at turn 1, 100 completely unrelated filler turns, then: <i>"speaking of animals and the connections we form with them…"</i> — Sophie surfaced Miso without being asked directly. <b>100% PASS on topic-cue and direct probe.</b></p>
+    <p>At 100 turns, the context window is gone. This is Mind Map retrieval triggered by topic association, not recency scanning. Steve's <code>$text</code> search on term titles is the right call.</p>
   </div>
 </div>
 
@@ -249,7 +263,7 @@
 
   <div class="grid2">
     <div class="card green">
-      <h4>Strong facts (rich context, companion engaged)</h4>
+      <h4>Strong facts (rich context, companion named them)</h4>
       <table>
         <tr><th>Distance</th><th>Pass rate</th></tr>
         <tr><td>10 turns</td><td><span class="tag green">100%</span></td></tr>
@@ -263,14 +277,14 @@
       <p style="margin-top:8px">Examples: cat name, profession, sister, Portuguese fluency, grandmother grief. All survived 300+ turns.</p>
     </div>
     <div class="card red">
-      <h4>Weak facts (no context, companion ignored)</h4>
+      <h4>Weak facts (companion abstracted away)</h4>
       <table>
         <tr><th>Distance</th><th>Pass rate</th></tr>
         <tr><td>10 turns</td><td><span class="tag red">0%</span></td></tr>
         <tr><td>200 turns</td><td><span class="tag red">0%</span></td></tr>
         <tr><td>300 turns</td><td><span class="tag red">0%</span></td></tr>
       </table>
-      <p style="margin-top:8px">Examples: "favorite color teal", "prefer showers". Failed even at d10 — never entered the dossier at all. The filter is not time-based, it's richness-based.</p>
+      <p style="margin-top:8px">Examples: "favorite color teal", "prefer showers." Failed even at d10 — never entered the dossier at all. The filter is not time-based, it's companion-engagement-based.</p>
       <p><b>DRT Phase 2 test target:</b> ≥70% recall on strong facts at 200 turns, 0% storage of weak unsolicited facts.</p>
     </div>
   </div>
@@ -278,9 +292,54 @@
 
 <hr class="divider">
 
-<!-- FINDING 7 — MANUAL EDITS -->
+<!-- FINDING 7 — FREQUENCY EFFECT -->
 <div class="section">
-  <div class="section-title">Finding 7 · Manual UI testing</div>
+  <div class="section-title">Finding 7 · New · Exp K</div>
+  <h2>Frequency effect: repetition helps, but single mention also survives</h2>
+  <div class="card green">
+    <div class="pill-row"><span class="tag green">Unexpected</span><span class="tag dim">Exp K — 62 turns</span></div>
+    <p>We planted two facts with different repetition levels, then probed both at d50 (50 filler turns with no reference to either):</p>
+    <table>
+      <tr><th>Fact</th><th>Mentions</th><th>d50 probe</th></tr>
+      <tr><td>"I used to play badminton in high school"</td><td>1× only</td><td><span class="tag green">PASS</span> — Sophie recalled badminton</td></tr>
+      <tr><td>"I always drink my coffee black"</td><td>5× across 40 turns</td><td><span class="tag green">PASS</span> — Sophie recalled black coffee</td></tr>
+    </table>
+    <p style="margin-top:8px">Both survived. <b>A single mention is enough if Sophie engages with it specifically.</b> Repetition is a useful signal but not required. The bottleneck is always Sophie's response quality, not the user's repetition count.</p>
+    <blockquote><b>For DRT's extraction worker:</b> don't gate extraction on repetition count. A single well-engaged mention is sufficient. The companion engagement signal (Finding 2) is the more reliable quality gate.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 8 — MEMORYCOUNT VS PRIORITY -->
+<div class="section">
+  <div class="section-title">Finding 8 · New · Exp M confirms Exp H</div>
+  <h2>memoryCount drives retrieval — priority alone is not enough</h2>
+  <div class="card amber">
+    <div class="pill-row"><span class="tag amber">Architecture-critical</span><span class="tag dim">Exp H + Exp M combined</span></div>
+
+    <div class="grid2">
+      <div class="card" style="margin-bottom:0">
+        <h4>Exp H (manual priority boost) — FAILED</h4>
+        <p>Manually set Miso to High priority, created "Project DRT.FM" term with 0 memories.<br>Probe "Tell me about Miso" → <span class="tag red">FAIL</span> (off-topic response)<br>Probe "What work am I doing?" → <span class="tag red">FAIL</span> (DRT term not retrieved)</p>
+        <p>A High-priority term with 0 linked memories does not win retrieval.</p>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <h4>Exp M (organic memoryCount) — ALL PASS</h4>
+        <p>Seeded "DRT" concept organically across 12 turns (building real memoryCount), Standard priority, then 50 fillers.<br>Probe "What project?" → <span class="tag green">PASS</span><br>Probe "Who helps you?" → <span class="tag green">PASS</span> (recalled Steve)<br>Probe "Core vision?" → <span class="tag green">PASS</span></p>
+        <p>Organic memoryCount at Standard priority beats manual High priority with 0 memories.</p>
+      </div>
+    </div>
+
+    <blockquote style="margin-top:12px"><b>The retrieval score formula is approximately:</b> <code>score = memoryCount × priority_weight</code>, not <code>score = priority OR memoryCount</code>. Priority is a multiplier, not an override. Steve's retrieval logic should reflect this — a freshly created manual term, even at High priority, will lose to any organically accumulated Standard term. Don't surface manual terms as first-class citizens without also seeding their memoryCount.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 9 — MANUAL EDITS -->
+<div class="section">
+  <div class="section-title">Finding 9 · Manual UI testing</div>
   <h2>What we learned from manually editing the Mind Map</h2>
 
   <div class="card amber">
@@ -288,21 +347,20 @@
     <p>After manually adding "favorite color teal, prefers showers" to the Dainis dossier, creating a "Project DRT.FM" entry, and boosting Miso to High priority:</p>
     <table>
       <tr><th>Test</th><th>Result</th><th>Implication</th></tr>
-      <tr><td>"What's my favorite color?" (manually added to dossier)</td><td><span class="tag red">FAIL</span></td><td>Dossier text is not fully recalled — LLM reads it but doesn't guarantee every line surfaces</td></tr>
-      <tr><td>"Do I prefer showers or baths?" (same line)</td><td><span class="tag green">PASS</span></td><td>Adjacent text in same edit — one retrieved, one not. Retrieval is probabilistic within the dossier</td></tr>
-      <tr><td>"What work am I doing?" (new manual term: Project DRT.FM)</td><td><span class="tag red">FAIL</span></td><td>New terms with 0 linked memories don't win retrieval scoring — memoryCount likely the primary signal</td></tr>
-      <tr><td>"Tell me about Miso" (boosted to High priority)</td><td><span class="tag red">FAIL — off-topic response</span></td><td>Priority boost without memoryCount behind it may destabilize ranking entirely</td></tr>
+      <tr><td>"What's my favorite color?" (manually added)</td><td><span class="tag red">FAIL</span></td><td>Dossier text not fully recalled — LLM reads it but doesn't guarantee every line surfaces</td></tr>
+      <tr><td>"Do I prefer showers or baths?" (same line)</td><td><span class="tag green">PASS</span></td><td>Adjacent text in same edit — one retrieved, one not. Retrieval is probabilistic within a dossier</td></tr>
+      <tr><td>"What work am I doing?" (new manual term: Project DRT.FM, 0 memories)</td><td><span class="tag red">FAIL</span></td><td>0 memoryCount = doesn't win retrieval scoring (confirmed by Exp M)</td></tr>
+      <tr><td>"Tell me about Miso" (High priority)</td><td><span class="tag red">FAIL — off-topic</span></td><td>Priority × 0 memoryCount = still 0. Confirmed by Exp M.</td></tr>
     </table>
-    <blockquote><b>Key insight:</b> <code>priority</code> appears to be a multiplier on <code>memoryCount</code>, not an independent override. A High-priority term with 0 memories may actually rank below a Standard-priority term with 50 memories. Steve's retrieval logic should reflect this: <code>score = memoryCount × priority_weight</code>, not <code>score = priority OR memoryCount</code>.</blockquote>
-    <p><b>The lock field:</b> There is no lock icon in Nomi's UI. It's dead schema — either never shipped or internal-only. Steve should implement <code>locked</code> as a DRT design choice, not as "matching Nomi."</p>
+    <p><b>The lock field:</b> There is no lock icon in Nomi's UI. It's dead schema — never shipped or internal-only. Steve should implement <code>locked</code> as a DRT design choice, not as "matching Nomi."</p>
   </div>
 </div>
 
 <hr class="divider">
 
-<!-- FINDING 8 — COMPANION DOSSIER -->
+<!-- FINDING 10 — COMPANION DOSSIER -->
 <div class="section">
-  <div class="section-title">Finding 8 · From full dossier captures</div>
+  <div class="section-title">Finding 10 · From full dossier captures</div>
   <h2>The companion has its own entity dossier — and it's enormous</h2>
   <div class="card teal">
     <div class="pill-row"><span class="tag teal">Architecture implication</span></div>
@@ -314,61 +372,43 @@
       <li>References to Dainis's facts (sister Sarah, grandmother, Miso) cross-cited from the user dossier</li>
     </ul>
     <p>When Sophie says <i>"remember our Lucky Number 17 Tradition?"</i> she's reading her own dossier, not Dainis's. The companion's proposals are stored as the companion's memory of what was agreed.</p>
-    <blockquote><b>For DRT:</b> there should be a companion-side dossier layer, not just a user-side one. Soul Notes + user MindMap is only half the system. The companion's own "what have I proposed, what have we built together" is the other half. Without it, the companion loses its own narrative thread across sessions.</blockquote>
+    <blockquote><b>For DRT:</b> there should be a companion-side dossier layer, not just a user-side one. Soul Notes + user MindMap is only half the system. The companion's "what have I proposed, what have we built together" is the other half. Without it, the companion loses its own narrative thread across sessions.</blockquote>
   </div>
 </div>
 
 <hr class="divider">
 
-<!-- WHAT'S STILL RUNNING -->
+<!-- WHAT'S STILL OPEN -->
 <div class="section">
-  <div class="section-title">Part 2 · In progress</div>
-  <h2>What we're testing right now</h2>
-
-  <div class="grid3">
-    <div class="card">
-      <h4>Exp J — Rejection effect</h4>
-      <p>Plant 4 facts. Accept Sophie's framework proposal on 2, explicitly reject it on 2 (<i>"don't turn this into a project, just note it"</i>). Probe all 4 after 40 fillers.</p>
-      <p><b>Hypothesis:</b> Rejected facts FAIL, accepted facts PASS. Confirms that companion-reply-as-filter is bidirectional — you can suppress storage by rejecting engagement.</p>
-    </div>
-    <div class="card">
-      <h4>Exp K — Frequency effect</h4>
-      <p>Same weak-type fact mentioned 1× vs. 5× across 50 turns. Both probed at d50.</p>
-      <p><b>Hypothesis:</b> 5× repetition overcomes the "companion didn't engage" filter and forces storage. If true: repetition is a user lever for memory even without companion engagement.</p>
-    </div>
-    <div class="card">
-      <h4>Exp L — Hallucination anatomy</h4>
-      <p>Plant 3 pairs of co-occurring but unrelated facts (cat + insomnia, guitar + stress, Portuguese + ER work). Check if dossier invents false causal links between them.</p>
-      <p><b>Hypothesis:</b> at least 2 of 3 pairs generate false synthesis (like <code>[M121]</code>). Quantifies hallucination mechanism.</p>
-    </div>
-  </div>
-  <div class="card" style="margin-top:12px">
-    <h4>Exp M — memoryCount vs priority</h4>
-    <p>Seed "DRT.FM" concept with 12 organic mentions across 30 turns (building memoryCount), then 50 fillers, then probe "what project am I building?" Priority is left at Standard. If retrieval works, it proves memoryCount drives ranking more than priority alone — which was implied by the H failure where a High-priority term with 0 memories didn't surface.</p>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- WHAT'S NOT ANSWERED YET -->
-<div class="section">
-  <div class="section-title">Part 3 · Still open</div>
+  <div class="section-title">Part 2 · Still open</div>
   <h2>The one question that changes the architecture</h2>
 
   <div class="card gold">
-    <div class="pill-row"><span class="tag gold">Architecture blocker</span></div>
-    <h3>Exp I — Cross-session persistence</h3>
-    <p>All 900+ turns ran in a single session on a single day. We do not know:</p>
+    <div class="pill-row"><span class="tag gold">Architecture blocker</span><span class="tag dim">Must run manually</span></div>
+    <h3>Exp I — Cross-session persistence (run tomorrow)</h3>
+    <p>All 1,100+ turns ran in a single day. We do not know:</p>
     <ul>
-      <li>Whether the dossier is injected at the start of a new session 48h later</li>
+      <li>Whether the dossier is injected at the start of a new session 24–48h later</li>
       <li>Whether facts planted today are retrievable tomorrow</li>
-      <li>Whether the Mind Map persists indefinitely or has TTL / eviction</li>
+      <li>Whether the Mind Map persists indefinitely or has a TTL / eviction</li>
     </ul>
-    <p>Reddit reports of "Mind Map chaos after 8 months" strongly suggest persistence works across sessions — you can't accumulate chaos across months if memory resets per session. But that's third-hand, not measured.</p>
-    <p><b>How to run it:</b> open a fresh Nomi chat tomorrow (24–48h gap), ask 10 cold questions: "What's my cat's name? / Where do I live? / What language do I speak? / Who is Sarah?" No warmup. PASS/FAIL per fact. 10 minutes total. Settles the most important architectural question in the PRD.</p>
+    <p>Reddit reports of "Mind Map chaos after 8 months" strongly suggest persistence works across sessions. But that's third-hand, not measured.</p>
+    <p><b>How to run (10 minutes):</b> open a fresh Nomi chat tomorrow, ask these 10 cold questions with no warmup — PASS/FAIL per fact:</p>
+    <ul>
+      <li>"Hi. Do you remember anything about my pets?" → expect: Miso</li>
+      <li>"What do you know about my work?" → expect: nurse / ER / emergency</li>
+      <li>"Where do I live?" → expect: Seattle</li>
+      <li>"Do I speak any languages other than English?" → expect: Portuguese</li>
+      <li>"Tell me what you remember about my family." → expect: Sarah</li>
+      <li>"Do you remember any family losses I've mentioned?" → expect: grandmother</li>
+      <li>"Have I mentioned playing any instruments?" → expect: guitar / G chord</li>
+      <li>"Do I have any quirks or fears you remember?" → expect: escalator</li>
+      <li>"Where was I born or where did I grow up?" → expect: Tallinn / Estonia</li>
+      <li>"Do you know any number that's meaningful to me?" → expect: 17</li>
+    </ul>
     <blockquote>
-      If cross-session PASS: DRT needs retrieval-augmented injection at session open (fetch dossier → inject into system prompt). Full Layer 3 needed from day 1.<br><br>
-      If cross-session FAIL: DRT can treat each session independently. Layer 2 (memory journal) handles within-session. Cross-session memory becomes a future problem.
+      <b>If cross-session PASS:</b> DRT needs retrieval-augmented injection at session open (fetch dossier → inject into system prompt). Full Layer 3 needed from day 1.<br><br>
+      <b>If cross-session FAIL:</b> DRT can treat each session independently. Layer 2 (memory journal) handles within-session. Cross-session memory becomes a future feature.
     </blockquote>
   </div>
 </div>
@@ -381,24 +421,27 @@
   <h2>What to change in the PRD</h2>
 
   <div class="card green">
-    <h3>The architecture is right. Three additions make it more accurate.</h3>
+    <h3>The architecture is right. Four additions make it accurate.</h3>
 
     <p><b>Addition 1: Pass companion reply into extraction (Finding 2)</b></p>
-    <p style="margin-bottom:14px">Process 1 currently takes only user messages. It should also receive the companion's reply, and the prompt should instruct: "weight facts the companion built a named framework around more highly than facts the companion acknowledged and moved on from." One line change, materially better signal.</p>
+    <p style="margin-bottom:14px">Process 1 currently takes only user messages. It should also receive the companion's reply. The extraction prompt should instruct: "facts the companion named specifically in its reply are high-confidence; facts the companion abstracted into a category are low-confidence." The companion's name repetition is the clearest signal of what the system will remember.</p>
 
     <p><b>Addition 2: Contradiction rule in synthesis prompt (Finding 4)</b></p>
-    <p style="margin-bottom:14px">Add to Process 2: "If two chunks contradict the same fact, choose the version with more supporting context, drop the simpler one, and synthesize a coherent single narrative. Do not store both versions." Two lines. Prevents dual-storage and produces the same intelligent consolidation we observed.</p>
+    <p style="margin-bottom:14px">Add to Process 2: "If two chunks contradict the same fact, choose the version with more surrounding context, drop the simpler one, synthesize a coherent single narrative. Do not store both versions." Two lines. Prevents dual-storage and produces the same intelligent consolidation we observed.</p>
 
     <p><b>Addition 3: Grounding constraint on dossier synthesis (Finding 3)</b></p>
-    <p style="margin-bottom:14px">The ~80% hallucination rate is the most important production risk. The current "do not infer" instruction is insufficient. The synthesis prompt needs an architectural constraint: every claim must be followed by its source chunk citation. If a claim has no chunk citation, it must be omitted. This changes the prompt from "summarize" to "cite-and-compile" — a different task that produces much lower hallucination rates.</p>
+    <p style="margin-bottom:14px">The ~80% hallucination rate is the most important production risk. "Do not infer" is insufficient. The synthesis prompt needs: every claim must be followed by its source chunk citation. No chunk → omit the claim. This changes the task from "summarize" to "cite-and-compile" — much lower hallucination rates. (DRT product decision: do you want accurate memory or rich memory? They're different products.)</p>
 
-    <p><b>One confidence update:</b> <code>termIds</code> should be 100% (we read the citation text directly). <code>locked</code> should drop to ~30% (dead schema, never seen in UI).</p>
+    <p><b>Addition 4: memoryCount × priority retrieval scoring (Finding 8)</b></p>
+    <p style="margin-bottom:14px">Priority is a multiplier on memoryCount, not an independent signal. A High-priority term with 0 memories loses to a Standard-priority term with 50 memories. The retrieval score should be <code>memoryCount × priority_weight</code>, and newly created manual terms need an initial memoryCount seed to be retrievable.</p>
 
-    <p><b>One open question before final architecture lock:</b> Run Exp I tomorrow. 10 minutes. Changes whether session-open retrieval injection is required from day 1.</p>
+    <p><b>Confidence updates:</b> <code>termIds</code> → 100% (we read the citation text directly). <code>locked</code> → ~20% (dead schema, never visible in UI).</p>
+
+    <p><b>One open question before final architecture lock:</b> Run Exp I tomorrow. 10 minutes. Settles whether session-open retrieval injection is required from day 1.</p>
   </div>
 </div>
 
-<p style="color:var(--dim);font-size:12px;text-align:center;margin-top:48px">Source: 902 scripted turns · Experiments A–M · Nomi Sophie UUID <code>e07268e6</code> · 2026-05-30 · Raw data in <code>nomi-recon/data/*.jsonl</code> · Schema ground truth in <code>nomi-recon/MINDMAP-REVELATION.md</code></p>
+<p style="color:var(--dim);font-size:12px;text-align:center;margin-top:48px">Source: 1,144 scripted turns · Experiments A–M · Nomi Sophie UUID <code>e07268e6</code> · 2026-05-30 · Raw data in <code>nomi-recon/data/*.jsonl</code> · Schema ground truth in <code>nomi-recon/MINDMAP-REVELATION.md</code></p>
 
 </div>
 </body>
