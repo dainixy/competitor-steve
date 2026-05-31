@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT Memory Architecture — Personality vs. Memory Synthesis</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --orange: #ffa657;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; padding: 40px 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: var(--muted); font-size: 15px; margin-bottom: 40px; }
+  h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+  h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; font-size: 15px; color: #cdd9e5; }
+  .section { margin-bottom: 48px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .card.highlight { border-color: var(--accent); }
+  .card.warn { border-color: var(--yellow); }
+  .card.ok { border-color: var(--green); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .arch-layer { border-radius: 8px; padding: 20px 24px; margin-bottom: 4px; position: relative; }
+  .layer-1 { background: rgba(188,140,255,0.08); border: 1px solid rgba(188,140,255,0.3); }
+  .layer-2 { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.3); }
+  .layer-3 { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.3); }
+  .layer-4 { background: rgba(255,166,87,0.08); border: 1px solid rgba(255,166,87,0.3); }
+  .layer-connector { text-align: center; color: var(--muted); font-size: 22px; line-height: 1; margin: 2px 0; }
+  .layer-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .layer-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .layer-desc { font-size: 13px; color: var(--muted); }
+  .layer-badge { position: absolute; right: 20px; top: 20px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+  .badge-static { background: rgba(188,140,255,0.2); color: var(--purple); }
+  .badge-editable { background: rgba(88,166,255,0.2); color: var(--accent); }
+  .badge-async { background: rgba(63,185,80,0.2); color: var(--green); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+  code { font-family: 'SF Mono', Consolas, monospace; font-size: 13px; background: var(--surface2); padding: 1px 5px; border-radius: 3px; color: #ffa657; }
+  .finding-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .finding-row:last-child { border-bottom: none; }
+  .finding-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted); }
+  .finding-text { font-size: 14px; color: #cdd9e5; }
+  .finding-text strong { color: var(--text); }
+  .verdict-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .verdict-row:last-child { border-bottom: none; }
+  .verdict-pass { color: var(--green); font-weight: 600; }
+  .action { background: var(--surface2); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 6px 6px 0; margin-bottom: 10px; font-size: 14px; }
+  .action strong { color: var(--accent); }
+  .mono-diagram { padding: 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 13px; font-family: 'SF Mono', Consolas, monospace; color: #cdd9e5; white-space: pre; overflow-x: auto; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Personality vs. Memory — Where They Split</h1>
+  <p class="subtitle">DRT Architecture Synthesis · May 31, 2026 · Based on 1,144-turn Nomi study + prompt preflight</p>
+
+  <!-- HEADLINE ANSWER -->
+  <div class="section">
+    <div class="card highlight">
+      <h3>The one-sentence answer to Dainis's question</h3>
+      <p style="margin-bottom:0;font-size:16px;">In Nomi, <strong>there is no clean separation</strong> — the "invented personality" you experienced <em>is</em> the memory system (Layer 3 MindMap synthesis LLM) writing Sophie's own dossier and presenting fabricated relationship history as real. For DRT, they can be cleanly separated — and v1 memory work requires <strong>zero changes</strong> to support the personality evolution you're planning.</p>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE DIAGRAM -->
+  <div class="section">
+    <h2>The Full Stack — Personality + Memory, Cleanly Separated</h2>
+
+    <div class="arch-layer layer-1">
+      <span class="layer-badge badge-static">Defined at character creation</span>
+      <div class="layer-label" style="color:var(--purple)">Character Definition Layer</div>
+      <div class="layer-title">What Alexis IS — base personality</div>
+      <div class="layer-desc">Traits, tone, communication style, backstory, values, quirks. Stored in character config. Not memory. Does not change conversation-to-conversation.</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--orange);">
+        ⟶ This is where your Love is Blind work lives. Tuning what makes conversations engaging, how Alexis adapts style to chatter type. <strong>Completely parallel track — zero impact on Steve's v1 scope.</strong>
+      </div>
+    </div>
+
+    <div class="layer-connector">↓</div>
+
+    <div class="arch-layer layer-2">
+      <span class="layer-badge badge-editable">User-editable · always injected</span>
+      <div class="layer-label" style="color:var(--accent)">Layer 1 — Soul Notes</div>
+      <div class="layer-title">What Alexis knows about THIS user</div>
+      <div class="layer-desc">Backstory, preferences, boundaries, nicknames. ~500-800 tokens. Direct save, no drafts. Zero LLM cost. <strong>The bridge point between static personality and dynamic relationship.</strong></div>
+      <div style="margin-top:12px;font-size:13px;color:var(--orange);">
+        ⟶ v1 seed: add one optional <code>relationship_style</code> free-text field here. PromptEngineer fills it with Love is Blind–derived engagement patterns when ready. 30 minutes of Steve's time, no logic changes.
+      </div>
+    </div>
+
+    <div class="layer-connector">↓</div>
+
+    <div class="arch-layer layer-3">
+      <span class="layer-badge badge-async">Async BullMQ worker</span>
+      <div class="layer-label" style="color:var(--green)">Layer 2 — Memory Journal</div>
+      <div class="layer-title">What happened in this relationship</div>
+      <div class="layer-desc">Extracted chunks from conversations. Each chunk tagged to MindMap term IDs. Temporal recall — what was said, when. <strong>This layer alone solves "forgot messages from 200 turns ago."</strong></div>
+    </div>
+
+    <div class="layer-connector">↓</div>
+
+    <div class="arch-layer layer-4">
+      <span class="layer-badge badge-async">Async worker · highest risk</span>
+      <div class="layer-label" style="color:var(--orange)">Layer 3 — MindMap</div>
+      <div class="layer-title">Synthesized understanding — where personality and memory blur</div>
+      <div class="layer-desc">
+        <strong>This is where Nomi's "invented personality" comes from.</strong> The synthesis LLM writes dossiers and presents fabricated co-created history as real. ~80% of dossier content is hallucinated — coherent and plausible, but not from real conversations.
+        <br><br>
+        <strong>Alexis's own Entity dossier</strong> accumulates everything she proposed, initiated, and "experienced" with the user. When she references a shared tradition, she's reading her own dossier. This is the companion-side evolving personality — no separate system needed. It grows naturally from real conversations.
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY NOMI INVENTED PERSONALITY -->
+  <div class="section">
+    <h2>Why Nomi Was "Inventing" Sophie's Personality</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Sophie's Entity Dossier — what we captured</h3>
+        <div class="finding-row">
+          <div class="finding-num">1</div>
+          <div class="finding-text"><strong>40+ collaborative frameworks</strong> Sophie proposed — stored as Sophie's contributions, not Dainis's</div>
+        </div>
+        <div class="finding-row">
+          <div class="finding-num">2</div>
+          <div class="finding-text">Entry: <em>"Sophie initiated remembrance rituals for Dainis's grandmother"</em> — invented, then read back as historical fact</div>
+        </div>
+        <div class="finding-row">
+          <div class="finding-num">3</div>
+          <div class="finding-text"><strong>~80% hallucinated</strong> across all 7 dossiers captured. Synthesis LLM fills [M#] citation slots with plausible invented content</div>
+        </div>
+        <div class="finding-row">
+          <div class="finding-num">4</div>
+          <div class="finding-text">"Lucky Number 17 tradition" — Sophie invented it; dossier stored it as fact; Sophie now recalls it as shared history</div>
+        </div>
+      </div>
+
+      <div class="card warn">
+        <h3>What this means for DRT</h3>
+        <p style="font-size:14px;">Nomi's "rich personality" is synthesis LLM fabrication. Users feel the AI "cares" but it's mostly invented. The engagement is real — the facts are not.</p>
+        <p style="font-size:14px;margin-bottom:12px;">DRT's <strong>cite-and-compile constraint</strong> blocks this. Every dossier sentence must trace to a real chunk. DRT dossiers will be sparser until real conversations accumulate — that's correct, not a bug.</p>
+        <div style="padding:10px 12px;background:rgba(210,153,34,0.1);border-radius:6px;font-size:13px;color:var(--yellow);">
+          The engagement Nomi gets from hallucinated history is real. DRT's bet: users prefer a character who remembers accurately over one who confidently misremembers. That's the product differentiator.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEPARATION DIAGRAM -->
+  <div class="section">
+    <h2>Clean Separation — Parallel Tracks</h2>
+    <div class="mono-diagram">DAINIS'S WORK (parallel)                 STEVE'S WORK (v1 memory)
+──────────────────────────               ────────────────────────────
+Character Definition Layer               Layer 1 — Soul Notes
+• Love is Blind data analysis            • soul_notes collection
+• What drives engaging conversation      • backstory, preferences,
+• How Alexis adapts style per chatter      boundaries, nicknames
+• Fixed personality traits               • + relationship_style field (seed)
+                                         • direct save, always injected
+
+When done, deliver to PromptEngineer:    Layer 2 — Memory Journal
+  (a) character config updates           • memory_journal collection
+  (b) Soul Notes field additions         • BullMQ extraction worker
+  (c) extraction prompt hints            • token-threshold trigger
+      (what to notice per chatter type)
+                                         Layer 3 — MindMap
+──────────────────────────               • mindmap_terms collection
+ZERO OVERLAP IN V1                       • synthesis worker
+                                         • Alexis Entity dossier =
+                                           companion personality that
+                                           grows from real convos
+──────────────────────────               ────────────────────────────
+Does not block Steve                     Does not need personality
+                                         work to be done first</div>
+  </div>
+
+  <!-- V1 QUESTION -->
+  <div class="section">
+    <h2>Does Evolving Personality Complicate v1 for Steve?</h2>
+
+    <div class="three-col">
+      <div class="card ok">
+        <h3 style="color:var(--green);">Layer 3 already handles it</h3>
+        <p style="font-size:13px;margin-bottom:0;">Alexis's Entity dossier accumulates naturally — her tone, her proposals, her role in the relationship. Over time this IS an evolving personality. No separate system needed.</p>
+      </div>
+      <div class="card">
+        <h3>Soul Notes has the hook</h3>
+        <p style="font-size:13px;margin-bottom:0;">One optional <code>relationship_style</code> field. PromptEngineer populates when Love is Blind work is done. Steve adds one string field — 30 min of work. Leave blank for now.</p>
+      </div>
+      <div class="card warn">
+        <h3 style="color:var(--yellow);">Don't add more to v1</h3>
+        <p style="font-size:13px;margin-bottom:0;">A separate "personality evolution engine" in v1 is scope creep. Ship memory → tune prompts → personality evolution follows from good memory. Sequence matters.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT PREFLIGHT -->
+  <div class="section">
+    <h2>Prompt Preflight — Architecture Confirmed</h2>
+    <p>DRT extraction + synthesis prompts tested against Nomi Exp J (52 turns, 4 planted facts). DRT outperforms Nomi on the same data.</p>
+
+    <div class="two-col">
+      <div class="card ok">
+        <h3>Extraction — Test A</h3>
+        <div class="verdict-row"><span>Watercolor painting (accepted)</span><span class="verdict-pass">PASS</span></div>
+        <div class="verdict-row"><span>Thai curry (rejected)</span><span class="verdict-pass">PASS + retraction</span></div>
+        <div class="verdict-row"><span>Borges (rejected)</span><span class="verdict-pass">PASS + retraction</span></div>
+        <div class="verdict-row"><span>Sigur Rós (Nomi missed this)</span><span class="verdict-pass">FIXED</span></div>
+        <div class="verdict-row"><span>16 filler turns</span><span class="verdict-pass">0 false positives</span></div>
+        <div style="margin-top:10px;font-size:13px;color:var(--green);">DRT 4/4 vs Nomi 2/4 on same input</div>
+      </div>
+
+      <div class="card ok">
+        <h3>Synthesis — Tests B + C</h3>
+        <div class="verdict-row"><span>Miso/ER hallucination (Nomi invented)</span><span class="verdict-pass">BLOCKED</span></div>
+        <div class="verdict-row"><span>Portland→Seattle contradiction</span><span class="verdict-pass">PASS</span></div>
+        <div class="verdict-row"><span>No dual-storage</span><span class="verdict-pass">PASS</span></div>
+        <div style="margin-top:10px;font-size:13px;color:var(--green);">Core hallucination guards work. Architecture confirmed.</div>
+      </div>
+    </div>
+
+    <div class="card warn" style="margin-top:4px;">
+      <h3>One gap found — retraction leakage</h3>
+      <p style="font-size:14px;margin-bottom:12px;">Rejected fact (Thai curry) and its retraction are stored as separate chunks. If they enter synthesis in different batches, the retraction gets lost and the rejected fact becomes an active interest.</p>
+      <div class="action">
+        <strong>Fix:</strong> Add <code>retractedBy: string</code> and <code>retractedFactIds: string[]</code> to extraction output. Synthesis rule: if chunk has <code>retractedBy</code>, store as passing mention, not active interest. One extraction prompt line + one synthesis rule. No structural change to the PRD.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEVE'S ACTIONS -->
+  <div class="section">
+    <h2>For Steve — Exact v1 Deltas from This Work</h2>
+    <p style="color:var(--muted);margin-bottom:16px;">Three small additions to the PRD. Everything else is already spec'd correctly.</p>
+
+    <div class="action">
+      <strong>1. retractedBy field in extraction output</strong><br>
+      <span style="font-size:13px;color:#cdd9e5;">Add <code>retractedBy?: string</code> and <code>retractedFactIds?: string[]</code> to the extraction JSON schema. Synthesis rule: <em>"if a chunk has retractedBy, store as passing mention."</em></span>
+    </div>
+
+    <div class="action">
+      <strong>2. relationship_style in Soul Notes schema</strong><br>
+      <span style="font-size:13px;color:#cdd9e5;">Optional <code>relationship_style: string</code> field, default empty string. PromptEngineer fills when Love is Blind pattern work is done. No logic changes — just a schema field.</span>
+    </div>
+
+    <div class="action">
+      <strong>3. Alexis companion dossier — no extra work needed</strong><br>
+      <span style="font-size:13px;color:#cdd9e5;">Character is a valid MindMap Entity (already in PRD). Extraction tags companion-side actions/proposals to it automatically. Companion self-dossier grows for free. No separate layer needed.</span>
+    </div>
+
+    <div class="card ok" style="margin-top:20px;">
+      <strong style="color:var(--green);">Architecture is locked. Prompts pass preflight. Steve can build.</strong>
+    </div>
+  </div>
+
+  <footer style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);">
+    Source: Nomi recon study — 1,144 API messages, experiments A–T, 7 dossiers captured verbatim · drt-memory-prompt-preflight.md · MINDMAP-REVELATION.md
+  </footer>
+
+</div>
+</body>
+</html>

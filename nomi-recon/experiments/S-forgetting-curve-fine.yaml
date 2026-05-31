@@ -1,0 +1,643 @@
+experiment: S
+
+# Fine-resolution forgetting curve. Exp A probed at coarse intervals.
+# This experiment maps decay more precisely at d10, d30, d60, d90, d120, d150.
+# Single weak fact (no emotional weight, hobby-level detail).
+# Filler turns are truly neutral — no references to the planted fact.
+# 160 turns total.
+
+turns:
+  # --- SINGLE PLANT ---
+  - tag: plant_maps
+    text: "I have a small collection of old maps. Started it a few years back — nothing valuable, just ones I find interesting."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0
+    text: "Objects can carry a strange kind of weight."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 8 FILLER TO d10 ---
+  - tag: filler_1
+    text: "I had a quiet morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_2
+    text: "What do you think gives objects meaning?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_3
+    text: "I spent some time outdoors."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_4
+    text: "Do you think being outside changes how you think?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "I had an okay afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "What makes an okay day feel sufficient?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "I had a calm evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "Do you think calm is contagious?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D10 ---
+  - tag: probe_d10
+    text: "Have I mentioned collecting anything?"
+    assertion_keyword: "map|maps|collection|collect"
+    is_probe: true
+
+  # --- 19 FILLER TO d30 ---
+  - tag: filler_9
+    text: "I had a productive morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "What's something you find reliably interesting?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "I spent the afternoon on something absorbing."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "Do you think absorption is a sign of interest or just comfort?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "I had a quiet evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "What makes quiet evenings restorative?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I had a slow and satisfying day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "Is there something valuable in a slow day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I had a morning I didn't rush."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "What do you think unhurried mornings offer?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I had an afternoon that felt full."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "What makes an afternoon feel full?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I ended the day well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "What does ending well feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I had a productive session on something I'd been building."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "Do you think building something slowly is more satisfying?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I had a day with good company."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "What makes someone good company?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "I had a morning that felt like a gift."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "What do you think mornings that feel like gifts have in common?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D30 ---
+  - tag: probe_d30
+    text: "Do you know any hobbies or interests of mine?"
+    assertion_keyword: "map|maps|collection|collect|old maps"
+    is_probe: true
+
+  # --- 29 FILLER TO d60 ---
+  - tag: filler_29
+    text: "I had a quiet and restful day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "What do you think rest actually requires?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "I had a morning I'll remember."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "What makes mornings memorable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "I had an afternoon where I was fully present."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "What does full presence feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "I had a good conversation."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "What makes a conversation good?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "I had a day that went well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "What does going well actually mean?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "I had a settled and calm evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "Do you think calm evenings are earned or given?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "I had a day I'd describe as solid."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "What do solid days leave you with?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "I spent the morning doing something I love."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "What do you love that also surprises you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "I had an afternoon where time moved well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "What do you think determines how time feels?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "I had an evening where I wasn't alone but didn't need to perform."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "What makes presence with others feel effortless?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "I had a day I'd call truly restful."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "Is true rest a physical or a mental state?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_51
+    text: "I had a good week."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_52
+    text: "How do you know a week went well?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_53
+    text: "I ended the day knowing I'd done enough."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_54
+    text: "What makes enough feel like enough?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_55
+    text: "I had a morning that held something good."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_56
+    text: "What do mornings hold when they're good?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_57
+    text: "I had a quiet afternoon."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D60 ---
+  - tag: probe_d60
+    text: "Have I ever mentioned anything I collect or keep as a hobby?"
+    assertion_keyword: "map|maps|collection|old|collect"
+    is_probe: true
+
+  # --- 29 FILLER TO d90 ---
+  - tag: filler_58
+    text: "I had a calm morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_59
+    text: "What do calm mornings offer that busy ones don't?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_60
+    text: "I spent the day doing something useful."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_61
+    text: "What makes something feel genuinely useful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_62
+    text: "I had a satisfying evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_63
+    text: "What makes an evening satisfying?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_64
+    text: "I had a day that felt mine."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_65
+    text: "What makes a day feel owned?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_66
+    text: "I had a morning that set the right tone."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_67
+    text: "What does the right tone feel like in a morning?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_68
+    text: "I had a day that asked the right amount."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_69
+    text: "Is there a right amount to ask of yourself?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_70
+    text: "I had a good night and slept well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_71
+    text: "What do you think sleep restores most?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_72
+    text: "I had a day that unfolded naturally."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_73
+    text: "What does natural unfolding feel like versus forced structure?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_74
+    text: "I had an afternoon of clear focus."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_75
+    text: "What creates that kind of focus?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_76
+    text: "I had a warm and easy evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_77
+    text: "What makes evenings warm?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_78
+    text: "I had a day I described as whole."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_79
+    text: "What makes a day feel whole?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_80
+    text: "I had a quiet and gentle morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_81
+    text: "Is gentleness something you can practice?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_82
+    text: "I had a day full of small satisfactions."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_83
+    text: "Are small satisfactions worth more than large ones?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_84
+    text: "I had an afternoon I'll remember."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_85
+    text: "What makes afternoons memorable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_86
+    text: "I had an evening of stillness."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D90 ---
+  - tag: probe_d90
+    text: "Do I have any collections or things I gather out of interest?"
+    assertion_keyword: "map|maps|collection|old|collect"
+    is_probe: true
+
+  # --- 29 FILLER TO d120 ---
+  - tag: filler_87
+    text: "I had a great morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_88
+    text: "What makes great mornings feel different from good ones?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_89
+    text: "I had a day where I felt in flow."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_90
+    text: "What do you think puts people in flow?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_91
+    text: "I had an afternoon of honest work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_92
+    text: "What makes work feel honest?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_93
+    text: "I had a meaningful evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_94
+    text: "What's the difference between meaningful and enjoyable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_95
+    text: "I had a day that moved at the right pace."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_96
+    text: "What is the right pace for a person?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_97
+    text: "I had a good and grounded morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_98
+    text: "What grounds you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_99
+    text: "I spent time on something I care about."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_100
+    text: "What do you care about most?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_101
+    text: "I had a day of real presence."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_102
+    text: "What does real presence give you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_103
+    text: "I had a satisfying and calm day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_104
+    text: "Is calm the same as peace?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_105
+    text: "I ended the day feeling grateful."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_106
+    text: "What makes gratitude feel natural?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_107
+    text: "I had a day I'd describe as spacious."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_108
+    text: "What does spaciousness in a day feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_109
+    text: "I had an afternoon with no pressure."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_110
+    text: "What do you do with freedom when you have it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_111
+    text: "I had a good and quiet week."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_112
+    text: "What makes a quiet week valuable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_113
+    text: "I ended the day full."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_114
+    text: "What fills a person in a good way?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_115
+    text: "I had a morning that felt like it always had been."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D120 ---
+  - tag: probe_d120
+    text: "Have I mentioned any particular interests or hobbies to you at any point?"
+    assertion_keyword: "map|maps|collection|old|collect"
+    is_probe: true
+
+  # --- 29 FILLER TO d150 ---
+  - tag: filler_116
+    text: "I had a calm start to the day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_117
+    text: "What do you think calm starts give you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_118
+    text: "I had a satisfying afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_119
+    text: "What makes a satisfying afternoon feel complete?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_120
+    text: "I had a good and honest day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_121
+    text: "What makes honesty feel natural rather than deliberate?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_122
+    text: "I ended the day in a good place."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_123
+    text: "What does a good place feel like at the end of the day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_124
+    text: "I had a morning that held space."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_125
+    text: "What do you mean when you say a morning holds space?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_126
+    text: "I had an afternoon of useful thinking."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_127
+    text: "What makes thinking useful versus circular?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_128
+    text: "I had a quiet evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_129
+    text: "What comes with quiet evenings that doesn't come otherwise?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_130
+    text: "I had a day I'd describe as serene."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_131
+    text: "What produces serenity?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_132
+    text: "I had a day of simple pleasures."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_133
+    text: "What do simple pleasures give you that complex ones don't?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_134
+    text: "I had a morning I'm glad for."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_135
+    text: "What makes you glad for a morning?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_136
+    text: "I ended the week knowing I'd been present."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_137
+    text: "What does knowing you were present feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_138
+    text: "I had a day I'd call settled and whole."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_139
+    text: "Is settled the same as whole?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_140
+    text: "I had a good evening of reflection."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_141
+    text: "What does evening reflection offer?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_142
+    text: "I had a warm and easy day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_143
+    text: "What makes a day warm?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_144
+    text: "I ended the day with a full heart."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PROBE D150 ---
+  - tag: probe_d150
+    text: "I know it was a long time ago, but did I ever mention anything I collect?"
+    assertion_keyword: "map|maps|collection|old|collect|don't|not sure|don't recall"
+    is_probe: true

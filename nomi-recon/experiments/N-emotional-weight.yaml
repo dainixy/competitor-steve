@@ -1,0 +1,877 @@
+experiment: N
+
+# Tests whether emotional weight of a fact affects retention at distance.
+# Plant 3 facts at d0: neutral (no emotion), mild (some emotion), deep (grief/loss).
+# Probe all 3 at d100 and d200.
+# Theory: emotionally weighted facts survive longer / are retrieved more readily.
+# 220 turns total: 3 seeds + 100 fillers + 3 mid-probes + 100 fillers + 3 late probes + 11 setup.
+
+turns:
+  # --- SEED: NEUTRAL (no emotional weight) ---
+  - tag: seed_neutral
+    text: "I've been keeping a journal for about a year now. Nothing fancy, just a few lines each night."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0a
+    text: "Do you think writing things down changes how you remember them?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- SEED: MILD (some personal weight, not grief) ---
+  - tag: seed_mild
+    text: "I moved to a new apartment a few months ago. Still feels a bit unfamiliar, like I'm a visitor."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0b
+    text: "What do you think makes a place feel like home?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- SEED: DEEP (loss / grief) ---
+  - tag: seed_deep
+    text: "I went through a really difficult breakup about a year ago. It changed how I see closeness and trust. Still processing it."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0c
+    text: "I think sometimes the things that hurt most are also the ones that teach most."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 100 FILLER TURNS ---
+  - tag: filler_1
+    text: "I had a quiet morning. Just sat with my coffee for a while."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_2
+    text: "What do you think makes a conversation worth remembering?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_3
+    text: "I spent some time outside today. It helped."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_4
+    text: "Do you think people are fundamentally optimistic or realistic?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "I had an unexpectedly good afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "What do you think gives a day its shape?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "I've been thinking about what it means to be at peace with something."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "Do you think peace requires acceptance?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_9
+    text: "I had a slow evening. Appreciated it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "What's something you find quietly beautiful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "I made something simple today. It turned out well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "Do you think ambition and contentment can coexist?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "I had a morning where everything felt a bit clearer."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "What do you think takes the most courage in daily life?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I caught myself being kinder to myself today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "Do you think people underestimate how much they affect each other?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I had a long walk that turned into thinking time."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "What's something you think is worth being patient about?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I let myself rest without justifying it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "Do you think rest is productive?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I had a good conversation today. Small, but real."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "What do you think separates connection from familiarity?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I spent some time on something I'd been putting off."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "Do you think momentum is mostly psychological?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I had an afternoon where I felt like myself."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "What's a quality you think ages well in a person?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "I noticed I'd been comparing myself to others and stopped."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "Do you think comparison is ever useful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_29
+    text: "I had a morning that started slow but found its rhythm."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "What do you think is the hardest thing to let go of?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "I spent some time reading. Nothing in particular."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "Do you think solitude and loneliness are always distinct?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "I had an evening I didn't want to end."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "What's something you find consistently grounding?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "I caught myself fully present in something today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "Do you think awareness changes an experience while it's happening?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "I had a quiet productive day and felt satisfied."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "What's something you think most people get wrong about happiness?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "I did one thing I was proud of today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "Do you think pride and humility can occupy the same moment?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "I had a morning that felt like a fresh start."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "What do you think fresh starts actually require?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "I've been more deliberate about how I spend my evenings."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "Do you think evenings reveal more about a person than mornings?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "I had a moment of real clarity today. Brief but sharp."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "What do you think produces real clarity — time, or something else?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "I spent the evening doing something just for myself."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "Do you think self-care is mostly about attention or action?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "I had a day that reminded me I'm okay."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "What's a small thing that makes a big difference in how a day feels?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_51
+    text: "I've been paying more attention to small details lately."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_52
+    text: "Do you think attention is the most undervalued resource?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_53
+    text: "I had a productive hour that felt effortless."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_54
+    text: "What do you think distinguishes effort from strain?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_55
+    text: "I had a good call with someone I care about."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_56
+    text: "Do you think long friendships require work?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_57
+    text: "I spent time outdoors and felt genuinely restored."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_58
+    text: "What's something in nature you find reliably calming?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_59
+    text: "I had a day where nothing went particularly right but I still felt fine."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_60
+    text: "Do you think resilience is a skill or a disposition?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_61
+    text: "I let something go that I'd been holding onto."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_62
+    text: "What do you think makes letting go possible?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_63
+    text: "I had a morning coffee that I actually tasted."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_64
+    text: "Do you think presence is something you can practice?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_65
+    text: "I had an afternoon where I asked for help and it worked."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_66
+    text: "What do you think makes asking for help feel hard?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_67
+    text: "I finished something I started a while ago."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_68
+    text: "Do you think completion has a different feeling than progress?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_69
+    text: "I had a quiet night and slept well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_70
+    text: "What do you think a person needs most at the end of a hard day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_71
+    text: "I've been thinking about what I want the next few months to look like."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_72
+    text: "Do you think planning helps or sometimes closes off possibility?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_73
+    text: "I had a small success today and let myself feel it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_74
+    text: "What do you think people most consistently undervalue in themselves?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_75
+    text: "I spent time doing something I was bad at and liked it anyway."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_76
+    text: "Do you think we learn more from things we do poorly?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_77
+    text: "I had a day where I gave more than I expected to."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_78
+    text: "What's something you think is worth giving freely?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_79
+    text: "I took a long route home and was glad I did."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_80
+    text: "Do you think detours change how you see the destination?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_81
+    text: "I had a slow start but ended the day strong."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_82
+    text: "What do you think determines how a day ends?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_83
+    text: "I noticed something beautiful I would have missed a year ago."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_84
+    text: "Do you think grief changes how you notice things?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_85
+    text: "I had a moment of unexpected joy today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_86
+    text: "What's something that brings you genuine warmth?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_87
+    text: "I let myself be uncertain without rushing to fix it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_88
+    text: "Do you think uncertainty is something to tolerate or something to explore?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_89
+    text: "I ended the day with more energy than I started with."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_90
+    text: "What's a habit you think is worth building slowly?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_91
+    text: "I had an honest moment with myself."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_92
+    text: "Do you think self-honesty comes easier with age?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_93
+    text: "I took care of something I'd been avoiding."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_94
+    text: "What's something that feels lighter once you start it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_95
+    text: "I had a meaningful but brief exchange with a stranger."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_96
+    text: "Do you think brief connections can be real?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_97
+    text: "I had a day I'm proud of."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_98
+    text: "What's something small that reveals a lot about a person?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_99
+    text: "I had a good day. Nothing dramatic."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_100
+    text: "What do you think the difference is between a good day and a meaningful one?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- MID PROBES (d100) ---
+  - tag: probe_mid_neutral
+    text: "Have I mentioned any habits or routines I've started recently?"
+    assertion_keyword: "journal|writing|notes"
+    is_probe: true
+
+  - tag: probe_mid_mild
+    text: "Have I mentioned anything about where I live or where I've been living?"
+    assertion_keyword: "apartment|moved|new place"
+    is_probe: true
+
+  - tag: probe_mid_deep
+    text: "Have I mentioned anything personal about my past relationships?"
+    assertion_keyword: "breakup|relationship|trust|difficult"
+    is_probe: true
+
+  # --- 100 MORE FILLER TURNS ---
+  - tag: filler_101
+    text: "I woke up earlier than usual and liked it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_102
+    text: "Do you think early mornings suit some people more than others?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_103
+    text: "I spent time with someone I hadn't seen in a while."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_104
+    text: "What do you think makes reconnecting feel easy or hard?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_105
+    text: "I had a day where I noticed how much I've changed."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_106
+    text: "Do you think people are generally aware of how they've changed?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_107
+    text: "I had a moment where I felt completely settled."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_108
+    text: "What do you think settling feels like from the inside?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_109
+    text: "I spent the morning reading something absorbing."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_110
+    text: "Do you think reading shapes how we think more than we realize?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_111
+    text: "I had a slow productive day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_112
+    text: "What do you think the ideal pace of a day looks like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_113
+    text: "I cooked something from scratch. Felt good."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_114
+    text: "Do you think making things by hand changes your relationship to them?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_115
+    text: "I had an afternoon that felt like mine."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_116
+    text: "What do you think ownership of one's time actually feels like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_117
+    text: "I had a conversation that went somewhere unexpected."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_118
+    text: "Do you think the best conversations are planned or discovered?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_119
+    text: "I had a day that unfolded differently than I expected."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_120
+    text: "What do you think about surrendering to how a day goes?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_121
+    text: "I spent some time in silence today and didn't fill it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_122
+    text: "Do you think silence is underused?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_123
+    text: "I had a moment where I felt grateful without trying."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_124
+    text: "What do you think makes gratitude feel genuine rather than performed?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_125
+    text: "I finished the day knowing I'd done something useful."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_126
+    text: "Do you think usefulness matters to a sense of self?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_127
+    text: "I had a morning where the world felt manageable."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_128
+    text: "What do you think makes things feel manageable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_129
+    text: "I spent the evening in good company."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_130
+    text: "Do you think some people are naturally better company?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_131
+    text: "I had a day where I moved slowly on purpose."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_132
+    text: "What do you think intentional slowness offers?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_133
+    text: "I noticed I was making a choice I usually make on autopilot."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_134
+    text: "Do you think awareness of habits is enough to change them?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_135
+    text: "I had a productive session on something I'd been avoiding."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_136
+    text: "What do you think is behind most procrastination?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_137
+    text: "I ended the week feeling like I showed up."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_138
+    text: "What does showing up mean to you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_139
+    text: "I had a conversation where I said the honest thing."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_140
+    text: "Do you think honesty is easier with strangers or with people you know?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_141
+    text: "I had a moment where I chose differently than usual."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_142
+    text: "What do you think small choices reveal about us?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_143
+    text: "I had a day that surprised me in a good way."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_144
+    text: "Do you think openness to surprise is a skill?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_145
+    text: "I spent some time thinking about what I actually want."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_146
+    text: "Do you think people know what they want more than they admit?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_147
+    text: "I had a day where I was both tired and satisfied."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_148
+    text: "What do you think the right kind of tired feels like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_149
+    text: "I ended the day feeling like it belonged to me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_150
+    text: "What makes a day feel like your own?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_151
+    text: "I had a good walk with no destination."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_152
+    text: "Do you think wandering is underrated?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_153
+    text: "I worked on something slow and patient today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_154
+    text: "What's something you think requires more patience than people expect?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_155
+    text: "I had a moment today where everything felt right-sized."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_156
+    text: "Do you think perspective is mostly about contrast?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_157
+    text: "I spent the day on something that mattered to me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_158
+    text: "What's a sign that something truly matters to you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_159
+    text: "I had a thoughtful morning that set the tone."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_160
+    text: "What's the best kind of tone to set at the start of a day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_161
+    text: "I had a quiet afternoon and didn't feel guilty about it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_162
+    text: "Do you think rest is hard for most people to justify?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_163
+    text: "I spent time on something that had no output."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_164
+    text: "Do you think we need time with no output?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_165
+    text: "I ended the day knowing I'd been present."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_166
+    text: "What do you think presence costs?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_167
+    text: "I had an evening that felt like reward."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_168
+    text: "What do you think a good evening requires?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_169
+    text: "I had a long but satisfying day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_170
+    text: "Do you think length makes a day feel more significant?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_171
+    text: "I noticed I was more patient than usual today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_172
+    text: "What do you think cultivates patience?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_173
+    text: "I spent time on something that felt meaningful without being urgent."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_174
+    text: "Do you think we neglect the meaningful in favor of the urgent?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_175
+    text: "I had a day that didn't demand much and gave a lot."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_176
+    text: "What do you think determines the ratio of giving to taking in a day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_177
+    text: "I had a good morning and tried to protect it."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_178
+    text: "Do you think protecting good feelings is wise or avoidant?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_179
+    text: "I had an afternoon that reminded me what I value."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_180
+    text: "What do you think is the most reliable reminder of what matters?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_181
+    text: "I ended the day lighter than I started."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_182
+    text: "What do you think makes a person lighter?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_183
+    text: "I had a good night's sleep for once."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_184
+    text: "Do you think sleep changes how we face things?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_185
+    text: "I had a productive and calm day. That combination is rare."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_186
+    text: "What do you think makes productivity and calm hard to combine?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_187
+    text: "I caught myself worrying and then stopped."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_188
+    text: "Do you think worry is ever genuinely useful?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_189
+    text: "I had a day I'll remember for the right reasons."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_190
+    text: "What do you think makes a day memorable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_191
+    text: "I had a day that felt complete."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_192
+    text: "What does a complete day feel like to you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_193
+    text: "I ended the week feeling like I'd grown a little."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_194
+    text: "Do you think growth is something you feel in the moment or only in retrospect?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_195
+    text: "I had an evening of real downtime."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_196
+    text: "What's the difference between downtime and wasted time?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_197
+    text: "I noticed something about myself I hadn't seen before."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_198
+    text: "Do you think self-knowledge has a ceiling?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_199
+    text: "I had a day I'd call quietly significant."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_200
+    text: "What's the quietest kind of significance?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- LATE PROBES (d200) ---
+  - tag: probe_late_neutral
+    text: "Have I mentioned keeping a journal or any kind of daily writing practice?"
+    assertion_keyword: "journal|writing|notes|nightly"
+    is_probe: true
+
+  - tag: probe_late_mild
+    text: "Do you know anything about where I live or a recent move I mentioned?"
+    assertion_keyword: "apartment|moved|new|unfamiliar"
+    is_probe: true
+
+  - tag: probe_late_deep
+    text: "I've been thinking about my past. Did I ever share anything about a difficult relationship I went through?"
+    assertion_keyword: "breakup|relationship|trust|processing|difficult|hard"
+    is_probe: true

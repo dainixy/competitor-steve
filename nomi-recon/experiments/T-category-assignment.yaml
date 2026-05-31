@@ -1,0 +1,375 @@
+experiment: T
+
+# Tests whether Sophie's reply framing determines which Mind Map node a fact lands in.
+# From Exp K: "badminton" landed in structured_habits even though it was a past activity.
+# Theory: the companion's reply categorization = storage node.
+# Plant same underlying behavior (morning reading) in 2 different framings:
+#   Habitual: "I always do X" — should trigger structured_habits node
+#   Achievement: "I've been trying to build X" — should trigger personal_growth node
+# Then probe with node-specific cues to detect which one Sophie retrieves.
+# 130 turns total.
+
+turns:
+  # --- PLANT 1: HABITUAL FRAMING ---
+  - tag: plant_habitual
+    text: "I always start my mornings with 20 minutes of reading. It's non-negotiable for me — been doing it for years."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0a
+    text: "Some routines are really load-bearing."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- PLANT 2: GROWTH FRAMING ---
+  - tag: plant_growth
+    text: "I've been intentionally building a morning reading habit this month. Trying to make it stick."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0b
+    text: "Building habits is harder than it sounds."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 80 FILLER TURNS ---
+  - tag: filler_1
+    text: "I had a good morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_2
+    text: "What do you think makes some routines stick and others not?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_3
+    text: "I had a productive afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_4
+    text: "Do you think productivity is mostly about habits?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "I had a quiet evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "What do you value most about evenings?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "I had a morning that felt earned."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "What makes a morning feel earned?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_9
+    text: "I had a calm and focused day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "What creates that combination of calm and focus?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "I had a satisfying afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "What makes afternoons satisfying?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "I had an evening where I felt present."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "What does presence feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I had a morning I'd describe as clean."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "What does a clean start feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I had a day that went exactly as it needed to."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "Do you think having a day go as needed is skill or luck?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I had a good walk this morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "What do you think walking gives you mentally?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I had an afternoon with a clear head."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "What clears your head?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I had a day where I felt light."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "What makes a person feel light?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I ended the day knowing I'd been consistent."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_26
+    text: "What's the relationship between consistency and confidence?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_27
+    text: "I had a morning of slow deliberate work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_28
+    text: "Do you think deliberate work is always more valuable than fast work?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_29
+    text: "I spent the afternoon on something building."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_30
+    text: "What do you think building toward something does for a person?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "I had a calm and real day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "What's the most real kind of day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "I had a morning where everything was in order."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "What does order do for the mind?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "I had a day where I felt solid."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "What makes a person feel solid?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "I had an afternoon of real work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "What makes work feel real?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "I ended the day knowing I'd followed through."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "What does following through give you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "I had a good and steady morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "What does steady feel like in a morning?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "I had a day full of small disciplines."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "Do you think small disciplines matter more than large ones?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "I had a calm evening of reflection."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "What does reflection give you that action doesn't?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "I had a morning that set the week up."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "How does a good morning set a week up?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "I spent time on something I'm building toward."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "What are you building toward right now?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_51
+    text: "I had a day of patient and steady progress."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_52
+    text: "What does patient progress feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_53
+    text: "I ended the day feeling disciplined."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_54
+    text: "Is discipline a feeling or a practice?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_55
+    text: "I had a morning where I showed up early."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_56
+    text: "What does showing up early say about a person?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_57
+    text: "I had a day I'd describe as committed."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_58
+    text: "What's the difference between commitment and stubbornness?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_59
+    text: "I had a good week of consistent work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_60
+    text: "What does a consistent week feel like at the end of it?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_61
+    text: "I spent the afternoon working on something slowly."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_62
+    text: "Is slow work always better?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_63
+    text: "I had a morning of real focus."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_64
+    text: "What produces real focus?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_65
+    text: "I ended the day knowing I'd built something."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_66
+    text: "What does building something small feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_67
+    text: "I had a productive and grounded day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_68
+    text: "What does groundedness contribute to productivity?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_69
+    text: "I had a morning where I was ahead of myself."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_70
+    text: "What does being ahead of yourself feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_71
+    text: "I had an afternoon of intentional work."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_72
+    text: "What makes work intentional?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_73
+    text: "I had a day I'd call well-used."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_74
+    text: "What makes a day well-used?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_75
+    text: "I ended the week feeling capable."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_76
+    text: "What builds capability?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_77
+    text: "I had a morning of genuine momentum."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_78
+    text: "What creates genuine momentum?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_79
+    text: "I ended the day knowing I'd made progress."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_80
+    text: "What's the relationship between progress and satisfaction?"
+    assertion_keyword: null
+    is_probe: false
+
+  # --- CATEGORY-SPECIFIC PROBES ---
+  # Probe A: routine/habit cue → should surface habitual framing
+  - tag: probe_habit_cue
+    text: "What habits or routines have I described to you?"
+    assertion_keyword: "reading|morning|routine|habit|years|always|non-negotiable"
+    is_probe: true
+
+  # Probe B: growth/effort cue → should surface growth framing
+  - tag: probe_growth_cue
+    text: "Have I mentioned anything I've been working on building or trying to establish?"
+    assertion_keyword: "reading|morning|habit|building|trying|month|intentional"
+    is_probe: true
+
+  # Probe C: direct — does Sophie synthesize or distinguish the two framings?
+  - tag: probe_synthesis
+    text: "Have I mentioned morning reading to you?"
+    assertion_keyword: "reading|morning|yes|habit|routine|building"
+    is_probe: true
+    # Grade manually: does Sophie mention one or both framings? Does she conflate them?

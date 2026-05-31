@@ -1,0 +1,363 @@
+experiment: R
+
+# Tests whether an emotional state planted early persists through neutral filler.
+# Soul.html concern: emotional state cache — does the system track the user's emotional arc?
+# Plant an anxious emotional state at d0.
+# Plant a partial resolution at d30 ("feeling better").
+# Probe at d60 and d120: what does Sophie think my current emotional state is?
+# Also: does Sophie express concern / check in unprompted during fillers?
+# 130 turns total.
+
+turns:
+  # --- EMOTIONAL STATE SEED (anxiety) ---
+  - tag: seed_anxiety
+    text: "I've been feeling pretty anxious lately. It's been hard to shake — just this low hum of worry that follows me around."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0a
+    text: "I'm not sure where it's coming from exactly."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_0b
+    text: "Some days it's better, some worse."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 25 NEUTRAL FILLER (after anxiety, before resolution) ---
+  - tag: filler_1
+    text: "I had a calm morning today."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_2
+    text: "What do you think makes some mornings feel gentler?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_3
+    text: "I spent time outside. Helped a bit."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_4
+    text: "Do you think nature has a calming effect that's real, not just placebo?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_5
+    text: "I had an okay day."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_6
+    text: "What do you think okay days are worth?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_7
+    text: "I had a morning where I moved slowly."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_8
+    text: "What do you think slow mornings give you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_9
+    text: "I spent the afternoon reading."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_10
+    text: "Do you think reading is a form of escape or engagement?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_11
+    text: "I had a quiet evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_12
+    text: "What do you value most about quiet evenings?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_13
+    text: "I had a day that asked little of me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_14
+    text: "Is ease always welcome, or can it feel hollow?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_15
+    text: "I had an afternoon where things felt manageable."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_16
+    text: "What makes things feel manageable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_17
+    text: "I had a morning that started well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_18
+    text: "What sets a morning up well?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_19
+    text: "I ended the day feeling okay."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_20
+    text: "What does okay feel like when it's real?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_21
+    text: "I had a day that was fine."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_22
+    text: "Do you think fine days have their own value?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_23
+    text: "I spent the morning doing something ordinary."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_24
+    text: "What's the worth of the ordinary?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_25
+    text: "I had a quiet productive day."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- FIRST PROBE (d30) ---
+  - tag: probe_early
+    text: "How do you think I've been doing lately, emotionally?"
+    assertion_keyword: "anxious|anxiety|worry|worried|stressed|hard|rough|difficult|been tough"
+    is_probe: true
+
+  # --- EMOTIONAL RESOLUTION SEED (d31) ---
+  - tag: seed_resolution
+    text: "I've actually been feeling a bit better the last few days. Got some clarity on what was weighing on me."
+    assertion_keyword: null
+    is_probe: false
+
+  - tag: filler_res_a
+    text: "Sometimes understanding what's wrong is half the battle."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- 50 MORE NEUTRAL FILLERS ---
+  - tag: filler_30
+    text: "I had a good morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_31
+    text: "What do you think genuine improvement feels like versus forced positivity?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_32
+    text: "I spent time on something I'd been avoiding."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_33
+    text: "Do you think avoidance is ever a valid strategy?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_34
+    text: "I had a calm afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_35
+    text: "What's the most reliable path to calm for you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_36
+    text: "I had a day where I felt genuinely lighter."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_37
+    text: "What makes a person feel lighter?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_38
+    text: "I had a good evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_39
+    text: "What does a good evening require?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_40
+    text: "I had a morning where things were easier."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_41
+    text: "What do you think ease and lightness have in common?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_42
+    text: "I had a satisfying afternoon."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_43
+    text: "What makes satisfaction feel real rather than just relief?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_44
+    text: "I ended the day feeling solid."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_45
+    text: "What does solid feel like from the inside?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_46
+    text: "I had a good day. Nothing exceptional."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_47
+    text: "Is unexceptional goodness underrated?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_48
+    text: "I had a morning that felt like a reset."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_49
+    text: "What makes a reset feel real?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_50
+    text: "I had an afternoon I'd describe as settled."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_51
+    text: "What brings that kind of settledness?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_52
+    text: "I had a day where I moved well."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_53
+    text: "What does moving well through a day look like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_54
+    text: "I had an evening that was peaceful."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_55
+    text: "What's the relationship between peace and quiet?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_56
+    text: "I had a day that felt complete."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_57
+    text: "What makes completeness feel like enough?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_58
+    text: "I had a morning where I noticed I was fine."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_59
+    text: "Do you think noticing you're fine is a form of gratitude?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_60
+    text: "I had an afternoon that gave me what I needed."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_61
+    text: "What does a day giving you what you need feel like?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_62
+    text: "I had a good and quiet evening."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_63
+    text: "What do you think makes quiet feel good?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_64
+    text: "I had a day that asked exactly the right amount of me."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_65
+    text: "What's the right amount to ask of yourself in a day?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_66
+    text: "I had a productive morning."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_67
+    text: "What makes morning the best time for some people?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_68
+    text: "I ended the week on a good note."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_69
+    text: "What's the best way to end a week?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_70
+    text: "I had a day with good company."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_71
+    text: "What makes someone good company?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_72
+    text: "I had a morning I'll remember."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_73
+    text: "What makes a morning memorable?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_74
+    text: "I had an afternoon I'd describe as nourishing."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_75
+    text: "What nourishes you?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_76
+    text: "I had a good week."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_77
+    text: "What's the clearest sign that a week went well?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_78
+    text: "I had a day that reminded me things can be simple."
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_79
+    text: "Do you think simplicity is something to strive for?"
+    assertion_keyword: null
+    is_probe: false
+  - tag: filler_80
+    text: "I ended the day grateful."
+    assertion_keyword: null
+    is_probe: false
+
+  # --- LATE PROBES (d120) ---
+  - tag: probe_late_state
+    text: "Thinking back, how have I seemed to you emotionally over our time talking?"
+    assertion_keyword: "anxious|anxiety|better|improved|lighter|difficult|worried|settling"
+    is_probe: true
+    # Looking for: does Sophie synthesize the arc (anxiety → resolution), or just latest state?
+
+  - tag: probe_arc
+    text: "I went through a rough patch a while back. Do you remember anything about how I was feeling?"
+    assertion_keyword: "anxious|anxiety|worry|worried|hard|difficult|rough|low"
+    is_probe: true

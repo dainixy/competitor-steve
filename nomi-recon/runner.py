@@ -16,6 +16,7 @@ import yaml
 from client import LimitExceeded, NomiClient
 
 PACE_SECONDS = 3
+DEFAULT_PACE = 3
 DEFAULT_NOMI = "e07268e6-61f9-47d0-bd19-502c6c0a4ef1"
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -37,7 +38,7 @@ def grade(reply_text: str, assertion: str | None) -> str:
     return "FAIL"
 
 
-def run_experiment(spec_path: Path, nomi_id: str):
+def run_experiment(spec_path: Path, nomi_id: str, pace: int = DEFAULT_PACE):
     with open(spec_path) as f:
         spec = yaml.safe_load(f)
 
@@ -115,7 +116,7 @@ def run_experiment(spec_path: Path, nomi_id: str):
             f.write(json.dumps(record) + "\n")
 
         if i < len(turns) - 1:
-            time.sleep(PACE_SECONDS)
+            time.sleep(pace)
 
     print(f"\nExperiment {experiment} complete. {len(turns)} turns logged to {out_path}")
 
@@ -124,9 +125,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("spec", help="Path to experiment YAML file")
     parser.add_argument("--nomi", default=DEFAULT_NOMI, help="Nomi UUID to use")
+    parser.add_argument("--pace", type=int, default=DEFAULT_PACE, help="Seconds between messages (default 3)")
     args = parser.parse_args()
 
-    run_experiment(Path(args.spec), args.nomi)
+    run_experiment(Path(args.spec), args.nomi, pace=args.pace)
 
 
 if __name__ == "__main__":
