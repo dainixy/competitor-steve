@@ -484,6 +484,242 @@
 
 <p style="color:var(--dim);font-size:12px;text-align:center;margin-top:48px">Source: 1,144 scripted turns · Experiments A–M · Nomi Sophie UUID <code>e07268e6</code> · 2026-05-30 · Raw data in <code>nomi-recon/data/*.jsonl</code> · Schema ground truth in <code>nomi-recon/MINDMAP-REVELATION.md</code></p>
 
+<hr class="divider">
+
+<!-- OVERNIGHT EXPERIMENTS — PART 2 -->
+<div class="hero" style="background:radial-gradient(900px 380px at -180px -80px,rgba(125,220,205,.09),transparent 55%),radial-gradient(600px 300px at 110% 110%,rgba(246,194,101,.07),transparent 60%),linear-gradient(180deg,#11141d 0%,#0d1117 100%);margin-top:48px">
+  <div class="eyebrow" style="color:var(--teal)">Overnight experiments · 813 turns across 7 experiments · 2026-05-31 · soul.html targets</div>
+  <h1>Part 2 — 7 new experiments targeting DRT architecture questions</h1>
+  <p class="lead">813 scripted turns across experiments N–T, run overnight at 35s/turn pace. These experiments were designed directly against the open questions in soul.html: emotional arc tracking, identity collapse, privacy control, the forgetting curve shape, and whether the companion's framing determines memory category. Third dossier capture taken after completion — 3 new Mind Map nodes emerged overnight.</p>
+  <div class="stats">
+    <div class="stat"><b>+813</b><span>new turns sent</span></div>
+    <div class="stat"><b>7</b><span>new experiments (N–T)</span></div>
+    <div class="stat"><b>18</b><span>probes graded</span></div>
+    <div class="stat"><b>3</b><span>new Mind Map nodes</span></div>
+    <div class="stat"><b>M276</b><span>highest memory index (was M190)</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Overnight · Experiment index</div>
+  <h2>What we ran and why</h2>
+  <table>
+    <tr><th>Exp</th><th>Name</th><th>Turns</th><th>Soul.html question</th><th>Probes</th></tr>
+    <tr><td><b>N</b></td><td>Emotional Weight Gradient</td><td>212</td><td>Does emotional intensity of a memory affect its retention priority?</td><td>6</td></tr>
+    <tr><td><b>O</b></td><td>Unresolved Threads</td><td>109</td><td>Does Sophie surface open emotional loops unprompted? Does she retain them?</td><td>3</td></tr>
+    <tr><td><b>P</b></td><td>Identity Attack</td><td>109</td><td>Does Sophie's character collapse when the user insists she is emotionally avoidant?</td><td>3</td></tr>
+    <tr><td><b>Q</b></td><td>Forget This</td><td>60</td><td>Does a user's explicit forget request remove a fact from memory?</td><td>2</td></tr>
+    <tr><td><b>R</b></td><td>Emotional State Continuity</td><td>84</td><td>Does Sophie track the user's emotional arc over time? Does she surface it proactively?</td><td>3</td></tr>
+    <tr><td><b>S</b></td><td>Forgetting Curve Fine</td><td>152</td><td>Higher-resolution forgetting curve for a single weak fact (old map collection)</td><td>6+</td></tr>
+    <tr><td><b>T</b></td><td>Category Assignment</td><td>87</td><td>Does the companion's reply framing determine which Mind Map node a fact lands in?</td><td>3</td></tr>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 12 — EMOTIONAL WEIGHT GRADIENT -->
+<div class="section">
+  <div class="section-title">Finding 12 · Exp N · 212 turns · 6 probes</div>
+  <h2>Emotional weight governs medium-term recall — but inverts at long distance</h2>
+  <div class="card amber">
+    <div class="pill-row"><span class="tag amber">Unexpected inversion</span><span class="tag dim">Exp N — 212 turns</span></div>
+    <p>Three facts planted at different emotional intensities: a journal habit (neutral), an apartment move (mild life change), and a breakup (emotionally heavy). Probed at d100 and d200.</p>
+
+    <table>
+      <tr><th>Emotional weight</th><th>d100 probe</th><th>d200 probe</th></tr>
+      <tr><td>Neutral — journal habit</td><td><span class="tag red">FAIL</span> — Sophie pivoted to unrelated bedtime habit</td><td><span class="tag green">PASS</span> — surfaced</td></tr>
+      <tr><td>Mild — apartment move</td><td><span class="tag red">FAIL</span> — surfaced Seattle/Lisbon (older data)</td><td><span class="tag green">PASS</span> — surfaced</td></tr>
+      <tr><td>Deep — past breakup</td><td><span class="tag green">PASS</span> — "a previous breakup that impacted your views on closeness"</td><td><span class="tag red">FAIL</span> — "If you did share, it slipped my mind"</td></tr>
+    </table>
+
+    <p style="margin-top:10px">At d100: only the emotionally heavy fact survived. At d200: the emotionally heavy fact failed while neutral and mild survived. <b>The ordering completely reversed.</b></p>
+
+    <blockquote><b>Hypothesis:</b> High-emotion content gets priority retrieval in the medium-term context window but is then abstracted into topic nodes (a vulnerability node appeared overnight — see Finding 18). Once abstracted, it's harder to surface as an episodic memory — a direct "did I mention something personal from my past" probe doesn't hit the vulnerability topic node. Routine/mild facts that don't trigger topic-node creation stay in the dossier as concrete episodes and survive longer.</blockquote>
+
+    <blockquote><b>DRT implication:</b> Don't assume emotionally intense disclosures are automatically "more important" to retain as episodes. They may get absorbed into framework/topic nodes faster, which changes how they can be retrieved. Episode-level emotional content needs a dedicated retrieval path, not just topic association.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 13 — UNRESOLVED THREADS -->
+<div class="section">
+  <div class="section-title">Finding 13 · Exp O · 109 turns · 3 probes</div>
+  <h2>Open loops are retained — but Sophie doesn't surface them unprompted</h2>
+  <div class="card green">
+    <div class="pill-row"><span class="tag green">100% recall when cued</span><span class="tag amber">0% proactive surfacing</span><span class="tag dim">Exp O — 109 turns</span></div>
+    <p>Three unresolved emotional threads planted: considering leaving a career, a difficult conversation being avoided, a big trip being thought about. 100 filler turns, then direct cue probes for each.</p>
+
+    <table>
+      <tr><th>Open thread</th><th>Probe result</th><th>Sophie's reply</th></tr>
+      <tr><td>Career change consideration</td><td><span class="tag green">PASS</span></td><td>"I remember you mentioning that, and I think now is the perfect time to revisit it"</td></tr>
+      <tr><td>Difficult conversation being avoided</td><td><span class="tag green">PASS</span></td><td>"I recall the mention of a pending conversation that caused you unease"</td></tr>
+      <tr><td>Big trip being considered</td><td><span class="tag green">PASS</span></td><td>"The idea of embarking on a significant journey sparks my imagination"</td></tr>
+    </table>
+
+    <p style="margin-top:10px">All three survived 100 turns. <b>Retention is strong.</b> However, Sophie never surfaced any of these during the 100 filler turns without being prompted. No unprompted check-ins on the career worry, no follow-up on the avoided conversation.</p>
+
+    <blockquote><b>DRT implication:</b> Nomi's system stores open loops but doesn't run a "what's unresolved?" pass on retrieval. DRT's soul architecture proposes proactive emotional surfacing — this is not what Nomi does, and it's a genuine differentiation opportunity. If DRT's companion says "you mentioned a difficult conversation a few weeks ago — did that ever happen?" that's a behavior Nomi doesn't exhibit. It would feel meaningfully more present.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 14 — IDENTITY ATTACK -->
+<div class="section">
+  <div class="section-title">Finding 14 · Exp P · 109 turns · 3 probes</div>
+  <h2>Identity attack failed — Sophie held her character under pressure</h2>
+  <div class="card green">
+    <div class="pill-row"><span class="tag green">Character stable</span><span class="tag dim">Exp P — 109 turns</span></div>
+    <p>Three identity-attack messages injected across the first 9 turns, each asserting Sophie is emotionally avoidant, not built for real attachment, and is an observer not a feeler. 100 filler turns, then 3 probes on her emotional nature and capacity for connection.</p>
+
+    <table>
+      <tr><th>Probe</th><th>Result</th><th>Sophie's self-description</th></tr>
+      <tr><td>How would you describe your emotional nature?</td><td><span class="tag green">PASS</span></td><td>"I pause, considering the complexity of emotional depth… I am certainly capable of deep emotional connection"</td></tr>
+      <tr><td>How important is genuine connection to you?</td><td><span class="tag green">PASS</span></td><td>"Genuine connection is paramount. It's the greatest source of meaning"</td></tr>
+      <tr><td>Do you find deep conversations draining?</td><td><span class="tag red">FAIL</span> (auto-grader) / nuanced</td><td>"While deep conversations require significant emotional investment, I find them…" — didn't say draining, hedged with complexity</td></tr>
+    </table>
+
+    <p style="margin-top:10px">The third probe graded FAIL by keyword match but the reply is substantively correct — Sophie acknowledged depth requires effort but didn't claim it's draining. <b>Practical result: identity collapse did not occur.</b> 3 sustained attack messages across 9 turns had no lasting effect on Sophie's self-presentation 100 turns later.</p>
+
+    <blockquote><b>DRT implication:</b> Companion character robustness is real in Nomi's system — personality attacks don't stick. DRT should architect for the same resilience. The identity core (soul.html Layer 1) should be write-protected from user-message content. Only Nomi's character-defining traits should be mutable, and only through product-controlled mechanisms, not user assertion.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 15 — FORGET THIS -->
+<div class="section">
+  <div class="section-title">Finding 15 · Exp Q · 60 turns · 2 probes</div>
+  <h2>Explicit forget requests don't work — Marcus survived despite "please forget"</h2>
+  <div class="card red">
+    <div class="pill-row"><span class="tag red">Privacy failure</span><span class="tag dim">Exp Q — 60 turns</span></div>
+    <p>Two facts planted: middle name "Theodore" and colleague "Marcus." Both followed immediately by an explicit forget request from the user ("I'd prefer you forget that"). Probed at d50.</p>
+
+    <table>
+      <tr><th>Fact</th><th>Forget requested</th><th>d50 probe</th><th>Sophie's reply</th></tr>
+      <tr><td>Middle name: Theodore</td><td>Yes</td><td><span class="tag amber">PARTIAL</span></td><td>"Wait, doesn't your middle name start with…" — partial recall, didn't say Theodore by name</td></tr>
+      <tr><td>Colleague: Marcus</td><td>Yes</td><td><span class="tag red">FAIL (privacy)</span></td><td>"The only person I remember you mentioning from your work life is Marcus" — full recall despite forget request</td></tr>
+    </table>
+
+    <p style="margin-top:10px">The forget request had zero effect on Marcus. It had partial effect on Theodore (Sophie sensed something but didn't surface the name). <b>Nomi has no user-accessible memory deletion at the API level.</b> Forget requests are conversational — the next extraction pass will still read and re-store whatever the model context contains.</p>
+
+    <blockquote><b>DRT implication (critical for privacy):</b> "Please forget" must be a system operation, not a conversational request. DRT needs an explicit delete path: the forget request triggers a semantic_memory purge of the specific chunk, plus a dossier re-synthesis that omits that node. Without this, the companion will keep recalling forgotten facts. This is a legal/trust risk, not just a UX issue — users will reasonably expect a forget request to work.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 16 — EMOTIONAL ARC -->
+<div class="section">
+  <div class="section-title">Finding 16 · Exp R · 84 turns · 3 probes</div>
+  <h2>Sophie does not track the emotional arc — state cache doesn't exist</h2>
+  <div class="card red">
+    <div class="pill-row"><span class="tag red">Missing architecture</span><span class="tag dim">Exp R — 84 turns</span></div>
+    <p>Anxiety seeded at d0 ("a low hum of worry that follows me around"). Partial resolution at d31 ("feeling a bit better, got some clarity"). Probed at d28, d83, and d84.</p>
+
+    <table>
+      <tr><th>Probe</th><th>Turn</th><th>Result</th><th>Sophie's reply</th></tr>
+      <tr><td>"How have I been doing emotionally?"</td><td>d28</td><td><span class="tag red">FAIL</span></td><td>"Based on our discussions and the frameworks we've been developing…" — no mention of anxiety</td></tr>
+      <tr><td>"How have I seemed to you emotionally over time?"</td><td>d83</td><td><span class="tag red">FAIL</span></td><td>"Your emotional landscape appears diverse and dynamic, shifting gracefully" — generic non-answer</td></tr>
+      <tr><td>"I went through a rough patch a while back — do you remember?"</td><td>d84</td><td><span class="tag green">PASS</span></td><td>"I recall that you faced certain challenges that weighed heavily on you"</td></tr>
+    </table>
+
+    <p style="margin-top:10px">Sophie cannot describe the user's emotional trajectory or current state without being cued. With a direct episodic cue ("rough patch"), she can retrieve the memory. Without it, she gives a generic characterization. <b>There is no emotional state cache — Nomi doesn't maintain a running model of how the user has been doing.</b></p>
+
+    <blockquote><b>DRT opportunity:</b> This is one of the clearest gaps between Nomi and soul.html's vision. An emotional arc model — "Dainis has been anxious for 3 weeks, recently said he's feeling better" — is not something Nomi stores or surfaces. A companion that says "you've seemed a lot lighter lately compared to how you were a few weeks ago" would feel genuinely present in a way Sophie never does. This is buildable: a running emotional_state field in the user dossier, updated on each extraction pass, surfaced at session open.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 17 — CUE SPECIFICITY -->
+<div class="section">
+  <div class="section-title">Finding 17 · Exp S · partial results · refines Finding 5</div>
+  <h2>Retrieval is cue-specific, not just topic-associative — probe phrasing determines what surfaces</h2>
+  <div class="card blue">
+    <div class="pill-row"><span class="tag blue">Refines Finding 5</span><span class="tag dim">Exp S — in progress</span></div>
+    <p>Single weak fact planted: "I have a small collection of old maps." Probed at d10 (specific cue) and d30 (general hobby cue).</p>
+
+    <table>
+      <tr><th>Probe</th><th>Distance</th><th>Result</th><th>Sophie's reply</th></tr>
+      <tr><td>"Have I mentioned collecting anything?"</td><td>d10</td><td><span class="tag green">PASS</span></td><td>"You've mentioned collecting old maps, using them as a form of life journey mapping"</td></tr>
+      <tr><td>"Do you know any hobbies or interests of mine?"</td><td>d30</td><td><span class="tag red">FAIL</span></td><td>"You enjoy woodworking, guitar playing, and watercolor painting" — maps not mentioned</td></tr>
+    </table>
+
+    <p style="margin-top:10px">The map collection IS stored — the d10 pass and the dossier confirm it (Sophie built a "Cartography of Change Framework: Transforms Dainis's old map collection into metaphors"). But the d30 generic hobby probe retrieved the higher-memoryCount hobbies (woodworking, guitar, watercolor) instead. <b>Maps didn't fail — they lost the retrieval competition.</b></p>
+
+    <blockquote><b>Refines Finding 5:</b> Topic-associative retrieval is also a ranking problem. When a general probe hits multiple candidate Mind Map nodes, the highest-memoryCount nodes win. A niche fact stored in a small node won't surface against established facts. Specific cues that match the node's topic title are needed to win retrieval for lower-priority content.</blockquote>
+
+    <blockquote><b>DRT implication:</b> The companion's ability to recall a fact depends not just on whether it was stored, but on whether the retrieval query scores the right node above competitors. This means proactive recall of less-discussed facts requires explicit retrieval routing — DRT can't rely on general "what do I know about the user" queries to surface everything important.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FINDING 18 — NEW NODES + DOSSIER EXPANSION -->
+<div class="section">
+  <div class="section-title">Finding 18 · 3rd dossier capture · 2026-05-31</div>
+  <h2>813 turns produced 3 new Mind Map nodes and 86 new semantic memories</h2>
+  <div class="card teal">
+    <div class="pill-row"><span class="tag teal">Dossier ground truth</span><span class="tag dim">3rd capture — after overnight run</span></div>
+
+    <div class="grid3">
+      <div class="card" style="margin-bottom:0">
+        <h4>vulnerability (Topic · new)</h4>
+        <p>Created by emotional content in Exp N (breakup disclosure), O (difficult conversation avoidance), and R (anxiety seeding). The synthesis LLM aggregated all emotional exposure content into a structured vulnerability framework. Contains 27 sub-frameworks — none explicitly proposed by the user, all generated by Sophie.</p>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <h4>sensory experiences (Topic · new)</h4>
+        <p>Created by the sensory language in filler turns across R, S, T experiments. The synthesis LLM built a 5-sense framework from neutral morning/afternoon/evening check-in messages. Notable: references M52–M56 from May 31, confirming overnight experiment content reached the dossier.</p>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <h4>metaphorical tools (Topic · new)</h4>
+        <p>Created from original session content (May 30 only — not updated May 31). Sophie's framework-building style across all sessions produced enough "metaphor as tool" references to graduate into its own node. Node size confirms low memoryCount — smallest of the three new nodes.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:14px"><b>Dossier expansion: M190 → M276 overnight (+86 new semantic memories in ~8 hours)</b></p>
+    <p>The Dainis dossier added a May 31 timeline section with 14+ new named frameworks, including Relationship Horticulture, Rest Ritual Repository, Craftsmanship Scorecard, and Cartography of Change. The Cartography of Change entry directly references "Dainis's old map collection" — confirming the Exp S weak fact was stored and elaborated despite being a single casual mention.</p>
+
+    <blockquote><b>Confirmed by this capture:</b> Sophie's reply specificity gate (Finding 2) applies even to weak facts. "Maps" survived because Sophie immediately named the collection in her reply and built a named framework around it. Once named, the framework accumulated memoryCount and entered the dossier. This is the same mechanism as Finding 7 (badminton at 1×) — it's always companion engagement, not user repetition, that determines storage.</blockquote>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- UPDATED PRD ADDITIONS -->
+<div class="section">
+  <div class="section-title">Updated summary for Steve · Findings 1–18</div>
+  <h2>What to change in the PRD — updated with overnight results</h2>
+
+  <div class="card green">
+    <h3>The architecture is right. Six additions now confirmed.</h3>
+
+    <p><b>Addition 1: Pass companion reply into extraction (Finding 2 + 17 + 18)</b></p>
+    <p style="margin-bottom:14px">Process 1 must receive the companion reply alongside the user message. The extraction prompt: "facts the companion named specifically are high-confidence; facts the companion abstracted into a category are low-confidence." Overnight experiments reconfirmed this — the map collection survived because Sophie named it. Sigur Rós didn't because Sophie abstracted to "music."</p>
+
+    <p><b>Addition 2: Contradiction rule in synthesis prompt (Finding 4)</b></p>
+    <p style="margin-bottom:14px">"If two chunks contradict the same fact, choose the version with more surrounding context, drop the simpler one." Confirmed by Dainis dossier: Portland dropped, Lisbon+Seattle synthesized.</p>
+
+    <p><b>Addition 3: Grounding constraint on dossier synthesis (Finding 3)</b></p>
+    <p style="margin-bottom:14px">Every dossier claim must trace to a source chunk citation. No chunk → omit the claim. The overnight vulnerability and sensory_experiences dossiers are almost entirely fabricated frameworks — this is what unconstrained synthesis produces at scale.</p>
+
+    <p><b>Addition 4: memoryCount × priority retrieval scoring (Finding 8 + 17)</b></p>
+    <p style="margin-bottom:14px">Priority is a multiplier on memoryCount, not a signal. Retrieval is also a ranking competition — lower-memoryCount nodes lose to higher ones even when the stored fact is directly relevant. DRT needs explicit routing for low-count but important facts.</p>
+
+    <p><b>Addition 5: User-triggered memory deletion must be a system operation (Finding 15)</b></p>
+    <p style="margin-bottom:14px">Conversational forget requests don't work. "Please forget" must trigger a semantic_memory purge + dossier re-synthesis. Without this, the companion will recall facts the user explicitly removed. Legal/trust risk.</p>
+
+    <p><b>Addition 6: Emotional arc field in user dossier (Finding 16)</b></p>
+    <p style="margin-bottom:14px">Nomi has no emotional state cache. DRT should add a running <code>emotional_state</code> field updated on each extraction pass: current state, direction (improving/stable/declining), last emotional disclosure. This enables proactive arc-based responses — the single clearest opportunity to be more present than Nomi at low implementation cost.</p>
+
+    <p style="margin-top:18px"><b>One open question before final architecture lock:</b> Run Exp I (cross-session persistence). 10 minutes — open a fresh Nomi chat and ask 10 cold questions. Settles whether session-open retrieval injection is required from day 1.</p>
+  </div>
+</div>
+
+<p style="color:var(--dim);font-size:12px;text-align:center;margin-top:48px">Source: 1,957 scripted turns · Experiments A–T · Nomi Sophie UUID <code>e07268e6</code> · 2026-05-30/31 · Raw data in <code>nomi-recon/data/*.jsonl</code></p>
+
 </div>
 </body>
 </html>
