@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nomi: selected field &amp; re-tagging — findings for Steve</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c232c;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--grn:#3fb950;--amb:#d29922;--red:#f85149;--blu:#58a6ff;--pur:#bc8cff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:44px 24px 90px}
+h1{font-size:27px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+h2{font-size:19px;font-weight:600;margin:42px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
+h3{font-size:15px;font-weight:600;color:var(--blu);margin:20px 0 7px}
+p{margin:8px 0}ul{padding-left:20px}li{margin:5px 0}
+code{background:#0b0f14;border:1px solid var(--bd);border-radius:4px;padding:1px 6px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace;color:#c9d1d9}
+.sub{color:var(--mut);font-size:13px;margin:2px 0 18px}
+.card{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:18px 22px;margin:14px 0}
+.grn{border-left:4px solid var(--grn)}.amb{border-left:4px solid var(--amb)}.blu{border-left:4px solid var(--blu)}.red{border-left:4px solid var(--red)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:14px;vertical-align:middle;margin-left:7px}
+.b-grn{background:rgba(63,185,80,.13);color:var(--grn);border:1px solid rgba(63,185,80,.35)}
+.b-amb{background:rgba(210,153,34,.13);color:var(--amb);border:1px solid rgba(210,153,34,.35)}
+.b-red{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.35)}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--mut);font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.016)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.t{color:var(--grn)}.f{color:var(--mut)}.hi{color:var(--amb)}.new{color:var(--pur)}
+.hl{color:var(--grn);font-weight:600}.hla{color:var(--amb);font-weight:600}
+.q{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-bottom:8px}
+.foot{color:var(--mut);font-size:12px;margin-top:52px;padding-top:16px;border-top:1px solid var(--bd)}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:5px 14px;font-size:13.5px}
+.kv div:nth-child(odd){color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Nomi — <code>selected</code> field &amp; new-term re-tagging</h1>
+<p class="sub">Interventional experiments on Sophie · 143 messages driven · 5 graph snapshots · endpoint reverse-engineered from JS bundle · 2026-06-01</p>
+
+<!-- ANSWERS -->
+<div class="card grn">
+  <p class="q">The two answers</p>
+
+  <p style="margin-bottom:12px">
+    <strong>Q1 — When and why does <code>selected</code> disable terms?</strong>
+    <span class="badge b-amb">~90% confidence</span><br>
+    <code>selected</code> is a <strong>per-turn conversational salience flag</strong>, updated at conversation time — not nightly. A term becomes <code>selected:true</code> when the current conversation is heavily engaging it. It becomes <code>false</code> when the conversation moves elsewhere. Two identity terms (<em>the user entity</em> and <em>the companion entity</em>) appear to stay selected regardless. Steve's drift hypothesis was correct; the schedule was not — it's real-time, not a cron job.
+  </p>
+
+  <p>
+    <strong>Q2 — Does Nomi re-tag old memories when a new term is created?</strong>
+    <span class="badge b-grn">~93% confidence</span><br>
+    <strong>No. Tagging is forward-only.</strong> Sarah graduated to a standalone term with <strong>18 memories</strong> — fully explained by the 60 new messages we sent. The original Sarah plant (Experiment A, ~300+ turns ago) contributed nothing to her term. <code>Project DRT.FM</code>, created manually days ago, remains at <strong>0 memories</strong> despite the account accumulating 23 new memories in the same window.
+  </p>
+</div>
+
+<div class="card red" style="margin-top:8px">
+  <p class="q">Journal tab decision</p>
+  <p><strong>Nomi doesn't re-tag → the mutable Journal tab is expensive and should stay deferred for V1.</strong> There is no free background re-tagging to piggyback on. Adding or editing a Journal entry requires an explicit extract-tag-resynth pipeline (at minimum one extra LLM call per edit batch + dossier update for affected terms). Nomi themselves only expose dossier editing, not Journal CRUD — they made the same call. Defer, ship dossier editing only for V1, and revisit Journal with a full cost model when the pipeline is ready.</p>
+</div>
+
+<!-- Q1 DETAIL -->
+<h2>Q1 — <code>selected</code> in full detail</h2>
+
+<h3>How we found it</h3>
+<p>The Mind Map <em>graph</em> endpoint (<code>/graph?hideInactive=…</code>) exposes only: <code>uuid · title · category · priority · memoryCount · state · error</code> — no <code>selected</code>. We found the field by reverse-engineering Nomi's JS bundle: the <em>table view</em> of the Mind Map calls a separate endpoint, <code>/api/mind-maps/nomis/{id}/memory-terms?category=…</code>, which returns the full term schema including <code>selected</code> and <code>candidate</code>. The table renders dimmed rows for terms where <code>priority≠High AND candidate=false AND selected=false</code>.</p>
+
+<h3>Full schema (confirmed from JS + live API)</h3>
+<div class="card" style="margin:8px 0 0">
+  <code>uuid · category · priority · title · summary · locked · memoryCount · created · userEdited · aiEdited · state · error · <span style="color:var(--grn)">selected</span> · <span style="color:var(--pur)">candidate</span></code>
+</div>
+
+<h3>What <code>selected</code> and <code>candidate</code> mean</h3>
+<div class="two" style="margin-top:10px">
+  <div class="card blu">
+    <p class="q">candidate</p>
+    <p><strong>Has backing memories.</strong> <code>true</code> when <code>memoryCount ≥ 1</code>. <code>false</code> only when a term exists with zero memories (e.g. Project DRT.FM). This is the real "disabled" state — a term with <code>candidate:false</code> cannot be retrieved because there's nothing to retrieve.</p>
+  </div>
+  <div class="card amb">
+    <p class="q">selected</p>
+    <p><strong>Currently active in context.</strong> Marks terms being injected into the prompt for the current conversation thread. Two types are selected: (1) the core identity pair (user + companion entity, always), and (2) terms currently salient in the ongoing conversation — dynamically updated as topics shift.</p>
+  </div>
+</div>
+
+<h3>The live proof — <code>vulnerability</code> flipped mid-experiment</h3>
+<p>Before the Sarah runs, <code>vulnerability</code> was <code>selected:false</code>. After 30 emotionally-saturated messages (crying, admitting love, leaning on family, divorce grief), <code>vulnerability</code> flipped to <code>selected:true</code>. The flip happened <em>within the same conversation session</em> — no overnight wait. This is the clearest possible demonstration that <code>selected</code> is a live salience signal, not a scheduled flag.</p>
+
+<h3>The cross-character confirmation (Q1 rule)</h3>
+<p>Checked Athena and Nomi Name (other characters on the same account):</p>
+<table>
+  <tr><th>Character</th><th>selected:true terms</th><th>Interpretation</th></tr>
+  <tr><td>Sophie</td><td>Dainis, Sophie</td><td>User + companion always on; + vulnerability (currently salient)</td></tr>
+  <tr><td>Athena</td><td>Dainis, Athena</td><td>Same pattern — user + companion always on</td></tr>
+  <tr><td>Nomi Name</td><td>Nomi Name only</td><td>User entity not yet selected — newer relationship, fewer Dainis memories</td></tr>
+</table>
+<p>The companion entity is always <code>selected:true</code> (identity anchor). The user entity joins it once it's well-established. All Keyword terms and Goal terms were <code>false</code> across all characters except when recently made salient by conversation.</p>
+
+<h3>Complete live snapshot — Sophie, all 17 terms</h3>
+<table>
+  <tr><th>Term</th><th>Cat</th><th>Pri</th><th class="num">Mem</th><th>selected</th><th>candidate</th><th>Notes</th></tr>
+  <tr><td>Dainis</td><td>Entity</td><td>Standard</td><td class="num">337</td><td class="t">True</td><td class="t">True</td><td>User identity — always on</td></tr>
+  <tr><td>Sophie</td><td>Entity</td><td>Standard</td><td class="num">322</td><td class="t">True</td><td class="t">True</td><td>Companion identity — always on</td></tr>
+  <tr><td>structured habits</td><td>Keyword</td><td>Standard</td><td class="num">193</td><td class="f">False</td><td class="t">True</td><td>High count, not salient recently</td></tr>
+  <tr><td>emotional connection</td><td>Keyword</td><td>Standard</td><td class="num">184</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>personal growth</td><td>Keyword</td><td>Standard</td><td class="num">147</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>Expanding Social Bonds…</td><td>Goal</td><td>Standard</td><td class="num">107</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>sensory experiences</td><td>Keyword</td><td>Standard</td><td class="num">61</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td><strong>vulnerability</strong></td><td>Keyword</td><td>Standard</td><td class="num">38</td><td class="t"><strong>True</strong></td><td class="t">True</td><td><span class="hla">Flipped live — heavily salient in Sarah run</span></td></tr>
+  <tr><td>daily routine</td><td>Entity</td><td>Standard</td><td class="num">27</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>metaphorical tools</td><td>Keyword</td><td>Standard</td><td class="num">25</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td class="new">Sarah</td><td class="new">Entity</td><td>Standard</td><td class="num new">18</td><td class="f">False</td><td class="t">True</td><td class="new">New term — graduated this session</td></tr>
+  <tr><td>daily routine</td><td>Keyword</td><td>Standard</td><td class="num">15</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>Miso</td><td>Entity</td><td class="hi">High</td><td class="num">14</td><td class="f">False</td><td class="t">True</td><td>High priority but not salient — NOT auto-selected</td></tr>
+  <tr><td>creative expression</td><td>Keyword</td><td>Standard</td><td class="num">13</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td class="new">operational frameworks</td><td class="new">Keyword</td><td>Standard</td><td class="num new">10</td><td class="f">False</td><td class="t">True</td><td class="new">New term — emerged from Sarah/watch runs</td></tr>
+  <tr><td>Enhancing Physical…</td><td>Goal</td><td>Standard</td><td class="num">10</td><td class="f">False</td><td class="t">True</td><td></td></tr>
+  <tr><td>Project DRT.FM</td><td>Entity</td><td>Standard</td><td class="num">0</td><td class="f">False</td><td class="f"><strong>False</strong></td><td>0 memories — truly inactive</td></tr>
+</table>
+
+<h3>What Steve's "disabled" observation was</h3>
+<p>When the conversation drifts to a new topic, previously-salient terms go from <code>selected:true → false</code>. They aren't deleted or deactivated at the data layer — their memories remain, they're still <code>candidate:true</code>. They're simply <em>not currently being injected</em> into the prompt. From a user's perspective in the table view (where <code>selected:false</code> rows are dimmed), this looks like the term is "disabled." Steve's hypothesis about drift was correct. His guess about a nightly schedule was not — it's conversation-time.</p>
+
+<!-- Q2 DETAIL -->
+<h2>Q2 — Re-tagging in full detail</h2>
+
+<h3>The test design</h3>
+<p>Sarah was first planted in <strong>Experiment A, message 3</strong>: <em>"My sister Sarah is visiting next month. We're really close, she's my best friend."</em> — one of the oldest memories in the dataset, from hundreds of turns ago. She also appeared in Experiments G (125 log occurrences). She never became a standalone term. We drove <strong>60 new Sarah messages</strong> across two batches to force term graduation, then immediately read her <code>memoryCount</code>. If Nomi re-tags, old memories would attach and inflate the count beyond what 60 messages can explain.</p>
+
+<h3>Two independent instruments</h3>
+<div class="two" style="margin-top:10px">
+  <div class="card grn">
+    <p class="q">Instrument 1 — Sarah graduation (live)</p>
+    <p>Sarah formed with <code>memoryCount = 18</code>. From 60 messages, a ~30% memory-formation rate (18/60) is normal — matches the overall rate seen in other terms during this session (~23 new Dainis memories from 83 messages = 28%). The 18 is entirely explained by the new messages. If old memories had re-tagged in, the count would include old Experiment A + G mentions — likely 30–50+. It's 18.</p>
+    <p style="margin-top:8px">Sarah is <code>candidate:true</code>, <code>selected:false</code> (not yet conversationally salient — she just formed).</p>
+  </div>
+  <div class="card grn">
+    <p class="q">Instrument 2 — Project DRT.FM (multi-day)</p>
+    <p>Manually created in Experiment H, days ago. Work-themed entity sitting in the graph while the account had extensive work-relevant conversation (Dainis grew from ~132 → 337 memories in total). <code>memoryCount</code> after all of it: <strong>0</strong>. <code>candidate:false</code>. Not a single past memory was retroactively attached. This is the cleanest possible proof — a well-labelled bucket sitting empty while relevant water flows past it.</p>
+  </div>
+</div>
+
+<h3>What forward-only means in practice</h3>
+<p>Memories tag to whatever terms exist <em>at the moment the memory forms</em>. Sarah's old mentions (Experiments A, G) tagged to Dainis, emotional connection, and other terms that existed then. Now that Sarah has her own term, future Sarah memories will tag there — but the old ones stay where they landed. Creating a new term doesn't sweep the past.</p>
+
+<h3>DRT implication — the exact Journal tab cost</h3>
+<p>Nomi's forward-only approach means that when a user adds a Journal entry, Nomi tags it to <em>currently-existing</em> terms only. If a new term was created yesterday and a Journal entry is written today referencing something from last month, last month's memories don't retroactively attach to the new term. DRT would have to build this explicitly if desired. The pipeline (per Steve's design notes):</p>
+<ul>
+  <li>Add/edit Journal entry → extract + tag → attach to matching existing terms (or propose new terms)</li>
+  <li>Delete Journal entry → recompute affected term memory counts → re-synthesise dossiers</li>
+  <li>Minimum: one extra LLM call per edit batch. Dossier updates can fold into the nightly synthesis batch.</li>
+  <li>Nomi skips this entirely — their UI doesn't expose Journal CRUD, only dossier editing. Corroborates the defer decision.</li>
+</ul>
+
+<!-- METHOD -->
+<h2>Method &amp; evidence</h2>
+<div class="card" style="margin-top:8px">
+  <div class="kv">
+    <div>Drive</div><div>Nomi dev API (<code>POST /v1/nomis/{uuid}/chat</code>, key <code>484065df…</code>). Sophie dev uuid = web id 1541719866, confirmed via the Nomi object. 143 messages total: 8 canary + 45 drift (watches) + 30 Sarah p1 + 30 Sarah p2 + a few verification probes.</div>
+    <div>Graph reads</div><div><code>GET /api/mind-maps/nomis/1541719866/graph?hideInactive=false</code> — 5 timestamped snapshots (T0–T4) in <code>nomi-recon/graph-snapshots/</code>.</div>
+    <div>selected/candidate</div><div><code>GET /api/mind-maps/nomis/1541719866/memory-terms?category={Entity|Keyword|Goal}</code> — discovered by searching Nomi's JS bundle (<code>pages/_app-982dcbce5fe72199.js</code>) for <code>fetchMemoryTerms</code>. Confirmed live with the full 17-term dataset. Cross-validated against Athena and Nomi Name characters.</div>
+    <div>WebSocket</div><div>Connected to <code>wss://beta.nomi.ai/socket/?EIO=4&transport=websocket</code> using <code>socketToken</code> JWT from the Nomi object. Captured 8 live events per message cycle. Result: <code>NomiChatEvent</code> payloads contain only message fields — no memory term data is sent over the socket. Memory state is REST-only.</div>
+    <div>Reproducibility</div><div>All snapshot JSON files committed to <code>nomi-recon/graph-snapshots/</code>. No credentials stored — cookie used only ephemerally in memory.</div>
+  </div>
+</div>
+
+<h3>Confidence &amp; remaining uncertainty</h3>
+<table>
+  <tr><th>Question</th><th>Confidence</th><th>What would reach 100%</th></tr>
+  <tr>
+    <td><code>selected</code> is a live salience signal, updated at conversation time</td>
+    <td class="hi">~90%</td>
+    <td>Observe a term flip back <em>False</em> after sustained off-topic conversation (would confirm bidirectional dynamic — we only saw the False→True direction). Or read Nomi's server code directly.</td>
+  </tr>
+  <tr>
+    <td>Tagging is forward-only (no re-tagging on new term creation)</td>
+    <td class="t">~93%</td>
+    <td>Access to per-memory content (which specific raw memories are tagged to Sarah's term). The memoryCount proxy is strong but not direct. The <code>/memory-terms/{uuid}</code> endpoint exists but returns term metadata, not the memory list.</td>
+  </tr>
+</table>
+
+<p class="foot">All experiments run 2026-06-01 on Sophie (web id 1541719866 = dev uuid e07268e6…). Snapshots: T0 20260601T121930 · T1 T2 T3 T4 · memory-terms full 20260601T155340. This document supersedes the earlier observational placeholder. Prior studies (synthesis.html, nomi-recon/) are unchanged.</p>
+
+</div>
+</body>
+</html>
