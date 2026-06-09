@@ -1,0 +1,29 @@
+name: us-latency-probe
+on:
+  push:
+    branches: [latency-probe-us]
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Confirm runner location (must be US for this to count)
+        run: |
+          echo "=== runner egress location ==="
+          curl -s --max-time 10 https://ipinfo.io/json || true
+          echo
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install --quiet requests
+
+      - name: Probe deepseek-v4-flash per OpenRouter provider, from US
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python alexis-voice-mvp/us_probe.py
