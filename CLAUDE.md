@@ -2,6 +2,17 @@
 
 This workspace is used to prepare context, competitor analysis, and tasks for Steve — DRT's developer.
 
+## DRT.FM design system (LOCKED — do not redesign)
+
+- **`DRTFM-DESIGN.md`** at repo root is the brand bible: colors, type, components, motion, performance budgets, logo rules. Read it before building ANY DRT.FM screen; its values are law.
+- **`drtfm-logo-kit/`** is the final logo (Heartwave mark + lockup, locked 2026-07-11): SVGs, favicon.ico, app icons, README with the `<head>` snippet. Never redesign or recolor; usage rules in DRTFM-DESIGN.md §12.
+- `design-system-guide.html` explains the whole system in plain language; `claude-design-upgrade-report.html` holds the research behind it.
+- The UI-work protocol (auto de-slop, live design review, variants for big decisions) lives in user-level `~/.claude/CLAUDE.md` and applies here automatically.
+
+## Handoff repo sync (MANDATORY)
+
+Steve reads snapshot GitHub repos under the `dainixy` account (`alexis-soul-handoff`, `alexis-voice-handoff`, `competitor-steve`). They do NOT auto-update. After editing any file that is mirrored in one of them (e.g. `alexis-harness/content/*`, `alexis-soul-rules.html`, `alexis-handoff.html`), mirror + commit + push to the handoff repo **in the same session** (secret-scan first). Check for drift any time with `scripts/check-handoff-sync.sh`. When Steve writes "Dainis/<name>" he means `github.com/dainixy/<name>`.
+
 ## Agent skills
 
 Local skills live in `.agents/skills/<skill-name>/SKILL.md`. When the user types `/<skill-name>`, read the corresponding SKILL.md and follow its instructions exactly.

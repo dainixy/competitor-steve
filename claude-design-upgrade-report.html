@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Design Upgrade — Research + Installed Stack</title>
+<style>
+  :root {
+    --bg: #101216; --surface: #191c22; --raised: #22262e;
+    --text: #e8eaed; --text-2: #9aa0a8; --text-3: #6b7078;
+    --accent: #4fd1c5; --hairline: rgba(255,255,255,0.09);
+    --good: #7bc47f; --warn: #e6c07b; --bad: #e07b7b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 48px 24px 96px; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 32px; font-weight: 650; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 10px; }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; margin: 56px 0 6px; }
+  h2 .n { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 6px; }
+  h3 { font-size: 16px; font-weight: 600; margin: 28px 0 8px; }
+  .sub { color: var(--text-2); font-size: 14px; margin-bottom: 4px; }
+  .lede { color: var(--text-2); font-size: 15px; margin: 8px 0 16px; }
+  p { margin: 10px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
+  .card h3 { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+  th { text-align: left; color: var(--text-3); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; border-bottom: 1px solid var(--hairline); }
+  td { padding: 10px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 4px 12px; }
+  code { background: var(--raised); border-radius: 5px; padding: 1px 6px; font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; color: var(--text); }
+  .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 99px; letter-spacing: 0.4px; vertical-align: 1px; }
+  .pill.strong { background: rgba(123,196,127,0.14); color: var(--good); }
+  .pill.medium { background: rgba(230,192,123,0.13); color: var(--warn); }
+  .pill.installed { background: rgba(79,209,197,0.13); color: var(--accent); }
+  .pill.skip { background: rgba(224,123,123,0.12); color: var(--bad); }
+  ul, ol { margin: 8px 0 8px 22px; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--text-3); }
+  .rule { color: var(--text); }
+  .why { color: var(--text-2); font-size: 14px; }
+  .tag { color: var(--text-3); font-size: 12.5px; }
+  .divider { border: none; border-top: 1px solid var(--hairline); margin: 40px 0; }
+  .kbd { background: var(--raised); border: 1px solid var(--hairline); border-radius: 6px; padding: 2px 8px; font: 12.5px ui-monospace, Menlo, monospace; white-space: nowrap; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+  .stat { font-size: 26px; font-weight: 650; letter-spacing: -0.5px; }
+  .statlabel { color: var(--text-3); font-size: 12.5px; }
+  .statrow { display: flex; gap: 28px; flex-wrap: wrap; margin: 18px 0 4px; }
+  blockquote { border-left: 2px solid var(--accent); padding: 2px 0 2px 16px; margin: 12px 0; color: var(--text-2); font-size: 14.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Claude Design Upgrade</h1>
+<div class="sub">Research synthesis + installed stack &nbsp;·&nbsp; 2026-07-11 &nbsp;·&nbsp; three verified streams: 14-agent web sweep (52 verified findings), Kimi social-media deep research (17/17 cited repos confirmed real), headless-browser teardowns of Candy.AI + OurDream</div>
+
+<div class="statrow">
+  <div><div class="stat">26</div><div class="statlabel">design skills installed</div></div>
+  <div><div class="stat">11</div><div class="statlabel">methods, evidence-ranked</div></div>
+  <div><div class="stat">28</div><div class="statlabel">competitor design principles extracted</div></div>
+  <div><div class="stat">2</div><div class="statlabel">research streams converged on the same answer</div></div>
+</div>
+
+<h2><span class="n">1</span>The answer in one paragraph</h2>
+<p>Claude's default design output is generic because it is the <em>statistical average of all web design</em> — that's literally what "generic" means. Every credible practitioner fixes it the same way: <strong>stronger inputs</strong> (a written design system + named references instead of "modern and clean"), <strong>tighter guardrails</strong> (taste skills that ban the known AI-slop patterns), and <strong>feedback loops</strong> (Claude looks at a screenshot of its own page and critiques it — because Claude is a much better critic than generator). Both research streams — my verified web sweep and Kimi's social sweep — converged on this independently. The stack implementing all three layers is <strong>already installed on this Mac</strong> and works in every Claude Code session, including the DRT.FM prototype chat.</p>
+
+<h2><span class="n">2</span>What's installed and how to use it</h2>
+<p class="lede">User-level (<code>~/.claude/</code>), documented with pinned versions in <code>~/.claude/skills/DESIGN-STACK-MANIFEST.md</code>. Nothing to configure — skills activate on matching requests.</p>
+
+<div class="tablewrap"><table>
+<tr><th>Layer</th><th>What</th><th>Say this to use it</th></tr>
+<tr><td><strong>Aesthetic floor</strong></td><td><code>frontend-design</code> (Anthropic) — bans the known AI-slop looks, forces a design plan before code</td><td>automatic when building UI</td></tr>
+<tr><td><strong>Anti-slop generation</strong></td><td><code>hallmark</code> (Together AI) — 57 slop gates, 21 page structures, 20 themes</td><td><span class="kbd">hallmark audit</span> · <span class="kbd">hallmark redesign</span> · <span class="kbd">hallmark study &lt;URL&gt;</span></td></tr>
+<tr><td><strong>Product-UI craft</strong></td><td><code>interface-design</code> (Dammyjay93) — app screens: tokens, states, cross-session design memory</td><td><span class="kbd">/design-review</span> · <span class="kbd">/design-deslop</span></td></tr>
+<tr><td><strong>Speed + SEO</strong> (your hard requirement)</td><td>6 skills from Addy Osmani (Chrome team) — budgets: page &lt;1.5MB, JS &lt;300KB, LCP &lt;2.5s, CLS &lt;0.1</td><td>"audit my site" · "fix Core Web Vitals" · "make this SEO-ready"</td></tr>
+<tr><td><strong>Design judgment</strong></td><td>10 Refactoring UI checklists + orchestrator — PASS/FAIL criteria per principle</td><td><span class="kbd">/meta-refactor-ui</span></td></tr>
+<tr><td><strong>Motion restraint</strong></td><td>Emil Kowalski's skills (animations.dev author) — micro-interactions that feel expensive, never flashy</td><td>automatic; <span class="kbd">review animations</span></td></tr>
+<tr><td><strong>De-slop pipeline</strong></td><td>ibelick's cleanup passes — run on code Claude already wrote</td><td><span class="kbd">/baseline-ui</span> → <span class="kbd">/fixing-accessibility</span> → <span class="kbd">/fixing-motion-performance</span> → <span class="kbd">/fixing-metadata</span></td></tr>
+<tr><td><strong>Live review loop</strong></td><td><code>live-design-review</code> agent — drives a headless browser, screenshots at 3 viewports, Lighthouse audit, triaged report</td><td>"run a live design review on localhost:3000"</td></tr>
+</table></div>
+
+<div class="card">
+<h3>The working loop for the DRT.FM prototype chat</h3>
+<ol>
+<li><strong>Before building:</strong> point Claude at the project's <code>DESIGN.md</code> (being written next — see §7). Never say "modern and clean"; name the direction and reference.</li>
+<li><strong>Build</strong> — the taste skills constrain generation automatically.</li>
+<li><strong>De-slop:</strong> <span class="kbd">/design-deslop</span> or <span class="kbd">/baseline-ui</span>.</li>
+<li><strong>See it:</strong> "run a live design review on &lt;preview URL&gt;" — fixes what code review can't catch, plus a Lighthouse speed gate.</li>
+<li><strong>You judge.</strong> Ask for 3–5 visual variants of any screen you're unsure about and pick — AI is cheap at variants, bad at knowing which is good. Your taste is the selection function.</li>
+</ol>
+</div>
+
+<h2><span class="n">3</span>The 11 methods, ranked by evidence</h2>
+<p class="lede">From 52 adversarially verified findings. "Both streams" = my web sweep and Kimi's social sweep found it independently.</p>
+
+<div class="card"><h3>1 · Give Claude eyes — screenshot feedback loop <span class="pill strong">STRONG</span> <span class="pill installed">INSTALLED</span></h3>
+<p class="why">The single most independently converged-on fix (both streams, 5+ unrelated practitioners, a 296K-view tutorial). Claude writes UI blind; most "bad taste" is actually <em>unreviewed</em> output. Wire in a browser, let it look at what it built, and it fixes the padding, dead buttons, and broken layouts it couldn't see. Ours runs through the chrome-devtools connector you already had — with a Lighthouse speed audit added.</p></div>
+
+<div class="card"><h3>2 · Taste skills — written as principles, not pixel rules <span class="pill strong">STRONG</span> <span class="pill installed">INSTALLED</span></h3>
+<p class="why">The counterintuitive finding, proven twice independently: <strong>exact hex codes and pixel values make output worse and samey; evocative principles make Claude think</strong> ("squint test: blur your eyes — can you still see hierarchy?"). Justin Wetch ran the only blind eval in this space — his principle-based rewrite of Anthropic's skill won 75% of 50 blind judgments (Google's Paul Irish engaged). His SkillEval workbench is stashed in our reference folder for A/B-testing our own rules later.</p></div>
+
+<div class="card"><h3>3 · Name the aesthetic, feed references <span class="pill strong">STRONG</span></h3>
+<p class="why">"Modern and clean" returns the average. "Brutalism: 4px black borders, monospace, broken grid" returns a design. Best verified demo: on-camera controlled comparison (174K views) — skill + reference screenshot beats skill alone beats baseline. Drag screenshots of sites you admire into the prototype chat; <span class="kbd">hallmark study &lt;URL&gt;</span> formalizes this into a portable design file. Meng To's motto from the sweep: <em>"references beat paragraphs, specs beat vibes."</em></p></div>
+
+<div class="card"><h3>4 · Self-critique passes <span class="pill strong">STRONG</span> <span class="pill installed">INSTALLED</span></h3>
+<p class="why">Generation and evaluation are different tasks — a dedicated review pass catches slop the generation pass literally cannot attend to. Installed as three flavors: the live-browser reviewer, the /design-deslop static pass, and the chained ibelick cleanup commands. The zero-install version that also works: <em>"Go through the page you just created and improve it significantly: reflect on mistakes, inconsistencies, anything visually off."</em></p></div>
+
+<div class="card"><h3>5 · Persistent design memory — one written source of truth <span class="pill strong">STRONG</span> <span class="pill installed">partially — DESIGN.md next</span></h3>
+<p class="why">Claude forgets decisions between sessions, so buttons drift 36→38→40px across days. Consistency IS most of what reads as "designed." One file, re-read every session. Critical nuance from the sweep: tokens alone fix colors but not layout — the file must also contain component recipes in prose ("Card = image full-bleed, 12px radius, text on scrim; used for X, not Y"). This is DRT.FM's DESIGN.md — the one per-project piece, drafted next from the teardowns below.</p></div>
+
+<div class="card"><h3>6 · Parallel variant fanout <span class="pill medium">MEDIUM-STRONG</span></h3>
+<p class="why">Never accept the first design. Have Claude build the same screen 4–8 ways as plain HTML files, pick the winner, iterate only on that. AI is cheap at variants and bad at judging them; you are the reverse. This converts your taste from bottleneck into selection function — and it's how a shipping founder on HN got his live site.</p></div>
+
+<div class="card"><h3>7 · Component grounding <span class="pill medium">MEDIUM-STRONG</span></h3>
+<p class="why">Left alone, Claude hallucinates a slightly different button every time. Ground it in a real component library and <strong>ban invention explicitly</strong> — the sweep's most-verified detail: polite requests don't stop improvisation, only hard "NEVER build from primitives" rules do. For DRT.FM: shadcn MCP inside the project repo (one command, noted in manifest) or a Storybook page per component.</p></div>
+
+<div class="card"><h3>8 · Figma as ground truth <span class="pill medium">MEDIUM — needs Figma designs</span></h3>
+<p class="why">If a human-made design exists in Figma, an MCP bridge (Framelink, 15.4k★) feeds the real layout to Claude — removing taste from its job entirely. Relevant later if you commission screens; not blocking now.</p></div>
+
+<div class="card"><h3>9 · Measure, don't eyeball <span class="pill medium">MEDIUM</span></h3>
+<p class="why">Screenshots can fool the judge; computed styles can't. Extract rendered pixel values and diff them against the spec numerically ("gap is 40px, spec says 24px"). One senior engineer's rigorous write-up; our anatomy-gate work on Nadia already proved this philosophy for us. Cheap to add to the review agent later.</p></div>
+
+<div class="card"><h3>10 · Multi-model composition <span class="pill medium">MEDIUM — calibration signal</span></h3>
+<p class="why">Some practitioners hand the visual phase to a cheaper model and let Claude plan + ship. Included as an honest data point about Claude's native design ranking, not a recommendation — our stack addresses the gap differently.</p></div>
+
+<div class="card"><h3>11 · The 5–20% rule — the human owns final polish <span class="pill medium">MEDIUM-STRONG as a norm</span></h3>
+<p class="why">Designers at Notion, Ramp, and enterprise teams all describe the same shape: AI gets UI 80–95% there; shipped quality comes from a human owning the last stretch. Every verified high-quality outcome in this research had a human decision-maker at the moment of taste. That's your role in the loop — nobody found a way to delegate it.</p></div>
+
+<h2><span class="n">4</span>Candy.AI teardown — what makes it feel premium</h2>
+<p class="lede">Headless-browser analysis at 1440px: landing, gallery, pricing, live chat, creator wizard, 404, empty states + computed styles across ~4,000 DOM nodes. Full data in <code>.scratch/design-taste/</code>. Every rule below is restated to transfer to a different visual identity — <strong>these are disciplines, not their look</strong>.</p>
+
+<div class="card"><h3>The big strategic one: the landing page IS the product</h3>
+<p class="why">Logged-out homepage renders the real app shell — sidebar, character grid, filters, search. Visitors browse immediately; marketing prose is pushed below the fold as quiet article text (still there for SEO). No hero-headline-two-buttons template anywhere.</p></div>
+
+<div class="two">
+<div class="card"><h3>Color & depth</h3>
+<ul class="why">
+<li>Near-black <code>#131313</code> canvas, elevation by background steps (<code>#252525</code> → <code>#303030</code>) + 10%-white hairlines. Across ~4,000 elements, <strong>almost zero box-shadows</strong> — shadows only on true overlays.</li>
+<li>One accent (their pink) with an enumerated job list: primary CTA, active-nav marker, one accented headline word, selection rings. Every other color has exactly one meaning (red=LIVE, gold=discount).</li>
+</ul></div>
+<div class="card"><h3>Type & shape</h3>
+<ul class="why">
+<li>One typeface. Effective scale ~6 sizes; hierarchy from <strong>weight</strong> (400/500/600) and dimming, not more sizes. 14px/500 dominates all UI labels — one voice.</li>
+<li>Exactly four radius values, each bound to a component class (pills, 24px media cards, 10px buttons, 8px controls). The consistency itself reads as engineered.</li>
+</ul></div>
+<div class="card"><h3>Cards & content</h3>
+<ul class="why">
+<li>Cards are 100% image — no border, no padded frame; text overlays a bottom gradient scrim.</li>
+<li>Card copy is a narrative hook in second person ("Your stepmom catches you in the act!"), not metadata. Copywriting is a design material.</li>
+<li>Hover = <strong>content preview</strong> (still swaps to autoplaying video), never CSS zoom. 150ms color transitions elsewhere.</li>
+</ul></div>
+<div class="card"><h3>Flows & trust</h3>
+<ul class="why">
+<li>Chat never opens empty — the character has already sent an in-character opener; the composer teaches premium features as tappable chips.</li>
+<li>Pricing: one viewport, three cards, only the recommended plan carries color. Trust microcopy at the anxiety point: bank-statement discretion + cancel path directly under the buy button.</li>
+<li>Empty states are the action drawn at content size ("Create new AI" tile occupying the future card's slot). Custom-illustrated 404.</li>
+</ul></div>
+</div>
+
+<h2><span class="n">5</span>OurDream teardown — consistency by architecture</h2>
+<p class="lede">Same method, deeper find: they run a genuine internal design system — ~400 CSS design tokens in three tiers. Their polish is <em>mechanical</em>, not heroic. This is the model for DRT.FM's DESIGN.md.</p>
+
+<div class="two">
+<div class="card"><h3>Token architecture (the master move)</h3>
+<ul class="why">
+<li>Primitives → roles → component aliases; every interactive color ships with hover/active/disabled variants <strong>defined together</strong>, so no state is ever improvised.</li>
+<li>Motion tokenized: 5 durations (100–600ms) + 5 easing curves. Nothing animates at an ad-hoc speed.</li>
+<li>Radius histogram: 12px on 162 elements, nothing off-scale. "One giant spike, not a smear."</li>
+</ul></div>
+<div class="card"><h3>Accent scarcity</h3>
+<ul class="why">
+<li>Accent occupies <strong>under 2% of any screen</strong>. Banned from icons, borders, links. Only: money actions (Join/Upgrade/Subscribe), the premium badge, selected-plan border.</li>
+<li>Three CTA tiers: accent pill (max one per region) → inverted white pill → gray/ghost. Paired actions get inverse + surface, never two accents.</li>
+<li>Content imagery owns the color budget; the chrome stays monochrome.</li>
+</ul></div>
+<div class="card"><h3>Craft details that read expensive</h3>
+<ul class="why">
+<li>Image scrims use 15+ gradient stops shaped like an easing curve — no visible "band edge." The single biggest expensive tell on their cards.</li>
+<li>Hover: scale(1.02), 200ms, ease-out, grid cells overflow-visible so it never clips. That's the entire effect.</li>
+<li>Dark theme designed, not inverted: <code>#0d0d0d</code> page (never #000), three graded text tones, styled scrollbars, dark-first paint with zero white flash.</li>
+<li>Overflow always designed: 2-line clamps, "+17 more" counter chips, fading horizontal rails.</li>
+</ul></div>
+<div class="card"><h3>Conversion surfaces</h3>
+<ul class="why">
+<li>Pricing converts abstract credits into concrete outputs: "1000 Dreamcoins = 200 images / 20 min voice / 10 videos." (Directly relevant to our gen-credit model.)</li>
+<li>Promos inherit exact content geometry — a sale banner occupies one standard grid cell. Marketing never breaks the grid.</li>
+<li>Search placeholder teaches by example — a sample query you could type verbatim, not "Search...".</li>
+</ul></div>
+</div>
+
+<div class="card"><h3>Their one measured weakness — our opening</h3>
+<p class="why">OurDream loads <strong>8+ font families</strong> (Poppins + owners variants + Neue Haas + Geist) — a real performance cost. Our speed-first constraint (one or two font families, budget-enforced) can beat both competitors on Core Web Vitals while matching their discipline. Neither site's polish requires weight.</p></div>
+
+<p class="tag">These 28 principles + our 33 hands-on observations from the paid-account sessions (OurDream: guided creator with visual pickers, per-chat sliders, background generation with notification bell, best-in-category cancellation; both: verdicts logged in competitor-checks.html) become DRT.FM's DESIGN.md. Deliberately NOT copied: pink accents, near-black-with-pink identity, their fonts — identity stays ours.</p>
+
+<h2><span class="n">6</span>Tools verified but not installed — and why</h2>
+<div class="tablewrap"><table>
+<tr><th>Tool</th><th>Evidence</th><th>Call</th></tr>
+<tr><td><code>taste-skill</code> (Leon Lin)</td><td>61.9k★ but 8k→62k in 3 months = partly hype; one hands-on review</td><td><span class="pill skip">HOLD</span> overlaps hallmark; revisit if needed</td></tr>
+<tr><td>UI/UX Pro Max</td><td>104k★ (extreme velocity), queryable design database, real contributor activity</td><td><span class="pill skip">HOLD</span> 4th taste layer risks conflicts + context bloat; the <code>website-builder-setup</code> skill can install it in one command if we ever want it</td></tr>
+<tr><td>Justin Wetch's skill rewrite</td><td>75% blind-eval win vs official</td><td><span class="pill medium">STASHED</span> in reference/ for A/B once DRT.FM prototyping starts</td></tr>
+<tr><td>tweakcn</td><td>10.2k★ visual theme editor for shadcn</td><td>use when DRT.FM repo adopts shadcn — export tokens, paste into DESIGN.md</td></tr>
+<tr><td>Figma MCP (Framelink)</td><td>15.4k★, community standard</td><td>only when Figma designs exist</td></tr>
+<tr><td>SuperDesign, Impeccable, MengTo/Skills, designprompts.dev</td><td>real but niche/promotional/unmaintained-in-parts</td><td>reference reading; patterns captured in §3</td></tr>
+</table></div>
+<p class="tag">Context-budget rule from the sweep worth remembering: each MCP server costs ~3–6k tokens at every session start; a skill costs ~100. Prefer skills; keep MCP servers to 3–5. We added zero new MCP servers.</p>
+
+<h2><span class="n">7</span>What's next</h2>
+<div class="card">
+<ol>
+<li><strong>DRT.FM DESIGN.md</strong> — the per-project brand layer, drafted from §4/§5 disciplines + course knowledge. Needs your input on identity: accent color, type direction, mood — a short grill, then I write it. The 74 brand DESIGN.md examples (Stripe, Linear, Vercel) are cloned locally as structural reference.</li>
+<li><strong>Course synthesis</strong> — 24 distilled rule files from your two UX courses are done (all checklists, all 12 pattern libraries, the 603-page book). Video transcription is still running locally (~half done); when it lands, one merge pass produces the unified course playbook, and the durable rules feed DESIGN.md + a project skill.</li>
+<li><strong>Optional Kimi round 2</strong> — the sweep produced 25 chaseable social leads (launch-thread reply graphs, Discord leaks, star-count forensics on the two mega-repos). Diminishing returns for building; worth running only if you want the people-network mapped.</li>
+<li><strong>First real test</strong> — point the DRT.FM prototype chat at a screen, run the full loop (§2), and judge the output. The stack is live now; the proof is the next prototype.</li>
+</ol>
+</div>
+
+<p class="tag" style="margin-top:40px">Sources: 52 verified findings (each adversarially spot-checked, 6 demoted) in session workspace; Kimi report at ~/Downloads/report (5).md — all 17 repos independently confirmed; teardown screenshots + token dumps in scratchpad; installed-stack manifest at ~/.claude/skills/DESIGN-STACK-MANIFEST.md.</p>
+
+</div>
+</body>
+</html>

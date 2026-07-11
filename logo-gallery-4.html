@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRT.FM — The Heartwave</title>
+<style>
+  :root{--bg-page:#0f0e11;--bg-surface:#1a191e;--bg-raised:#242229;--hairline:rgba(255,255,255,0.08);
+  --text-hi:#f2f0f3;--text-mid:#a9a4b0;--text-low:#6f6a78;--accent:#f2436b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg-page);color:var(--text-mid);font:15px/1.5 -apple-system,sans-serif;padding:56px 24px 120px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:36px;color:var(--text-hi);letter-spacing:-0.5px;margin-bottom:8px}
+  h2{font-family:Georgia,serif;font-weight:400;font-size:24px;color:var(--text-hi);margin:48px 0 8px}
+  .lede{max-width:66ch;margin-bottom:24px}
+  .v{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:16px;padding:24px 26px;margin:16px 0}
+  .vhead{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  .vnum{font-family:Georgia,serif;font-size:20px;color:var(--accent)}
+  .vname{color:var(--text-hi);font-weight:600;font-size:15px}
+  .vwhy{font-size:13.5px;color:var(--text-low);margin-bottom:16px;max-width:70ch}
+  .stage{background:var(--bg-page);border:1px solid var(--hairline);border-radius:12px;padding:36px 20px;display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap}
+  .stage img.wm{height:80px}
+  .row2{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .navmock{background:var(--bg-page);border:1px solid var(--hairline);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:24px;flex:1;min-width:340px}
+  .navmock img{height:24px}
+  .navmock .item{font-size:13px;color:var(--text-low)}
+  .navmock .cta{margin-left:auto;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px}
+  .lbl{font-size:11px;color:var(--text-low);text-transform:uppercase;letter-spacing:.5px}
+  .favrow{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .tile{background:#17161a;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+  .t96{width:96px;height:96px;border-radius:22px}.t96 img,.t96 svg{width:72px;height:72px}
+  .t64{width:64px;height:64px;border-radius:14px}.t64 img{width:46px;height:46px}
+  .t32{width:32px;height:32px;border-radius:8px}.t32 img{width:23px;height:23px}
+  .t16{width:16px;height:16px;border-radius:4px}.t16 img{width:12px;height:12px}
+  .tabmock{background:var(--bg-raised);border:1px solid var(--hairline);border-radius:10px 10px 0 0;padding:8px 14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);width:190px}
+  .tabmock img{width:14px;height:14px}
+  .note{border-left:2px solid var(--accent);padding:2px 0 2px 14px;font-size:13.5px;color:var(--text-mid);margin:20px 0;max-width:72ch}
+  .hb{transform-box:fill-box;transform-origin:center;animation:pulse 1.6s ease-in-out infinite}
+  .hb0{animation-delay:0s}.hb1{animation-delay:.15s}.hb2{animation-delay:.3s}.hb3{animation-delay:.45s}.hb4{animation-delay:.6s}.hb5{animation-delay:.75s}.hb6{animation-delay:.9s}
+  @keyframes pulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.72)}}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>The Heartwave — mark + wordmark system</h1>
+<p class="lede">Your idea, built: a heart made of sound. Seven audio bars trace the heart's silhouette — love and .fm in one shape, nothing like OurDream's flat heart. And because it's real bars, it can breathe while Alexis speaks (watch the big one). Answer like: <b>"mark 7-bar + P1"</b>.</p>
+
+<h2>The mark</h2>
+<div class="v">
+  <div class="vhead"><span class="vnum">M</span><span class="vname">Heartwave, 7 bars</span><span class="lbl" style="color:var(--accent)">&nbsp;recommended</span></div>
+  <div class="vwhy">Left: live animation (how it behaves when she talks — subtle pulse, stops when idle, respects reduced-motion). Right: static at favicon sizes + real tab.</div>
+  <div class="stage">
+    <div class="tile t96"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="heartwave-anim"><path class="hb hb0" fill="#f2436b" d="M5.5,34.2 Q5.5,29.3 10.4,29.3 L10.4,29.3 Q15.3,29.3 15.3,34.2 L15.3,46.1 Q15.3,51.0 10.4,51.0 L10.4,51.0 Q5.5,51.0 5.5,46.1 Z"/><path class="hb hb1" fill="#f2436b" d="M18.7,25.9 Q18.7,21.0 23.6,21.0 L23.6,21.0 Q28.5,21.0 28.5,25.9 L28.5,59.9 Q28.5,64.8 23.6,64.8 L23.6,64.8 Q18.7,64.8 18.7,59.9 Z"/><path class="hb hb2" fill="#f2436b" d="M31.9,26.8 Q31.9,21.9 36.8,21.9 L36.8,21.9 Q41.7,21.9 41.7,26.8 L41.7,70.6 Q41.7,75.5 36.8,75.5 L36.8,75.5 Q31.9,75.5 31.9,70.6 Z"/><path class="hb hb3" fill="#f2436b" d="M45.1,42.9 Q45.1,38.0 50.0,38.0 L50.0,38.0 Q54.9,38.0 54.9,42.9 L54.9,87.6 Q54.9,92.5 50.0,92.5 L50.0,92.5 Q45.1,92.5 45.1,87.6 Z"/><path class="hb hb4" fill="#f2436b" d="M58.3,26.8 Q58.3,21.9 63.2,21.9 L63.2,21.9 Q68.1,21.9 68.1,26.8 L68.1,70.6 Q68.1,75.5 63.2,75.5 L63.2,75.5 Q58.3,75.5 58.3,70.6 Z"/><path class="hb hb5" fill="#f2436b" d="M71.5,25.9 Q71.5,21.0 76.4,21.0 L76.4,21.0 Q81.3,21.0 81.3,25.9 L81.3,59.9 Q81.3,64.8 76.4,64.8 L76.4,64.8 Q71.5,64.8 71.5,59.9 Z"/><path class="hb hb6" fill="#f2436b" d="M84.7,34.2 Q84.7,29.3 89.6,29.3 L89.6,29.3 Q94.5,29.3 94.5,34.2 L94.5,46.1 Q94.5,51.0 89.6,51.0 L89.6,51.0 Q84.7,51.0 84.7,46.1 Z"/></svg></div>
+    <div class="favrow">
+      <div class="tile t64"><img src="design-guide-assets/logo-drafts/r4c-heartwave-7.svg"></div>
+      <div class="tile t32"><img src="design-guide-assets/logo-drafts/r4c-heartwave-7.svg"></div>
+      <div class="tile t16"><img src="design-guide-assets/logo-drafts/r4c-heartwave-7.svg"></div>
+      <div class="tabmock"><img src="design-guide-assets/logo-drafts/r4c-heartwave-7.svg"><span>drt.fm — Alexis</span></div>
+    </div>
+  </div>
+</div>
+<div class="grid2">
+<div class="v">
+  <div class="vhead"><span class="vnum">M2</span><span class="vname">Denser: 9 bars</span></div>
+  <div class="vwhy">Smoother silhouette, finer texture; bars blur together sooner at small sizes.</div>
+  <div class="favrow"><div class="tile t64"><img src="design-guide-assets/logo-drafts/r4c-heartwave-9.svg"></div><div class="tile t32"><img src="design-guide-assets/logo-drafts/r4c-heartwave-9.svg"></div><div class="tile t16"><img src="design-guide-assets/logo-drafts/r4c-heartwave-9.svg"></div></div>
+</div>
+<div class="v">
+  <div class="vhead"><span class="vnum">M3</span><span class="vname">Solid: striped heart</span></div>
+  <div class="vwhy">Heart-first version — solid silhouette with bar cuts. Sturdier at 16px, less alive.</div>
+  <div class="favrow"><div class="tile t64"><img src="design-guide-assets/logo-drafts/r4-heartwave-5.svg"></div><div class="tile t32"><img src="design-guide-assets/logo-drafts/r4-heartwave-5.svg"></div><div class="tile t16"><img src="design-guide-assets/logo-drafts/r4-heartwave-5.svg"></div></div>
+</div>
+</div>
+
+<h2>The wordmark — three ways to pair it</h2>
+<div class="v">
+  <div class="vhead"><span class="vnum">P1</span><span class="vname">Mark-led lockup</span><span class="lbl" style="color:var(--accent)">&nbsp;recommended</span></div>
+  <div class="vwhy">The Grok pattern: mark + name, side by side. Works at every size; the mark alone carries favicon and app icon. The dot stays plain rose — the heart lives in the mark only.</div>
+  <div class="stage"><img class="wm" src="design-guide-assets/logo-drafts/r4-lockup-markled.svg"></div>
+  <div class="row2"><div class="navmock"><img src="design-guide-assets/logo-drafts/r4-lockup-markled.svg"><span class="item">Explore</span><span class="item">Chat</span><span class="item">Generate</span><span class="cta">Upgrade</span></div></div>
+</div>
+<div class="v">
+  <div class="vhead"><span class="vnum">P2</span><span class="vname">Mark as the dot (hero moments only)</span></div>
+  <div class="vwhy">The heartwave sits where the period lives — the Omira move. Beautiful at hero size, but at nav size it smears, so navigation would use the plain-dot version (P3) as fallback. Two logo versions to manage.</div>
+  <div class="stage"><img class="wm" src="design-guide-assets/logo-drafts/r4-lockup-markdot.svg"></div>
+  <div class="row2"><div class="navmock"><img src="design-guide-assets/logo-drafts/r4-lockup-plain.svg"><span class="item">← nav fallback</span><span class="item">Chat</span><span class="item">Generate</span><span class="cta">Upgrade</span></div></div>
+</div>
+<div class="v">
+  <div class="vhead"><span class="vnum">P3</span><span class="vname">Quiet wordmark, mark lives in the icon</span></div>
+  <div class="vwhy">Text is just text (rose dot); the heartwave appears only as favicon/app icon/loading state. Maximum restraint.</div>
+  <div class="stage"><img class="wm" src="design-guide-assets/logo-drafts/r4-lockup-plain.svg"></div>
+  <div class="row2"><div class="navmock"><img src="design-guide-assets/logo-drafts/r4-lockup-plain.svg"><span class="item">Explore</span><span class="item">Chat</span><span class="item">Generate</span><span class="cta">Upgrade</span></div></div>
+</div>
+
+<div class="note"><b>My verdict:</b> Mark 7-bar + P1. One mark that is unmistakably yours (love + audio, no OurDream shadow), a lockup that survives every size without fallback rules, and the animation hook — the logo literally beats while she speaks — is a brand moment none of the competitors have.</div>
+
+</div>
+</body>
+</html>

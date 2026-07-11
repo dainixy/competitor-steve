@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Claude Design System — The Full Guide</title>
+<style>
+  /* Styled with DRT.FM's own new design tokens — this page IS a demo of the identity */
+  :root {
+    --bg-page: #0f0e11; --bg-surface: #1a191e; --bg-raised: #242229;
+    --hairline: rgba(255,255,255,0.08);
+    --text-hi: #f2f0f3; --text-mid: #a9a4b0; --text-low: #6f6a78;
+    --accent: #f2436b; --accent-hover: #d63a5e; --accent-tint: rgba(242,67,107,0.10);
+    --r-control: 10px; --r-card: 16px; --r-modal: 24px; --r-pill: 999px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg-page); color: var(--text-mid); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 56px 24px 120px; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 44px; line-height: 1.08; letter-spacing: -0.5px; color: var(--text-hi); margin-bottom: 14px; }
+  h1 em { color: var(--accent); font-style: italic; }
+  h2 { font-family: Georgia, serif; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.5px; color: var(--text-hi); margin: 72px 0 10px; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text-hi); margin: 24px 0 6px; }
+  .lede { font-size: 17px; color: var(--text-mid); margin: 6px 0 18px; max-width: 68ch; }
+  p { margin: 10px 0; max-width: 72ch; }
+  .card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 22px 24px; margin: 16px 0; }
+  .steps .card { display: flex; gap: 18px; align-items: flex-start; }
+  .stepnum { font-family: Georgia, serif; font-size: 30px; color: var(--accent); line-height: 1; min-width: 34px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  img.shot { width: 100%; border-radius: var(--r-card); border: 1px solid var(--hairline); display: block; }
+  .caption { font-size: 13px; color: var(--text-low); margin: 8px 2px 0; }
+  .kbd { background: var(--bg-raised); border: 1px solid var(--hairline); border-radius: 6px; padding: 2px 9px; font: 13px ui-monospace, Menlo, monospace; color: var(--text-hi); white-space: nowrap; }
+  ul { margin: 8px 0 8px 20px; } li { margin: 7px 0; } li::marker { color: var(--text-low); }
+  .good li::marker { content: "✓  "; color: #46a758; }
+  .bad li::marker { content: "✕  "; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  td, th { padding: 10px 12px; border-bottom: 1px solid var(--hairline); text-align: left; vertical-align: top; }
+  th { color: var(--text-low); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  tr:last-child td { border-bottom: none; }
+  .tbl { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 4px 10px; overflow-x: auto; margin: 14px 0; }
+  .swatches { display: flex; gap: 12px; flex-wrap: wrap; margin: 14px 0; }
+  .sw { width: 150px; border-radius: var(--r-control); overflow: hidden; border: 1px solid var(--hairline); }
+  .sw .chip { height: 66px; } .sw .lbl { padding: 8px 10px; font-size: 12px; color: var(--text-mid); background: var(--bg-surface); }
+  .sw .lbl b { display: block; color: var(--text-hi); font-weight: 600; }
+  .btnrow { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+  .btn { border: none; border-radius: var(--r-control); padding: 12px 22px; font: 600 14px/1 -apple-system, sans-serif; cursor: default; }
+  .btn.accent { background: var(--accent); color: #fff; }
+  .btn.inverse { background: #f2f0f3; color: #17161a; }
+  .btn.quiet { background: var(--bg-raised); color: var(--text-mid); }
+  .democard { position: relative; width: 240px; aspect-ratio: 3/4; border-radius: var(--r-card); overflow: hidden; }
+  .democard .ph { position: absolute; inset: 0; background: radial-gradient(120% 90% at 30% 20%, #5a4652 0%, #3a3038 45%, #201c22 100%); }
+  .democard .scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.58) 8%, rgba(0,0,0,.46) 17%, rgba(0,0,0,.33) 27%, rgba(0,0,0,.21) 36%, rgba(0,0,0,.12) 44%, rgba(0,0,0,.05) 51%, rgba(0,0,0,0) 58%); }
+  .democard .txt { position: absolute; left: 14px; right: 14px; bottom: 12px; }
+  .democard .name { color: #fff; font-weight: 600; font-size: 16px; } .democard .name span { color: rgba(255,255,255,.55); font-weight: 400; }
+  .democard .hook { color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.35; margin-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pillrow { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .pill { border-radius: var(--r-pill); padding: 4px 12px; font-size: 12px; font-weight: 600; background: var(--bg-raised); color: var(--text-mid); }
+  .pill.sel { background: #f2f0f3; color: #17161a; }
+  .retired { text-decoration: line-through; color: var(--text-low); }
+  .accentword { color: var(--accent); }
+  .radbox { background: var(--bg-raised); border: 1px solid var(--hairline); height: 62px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-mid); }
+  .callout { border-left: 2px solid var(--accent); padding: 4px 0 4px 16px; margin: 16px 0; color: var(--text-mid); max-width: 70ch; }
+  .filemap td:first-child { font: 13px ui-monospace, Menlo, monospace; color: var(--text-hi); white-space: nowrap; }
+  .toc { display:flex; gap:10px 18px; flex-wrap:wrap; font-size:14px; margin: 18px 0 0; }
+  .toc a { color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--hairline); padding-bottom: 1px; }
+  .toc a:hover { color: var(--text-hi); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Your Claude design system —<br>the <em>full</em> guide</h1>
+<p class="lede">Everything we built on July 11, explained simply: what it is, what it looks like, and exactly how to use it. This page is styled with DRT.FM's new design language — you're looking at the identity right now.</p>
+<div class="toc">
+  <a href="#story">The story</a><a href="#toolbox">The toolbox</a><a href="#look">The DRT.FM look</a><a href="#competitors">Competitor lessons</a><a href="#site">Your site: what changes</a><a href="#courses">Your courses, distilled</a><a href="#use">How to use it</a><a href="#files">Where everything lives</a>
+</div>
+
+<h2 id="story">The story in 60 seconds</h2>
+<p class="lede">Claude is a great builder and a bad designer — by default it produces the <em>average of the internet</em>: same fonts, purple gradients, everything equally loud. Real designers fix this with three moves, and we installed all three.</p>
+<div class="grid3">
+  <div class="card"><h3>1 · Rules go in</h3><p>Instruction files ("skills") now load automatically whenever Claude designs — taste rules from working designers, your two UX courses boiled down to 110 rules, and hard speed limits. Claude stops guessing.</p></div>
+  <div class="card"><h3>2 · Eyes on the output</h3><p>A reviewer opens the finished page in an invisible browser, screenshots it on phone / tablet / desktop, checks loading speed, and returns a fix list. Claude is a much better <em>critic</em> than creator — it just needs to see its own work.</p></div>
+  <div class="card"><h3>3 · You judge</h3><p>Never accept the first design. Ask for 3–5 versions, pick the best, iterate on that one. AI is cheap at making options and bad at knowing which is good. Your taste is the final filter — nobody has automated that away.</p></div>
+</div>
+<div class="callout">The one finding with a real measured test behind it: skills written as <b>principles</b> ("blur your eyes — can you still see what matters first?") beat skills written as pixel commands ("use exactly 16px") — 75% win rate in blind judging. Our whole setup follows that.</div>
+
+<h2 id="toolbox">The toolbox — what's installed, in plain words</h2>
+<p class="lede">All of this lives on your Mac and works in <b>every</b> Claude Code chat automatically. Nothing to launch or configure.</p>
+<div class="tbl"><table>
+<tr><th>Tool</th><th>What it does, simply</th><th>How you trigger it</th></tr>
+<tr><td><b>Taste tutors</b><br><span style="color:var(--text-low);font-size:12.5px">frontend-design, hallmark, interface-design</span></td><td>Whisper design rules while Claude builds: ban the "AI look", force a real plan before code, keep app screens consistent.</td><td>automatic</td></tr>
+<tr><td><b>Your courses</b><br><span style="color:var(--text-low);font-size:12.5px">ux-foundations</span></td><td>The 110 best rules from your Tommy Geoco + Nguyen Le courses (book, PDFs, and all 43 videos). Claude reads them before designing.</td><td>automatic</td></tr>
+<tr><td><b>Speed police</b><br><span style="color:var(--text-low);font-size:12.5px">6 skills from Chrome's team</span></td><td>Enforces the numbers Google ranks you on: page under 1.5MB, fast first paint, no layout jumps.</td><td>"audit my site" · "fix Core Web Vitals"</td></tr>
+<tr><td><b>Cleanup crew</b></td><td>After building, strips the "this looks AI-made" tells and fixes spacing, contrast, slow animations.</td><td><span class="kbd">/design-deslop</span> then <span class="kbd">/baseline-ui</span></td></tr>
+<tr><td><b>The eyes</b><br><span style="color:var(--text-low);font-size:12.5px">live-design-review agent</span></td><td>Opens your page in a hidden browser, screenshots 3 screen sizes, runs a speed test, returns a fix list sorted by severity.</td><td>"run a live design review on localhost:3000"</td></tr>
+<tr><td><b>Design detective</b></td><td>Point it at any site you admire — it extracts the design DNA (structure, type pairing, color logic) as reusable rules, without cloning.</td><td><span class="kbd">hallmark study &lt;URL&gt;</span></td></tr>
+<tr><td><b>The report card</b></td><td>Grades any design against the 10 principles from the famous Refactoring UI book, pass/fail each.</td><td><span class="kbd">/meta-refactor-ui</span></td></tr>
+<tr><td><b>The brand bible</b><br><span style="color:var(--text-low);font-size:12.5px">DRTFM-DESIGN.md</span></td><td>DRT.FM's identity file — colors, fonts, mood, component recipes. The one piece that is per-project: copy it into any repo that builds DRT.FM screens.</td><td>"read DRTFM-DESIGN.md first"</td></tr>
+</table></div>
+
+<h2 id="look">The DRT.FM look — rendered live</h2>
+<p class="lede">From your five answers: <b>quiet luxury · dark-first · rose accent · serif headlines · Alexis-first landing</b>. Everything below is real CSS from the brand bible, not a mockup.</p>
+
+<h3>The dark ramp — depth without shadows</h3>
+<p>Never pure black. Three surface steps + a hairline do all the depth work. Shadows are reserved for things that truly float (menus, dialogs).</p>
+<div class="swatches">
+  <div class="sw"><div class="chip" style="background:#0f0e11"></div><div class="lbl"><b>#0f0e11</b>page</div></div>
+  <div class="sw"><div class="chip" style="background:#1a191e"></div><div class="lbl"><b>#1a191e</b>cards &amp; panels</div></div>
+  <div class="sw"><div class="chip" style="background:#242229"></div><div class="lbl"><b>#242229</b>hover / active</div></div>
+  <div class="sw"><div class="chip" style="background:#0f0e11; position:relative"><div style="position:absolute;inset:20px;border:1px solid rgba(255,255,255,0.08);border-radius:8px"></div></div><div class="lbl"><b>8% white line</b>the only border</div></div>
+</div>
+
+<h3>One accent with a job description</h3>
+<p>Your site today runs two accents — purple <span class="retired">#c084fc</span> and rose. The purple is <b>retired</b> (purple gradients are the #1 "made by AI" tell). The rose stays, refined, and gets an exclusive contract:</p>
+<div class="grid2">
+  <div class="card good"><h3 style="color:#46a758">Rose may appear as</h3><ul>
+    <li>THE pay/upgrade button (one per screen area)</li>
+    <li>the marker on the active nav item</li>
+    <li>a selected item's ring + faint tint</li>
+    <li>at most one <span class="accentword">word</span> in a big headline</li>
+  </ul></div>
+  <div class="card bad"><h3 style="color:var(--accent)">Rose is banned from</h3><ul>
+    <li>icons, links, borders, hovers</li>
+    <li>gradients and any decoration</li>
+    <li>meaning two different things</li>
+    <li>more than ~2% of any screen</li>
+  </ul></div>
+</div>
+<p class="caption">Why so strict? Both competitors do exactly this — that's why their pay buttons are impossible to miss. Scarcity is what makes the color work.</p>
+
+<h3>Buttons — three tiers, instantly readable</h3>
+<div class="btnrow">
+  <button class="btn accent">Upgrade</button>
+  <button class="btn inverse">Chat with Alexis</button>
+  <button class="btn quiet">See more</button>
+  <span class="caption">money action · main action · everything else — never two rose buttons on one screen</span>
+</div>
+
+<h3>Type — a quiet voice and a rare special voice</h3>
+<p><b>Satoshi</b> (clean sans) does all interface work. <b>Instrument Serif</b> — the elegant serif you see in this page's headlines — appears <em>only</em> for big headlines and character names, so it stays special. Two small font files total, where OurDream ships eight (and pays for it in speed).</p>
+
+<h3>Corners &amp; chips — a fixed vocabulary</h3>
+<div class="grid3">
+  <div><div class="radbox" style="border-radius:10px">10px — buttons, inputs</div></div>
+  <div><div class="radbox" style="border-radius:16px">16px — cards</div></div>
+  <div><div class="radbox" style="border-radius:24px">24px — dialogs</div></div>
+</div>
+<div class="pillrow"><span class="pill sel">Selected</span><span class="pill">Romance</span><span class="pill">Slow burn</span><span class="pill">+17 more</span><span class="caption" style="align-self:center">chips are pills; a selected chip inverts to white — it never turns rose</span></div>
+
+<h3>The character card recipe</h3>
+<div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start">
+  <div class="democard"><div class="ph"></div><div class="scrim"></div><div class="txt"><div class="name">Alexis <span>24</span></div><div class="hook">She remembers what you said last Tuesday — and she's been thinking about it.</div></div></div>
+  <ul style="flex:1; min-width: 260px">
+    <li>The image <b>is</b> the card — no frame, no border, no shadow, no text block glued underneath.</li>
+    <li>Text sits on a <b>smooth gradient</b> (many tiny steps — if you can see where the gradient begins, it's wrong).</li>
+    <li>One identity line + one hook written <b>to you</b>, cut at two lines. No tag lists, no stat rows.</li>
+    <li>Hover reveals <b>more content</b> (a motion preview) — it never zooms or glows.</li>
+  </ul>
+</div>
+
+<h3>Motion &amp; speed — restraint is the brand</h3>
+<div class="grid2">
+  <div class="card"><h3>Motion</h3><p>Three speeds only (120 / 200 / 300ms), one easing curve. No scroll animations, no floating particles, no pulsing dots. Animation exists to give feedback, not to perform.</p></div>
+  <div class="card"><h3>Hard speed limits</h3><p>Page under 1.5MB · scripts under 300KB · loads in under 2.5s · nothing jumps while loading. These are blockers in every design review — because Google ranks on them.</p></div>
+</div>
+
+<h2 id="competitors">What we learned from the competitors — with receipts</h2>
+<p class="lede">A robot browser measured both sites' actual code (~4,000 elements each). Their polish isn't magic — it's discipline. We copy the <b>discipline</b>, never the look.</p>
+
+<div class="card">
+  <img class="shot" src="design-guide-assets/candy-landing.png" alt="Candy.AI landing page">
+  <p class="caption">Candy.AI — logged-out homepage</p>
+  <ul>
+    <li><b>The landing page IS the product</b> — real characters, working nav, stories rail. No "welcome to our website" hero.</li>
+    <li>Almost <b>zero shadows</b> anywhere — depth comes from lighter panels on darker background (our ramp does the same).</li>
+    <li>The sale banner is <b>custom campaign art</b>, not text slapped on a gradient — and it lives inside the content grid.</li>
+    <li>Status pills (LIVE, -70%) each own one color and one meaning — you scan them without reading.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <img class="shot" src="design-guide-assets/candy-pricing.png" alt="Candy.AI pricing page">
+  <p class="caption">Candy.AI — pricing</p>
+  <ul>
+    <li>One screen, three cards, <b>no comparison table</b>. Only the recommended plan gets color — so the eye lands exactly where they want the click.</li>
+    <li>Under the buttons, the two anxieties answered before they're asked: <i>"Charge shown as 'EverAI' on your bank statement"</i> and <i>"Cancel in settings."</i> Trust text at the moment of doubt.</li>
+    <li>Benefits are a short icon list, not a 12-row checkmark matrix.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <img class="shot" src="design-guide-assets/od-landing.png" alt="OurDream landing grid">
+  <p class="caption">OurDream — landing grid (the discipline benchmark)</p>
+  <ul>
+    <li>Count the pink: <b>two buttons</b> on the whole screen (Join Free, Upgrade). Everything else is gray — the photos supply all the color. That's the under-2% accent rule, live.</li>
+    <li>The search box teaches by example — a real query you could type, not "Search..."</li>
+    <li>The 75% sale card is <b>exactly the same size and shape</b> as a character card. Marketing never breaks the grid.</li>
+    <li>Under the hood: ~400 named design variables. Their consistency is <b>mechanical</b>, not heroic — that's what DRTFM-DESIGN.md gives us.</li>
+    <li>Their one weakness: 8+ font families loaded = slow. We ship 2 and beat them on speed.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <img class="shot" src="design-guide-assets/od-empty.png" alt="OurDream empty chat state" style="max-width:560px">
+  <p class="caption">OurDream — "no chats yet" screen</p>
+  <ul>
+    <li>An empty screen is a <b>doorway, not a dead end</b>: one friendly sentence, real character photos fanned like polaroids, one button to the next step.</li>
+    <li>Compare with the default AI answer — a gray icon and "No data." Every DRT.FM empty state follows the doorway rule.</li>
+  </ul>
+</div>
+
+<h2 id="site">Your site today → what changes</h2>
+<div class="card">
+  <img class="shot" src="design-guide-assets/drtfm-now.png" alt="drt.fm current homepage">
+  <p class="caption">drt.fm as it looks now — good bones: dark, grid landing, Alexis trailer up top</p>
+  <ul>
+    <li><b>Keep:</b> the dark canvas, the character grid landing, Alexis leading the page (your five answers formalized exactly this).</li>
+    <li><b>Change:</b> retire the purple — one rose accent with the job contract above. Purple + rose together is the classic AI-slop palette.</li>
+    <li><b>Change:</b> headlines move to the serif (like this page), UI text to one clean sans — instant "designed, not generated" feel.</li>
+    <li><b>Change:</b> the Alexis hero becomes a real <em>presence</em> (poster-first video, her name in serif, one rose button) rather than an ad about her.</li>
+    <li><b>Tighten:</b> cards adopt the recipe (full-bleed image, smooth scrim, one hook line) and every empty state becomes a doorway.</li>
+  </ul>
+</div>
+
+<h2 id="courses">Your two courses, distilled</h2>
+<p class="lede">All PDFs, the 603-page book, and 43 transcribed video hours → one playbook (12 topics) + 110 one-line rules that Claude now reads automatically. A few favorites, so you know the flavor:</p>
+<div class="card"><ul>
+  <li><b>Decide in this order:</b> what's the goal → how is it organized → how does it behave → how does it look. Visual polish is always last.</li>
+  <li><b>The squint test:</b> blur your eyes at any screen. If you can't tell what matters first, the screen is broken — nothing is accentuated when everything shouts.</li>
+  <li><b>Space tells the truth:</b> things in a group sit close; groups sit far apart. Whitespace separates better than lines and boxes.</li>
+  <li><b>Hierarchy from weight, not size:</b> bolder and dimmer beats bigger and bigger.</li>
+  <li><b>When there's no data, familiarity wins:</b> copy the pattern users already know (Jakob's Law) instead of inventing a "better" one.</li>
+  <li><b>Standard is fast:</b> save originality for the one thing that makes you different; everything else should be boringly familiar — which is also the cheapest to load.</li>
+  <li><b>Never letter-space lowercase text.</b> (A hard rule from the typography module — one of those things you can't unsee.)</li>
+</ul></div>
+
+<h2 id="use">How to use it — the daily loop</h2>
+<div class="steps">
+  <div class="card"><div class="stepnum">1</div><div><h3 style="margin-top:0">Give the chat the brand bible</h3><p>In the DRT.FM prototype chat: copy <span class="kbd">DRTFM-DESIGN.md</span> into that repo's root, then say: <i>"Read DRTFM-DESIGN.md fully before building anything."</i> This is the only manual step — everything else loads by itself.</p></div></div>
+  <div class="card"><div class="stepnum">2</div><div><h3 style="margin-top:0">Build with a named direction</h3><p>Never say "make it modern and clean" (that's how you get the average). Say what and for whom: <i>"Build the pricing page per DESIGN.md — quiet luxury, one rose CTA, Alexis presence at top."</i> Screenshots of things you like are welcome fuel.</p></div></div>
+  <div class="card"><div class="stepnum">3</div><div><h3 style="margin-top:0">Clean it</h3><p>Type <span class="kbd">/design-deslop</span> — strips the AI fingerprints. For a deeper pass: <span class="kbd">/baseline-ui</span>, then <span class="kbd">/fixing-accessibility</span>, then <span class="kbd">/fixing-motion-performance</span>.</p></div></div>
+  <div class="card"><div class="stepnum">4</div><div><h3 style="margin-top:0">Let it see itself</h3><p>Say: <i>"Run a live design review on http://localhost:3000."</i> You get screenshots at three screen sizes, a speed score, and a fix list sorted Blocker → Nitpick. Fix the blockers, run again.</p></div></div>
+  <div class="card"><div class="stepnum">5</div><div><h3 style="margin-top:0">Judge like an owner</h3><p>Unsure between directions? <i>"Give me 4 visual variants of this screen as plain HTML files."</i> Open them, pick one, kill the rest. Then the squint test: one focal point, clear reading order? Ship. When in doubt — remove one thing, don't add.</p></div></div>
+</div>
+
+<div class="card"><h3>Cheat sheet — phrases that do heavy lifting</h3>
+<div class="tbl" style="border:none;padding:0;margin:8px 0 0"><table>
+<tr><td><span class="kbd">hallmark study https://…</span></td><td>extract any admired site's design DNA as rules (no cloning)</td></tr>
+<tr><td><span class="kbd">/meta-refactor-ui</span></td><td>grade a design against the 10 Refactoring UI principles</td></tr>
+<tr><td>"audit my site"</td><td>full quality check: speed, SEO, accessibility, best practices</td></tr>
+<tr><td>"fix Core Web Vitals"</td><td>targeted speed repair on the numbers Google ranks</td></tr>
+<tr><td>"hallmark redesign this page"</td><td>keep the copy and structure, rebuild the look from scratch</td></tr>
+</table></div></div>
+
+<h2 id="files">Where everything lives</h2>
+<div class="tbl"><table class="filemap">
+<tr><td>~/.claude/skills/ + agents/</td><td>The whole toolbox — works in every Claude chat on this Mac, survives restarts. Inventory with pinned versions: <span class="kbd">DESIGN-STACK-MANIFEST.md</span></td></tr>
+<tr><td>drt-steve/DRTFM-DESIGN.md</td><td>The brand bible — copy into any repo building DRT.FM screens</td></tr>
+<tr><td>drt-steve/claude-design-upgrade-report.html</td><td>The research deep-dive (evidence, sources, method rankings)</td></tr>
+<tr><td>.scratch/design-taste/UX-PLAYBOOK.md</td><td>Master course reference, 12 topics (the 110 rules live in the ux-foundations skill)</td></tr>
+<tr><td>.scratch/design-taste/teardown-screenshots/</td><td>All competitor evidence: screenshots, hover diffs, OurDream's full token dump</td></tr>
+<tr><td>design-system-guide.html</td><td>This page</td></tr>
+</table></div>
+
+<p style="margin-top:48px; color:var(--text-low); font-size:13.5px">Built 2026-07-11 · sources: 52 verified web findings + Kimi social research (17/17 repos confirmed) + measured teardowns of Candy.AI and OurDream + your two UX courses, fully distilled. The serif/sans pairing on this page uses system stand-ins (Georgia); production uses Satoshi + Instrument Serif, self-hosted.</p>
+
+</div>
+</body>
+</html>
