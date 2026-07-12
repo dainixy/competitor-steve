@@ -4,9 +4,11 @@ This workspace is used to prepare context, competitor analysis, and tasks for St
 
 ## DRT.FM design system (LOCKED — do not redesign)
 
-- **`DRTFM-DESIGN.md`** at repo root is the brand bible: colors, type, components, motion, performance budgets, logo rules. Read it before building ANY DRT.FM screen; its values are law.
-- **`drtfm-logo-kit/`** is the final logo (Heartwave mark + lockup, locked 2026-07-11): SVGs, favicon.ico, app icons, README with the `<head>` snippet. Never redesign or recolor; usage rules in DRTFM-DESIGN.md §12.
-- `design-system-guide.html` explains the whole system in plain language; `claude-design-upgrade-report.html` holds the research behind it.
+Everything design-related lives in **`drt-design/`** (top-level folder; start at `drt-design/README.md`):
+
+- **`drt-design/DESIGN.md`** is the brand bible: colors, type, components, motion, performance budgets, logo rules. Read it before building ANY DRT.FM screen; its values are law.
+- **`drt-design/logo/`** is the final logo (Heartwave mark + lockup, locked 2026-07-11): SVGs, favicon.ico, app icons, README with the `<head>` snippet. Never redesign or recolor; usage rules in `DESIGN.md §12`.
+- `drt-design/guides/design-system-guide.html` explains the whole system in plain language; `drt-design/courses/` holds the distilled UX playbook + 110 rules; `drt-design/research/` holds the report and logo iterations.
 - The UI-work protocol (auto de-slop, live design review, variants for big decisions) lives in user-level `~/.claude/CLAUDE.md` and applies here automatically.
 
 ## Handoff repo sync (MANDATORY)

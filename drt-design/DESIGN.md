@@ -102,7 +102,7 @@ Purple or purple-to-pink gradients anywhere · glassmorphism panels · glow bord
 
 ## 12 · Logo (locked 2026-07-11 — do not redesign)
 
-The brand mark is the **Heartwave**: seven rose sound bars tracing a heart silhouette (love + .fm audio in one shape). The logo is the mark-led lockup: Heartwave + `drt.fm` in Satoshi Bold, white text, rose period, generous gap between mark and text. Files live in `drtfm-logo-kit/`:
+The brand mark is the **Heartwave**: seven rose sound bars tracing a heart silhouette (love + .fm audio in one shape). The logo is the mark-led lockup: Heartwave + `drt.fm` in Satoshi Bold, white text, rose period, generous gap between mark and text. Files live in `logo/` (this same drt-design/ folder):
 - `lockup-dark.svg` (primary, on dark) · `lockup-light.svg` · `lockup-mono-white/black.svg` (single-color contexts)
 - `lockup-dark-animated.svg` / `mark-animated.svg` — bars pulse (1.6s ease, staggered); use ONLY where Alexis is actively speaking or as a loading indicator; static everywhere else; both respect `prefers-reduced-motion`
 - `mark.svg` + `favicon.ico` + `favicon-16/32/48/64.png` (transparent) + `app-icon-180/192/512.png` (dark tile)

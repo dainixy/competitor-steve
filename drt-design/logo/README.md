@@ -1,4 +1,4 @@
-# DRT.FM Logo Kit — The Heartwave
+# DRT.FM Logo (drt-design/logo/) — The Heartwave
 
 Locked 2026-07-11. Mark: seven rose sound bars tracing a heart (love + .fm). Lockup: mark + `drt.fm` in Satoshi Bold outlines (no font dependency — all text is vector paths).
 
